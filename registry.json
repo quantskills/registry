@@ -5,16 +5,29 @@
     "description": "Generate a structured Chinese A-share stock due-diligence dossier from Pandadata interfaces, covering company profile, financials, dividends and capital actions, shareholder behavior, pledge/unlock/reduction risks, market funds, and sourced appendices. Use when the user asks for A股个股体检、个股尽调、公司全面分析、股票基本面报告、质押解禁减持风险排查, or a one-stop A-share company dossier.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
-    "requires": [],
-    "summary_zh": "Generate a structured Chinese A-share stock due-diligence dossier from Pandadata interfaces, covering company profile, financials, dividends and capital...",
-    "summary_en": "Generate a structured Chinese A-share stock due-diligence dossier from Pandadata interfaces, covering company profile, financials, dividends and capital actions, shareholder behavior, pledge/unlock/reduction risks,...",
+    "category": "analyst",
+    "tags": [
+      "a-share",
+      "stock-dossier",
+      "fundamentals",
+      "due-diligence",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "输入一个 A 股代码，输出一份可溯源的中文个股尽调报告：基本面、分红资本运作、股东行为、质押解禁减持风险、资金面，一次查清。",
+    "summary_en": "A-share stock dossier skill that uses Pandadata to produce company, financial, dividend, shareholder, and risk analysis.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -23,16 +36,29 @@
     "description": "基于 Pandadata 期货 DeepView 接口做期货品种、主力合约和跨期结构的综合研判，覆盖席位净持仓保证金、席位建仓、盈亏排行、多空比、资金流、基差、期限结构、仓单库存、虚实盘比、现货利润和跨期套利。Use when the user asks for 期货席位分析、持仓博弈、主力席位动向、基差或期限结构监控、仓单库存跟踪、虚实盘比、跨期套利扫描、期货品种综合分析, or a futures DeepView report for a variety or contract.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
-    "requires": [],
-    "summary_zh": "基于 Pandadata 期货 DeepView 接口做期货品种、主力合约和跨期结构的综合研判，覆盖席位净持仓保证金、席位建仓、盈亏排行、多空比、资金流、基差、期限结构、仓单库存、虚实盘比、现货利润和跨期套利。",
-    "summary_en": "基于 Pandadata 期货 DeepView 接口做期货品种、主力合约和跨期结构的综合研判，覆盖席位净持仓保证金、席位建仓、盈亏排行、多空比、资金流、基差、期限结构、仓单库存、虚实盘比、现货利润和跨期套利。Use when the user asks for 期货席位分析、持仓博弈、主力席位动向、基差或期限结构监控、仓单库存跟踪、虚实盘比、跨期套利扫描、期货品种综合分析, or a futures DeepView report...",
+    "category": "analyst",
+    "tags": [
+      "futures",
+      "deepview",
+      "basis",
+      "term-structure",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "把\"分析螺纹钢席位博弈\"\"看豆粕期限结构和仓单\"这类自然语言请求，转成 Pandadata 期货 DeepView 数据调用计划，输出事实与推断分离的中文研判报告。",
+    "summary_en": "Futures DeepView analyst skill for position seats, basis, inventory, term structure, and calendar-spread signals from Pandadata.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -41,16 +67,29 @@
     "description": "Build and apply a Gaetano / Crux Capital-style photonics, optical networking, Physical AI, and AI infrastructure research model from public X posts, public Substack pages, company coverage notes, earnings transcripts, technical papers, and market datasets. Use when an agent needs to map the photonics stack, identify AI infrastructure chokepoints, separate public thesis work from paid/private content, or create a trader-specific research skill for portable agent platforms such as Claude Code, OpenClaw, Codex-style skill systems, or other local AI agent runtimes.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
-    "requires": [],
-    "summary_zh": "Build and apply a Gaetano / Crux Capital-style photonics, optical networking, Physical AI, and AI infrastructure research model from public X posts, public...",
-    "summary_en": "Build and apply a Gaetano / Crux Capital-style photonics, optical networking, Physical AI, and AI infrastructure research model from public X posts, public Substack pages, company coverage notes, earnings transcripts,...",
+    "category": "analyst",
+    "tags": [
+      "ai-infrastructure",
+      "photonics",
+      "optical-networking",
+      "physical-ai",
+      "research-model"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-x-trader-builder"
+    ],
+    "summary_zh": "基于公开资料复刻 Gaetano / Crux Capital 的研究方法：把公开 X 帖子、公开 Substack 页面、财报与技术论文，拆解成「光子堆栈定位 → chokepoint 识别 → 证据分级 → 催化与风险跟踪」的结构化研究模型。",
+    "summary_en": "Research-model skill for public-material analysis of photonics, optical networking, Physical AI, and AI infrastructure themes.",
     "license": "GPL-3.0",
     "validation_level": "listed",
-    "maintainer_type": "community",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -59,16 +98,29 @@
     "description": "Pandadata macro and industry monitoring skill for macro data lookup, economic calendar tracking, industry prosperity analysis, high-frequency macro signals, and recurring macro weekly/monthly reports. Use when the user asks for 宏观数据查询, GDP/CPI/PPI/PMI/社融/M2/利率汇率, 行业景气度, 钢铁/有色/医药/电新/地产等行业宏观, 高频经济信号, 本周经济数据日历, 宏观周报/月报, or scheduled macro monitoring.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
-    "requires": [],
-    "summary_zh": "Pandadata macro and industry monitoring skill for macro data lookup, economic calendar tracking, industry prosperity analysis, high-frequency macro signals,...",
-    "summary_en": "Pandadata macro and industry monitoring skill for macro data lookup, economic calendar tracking, industry prosperity analysis, high-frequency macro signals, and recurring macro weekly/monthly reports.",
+    "category": "monitor",
+    "tags": [
+      "macro",
+      "industry",
+      "calendar",
+      "monitoring",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "把\"查 CPI\"\"本周有什么经济数据\"\"钢铁行业景气度怎么样\"这类请求，路由到正确的 Pandadata getmacro 接口，输出带数据时效标注的中文宏观分析与定期监控。",
+    "summary_en": "Macro monitoring skill for Pandadata macro data, economic calendars, industry prosperity, and high-frequency signals.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -77,16 +129,29 @@
     "description": "Generate A-share end-of-day market review reports with Pandadata data, covering trade-date checks, index performance and valuation, market breadth, limit-up/down sentiment, industries/concepts, 龙虎榜, block trades, margin financing, northbound holdings, risk notes, and optional scheduled after-close automation. Use when the user asks for 今日复盘, 收盘总结, 每日市场报告, A股复盘, 龙虎榜复盘, 北向资金动向, or to set up an automated daily market review.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
-    "requires": [],
-    "summary_zh": "Generate A-share end-of-day market review reports with Pandadata data, covering trade-date checks, index performance and valuation, market breadth,...",
-    "summary_en": "Generate A-share end-of-day market review reports with Pandadata data, covering trade-date checks, index performance and valuation, market breadth, limit-up/down sentiment, industries/concepts, 龙虎榜, block trades, margin...",
+    "category": "monitor",
+    "tags": [
+      "a-share",
+      "daily-review",
+      "market-breadth",
+      "sentiment",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "收盘后一句话生成 A 股当日复盘：指数与估值、市场宽度、行业概念热点、龙虎榜、大宗、两融、北向 —— 每个数字可溯源，支持定时自动生成。",
+    "summary_en": "A-share end-of-day review skill covering indexes, valuation, breadth, sentiment, sectors, themes, and capital-flow clues.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -95,34 +160,114 @@
     "description": "Pandadata/panda_data Python SDK API reference skill for selecting, calling, and troubleshooting Pandadata data interfaces from the bundled Chinese 接口文档. Use when the user asks to query Pandadata data, choose the right panda_data.get_* method, write or validate panda_data Python examples, inspect request/response fields, or install/load/use this skill in Claude Code, Codex, Hermes, OpenClaw, Cursor, or WorkBuddy agents.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
+    "category": "data-api",
+    "tags": [
+      "pandadata",
+      "panda-data",
+      "market-data",
+      "python-sdk",
+      "api-reference"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
     "requires": [],
-    "summary_zh": "Pandadata/panda_data Python SDK API reference skill for selecting, calling, and troubleshooting Pandadata data interfaces from the bundled Chinese 接口文档.",
-    "summary_en": "Pandadata/panda_data Python SDK API reference skill for selecting, calling, and troubleshooting Pandadata data interfaces from the bundled Chinese 接口文档.",
+    "summary_zh": "把自然语言数据需求，精准路由到正确的 pandadata API，并生成可直接运行的 Python 调用。",
+    "summary_en": "Pandadata and panda_data Python SDK reference skill for selecting, calling, and troubleshooting quant data APIs.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
     "name": "skill-paper-replication",
     "url": "https://github.com/quantskills/skill-paper-replication",
-    "description": "Systematically reproduce quantitative finance papers with framework-neutral scripts, third-party market data, standalone research backtests, and packaged outputs.",
+    "description": "Use when systematically reproducing quantitative finance papers with framework-neutral scripts, third-party market data, standalone research backtests, charts, metrics, and packaged outputs.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
+    "category": "replication",
+    "tags": [
+      "paper-replication",
+      "quant-finance",
+      "backtest",
+      "research",
+      "workflow"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
     "requires": [],
-    "summary_zh": "Systematically reproduce quantitative finance papers with framework-neutral scripts, third-party market data, standalone research backtests, and packaged...",
-    "summary_en": "Systematically reproduce quantitative finance papers with framework-neutral scripts, third-party market data, standalone research backtests, and packaged outputs.",
+    "summary_zh": "把一篇量化金融论文（arXiv 或本地 PDF），变成一套可运行、可审计的复现实验：检索 → 提取 → 回测 → 图表 → 指标对照，全程框架无关。",
+    "summary_en": "Framework-neutral quantitative paper replication skill for research scripts, backtests, charts, and auditable outputs.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
+    "last_validated": "2026-06-12"
+  },
+  {
+    "name": "skill-quant-factor-directional-alpha",
+    "url": "https://github.com/quantskills/skill-quant-factor-directional-alpha",
+    "description": "Use when an agent needs a verified library of directional OHLCV alpha factor Skills for trend, breakout, reversal, channel-position, or price-direction research across A-share and US equity samples.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "alpha-factor",
+      "directional",
+      "ohlcv",
+      "trend",
+      "breakout"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "方向类因子库：296 个独立 OHLCV 因子 Skill，真实行情验证 296/296 全部通过。",
+    "summary_en": "Directional OHLCV alpha factor library with 296 trend, breakout, reversal, and channel-position factor Skills validated on real market data.",
+    "license": "GPL-3.0",
+    "validation_level": "verified",
+    "maintainer_type": "official",
+    "last_validated": "2026-06-12"
+  },
+  {
+    "name": "skill-quant-factor-risk-pattern-alpha",
+    "url": "https://github.com/quantskills/skill-quant-factor-risk-pattern-alpha",
+    "description": "Use when an agent needs a verified library of OHLCV risk-state and chart-pattern alpha factor Skills for volatility, K-line shape, shock, drawdown, and pressure analysis.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "alpha-factor",
+      "risk-pattern",
+      "ohlcv",
+      "volatility",
+      "drawdown"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "风险状态与形态类因子库：288 个独立 OHLCV 因子 Skill，真实行情验证 288/288 全部通过。",
+    "summary_en": "Risk-state and chart-pattern OHLCV alpha factor library with 288 factor Skills for volatility, K-line shape, shock, drawdown, and pressure analysis.",
+    "license": "GPL-3.0",
+    "validation_level": "verified",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -131,16 +276,56 @@
     "description": "Use when converting OHLCV alpha ideas into QuantSkills organization factor Skills, batch-generating non-duplicate framework-neutral quant factor Skill folders, validating them on cached real market data such as AkShare A-share and Yahoo US data, and writing factor evaluation reports.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
+    "category": "tooling",
+    "tags": [
+      "factor-factory",
+      "alpha",
+      "ohlcv",
+      "validation",
+      "skill-generation"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
     "requires": [],
-    "summary_zh": "Use when converting OHLCV alpha ideas into QuantSkills organization factor Skills, batch-generating non-duplicate framework-neutral quant factor Skill folders,...",
-    "summary_en": "Use when converting OHLCV alpha ideas into QuantSkills organization factor Skills, batch-generating non-duplicate framework-neutral quant factor Skill folders, validating them on cached real market data such as AkShare...",
+    "summary_zh": "不是因子库本身，而是继续生产因子库的工具：批量生成、验证和打包框架中立的 OHLCV 量化因子 Skill。",
+    "summary_en": "Factory skill for turning OHLCV alpha ideas into QuantSkills factor skills with real-market validation and packaging.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
+    "last_validated": "2026-06-12"
+  },
+  {
+    "name": "skill-quant-factor-volume-stat-alpha",
+    "url": "https://github.com/quantskills/skill-quant-factor-volume-stat-alpha",
+    "description": "Use when an agent needs a verified library of OHLCV volume, volume-price, ranking, and statistical alpha factor Skills for liquidity and distribution research.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "alpha-factor",
+      "volume",
+      "volume-price",
+      "ranking",
+      "statistics"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "量能、量价和统计排序类因子库：216 个独立 OHLCV 因子 Skill，真实行情验证 216/216 全部通过。",
+    "summary_en": "Volume, volume-price, ranking, and statistical OHLCV alpha factor library with 216 factor Skills validated on real market data.",
+    "license": "GPL-3.0",
+    "validation_level": "verified",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -149,16 +334,27 @@
     "description": "Search for quantitative finance papers or research reports, then reproduce them end to end: source discovery across arXiv/Crossref/Semantic Scholar/SSRN/NBER/RePEc/institutional reports/Chinese broker research, full Chinese translation, AI summary, factor formula reconstruction, factor effectiveness validation, standalone beginner-readable HTML factor report, BACKTEST strategy generation and local backtest execution, Chinese backtest explanation report, and final delivery summary. Use when the user asks to find quant papers/reports, replicate a report/PDF/link/text, validate a factor, generate BACKTEST strategy code, or create a beginner-readable research replication package.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
+    "category": "replication",
+    "tags": [
+      "research-replication",
+      "quant-finance",
+      "papers",
+      "factors",
+      "chinese-report"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
     "requires": [],
-    "summary_zh": "Search for quantitative finance papers or research reports, then reproduce them end to end: source discovery across arXiv/Crossref/Semantic...",
-    "summary_en": "Search for quantitative finance papers or research reports, then reproduce them end to end: source discovery across arXiv/Crossref/Semantic Scholar/SSRN/NBER/RePEc/institutional reports/Chinese broker research, full...",
+    "summary_zh": "搜索或接收量化论文、研报、PDF、网页、文本材料，产出一套完整的研究复现交付包：全文翻译 → 因子公式复现 → 有效性验证 → 策略代码 → 真实本地回测 → 交付摘要。",
+    "summary_en": "Quant research replication skill for source discovery, formula reconstruction, Chinese summaries, validation, and deliverables.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -167,16 +363,27 @@
     "description": "Reproduce quantitative research reports and papers end to end: full Chinese translation, AI summary, factor formula reconstruction, factor effectiveness validation, standalone beginner-readable HTML factor report, BACKTEST strategy generation and local backtest execution, Chinese backtest explanation report, and final delivery summary. Use when the user provides a quant report/PDF/link/text and asks for report replication, factor replication, factor validation, BACKTEST strategy code, or a beginner-readable research replication package.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
+    "category": "replication",
+    "tags": [
+      "report-replication",
+      "factor-research",
+      "backtest",
+      "html-report",
+      "chinese"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
     "requires": [],
-    "summary_zh": "Reproduce quantitative research reports and papers end to end: full Chinese translation, AI summary, factor formula reconstruction, factor effectiveness...",
-    "summary_en": "Reproduce quantitative research reports and papers end to end: full Chinese translation, AI summary, factor formula reconstruction, factor effectiveness validation, standalone beginner-readable HTML factor report,...",
+    "summary_zh": "把一篇量化研报、论文、PDF、网页或文本材料，转化为完整的研究复现交付包：全文翻译 → 因子公式复现 → 有效性验证 → 策略代码 → 真实本地回测 → 交付摘要。",
+    "summary_en": "Quant report replication skill that turns papers or reports into Chinese translations, factor formulas, validation reports, and strategy assets.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -185,34 +392,58 @@
     "description": "Reconstruct Serenity-style investment research logic from public X/Twitter posts, saved threads, exported post datasets, public summaries, and ticker histories. Use when an agent needs to analyze @aleabitoreddit/Serenity, decompose AI or semiconductor supply-chain investment theses at the smallest practical unit, build a structured signal dataset, evaluate public calls versus later price action, or produce a reusable Serenity-style research model for portable agent platforms such as Claude Code, OpenClaw, Codex-style skill systems, or other local AI agent runtimes.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
-    "requires": [],
-    "summary_zh": "Reconstruct Serenity-style investment research logic from public X/Twitter posts, saved threads, exported post datasets, public summaries, and ticker histories.",
-    "summary_en": "Reconstruct Serenity-style investment research logic from public X/Twitter posts, saved threads, exported post datasets, public summaries, and ticker histories.",
+    "category": "analyst",
+    "tags": [
+      "semiconductors",
+      "ai",
+      "public-posts",
+      "research-model",
+      "thesis-review"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-x-trader-builder"
+    ],
+    "summary_zh": "从 Serenity（@aleabitoreddit）的公开 X 帖子里逆向研究逻辑：extract → clean → auto-review → evaluate → report 五段流水线，把帖子拆成最小信号单元，并用价格数据回看公开 call 的后续表现。",
+    "summary_en": "Research-model skill for reconstructing Serenity-style AI, semiconductor, and supply-chain theses from public posts and datasets.",
     "license": "GPL-3.0",
     "validation_level": "listed",
-    "maintainer_type": "community",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
     "name": "skill-ssquant-ai-trader",
     "url": "https://github.com/quantskills/skill-ssquant-ai-trader",
-    "description": "Generate and operate a live AI Trader from user's natural-language trading descriptions. Auto-judge automatability: clear rules become SIMNOW strategies, fuzzy/experiential rules trigger semi-automatic AI analysis with user confirmation. Handles code generation, market analysis, risk overlays, cron monitoring, notifications, and daily reports.",
+    "description": "Use when a user describes a trading strategy in natural language and wants an AI Trader to judge automatability, generate SSQuant code or semi-automatic analysis plans, connect to SIMNOW paper trading, monitor risk, and operate the workflow.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
+    "category": "tooling",
+    "tags": [
+      "ssquant",
+      "ai-trader",
+      "strategy",
+      "simnow",
+      "automation"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
     "requires": [],
-    "summary_zh": "Generate and operate a live AI Trader from user's natural-language trading descriptions.",
-    "summary_en": "Generate and operate a live AI Trader from user's natural-language trading descriptions. Auto-judge automatability: clear rules become SIMNOW strategies, fuzzy/experiential rules trigger semi-automatic AI analysis with...",
+    "summary_zh": "你负责说话，AI 负责写代码、跑策略、盯盘、控风险。",
+    "summary_en": "SSQuant AI Trader skill for converting natural-language trading descriptions into automated or semi-automated strategy workflows.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -221,16 +452,29 @@
     "description": "Use when a user wants to turn a natural language trading idea into a persistent, deployable AI Trader Skill. Parses rules, judges automatability, generates code/analysis plans, deploys to SIMNOW via 'ssquant-ai-trader', and finally calls skill_manage to create a permanent, reusable Skill for the specific trader.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
-    "requires": [],
-    "summary_zh": "Use when a user wants to turn a natural language trading idea into a persistent, deployable AI Trader Skill.",
-    "summary_en": "Use when a user wants to turn a natural language trading idea into a persistent, deployable AI Trader Skill. Parses rules, judges automatability, generates code/analysis plans, deploys to SIMNOW via 'ssquant-ai-trader',...",
+    "category": "tooling",
+    "tags": [
+      "ssquant",
+      "trader-generator",
+      "ai-trader",
+      "natural-language",
+      "deployment"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-ssquant-ai-trader"
+    ],
+    "summary_zh": "说一次想法，得到一个可以随时加载的 AI 交易员。",
+    "summary_en": "Trader-generator skill that turns natural-language trading ideas into deployable AI Trader rules, code, and operating plans.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   },
   {
@@ -239,16 +483,27 @@
     "description": "Build trader-specific research-model agent skills from public X/Twitter post datasets, exported timelines, saved threads, signal CSVs, and quote-aware review files. Use when an agent needs to reverse-engineer an X trader's investment logic, separate forward-looking thesis posts from quote-only or retrospective performance posts, generate clean signal datasets, derive a high-quality thesis template, or prepare a reusable trader-specific agent skill for platforms such as Claude Code, OpenClaw, Codex-style skill systems, or other local AI agent runtimes.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
-    "category": "uncategorized",
-    "tags": [],
-    "platforms": [],
-    "status": "draft",
+    "category": "tooling",
+    "tags": [
+      "trader-skill",
+      "research-model",
+      "x-twitter",
+      "skill-builder",
+      "workflow"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
     "requires": [],
-    "summary_zh": "Build trader-specific research-model agent skills from public X/Twitter post datasets, exported timelines, saved threads, signal CSVs, and quote-aware review...",
-    "summary_en": "Build trader-specific research-model agent skills from public X/Twitter post datasets, exported timelines, saved threads, signal CSVs, and quote-aware review files.",
+    "summary_zh": "把任意 X/Twitter 公开交易员的发帖历史，加工成 trader 专属的研究模型 Skill：init-run → 采集 → extract → auto-review → split → evaluate → template → report 九步流水线，从噪...",
+    "summary_en": "Skill-builder workflow for turning public X/Twitter data and user materials into trader-specific research-model skills.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
-    "maintainer_type": "community",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
     "last_validated": "2026-06-12"
   }
 ]
