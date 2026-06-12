@@ -122,10 +122,24 @@ def build_entry(name: str, repo_dir: Path, sha: str, report) -> dict:
 def public_entry(entry: dict) -> dict:
     out = {key: entry.get(key) for key in PUBLIC_ENTRY_KEYS}
     if not out.get("summary_zh"):
-        out["summary_zh"] = (entry.get("description") or "")[:120]
+        out["summary_zh"] = compact_summary(entry.get("description") or "", 160)
     if not out.get("summary_en"):
-        out["summary_en"] = (entry.get("description") or "")[:200]
+        out["summary_en"] = compact_summary(entry.get("description") or "", 220)
     return out
+
+
+def compact_summary(text: str, limit: int) -> str:
+    text = " ".join(str(text).split())
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    sentence_end = max(cut.rfind(mark) for mark in ("。", ".", "!", "?", "；", ";"))
+    if sentence_end >= max(40, limit // 2):
+        return cut[: sentence_end + 1]
+    space = cut.rfind(" ")
+    if space >= max(40, limit // 2):
+        return cut[:space].rstrip() + "..."
+    return cut.rstrip() + "..."
 
 
 # ---------------- 产物生成 ----------------
@@ -260,13 +274,12 @@ def main() -> None:
 
     entries.sort(key=lambda e: e["name"])
     public_entries = [public_entry(e) for e in entries if e["health"] != "quarantined"]
-    healthy_public_entries = [public_entry(e) for e in entries if e["health"] == "healthy"]
 
     if not args.skip_public_artifacts:
         registry_path.write_text(json.dumps(public_entries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         write_index(public_entries)
-        write_llms_txt(healthy_public_entries)
-        write_marketplace(healthy_public_entries)
+        write_llms_txt(public_entries)
+        write_marketplace(public_entries)
 
     stamp = dt.date.today().strftime("%Y%m%d")
     if args.audit_dir:

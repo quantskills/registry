@@ -4,5 +4,146 @@
     "name": "quantskills",
     "url": "https://github.com/quantskills"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "a-share-stock-dossier",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-a-share-stock-dossier"
+      },
+      "description": "Generate a structured Chinese A-share stock due-diligence dossier from Pandadata interfaces, covering company profile, financials, dividends and capital actions, shareholder behavior, pledge/unlock/reduction risks,...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "futures-deepview-analyst",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-futures-deepview-analyst"
+      },
+      "description": "基于 Pandadata 期货 DeepView 接口做期货品种、主力合约和跨期结构的综合研判，覆盖席位净持仓保证金、席位建仓、盈亏排行、多空比、资金流、基差、期限结构、仓单库存、虚实盘比、现货利润和跨期套利。Use when the user asks for 期货席位分析、持仓博弈、主力席位动向、基差或期限结构监控、仓单库存跟踪、虚实盘比、跨期套利扫描、期货品种综合分析, or a futures DeepView report...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "gaetano-crux-capital-research-model",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-gaetano-crux-capital-research-model"
+      },
+      "description": "Build and apply a Gaetano / Crux Capital-style photonics, optical networking, Physical AI, and AI infrastructure research model from public X posts, public Substack pages, company coverage notes, earnings transcripts,...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "macro-monitor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-macro-monitor"
+      },
+      "description": "Pandadata macro and industry monitoring skill for macro data lookup, economic calendar tracking, industry prosperity analysis, high-frequency macro signals, and recurring macro weekly/monthly reports.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "market-daily-review",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-market-daily-review"
+      },
+      "description": "Generate A-share end-of-day market review reports with Pandadata data, covering trade-date checks, index performance and valuation, market breadth, limit-up/down sentiment, industries/concepts, 龙虎榜, block trades, margin...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "pandadata-api",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-pandadata-api"
+      },
+      "description": "Pandadata/panda_data Python SDK API reference skill for selecting, calling, and troubleshooting Pandadata data interfaces from the bundled Chinese 接口文档.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "paper-replication",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-paper-replication"
+      },
+      "description": "Systematically reproduce quantitative finance papers with framework-neutral scripts, third-party market data, standalone research backtests, and packaged outputs.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "quant-factor-skill-factory",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-quant-factor-skill-factory"
+      },
+      "description": "Use when converting OHLCV alpha ideas into QuantSkills organization factor Skills, batch-generating non-duplicate framework-neutral quant factor Skill folders, validating them on cached real market data such as AkShare...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "quant-research-replication",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-quant-research-replication"
+      },
+      "description": "Search for quantitative finance papers or research reports, then reproduce them end to end: source discovery across arXiv/Crossref/Semantic Scholar/SSRN/NBER/RePEc/institutional reports/Chinese broker research, full...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "report-replication",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-report-replication"
+      },
+      "description": "Reproduce quantitative research reports and papers end to end: full Chinese translation, AI summary, factor formula reconstruction, factor effectiveness validation, standalone beginner-readable HTML factor report,...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "serenity-research-model",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-serenity-research-model"
+      },
+      "description": "Reconstruct Serenity-style investment research logic from public X/Twitter posts, saved threads, exported post datasets, public summaries, and ticker histories.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "ssquant-ai-trader",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-ssquant-ai-trader"
+      },
+      "description": "Generate and operate a live AI Trader from user's natural-language trading descriptions. Auto-judge automatability: clear rules become SIMNOW strategies, fuzzy/experiential rules trigger semi-automatic AI analysis with...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "ssquant-trader-generator",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-ssquant-trader-generator"
+      },
+      "description": "Use when a user wants to turn a natural language trading idea into a persistent, deployable AI Trader Skill. Parses rules, judges automatability, generates code/analysis plans, deploys to SIMNOW via 'ssquant-ai-trader',...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "x-trader-builder",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-x-trader-builder"
+      },
+      "description": "Build trader-specific research-model agent skills from public X/Twitter post datasets, exported timelines, saved threads, signal CSVs, and quote-aware review files.",
+      "type": "skill",
+      "category": "uncategorized"
+    }
+  ]
 }
