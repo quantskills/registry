@@ -16,6 +16,16 @@
       "category": "analyst"
     },
     {
+      "name": "event-risk-alert",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-event-risk-alert"
+      },
+      "description": "A-share event-risk alert skill for watchlists, holdings, unlocks, pledges, reductions, ST changes, forecasts, audit opinions, and traceable reports.",
+      "type": "skill",
+      "category": "monitor"
+    },
+    {
       "name": "futures-deepview-analyst",
       "source": {
         "source": "github",
@@ -32,6 +42,16 @@
         "repo": "quantskills/skill-gaetano-crux-capital-research-model"
       },
       "description": "Research-model skill for public-material analysis of photonics, optical networking, Physical AI, and AI infrastructure themes.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
+      "name": "index-valuation-rotation",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-index-valuation-rotation"
+      },
+      "description": "Index valuation and A-share industry rotation skill for PE/PB percentiles, valuation temperature, broad-index references, momentum ranks, and rotation summaries.",
       "type": "skill",
       "category": "analyst"
     },
@@ -56,12 +76,32 @@
       "category": "monitor"
     },
     {
+      "name": "options-vol-analyst",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-options-vol-analyst"
+      },
+      "description": "Options volatility analyst skill for option chains, implied volatility, realized volatility, IV percentiles, term structure, skew, and volatility-premium reports.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
       "name": "pandadata-api",
       "source": {
         "source": "github",
         "repo": "quantskills/skill-pandadata-api"
       },
       "description": "Pandadata and panda_data Python SDK reference skill for selecting, calling, and troubleshooting quant data APIs.",
+      "type": "skill",
+      "category": "data-api"
+    },
+    {
+      "name": "pandadata-warehouse",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-pandadata-warehouse"
+      },
+      "description": "Pandadata warehouse skill for caching, refreshing, querying, and validating local DuckDB and Parquet market-data stores.",
       "type": "skill",
       "category": "data-api"
     },
@@ -164,6 +204,16 @@
       "description": "Trader-generator skill that turns natural-language trading ideas into deployable AI Trader rules, code, and operating plans.",
       "type": "skill",
       "category": "tooling"
+    },
+    {
+      "name": "stock-screener",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-stock-screener"
+      },
+      "description": "Natural-language A-share stock screener skill that maps fundamentals, dividends, valuation, pledges, northbound flows, sectors, holders, and risk filters to Pandadata calls.",
+      "type": "skill",
+      "category": "analyst"
     },
     {
       "name": "x-trader-builder",

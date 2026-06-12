@@ -250,7 +250,7 @@ def main() -> None:
     args = ap.parse_args()
 
     registry_path = ROOT / "registry.json"
-    previous = {e["name"]: e for e in json.loads(registry_path.read_text())} if registry_path.exists() else {}
+    previous = {e["name"]: e for e in json.loads(registry_path.read_text(encoding="utf-8"))} if registry_path.exists() else {}
 
     repos = list_asset_repos()
     org_repo_names = {r["name"] for r in repos}

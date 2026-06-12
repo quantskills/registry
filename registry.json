@@ -31,6 +31,37 @@
     "last_validated": "2026-06-12"
   },
   {
+    "name": "skill-event-risk-alert",
+    "url": "https://github.com/quantskills/skill-event-risk-alert",
+    "description": "A-share event-risk monitoring and alerting skill for Pandadata-based scans of stock watchlists, holdings, or portfolios. Use when the user asks to monitor A-share holding risks, restricted-share unlocks, equity pledges, shareholder increase/decrease plans, ST or delisting-risk status changes, earnings forecast risk, audit-opinion risk, shareholder-count changes, daily or weekly event-risk scans, risk alert reports, or scheduled event-risk automation.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "a-share",
+      "event-risk",
+      "alerts",
+      "monitoring",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "A 股持仓和自选股事件风险预警：解禁、质押、减持、ST、业绩预告、审计意见等事件扫描与可追溯告警报告。",
+    "summary_en": "A-share event-risk alert skill for watchlists, holdings, unlocks, pledges, reductions, ST changes, forecasts, audit opinions, and traceable reports.",
+    "license": "GPL-3.0",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-12"
+  },
+  {
     "name": "skill-futures-deepview-analyst",
     "url": "https://github.com/quantskills/skill-futures-deepview-analyst",
     "description": "基于 Pandadata 期货 DeepView 接口做期货品种、主力合约和跨期结构的综合研判，覆盖席位净持仓保证金、席位建仓、盈亏排行、多空比、资金流、基差、期限结构、仓单库存、虚实盘比、现货利润和跨期套利。Use when the user asks for 期货席位分析、持仓博弈、主力席位动向、基差或期限结构监控、仓单库存跟踪、虚实盘比、跨期套利扫描、期货品种综合分析, or a futures DeepView report for a variety or contract.",
@@ -90,6 +121,37 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
+    "last_validated": "2026-06-12"
+  },
+  {
+    "name": "skill-index-valuation-rotation",
+    "url": "https://github.com/quantskills/skill-index-valuation-rotation",
+    "description": "Pandadata index valuation and A-share industry rotation analysis skill for building PE/PB percentile dashboards, valuation temperature tables, broad-index fixed-investment references, industry momentum rankings, and rotation summaries. Use when the user asks for 指数估值分位, 现在贵不贵, 估值温度计, 宽基指数定投参考, 行业轮动, 行业动量排名, 行业强弱切换, or an index valuation dashboard.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "a-share",
+      "index-valuation",
+      "industry-rotation",
+      "valuation-percentile",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "指数估值与行业轮动分析：PE/PB 分位、估值温度、宽基定投参考、行业动量排名与轮动摘要。",
+    "summary_en": "Index valuation and A-share industry rotation skill for PE/PB percentiles, valuation temperature, broad-index references, momentum ranks, and rotation summaries.",
+    "license": "GPL-3.0",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
     "last_validated": "2026-06-12"
   },
   {
@@ -155,6 +217,37 @@
     "last_validated": "2026-06-12"
   },
   {
+    "name": "skill-options-vol-analyst",
+    "url": "https://github.com/quantskills/skill-options-vol-analyst",
+    "description": "Pandadata options volatility analysis skill for option-chain snapshots, implied volatility versus historical/realized volatility, IV percentiles, term structure, skew/smile diagnostics, volatility premium, and Chinese options-volatility reports. Use when the user asks for 期权波动率分析, IV 历史分位, 波动率溢价, 期权链查询, 波动率曲面/偏度, 期权品种概览, or implied-vs-realized volatility comparison.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "options",
+      "volatility",
+      "implied-volatility",
+      "derivatives",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "期权波动率分析：期权链快照、隐含波动率、历史/实现波动率、IV 分位、期限结构、偏度与波动率溢价报告。",
+    "summary_en": "Options volatility analyst skill for option chains, implied volatility, realized volatility, IV percentiles, term structure, skew, and volatility-premium reports.",
+    "license": "GPL-3.0",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-12"
+  },
+  {
     "name": "skill-pandadata-api",
     "url": "https://github.com/quantskills/skill-pandadata-api",
     "description": "Pandadata/panda_data Python SDK API reference skill for selecting, calling, and troubleshooting Pandadata data interfaces from the bundled Chinese 接口文档. Use when the user asks to query Pandadata data, choose the right panda_data.get_* method, write or validate panda_data Python examples, inspect request/response fields, or install/load/use this skill in Claude Code, Codex, Hermes, OpenClaw, Cursor, or WorkBuddy agents.",
@@ -181,6 +274,37 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
+    "last_validated": "2026-06-12"
+  },
+  {
+    "name": "skill-pandadata-warehouse",
+    "url": "https://github.com/quantskills/skill-pandadata-warehouse",
+    "description": "Build, repair, query, and maintain a local Pandadata market-data warehouse backed by DuckDB and Parquet for repeat quant research, backtests, factor studies, and batch reports. Use when the user asks to cache Pandadata or panda_data results locally, create or update a local market-data database layer, perform incremental data refreshes, query downloaded data with DuckDB SQL, design table partitions and watermarks, validate local data against Pandadata APIs, or avoid repeated Pandadata API calls.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "data-api",
+    "tags": [
+      "pandadata",
+      "warehouse",
+      "duckdb",
+      "parquet",
+      "data-engineering"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "Pandadata 本地数据仓库：用 DuckDB 与 Parquet 缓存、增量刷新、查询和校验行情数据，减少重复 API 调用。",
+    "summary_en": "Pandadata warehouse skill for caching, refreshing, querying, and validating local DuckDB and Parquet market-data stores.",
+    "license": "GPL-3.0",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
     "last_validated": "2026-06-12"
   },
   {
@@ -475,6 +599,37 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
+    "last_validated": "2026-06-12"
+  },
+  {
+    "name": "skill-stock-screener",
+    "url": "https://github.com/quantskills/skill-stock-screener",
+    "description": "Natural-language A-share stock screening skill that translates user filters such as 连续分红, 低估值, 质押率, 北向加仓, 行业/概念/指数成分, 财务增长, 股东变化, and risk exclusions into verified Pandadata API calls and returns an evidence-backed stock list. Use when the user asks for 选股, 筛选股票, 找出满足条件的A股, 财务/分红/股东/资金面过滤, or natural-language stock screening.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "a-share",
+      "stock-screener",
+      "fundamentals",
+      "screening",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "自然语言 A 股选股：把分红、估值、质押、北向、行业概念、财务增长、股东变化等条件转成可追溯 Pandadata 筛选。",
+    "summary_en": "Natural-language A-share stock screener skill that maps fundamentals, dividends, valuation, pledges, northbound flows, sectors, holders, and risk filters to Pandadata calls.",
+    "license": "GPL-3.0",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
     "last_validated": "2026-06-12"
   },
   {
