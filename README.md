@@ -18,7 +18,7 @@ This is the public display layer for the QUANTSKILLS ecosystem. It answers:
 - Is it a `skill` or an `agent`?
 - What validation level and maintainer type does it declare?
 
-Detailed audit findings are not published here. Internal health reports live in the private `quantskills/registry-audit` repository.
+Detailed audit findings are not published here. Internal health checks should be run locally by maintainers or by a local maintenance Skill, not stored in this public repository.
 
 ## For Users
 
@@ -37,7 +37,7 @@ Use these stable files:
 | [`llms.txt`](llms.txt) | LLM/agent discovery index |
 | [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | Marketplace feed |
 
-Public `registry.json` intentionally does not include `health_items`, internal scan failures, or private audit notes.
+Public `registry.json` intentionally does not include `health_items`, internal scan failures, or local audit notes.
 
 ## Asset Types
 

@@ -4,7 +4,7 @@
 
 ## 输入
 
-详细审计报告不在本公开仓库保存。需要复核时,读取私有仓库 `quantskills/registry-audit` 的 `reports/` 目录下日期最新的:
+详细审计报告不在本公开仓库保存。需要复核时,由维护者在本地运行 registry 扫描脚本或本地维护 Skill,读取本地 `reports/` 目录下日期最新的:
 
 - `scan-YYYYMMDD.json`
 - `human-review-YYYYMMDD.md`

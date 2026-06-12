@@ -7,7 +7,7 @@
   llms.txt                       agent 可读站点索引(部署到 quantskills.ai 根目录)
   .claude-plugin/marketplace.json  Claude Code 插件市场清单
 
-可选私有审计产物(--audit-dir):
+可选本地审计产物(--audit-dir):
   scan-YYYYMMDD.json             完整扫描审计报告(含 health_items)
   human-review-YYYYMMDD.md       人类复核清单
 
@@ -245,8 +245,8 @@ def write_human_review(entries: list[dict], reports_dir: Path, stamp: str) -> No
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--full", action="store_true", help="忽略增量,全量重新校验")
-    ap.add_argument("--audit-dir", default="", help="写入完整私有审计报告的目录;不传则不生成详细报告")
-    ap.add_argument("--skip-public-artifacts", action="store_true", help="只生成 audit-dir 中的私有审计报告")
+    ap.add_argument("--audit-dir", default="", help="写入完整本地审计报告的目录;不传则不生成详细报告")
+    ap.add_argument("--skip-public-artifacts", action="store_true", help="只生成 audit-dir 中的本地审计报告")
     args = ap.parse_args()
 
     registry_path = ROOT / "registry.json"

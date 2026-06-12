@@ -1,6 +1,6 @@
 # 安全配置指南:只读审计版
 
-本文是 `quantskills/registry` 与私有 `quantskills/registry-audit` 的最小权限配置清单。目标是让流水线只能检查和记录,不能修改任何 skill / agent 仓库,且不公开详细审计问题。
+本文是 `quantskills/registry` 的最小权限配置清单。目标是让流水线只能检查并生成公开展示数据,不能修改任何 skill / agent 仓库,且不公开详细审计问题。完整审计报告后续由维护者本地 Skill 生成。
 
 ## 权限模型
 
@@ -34,11 +34,9 @@ Repository access:
 - Environments
 - Delete / destructive 相关权限
 
-### 2. registry / registry-audit 仓库写入权限
+### 2. registry 仓库写入权限
 
 `nightly-scan.yml` 需要把公开生成物提交回 `quantskills/registry` 本仓库。
-
-`nightly-audit.yml` 需要把详细报告提交回私有 `quantskills/registry-audit` 本仓库。
 
 这一步使用 GitHub Actions 内置的 `GITHUB_TOKEN`,只在 registry 仓库生效。workflow 顶层权限保持:
 
@@ -57,7 +55,7 @@ permissions:
 - 克隆仓库
 - 本地校验
 - public registry 工作流生成公开 registry / INDEX / llms / marketplace
-- private audit 工作流生成完整 reports
+- 本地维护 Skill 可按需生成完整 reports
 - 只 commit 当前仓库内的生成物
 
 默认工作流不做:
@@ -83,8 +81,8 @@ permissions:
 - [ ] 手动触发 public `nightly-scan --full` 应生成 `registry.json`
 - [ ] public `registry.json` 不应包含 `health_items`
 - [ ] public `registry` 不应包含 `reports/scan-*.json` 或 `reports/human-review-*.md`
-- [ ] 手动触发 private `nightly-audit --full` 应生成 `reports/scan-YYYYMMDD.json`
-- [ ] private audit 报告应包含完整 `health_items`
+- [ ] 本地维护 Skill 或本地脚本应能生成 `reports/scan-YYYYMMDD.json`
+- [ ] 本地 audit 报告应包含完整 `health_items`
 
 ## 可选加固
 
