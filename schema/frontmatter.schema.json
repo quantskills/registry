@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "quantskills SKILL.md / AGENT.md frontmatter contract",
+  "type": "object",
+  "required": [
+    "name",
+    "description",
+    "quantSkills"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]+$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 60
+    },
+    "quantSkills": {
+      "type": "object",
+      "required": [
+        "category",
+        "tags",
+        "platforms",
+        "status",
+        "validation_level",
+        "maintainer_type",
+        "summary_zh",
+        "summary_en"
+      ],
+      "properties": {
+        "organization": {
+          "type": "string"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "collection": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "project_type": {
+          "enum": [
+            "skill",
+            "agent"
+          ]
+        },
+        "category": {
+          "enum": [
+            "trader-research",
+            "factor",
+            "data-api",
+            "replication",
+            "monitor",
+            "analyst",
+            "tooling",
+            "research-agent",
+            "workflow-agent",
+            "review-agent",
+            "data-agent",
+            "automation-agent"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{0,49}$"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "claude-code",
+              "codex",
+              "openclaw",
+              "cursor",
+              "workbuddy"
+            ]
+          },
+          "minItems": 1
+        },
+        "language": {
+          "enum": [
+            "zh",
+            "en",
+            "zh-en"
+          ]
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "stable",
+            "deprecated"
+          ]
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summary_zh": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 120
+        },
+        "summary_en": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 200
+        },
+        "validation_level": {
+          "enum": [
+            "listed",
+            "runnable",
+            "verified"
+          ],
+          "description": "社区三级验证体系,默认 listed;runnable 需安装说明+示例输入输出;verified 需数据来源/无前视检查/回测证据/风险说明"
+        },
+        "maintainer_type": {
+          "enum": [
+            "official",
+            "community"
+          ],
+          "description": "官方维护或社区项目(对应组织治理规则)"
+        }
+      }
+    }
+  }
+}

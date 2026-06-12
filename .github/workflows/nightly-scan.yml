@@ -1,0 +1,49 @@
+name: nightly-scan
+
+on:
+  schedule:
+    - cron: "30 16 * * *"   # UTC 16:30 = 北京时间 00:30
+  workflow_dispatch:
+    inputs:
+      full:
+        description: "全量重新校验(忽略增量)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write        # commit registry.json / INDEX.md / reports
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install pyyaml requests
+
+      - name: Build registry
+        env:
+          # QS_READ_TOKEN: 只读 token,仅用于列出与克隆 skill-* / agent-* 仓库。
+          # 目标仓库权限: Metadata read + Contents read。
+          GITHUB_TOKEN: ${{ secrets.QS_READ_TOKEN }}
+          QS_ORG: quantskills
+        run: |
+          python scripts/build_registry.py ${{ inputs.full && '--full' || '' }}
+
+      - name: Commit artifacts
+        run: |
+          git config user.name "qs-registry-auditor"
+          git config user.email "auditor@quantskills.ai"
+          git add registry.json INDEX.md llms.txt .claude-plugin/marketplace.json
+          git diff --cached --quiet || git commit -m "chore(registry): nightly scan $(date -u +%Y-%m-%d)"
+          git push
+
+      # 网站(quantskills.ai)由另一团队维护,不在本组织职责内。
+      # 对接方式为"拉取模式":网站方按 docs/SITE_INTEGRATION_zh.md 消费 registry.json 的公开 raw URL,
+      # 本流水线不需要也不持有任何网站侧权限。
+      # 若网站方日后希望"推送模式"(注册表一更新就重建),由他们提供 build hook 后在此处加一步 curl 通知。

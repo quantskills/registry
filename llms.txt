@@ -1,0 +1,9 @@
+# quantskills
+> Open-source quant skills and agents for research, analytics, strategy workflows, validation, and tooling.
+
+## Skills
+
+## Agents
+
+## Registry
+- [registry.json](https://quantskills.ai/registry.json): machine-readable index of all assets

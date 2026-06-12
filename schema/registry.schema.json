@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "quantskills registry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "name",
+      "url",
+      "project_type",
+      "declaration_file",
+      "category",
+      "tags",
+      "status",
+      "last_validated",
+      "validation_level",
+      "maintainer_type"
+    ],
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "url": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": {
+        "type": "string"
+      },
+      "project_type": {
+        "enum": [
+          "skill",
+          "agent"
+        ]
+      },
+      "declaration_file": {
+        "enum": [
+          "SKILL.md",
+          "AGENT.md"
+        ]
+      },
+      "category": {
+        "type": "string"
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "status": {
+        "enum": [
+          "draft",
+          "stable",
+          "deprecated"
+        ]
+      },
+      "requires": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "summary_zh": {
+        "type": "string"
+      },
+      "summary_en": {
+        "type": "string"
+      },
+      "license": {
+        "type": "string"
+      },
+      "last_validated": {
+        "type": "string",
+        "format": "date"
+      },
+      "validation_level": {
+        "enum": [
+          "listed",
+          "runnable",
+          "verified"
+        ]
+      },
+      "maintainer_type": {
+        "enum": [
+          "official",
+          "community"
+        ]
+      }
+    }
+  }
+}
