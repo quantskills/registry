@@ -73,6 +73,13 @@ PROJECT_TYPE_LABELS = {
     "skill": "Skills",
     "agent": "Agents",
 }
+SNAPSHOT_START = "<!-- registry-snapshot:start -->"
+SNAPSHOT_END = "<!-- registry-snapshot:end -->"
+VALIDATION_LEVEL_ORDER = (
+    ("verified", "L3"),
+    ("runnable", "L2"),
+    ("listed", "L1"),
+)
 PUBLIC_ENTRY_KEYS = (
     "name",
     "url",
@@ -247,6 +254,78 @@ def write_marketplace(entries: list[dict]) -> None:
     out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def category_label(category: str, language: str) -> str:
+    label = CATEGORY_LABELS.get(category, f"{category} / {category}")
+    if " / " not in label:
+        return label
+    zh, en = label.split(" / ", 1)
+    return zh if language == "zh" else en
+
+
+def category_snapshot(entries: list[dict], language: str) -> str:
+    counts: dict[str, int] = {}
+    for entry in entries:
+        category = entry.get("category", "uncategorized")
+        counts[category] = counts.get(category, 0) + 1
+    parts = []
+    for category, count in sorted(counts.items(), key=lambda item: (-item[1], CATEGORY_ORDER.get(item[0], 500), item[0])):
+        parts.append(f"`{category_label(category, language)} / {category}` {count}")
+    return " · ".join(parts)
+
+
+def validation_snapshot(entries: list[dict]) -> str:
+    counts: dict[str, int] = {}
+    for entry in entries:
+        level = entry.get("validation_level", "listed")
+        counts[level] = counts.get(level, 0) + 1
+    parts = [f"{label} ×{counts.get(level, 0)}" for level, label in VALIDATION_LEVEL_ORDER]
+    known_levels = {level for level, _ in VALIDATION_LEVEL_ORDER}
+    for level in sorted(set(counts) - known_levels):
+        parts.append(f"{level} ×{counts[level]}")
+    return " · ".join(parts)
+
+
+def snapshot_date(entries: list[dict]) -> str:
+    dates = [entry.get("last_validated") for entry in entries if entry.get("last_validated")]
+    return max(dates) if dates else dt.date.today().isoformat()
+
+
+def replace_snapshot_block(path: Path, body: str) -> None:
+    text = path.read_text(encoding="utf-8")
+    if SNAPSHOT_START not in text or SNAPSHOT_END not in text:
+        raise RuntimeError(f"missing registry snapshot markers in {path}")
+    before, rest = text.split(SNAPSHOT_START, 1)
+    _, after = rest.split(SNAPSHOT_END, 1)
+    path.write_text(f"{before}{SNAPSHOT_START}\n{body}\n{SNAPSHOT_END}{after}", encoding="utf-8")
+
+
+def write_readme_snapshots(entries: list[dict]) -> None:
+    type_counts: dict[str, int] = {}
+    for entry in entries:
+        project_type = entry.get("project_type", "skill")
+        type_counts[project_type] = type_counts.get(project_type, 0) + 1
+
+    date = snapshot_date(entries)
+    skill_count = type_counts.get("skill", 0)
+    agent_count = type_counts.get("agent", 0)
+    validation = validation_snapshot(entries)
+
+    replace_snapshot_block(
+        ROOT / "README.md",
+        (
+            f"截至 {date}：**{skill_count} 个 skill / {agent_count} 个 agent**。"
+            f"分类分布：{category_snapshot(entries, 'zh')}；验证级别 {validation}。"
+        ),
+    )
+    replace_snapshot_block(
+        ROOT / "README.en.md",
+        (
+            f"As of {date}: **{skill_count} skills / {agent_count} agents**. "
+            f"Categories: {category_snapshot(entries, 'en')}; validation levels {validation}."
+        ),
+    )
+
+
 def write_human_review(entries: list[dict], reports_dir: Path, stamp: str) -> None:
     unhealthy = [e for e in entries if e["health"] != "healthy"]
     counts = {health: sum(1 for e in entries if e["health"] == health) for health in ("healthy", "warning", "quarantined")}
@@ -324,6 +403,7 @@ def main() -> None:
         write_index(public_entries)
         write_llms_txt(public_entries)
         write_marketplace(public_entries)
+        write_readme_snapshots(public_entries)
 
     stamp = dt.date.today().strftime("%Y%m%d")
     if args.audit_dir:

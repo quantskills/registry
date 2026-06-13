@@ -115,7 +115,9 @@ flowchart LR
 
 ## 📊 当前收录快照
 
-截至 2026-06-12：**22 个 skill**（agent 暂无），分类分布 `analyst` 7 · `tooling` 4 · `monitor` 3 · `replication` 3 · `factor` 3 · `data-api` 2；验证级别 L3 ×3 · L2 ×17 · L1 ×2。
+<!-- registry-snapshot:start -->
+截至 2026-06-13：**28 个 skill / 0 个 agent**。分类分布：`工具流程类 / tooling` 10 · `分析类 / analyst` 7 · `因子库 / factor` 3 · `监控类 / monitor` 3 · `复现类 / replication` 3 · `数据类 / data-api` 2；验证级别 L3 ×3 · L2 ×17 · L1 ×8。
+<!-- registry-snapshot:end -->
 
 > 此快照会随每夜扫描变化，实时清单以 [INDEX.md](INDEX.md) / [registry.json](registry.json) 为准。
 
