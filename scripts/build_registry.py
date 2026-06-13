@@ -25,6 +25,7 @@ import os
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 import requests
@@ -38,6 +39,40 @@ API = "https://api.github.com"
 HEADERS = {"Authorization": f"Bearer {TOKEN}", "Accept": "application/vnd.github+json"} if TOKEN else {}
 ROOT = Path(__file__).resolve().parent.parent
 EXCLUDED_REPOS = {"skill-template", "agent-template"}
+CATEGORY_LABELS = {
+    "analyst": "分析类 / Analyst",
+    "data-api": "数据类 / Data API",
+    "factor": "因子库 / Factor Library",
+    "monitor": "监控类 / Monitor",
+    "replication": "复现类 / Replication",
+    "tooling": "工具流程类 / Tooling",
+    "trader-research": "交易者研究类 / Trader Research",
+    "research-agent": "研究 Agent / Research Agent",
+    "workflow-agent": "工作流 Agent / Workflow Agent",
+    "review-agent": "审核 Agent / Review Agent",
+    "data-agent": "数据 Agent / Data Agent",
+    "automation-agent": "自动化 Agent / Automation Agent",
+    "uncategorized": "未分类 / Uncategorized",
+}
+CATEGORY_ORDER = {
+    "analyst": 10,
+    "data-api": 20,
+    "factor": 30,
+    "monitor": 40,
+    "replication": 50,
+    "tooling": 60,
+    "trader-research": 70,
+    "research-agent": 110,
+    "workflow-agent": 120,
+    "review-agent": 130,
+    "data-agent": 140,
+    "automation-agent": 150,
+    "uncategorized": 999,
+}
+PROJECT_TYPE_LABELS = {
+    "skill": "Skills",
+    "agent": "Agents",
+}
 PUBLIC_ENTRY_KEYS = (
     "name",
     "url",
@@ -74,6 +109,7 @@ def list_asset_repos() -> list[dict]:
             r
             for r in batch
             if r["name"].startswith(("skill-", "agent-")) and r["name"] not in EXCLUDED_REPOS and not r["archived"]
+            and not r.get("private")
         ]
         page += 1
     return repos
@@ -85,8 +121,16 @@ def head_sha(repo: dict) -> str:
 
 
 def shallow_clone(name: str, dest: Path) -> None:
-    url = f"https://x-access-token:{TOKEN}@github.com/{ORG}/{name}.git" if TOKEN else f"https://github.com/{ORG}/{name}.git"
-    subprocess.run(["git", "clone", "--depth", "1", "--quiet", url, str(dest)], check=True)
+    url = f"https://github.com/{ORG}/{name}.git"
+    last_error = None
+    for attempt in range(1, 4):
+        proc = subprocess.run(["git", "clone", "--depth", "1", "--quiet", url, str(dest)], text=True, capture_output=True)
+        if proc.returncode == 0:
+            return
+        last_error = (proc.stderr or proc.stdout or "unknown git clone failure").strip()
+        if attempt < 3:
+            time.sleep(2 * attempt)
+    raise RuntimeError(f"failed to clone {ORG}/{name}: {last_error}")
 
 
 def build_entry(name: str, repo_dir: Path, sha: str, report) -> dict:
@@ -148,10 +192,10 @@ def write_index(entries: list[dict]) -> None:
     by_type_cat: dict[tuple[str, str], list[dict]] = {}
     for e in entries:
         by_type_cat.setdefault((e.get("project_type", "skill"), e["category"]), []).append(e)
-    lines = ["# quantskills Asset 目录\n", "> 本文件由 build_registry.py 自动生成,请勿手工编辑。\n"]
-    type_label = {"skill": "Skills", "agent": "Agents"}
-    for project_type, cat in sorted(by_type_cat):
-        lines.append(f"\n## {type_label.get(project_type, project_type)} / {cat}\n")
+    lines = ["# quantskills 资产目录 / Asset Directory\n", "> 本文件由 build_registry.py 自动生成,请勿手工编辑。\n"]
+    for project_type, cat in sorted(by_type_cat, key=lambda item: (item[0], CATEGORY_ORDER.get(item[1], 500), item[1])):
+        category_label = CATEGORY_LABELS.get(cat, f"{cat} / {cat}")
+        lines.append(f"\n## {PROJECT_TYPE_LABELS.get(project_type, project_type)} / {category_label}\n")
         lines.append("| Asset | 简介 | 验证级别 | 状态 | 标签 |")
         lines.append("| --- | --- | --- | --- | --- |")
         for e in sorted(by_type_cat[(project_type, cat)], key=lambda x: x["name"]):

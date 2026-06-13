@@ -28,7 +28,36 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
+  },
+  {
+    "name": "skill-backtest",
+    "url": "https://github.com/quantskills/skill-backtest",
+    "description": "Use when an agent needs a standard cross-sectional long-only backtest protocol with T+1 open execution, top-bucket equal weighting, fees, limit-up or limit-down exclusions, benchmark comparison, NAV curves, drawdown, IC, and diagnostic charts.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "backtest",
+      "cross-section",
+      "long-only",
+      "diagnostics",
+      "quant-research"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "不是回测框架，而是截面多头回测的标准协议：T+1 开盘成交、Top 等权、双边 15bp、涨跌停剔除、四联诊断图、5 项健康度自检。",
+    "summary_en": "Standard cross-sectional long-only backtest protocol with T+1 execution, fees, limit filters, NAV curves, IC, drawdown, and diagnostic charts.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-event-risk-alert",
@@ -59,7 +88,123 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
+  },
+  {
+    "name": "skill-factor-debug",
+    "url": "https://github.com/quantskills/skill-factor-debug",
+    "description": "Use when an agent needs to debug failed, unstable, suspicious, or numerically broken quantitative factors, including NaN checks, signal validation, look-ahead bias probes, horizon mismatch, checksum drift, and correlation violations.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "factor-debug",
+      "look-ahead-bias",
+      "signal-validation",
+      "data-integrity",
+      "quant-research"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "不是 IDE 调试器，而是因子崩溃 / 失效 / 数值异常的诊断手册：按\"症状 → 候选病因 → 验证手段\"组织的 9 类速查表，专治\"因子跑挂\"和\"看似太好怀疑有 bug\"。",
+    "summary_en": "Factor debugging playbook for NaNs, signal validation failures, look-ahead bias, horizon mismatch, checksum drift, and correlation violations.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-13"
+  },
+  {
+    "name": "skill-factor-evaluate",
+    "url": "https://github.com/quantskills/skill-factor-evaluate",
+    "description": "Use when an agent needs to evaluate a single quantitative factor or signal with rank IC, Pearson IC, Sharpe, maximum drawdown, monotonicity, turnover, and a normalized composite score report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "factor-evaluation",
+      "ic",
+      "sharpe",
+      "monotonicity",
+      "turnover"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "不是回测引擎，而是给单个因子打综合分的评价 Skill：双 IC + Sharpe + MDD + 单调性 + 换手 → 归一加权主分。",
+    "summary_en": "Single-factor evaluation skill covering rank IC, Pearson IC, Sharpe, drawdown, monotonicity, turnover, and composite scoring.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-13"
+  },
+  {
+    "name": "skill-factor-mine",
+    "url": "https://github.com/quantskills/skill-factor-mine",
+    "description": "Use when an agent needs a disciplined quantitative factor mining workflow for forming one hypothesis at a time, implementing a factor, running validation, recording iteration notes, accepting improvements, or rolling back weak experiments.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "factor-mining",
+      "alpha-research",
+      "workflow",
+      "iteration",
+      "validation"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "不是因子库，而是因子挖掘的工作流 SOP：把\"加一个新因子\"这件事拆成可重复、可归因、可回滚的标准动作。",
+    "summary_en": "Disciplined factor-mining workflow for hypothesis design, implementation, validation, iteration notes, acceptance, and rollback decisions.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-13"
+  },
+  {
+    "name": "skill-factor-review",
+    "url": "https://github.com/quantskills/skill-factor-review",
+    "description": "Use when an agent needs to review an existing factor library, summarize experiment logs, quantify acceptance rates and score dynamics, analyze factor families and correlations, and recommend the next research direction.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "factor-review",
+      "factor-library",
+      "research-review",
+      "correlation",
+      "workflow"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "不是单因子评价，而是因子库整体复盘 Skill：扫描实验日志 + 因子卡，输出三层报告（量化盘点 + 结构分析 + 研究建议），回答\"已经做了什么、最优在哪、下一步该挖什么\"。",
+    "summary_en": "Factor-library review skill for experiment logs, acceptance rates, score dynamics, factor-family structure, correlations, and research recommendations.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-futures-deepview-analyst",
@@ -90,7 +235,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-gaetano-crux-capital-research-model",
@@ -121,7 +266,36 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
+  },
+  {
+    "name": "skill-ic-analysis",
+    "url": "https://github.com/quantskills/skill-ic-analysis",
+    "description": "Use when an agent needs multidimensional IC diagnostics for a quantitative signal, including rank versus Pearson IC, IC decay, subsample IC, top-basket Jaccard stability, and cumulative IC timelines.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "ic-analysis",
+      "rank-ic",
+      "ic-decay",
+      "factor-diagnostics",
+      "quant-research"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "不是评分系统，而是IC 多维诊断 Skill：双 IC 对照 + IC 衰减曲线 + 子样本切片 + Top 篮 Jaccard + 时序累计图。回答\"在哪类股票/什么周期上有效\"。",
+    "summary_en": "Multidimensional IC diagnostics for rank versus Pearson IC, IC decay, subsample IC, top-basket stability, and cumulative IC timelines.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-index-valuation-rotation",
@@ -152,7 +326,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-macro-monitor",
@@ -183,7 +357,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-market-daily-review",
@@ -214,7 +388,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-options-vol-analyst",
@@ -245,7 +419,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-pandadata-api",
@@ -274,7 +448,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-pandadata-warehouse",
@@ -305,7 +479,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-paper-replication",
@@ -334,7 +508,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-quant-factor-directional-alpha",
@@ -363,7 +537,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-quant-factor-risk-pattern-alpha",
@@ -392,7 +566,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-quant-factor-skill-factory",
@@ -421,7 +595,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-quant-factor-volume-stat-alpha",
@@ -450,7 +624,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-quant-research-replication",
@@ -479,7 +653,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-report-replication",
@@ -508,7 +682,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-serenity-research-model",
@@ -539,7 +713,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-ssquant-ai-trader",
@@ -568,7 +742,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-ssquant-trader-generator",
@@ -599,7 +773,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-stock-screener",
@@ -630,7 +804,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   },
   {
     "name": "skill-x-trader-builder",
@@ -659,6 +833,6 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-12"
+    "last_validated": "2026-06-13"
   }
 ]
