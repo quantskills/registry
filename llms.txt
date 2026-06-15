@@ -11,6 +11,8 @@
 - [skill-stock-screener](https://github.com/quantskills/skill-stock-screener): Natural-language A-share stock screener skill that maps fundamentals, dividends, valuation, pledges, northbound flows, sectors, holders, and risk filters to Pandadata calls.
 - [skill-pandadata-api](https://github.com/quantskills/skill-pandadata-api): Pandadata and panda_data Python SDK reference skill for selecting, calling, and troubleshooting quant data APIs.
 - [skill-pandadata-warehouse](https://github.com/quantskills/skill-pandadata-warehouse): Pandadata warehouse skill for caching, refreshing, querying, and validating local DuckDB and Parquet market-data stores.
+- [skill-factormad-debate-factor-mining](https://github.com/quantskills/skill-factormad-debate-factor-mining): Mine interpretable code-based stock alpha factors from OHLCV market data with a FactorMAD-style LLM debate workflow.
+- [skill-factormad-factor-debugging](https://github.com/quantskills/skill-factormad-factor-debugging): Validate, repair, and export code-based stock alpha factor functions with a debugging loop extracted from FactorMAD.
 - [skill-quant-factor-directional-alpha](https://github.com/quantskills/skill-quant-factor-directional-alpha): Directional OHLCV alpha factor library with 296 trend, breakout, reversal, and channel-position factor Skills validated on real market data.
 - [skill-quant-factor-risk-pattern-alpha](https://github.com/quantskills/skill-quant-factor-risk-pattern-alpha): Risk-state and chart-pattern OHLCV alpha factor library with 288 factor Skills for volatility, K-line shape, shock, drawdown, and pressure analysis.
 - [skill-quant-factor-volume-stat-alpha](https://github.com/quantskills/skill-quant-factor-volume-stat-alpha): Volume, volume-price, ranking, and statistical OHLCV alpha factor library with 216 factor Skills validated on real market data.
@@ -29,6 +31,7 @@
 - [skill-quant-factor-skill-factory](https://github.com/quantskills/skill-quant-factor-skill-factory): Factory skill for turning OHLCV alpha ideas into QuantSkills factor skills with real-market validation and packaging.
 - [skill-ssquant-ai-trader](https://github.com/quantskills/skill-ssquant-ai-trader): SSQuant AI Trader skill for converting natural-language trading descriptions into automated or semi-automated strategy workflows.
 - [skill-ssquant-trader-generator](https://github.com/quantskills/skill-ssquant-trader-generator): Trader-generator skill that turns natural-language trading ideas into deployable AI Trader rules, code, and operating plans.
+- [skill-time-series-analysis](https://github.com/quantskills/skill-time-series-analysis): Conclusion-first time-series diagnostics for original series, Log diff, distributions, stationarity, cointegration, and half-life.
 - [skill-x-trader-builder](https://github.com/quantskills/skill-x-trader-builder): Skill-builder workflow for turning public X/Twitter data and user materials into trader-specific research-model skills.
 
 ## Agents

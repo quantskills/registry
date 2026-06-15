@@ -126,6 +126,26 @@
       "category": "tooling"
     },
     {
+      "name": "factormad-debate-factor-mining",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factormad-debate-factor-mining"
+      },
+      "description": "Mine interpretable code-based stock alpha factors from OHLCV market data with a FactorMAD-style LLM debate workflow.",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
+      "name": "factormad-factor-debugging",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factormad-factor-debugging"
+      },
+      "description": "Validate, repair, and export code-based stock alpha factor functions with a debugging loop extracted from FactorMAD.",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
       "name": "futures-deepview-analyst",
       "source": {
         "source": "github",
@@ -324,6 +344,16 @@
       "description": "Natural-language A-share stock screener skill that maps fundamentals, dividends, valuation, pledges, northbound flows, sectors, holders, and risk filters to Pandadata calls.",
       "type": "skill",
       "category": "analyst"
+    },
+    {
+      "name": "time-series-analysis",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-time-series-analysis"
+      },
+      "description": "Conclusion-first time-series diagnostics for original series, Log diff, distributions, stationarity, cointegration, and half-life.",
+      "type": "skill",
+      "category": "tooling"
     },
     {
       "name": "x-trader-builder",

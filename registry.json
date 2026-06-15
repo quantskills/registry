@@ -164,6 +164,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -355,6 +356,62 @@
     "last_validated": "2026-06-15"
   },
   {
+    "name": "skill-factormad-debate-factor-mining",
+    "url": "https://github.com/quantskills/skill-factormad-debate-factor-mining",
+    "description": "Run a self-contained FactorMAD-style LLM multi-agent debate workflow for mining interpretable code-based stock alpha factors from OHLCV market data. Use when an agent needs to generate, debate, validate, score, and export candidate alpha factor code for quantitative research.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "factormad",
+      "alpha-mining",
+      "factor-research",
+      "llm",
+      "debate"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "使用 FactorMAD 风格的 LLM 多智能体辩论流程从 OHLCV 行情数据中挖掘代码型股票 Alpha 因子。",
+    "summary_en": "Mine interpretable code-based stock alpha factors from OHLCV market data with a FactorMAD-style LLM debate workflow.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-15"
+  },
+  {
+    "name": "skill-factormad-factor-debugging",
+    "url": "https://github.com/quantskills/skill-factormad-factor-debugging",
+    "description": "Validate, repair, and export code-based stock alpha factor functions with a debugging loop extracted from FactorMAD. Use for single factor code, factor lists, or factor-mining result JSON artifacts including FactorMAD debate outputs when the task is to debug factor code rather than score factor performance.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "factormad",
+      "factor-debugging",
+      "alpha-factor",
+      "code-validation",
+      "llm-repair"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "使用从 FactorMAD 抽取的 debug loop 验证、修复和导出代码型股票 Alpha 因子函数。",
+    "summary_en": "Validate, repair, and export code-based stock alpha factor functions with a debugging loop extracted from FactorMAD.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-15"
+  },
+  {
     "name": "skill-futures-deepview-analyst",
     "url": "https://github.com/quantskills/skill-futures-deepview-analyst",
     "description": "基于 Pandadata 期货 DeepView 接口做期货品种、主力合约和跨期结构的综合研判，覆盖席位净持仓保证金、席位建仓、盈亏排行、多空比、资金流、基差、期限结构、仓单库存、虚实盘比、现货利润和跨期套利。Use when the user asks for 期货席位分析、持仓博弈、主力席位动向、基差或期限结构监控、仓单库存跟踪、虚实盘比、跨期套利扫描、期货品种综合分析, or a futures DeepView report for a variety or contract.",
@@ -524,6 +581,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -646,6 +704,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -675,6 +734,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -704,6 +764,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -733,6 +794,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -762,6 +824,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -791,6 +854,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -820,6 +884,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -880,6 +945,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -909,6 +975,7 @@
     "platforms": [
       "claude-code",
       "codex",
+      "hermes",
       "openclaw",
       "cursor"
     ],
@@ -949,6 +1016,35 @@
     ],
     "summary_zh": "自然语言 A 股选股：把分红、估值、质押、北向、行业概念、财务增长、股东变化等条件转成可追溯 Pandadata 筛选。",
     "summary_en": "Natural-language A-share stock screener skill that maps fundamentals, dividends, valuation, pledges, northbound flows, sectors, holders, and risk filters to Pandadata calls.",
+    "license": "GPL-3.0",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-15"
+  },
+  {
+    "name": "skill-time-series-analysis",
+    "url": "https://github.com/quantskills/skill-time-series-analysis",
+    "description": "Use when an agent needs conclusion-first diagnostics or Markdown reports for financial time series, including KDE/QQ distribution checks, Hurst/ADF/KPSS stationarity, Log diff analysis, spread half-life, and Engle-Granger cointegration.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "time-series",
+      "stationarity",
+      "cointegration",
+      "mean-reversion",
+      "quant-research"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "结论先行的时序分析 Skill：原始序列、Log diff、分布、平稳性、协整和半衰期。",
+    "summary_en": "Conclusion-first time-series diagnostics for original series, Log diff, distributions, stationarity, cointegration, and half-life.",
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",

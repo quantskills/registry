@@ -51,6 +51,8 @@
 
 | Asset | 简介 | 验证级别 | 状态 | 标签 |
 | --- | --- | --- | --- | --- |
+| [skill-factormad-debate-factor-mining](https://github.com/quantskills/skill-factormad-debate-factor-mining) | 使用 FactorMAD 风格的 LLM 多智能体辩论流程从 OHLCV 行情数据中挖掘代码型股票 Alpha 因子。 | L1 Listed | draft | `factormad` `alpha-mining` `factor-research` `llm` `debate` |
+| [skill-factormad-factor-debugging](https://github.com/quantskills/skill-factormad-factor-debugging) | 使用从 FactorMAD 抽取的 debug loop 验证、修复和导出代码型股票 Alpha 因子函数。 | L1 Listed | draft | `factormad` `factor-debugging` `alpha-factor` `code-validation` `llm-repair` |
 | [skill-quant-factor-directional-alpha](https://github.com/quantskills/skill-quant-factor-directional-alpha) | 方向类因子库：296 个独立 OHLCV 因子 Skill，真实行情验证 296/296 全部通过。 | L3 Verified | stable | `alpha-factor` `directional` `ohlcv` `trend` `breakout` |
 | [skill-quant-factor-risk-pattern-alpha](https://github.com/quantskills/skill-quant-factor-risk-pattern-alpha) | 风险状态与形态类因子库：288 个独立 OHLCV 因子 Skill，真实行情验证 288/288 全部通过。 | L3 Verified | stable | `alpha-factor` `risk-pattern` `ohlcv` `volatility` `drawdown` |
 | [skill-quant-factor-volume-stat-alpha](https://github.com/quantskills/skill-quant-factor-volume-stat-alpha) | 量能、量价和统计排序类因子库：216 个独立 OHLCV 因子 Skill，真实行情验证 216/216 全部通过。 | L3 Verified | stable | `alpha-factor` `volume` `volume-price` `ranking` `statistics` |
@@ -84,4 +86,5 @@
 | [skill-quant-factor-skill-factory](https://github.com/quantskills/skill-quant-factor-skill-factory) | 不是因子库本身，而是继续生产因子库的工具：批量生成、验证和打包框架中立的 OHLCV 量化因子 Skill。 | L2 Runnable | stable | `factor-factory` `alpha` `ohlcv` `validation` `skill-generation` |
 | [skill-ssquant-ai-trader](https://github.com/quantskills/skill-ssquant-ai-trader) | 你负责说话，AI 负责写代码、跑策略、盯盘、控风险。 | L2 Runnable | stable | `ssquant` `ai-trader` `strategy` `simnow` `automation` |
 | [skill-ssquant-trader-generator](https://github.com/quantskills/skill-ssquant-trader-generator) | 说一次想法，得到一个可以随时加载的 AI 交易员。 | L2 Runnable | stable | `ssquant` `trader-generator` `ai-trader` `natural-language` `deployment` |
+| [skill-time-series-analysis](https://github.com/quantskills/skill-time-series-analysis) | 结论先行的时序分析 Skill：原始序列、Log diff、分布、平稳性、协整和半衰期。 | L2 Runnable | draft | `time-series` `stationarity` `cointegration` `mean-reversion` `quant-research` |
 | [skill-x-trader-builder](https://github.com/quantskills/skill-x-trader-builder) | 把任意 X/Twitter 公开交易员的发帖历史，加工成 trader 专属的研究模型 Skill：init-run → 采集 → extract → auto-review → split → evaluate → template → report 九步流水线，从噪... | L2 Runnable | stable | `trader-skill` `research-model` `x-twitter` `skill-builder` `workflow` |
