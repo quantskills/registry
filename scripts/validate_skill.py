@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """validate_skill.py — quantskills asset 仓库确定性健康检查器(脚本层)。
 
-只做事实判断,不做语义判断。语义判断(标签准确性、敏感内容、文档漂移)交给 AI 层,见 AGENT.md。
+只做事实判断,不做语义判断。语义判断(标签准确性、敏感内容、文档漂移)交给 AI 层,见 AGENTS.md。
 
 用法:
     python scripts/validate_skill.py /path/to/cloned/repo [--json] [--org-repos a,b,c]
@@ -23,7 +23,7 @@ except ImportError:
     sys.exit("缺少依赖: pip install pyyaml")
 
 # ---------------- 配置 ----------------
-DECLARATION_BY_TYPE = {"skill": "SKILL.md", "agent": "AGENT.md"}
+DECLARATION_BY_TYPE = {"skill": "SKILL.md", "agent": "AGENTS.md"}
 ASSET_TYPES = {"skill", "agent"}
 CATEGORIES = {
     "trader-research",
@@ -34,12 +34,14 @@ CATEGORIES = {
     "analyst",
     "tooling",
     "research-agent",
+    "monitor-agent",
+    "risk-agent",
     "workflow-agent",
     "review-agent",
     "data-agent",
     "automation-agent",
 }
-STATUSES = {"draft", "stable", "deprecated"}
+STATUSES = {"draft", "active", "stable", "deprecated"}
 PLATFORMS = {"claude-code", "codex", "openclaw", "cursor", "workbuddy"}
 VALIDATION_LEVELS = {"listed", "runnable", "verified"}
 MAINTAINER_TYPES = {"official", "community"}
@@ -100,7 +102,7 @@ def declaration_info(repo: Path) -> tuple[str | None, str | None]:
         return "agent", DECLARATION_BY_TYPE["agent"]
     if name.startswith("skill-"):
         return "skill", DECLARATION_BY_TYPE["skill"]
-    if (repo / "AGENT.md").is_file() and not (repo / "SKILL.md").is_file():
+    if (repo / "AGENTS.md").is_file() and not (repo / "SKILL.md").is_file():
         return "agent", DECLARATION_BY_TYPE["agent"]
     if (repo / "SKILL.md").is_file():
         return "skill", DECLARATION_BY_TYPE["skill"]
@@ -121,7 +123,7 @@ def parse_frontmatter(declaration_md: Path) -> dict | None:
 def check_required_files(repo: Path, declaration_file: str | None, rep: Report) -> None:
     required_files = [name for name in (declaration_file, "README.md", "LICENSE") if name]
     if not declaration_file:
-        rep.add("fail", "required-files", "缺少声明文件 SKILL.md 或 AGENT.md")
+        rep.add("fail", "required-files", "缺少声明文件 SKILL.md 或 AGENTS.md")
     for name in required_files:
         if not (repo / name).is_file():
             rep.add("fail", "required-files", f"缺少必备文件 {name}")

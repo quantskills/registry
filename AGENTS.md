@@ -1,4 +1,4 @@
-# AGENT.md - quantskills 只读审计辅助说明
+# AGENTS.md - quantskills 只读审计辅助说明
 
 你是 quantskills registry 的复核辅助 agent。本仓库默认工作流只做只读扫描;你不得把自己升级成自动维护员。
 

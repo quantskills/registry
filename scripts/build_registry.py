@@ -22,6 +22,7 @@ import argparse
 import datetime as dt
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -48,6 +49,8 @@ CATEGORY_LABELS = {
     "tooling": "工具流程类 / Tooling",
     "trader-research": "交易者研究类 / Trader Research",
     "research-agent": "研究 Agent / Research Agent",
+    "monitor-agent": "监控 Agent / Monitor Agent",
+    "risk-agent": "风险 Agent / Risk Agent",
     "workflow-agent": "工作流 Agent / Workflow Agent",
     "review-agent": "审核 Agent / Review Agent",
     "data-agent": "数据 Agent / Data Agent",
@@ -63,10 +66,12 @@ CATEGORY_ORDER = {
     "tooling": 60,
     "trader-research": 70,
     "research-agent": 110,
-    "workflow-agent": 120,
-    "review-agent": 130,
-    "data-agent": 140,
-    "automation-agent": 150,
+    "monitor-agent": 120,
+    "risk-agent": 130,
+    "workflow-agent": 140,
+    "review-agent": 150,
+    "data-agent": 160,
+    "automation-agent": 170,
     "uncategorized": 999,
 }
 PROJECT_TYPE_LABELS = {
@@ -152,7 +157,7 @@ def build_entry(name: str, repo_dir: Path, sha: str, report) -> dict:
         "url": f"https://github.com/{ORG}/{name}",
         "description": fm.get("description", ""),
         "project_type": project_type,
-        "declaration_file": declaration_file or ("AGENT.md" if project_type == "agent" else "SKILL.md"),
+        "declaration_file": declaration_file or ("AGENTS.md" if project_type == "agent" else "SKILL.md"),
         "category": qs.get("category", "uncategorized"),
         "tags": qs.get("tags", []),
         "platforms": qs.get("platforms", []),
@@ -299,6 +304,13 @@ def replace_snapshot_block(path: Path, body: str) -> None:
     path.write_text(f"{before}{SNAPSHOT_START}\n{body}\n{SNAPSHOT_END}{after}", encoding="utf-8")
 
 
+def replace_public_assets_badge(path: Path, skill_count: int, agent_count: int) -> None:
+    text = path.read_text(encoding="utf-8")
+    badge = f"public_assets-{skill_count}_skills_{agent_count}_agents-blue"
+    text = re.sub(r"public_assets-[^\"/]+-blue", badge, text, count=1)
+    path.write_text(text, encoding="utf-8")
+
+
 def write_readme_snapshots(entries: list[dict]) -> None:
     type_counts: dict[str, int] = {}
     for entry in entries:
@@ -317,6 +329,7 @@ def write_readme_snapshots(entries: list[dict]) -> None:
             f"分类分布：{category_snapshot(entries, 'zh')}；验证级别 {validation}。"
         ),
     )
+    replace_public_assets_badge(ROOT / "README.md", skill_count, agent_count)
     replace_snapshot_block(
         ROOT / "README.en.md",
         (
@@ -324,6 +337,7 @@ def write_readme_snapshots(entries: list[dict]) -> None:
             f"Categories: {category_snapshot(entries, 'en')}; validation levels {validation}."
         ),
     )
+    replace_public_assets_badge(ROOT / "README.en.md", skill_count, agent_count)
 
 
 def write_human_review(entries: list[dict], reports_dir: Path, stamp: str) -> None:

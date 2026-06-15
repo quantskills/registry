@@ -36,7 +36,7 @@
       "declaration_file": {
         "enum": [
           "SKILL.md",
-          "AGENT.md"
+          "AGENTS.md"
         ]
       },
       "category": {
@@ -57,6 +57,7 @@
       "status": {
         "enum": [
           "draft",
+          "active",
           "stable",
           "deprecated"
         ]

@@ -7,7 +7,7 @@ This document describes how the public registry is generated and maintained.
 Each asset repository declares its metadata in frontmatter:
 
 - `skill-*` repositories use `SKILL.md`
-- `agent-*` repositories use `AGENT.md`
+- `agent-*` repositories use `AGENTS.md`
 
 The public workflow runs nightly:
 

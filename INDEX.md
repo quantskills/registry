@@ -3,6 +3,31 @@
 > 本文件由 build_registry.py 自动生成,请勿手工编辑。
 
 
+## Agents / 研究 Agent / Research Agent
+
+| Asset | 简介 | 验证级别 | 状态 | 标签 |
+| --- | --- | --- | --- | --- |
+| [agent-correlation-break-research](https://github.com/quantskills/agent-correlation-break-research) | 用多股票与指数收益相关性变化识别风格切换、组合分散失效和结构性行情变化。 | L3 Verified | active | `correlation-break` `style-shift` `portfolio-risk` `pandadata` |
+
+## Agents / 监控 Agent / Monitor Agent
+
+| Asset | 简介 | 验证级别 | 状态 | 标签 |
+| --- | --- | --- | --- | --- |
+| [agent-derivatives-skew-sentiment-monitor](https://github.com/quantskills/agent-derivatives-skew-sentiment-monitor) | 用期权隐含波动率和标的历史波动率观察衍生品市场风险偏好，不重复已有期权波动率分析 Skill。 | L3 Verified | active | `derivatives` `options` `sentiment` `pandadata` |
+| [agent-market-regime-monitor](https://github.com/quantskills/agent-market-regime-monitor) | 用 Pandadata 行情、指数、宽度、波动和资金证据判断市场处于趋势、震荡、退潮或风险扩张状态。 | L3 Verified | active | `market-regime` `monitoring` `a-share` `pandadata` |
+
+## Agents / 风险 Agent / Risk Agent
+
+| Asset | 简介 | 验证级别 | 状态 | 标签 |
+| --- | --- | --- | --- | --- |
+| [agent-crowding-risk-monitor](https://github.com/quantskills/agent-crowding-risk-monitor) | 用价格、成交、融资、龙虎榜热度识别抱团、过热、踩踏和去杠杆风险。 | L3 Verified | active | `crowding` `margin` `risk-monitoring` `pandadata` |
+
+## Agents / 工作流 Agent / Workflow Agent
+
+| Asset | 简介 | 验证级别 | 状态 | 标签 |
+| --- | --- | --- | --- | --- |
+| [agent-quantspace](https://github.com/quantskills/agent-quantspace) | 面向 AI 编码代理的量化研究框架，组织数据、技能、策略、回测和报告工作流。 | L2 Runnable | active | `quant-research` `strategy-research` `backtesting` `pandadata` |
+
 ## Skills / 分析类 / Analyst
 
 | Asset | 简介 | 验证级别 | 状态 | 标签 |

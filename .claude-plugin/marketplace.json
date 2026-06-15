@@ -6,6 +6,56 @@
   },
   "plugins": [
     {
+      "name": "correlation-break-research",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/agent-correlation-break-research"
+      },
+      "description": "Detect correlation breaks, style shifts, and diversification stress from Pandadata return evidence.",
+      "type": "agent",
+      "category": "research-agent"
+    },
+    {
+      "name": "crowding-risk-monitor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/agent-crowding-risk-monitor"
+      },
+      "description": "Monitor crowded-trade risk from Pandadata price, turnover, margin, and LHB heat evidence.",
+      "type": "agent",
+      "category": "risk-agent"
+    },
+    {
+      "name": "derivatives-skew-sentiment-monitor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/agent-derivatives-skew-sentiment-monitor"
+      },
+      "description": "Monitor derivatives sentiment from option implied volatility and underlying historical volatility.",
+      "type": "agent",
+      "category": "monitor-agent"
+    },
+    {
+      "name": "market-regime-monitor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/agent-market-regime-monitor"
+      },
+      "description": "Monitor market regime from Pandadata index, breadth, volatility, and funding evidence.",
+      "type": "agent",
+      "category": "monitor-agent"
+    },
+    {
+      "name": "quantspace",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/agent-quantspace"
+      },
+      "description": "AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.",
+      "type": "agent",
+      "category": "workflow-agent"
+    },
+    {
       "name": "a-share-stock-dossier",
       "source": {
         "source": "github",

@@ -1,5 +1,153 @@
 [
   {
+    "name": "agent-correlation-break-research",
+    "url": "https://github.com/quantskills/agent-correlation-break-research",
+    "description": "Detect correlation breaks, style shifts, and diversification stress from Pandadata return evidence. Use when a research or trading AI agent needs Pandadata-backed monitoring, evidence-backed interpretation, user-readable reports, watchlists, and review materials without automated order placement.",
+    "project_type": "agent",
+    "declaration_file": "AGENTS.md",
+    "category": "research-agent",
+    "tags": [
+      "correlation-break",
+      "style-shift",
+      "portfolio-risk",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "active",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "用多股票与指数收益相关性变化识别风格切换、组合分散失效和结构性行情变化。",
+    "summary_en": "Detect correlation breaks, style shifts, and diversification stress from Pandadata return evidence.",
+    "license": "GPL-3.0",
+    "validation_level": "verified",
+    "maintainer_type": "official",
+    "last_validated": "2026-06-15"
+  },
+  {
+    "name": "agent-crowding-risk-monitor",
+    "url": "https://github.com/quantskills/agent-crowding-risk-monitor",
+    "description": "Monitor crowded-trade risk from Pandadata price, turnover, margin, and LHB heat evidence. Use when a research or trading AI agent needs Pandadata-backed monitoring, evidence-backed interpretation, user-readable reports, watchlists, and review materials without automated order placement.",
+    "project_type": "agent",
+    "declaration_file": "AGENTS.md",
+    "category": "risk-agent",
+    "tags": [
+      "crowding",
+      "margin",
+      "risk-monitoring",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "active",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "用价格、成交、融资、龙虎榜热度识别抱团、过热、踩踏和去杠杆风险。",
+    "summary_en": "Monitor crowded-trade risk from Pandadata price, turnover, margin, and LHB heat evidence.",
+    "license": "GPL-3.0",
+    "validation_level": "verified",
+    "maintainer_type": "official",
+    "last_validated": "2026-06-15"
+  },
+  {
+    "name": "agent-derivatives-skew-sentiment-monitor",
+    "url": "https://github.com/quantskills/agent-derivatives-skew-sentiment-monitor",
+    "description": "Monitor derivatives sentiment from option implied volatility and underlying historical volatility. Use when a research or trading AI agent needs Pandadata-backed monitoring, evidence-backed interpretation, user-readable reports, watchlists, and review materials without automated order placement.",
+    "project_type": "agent",
+    "declaration_file": "AGENTS.md",
+    "category": "monitor-agent",
+    "tags": [
+      "derivatives",
+      "options",
+      "sentiment",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "active",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "用期权隐含波动率和标的历史波动率观察衍生品市场风险偏好，不重复已有期权波动率分析 Skill。",
+    "summary_en": "Monitor derivatives sentiment from option implied volatility and underlying historical volatility.",
+    "license": "GPL-3.0",
+    "validation_level": "verified",
+    "maintainer_type": "official",
+    "last_validated": "2026-06-15"
+  },
+  {
+    "name": "agent-market-regime-monitor",
+    "url": "https://github.com/quantskills/agent-market-regime-monitor",
+    "description": "Monitor market regime from Pandadata index, breadth, volatility, and funding evidence. Use when a research or trading AI agent needs Pandadata-backed monitoring, evidence-backed interpretation, user-readable reports, watchlists, and review materials without automated order placement.",
+    "project_type": "agent",
+    "declaration_file": "AGENTS.md",
+    "category": "monitor-agent",
+    "tags": [
+      "market-regime",
+      "monitoring",
+      "a-share",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "active",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "用 Pandadata 行情、指数、宽度、波动和资金证据判断市场处于趋势、震荡、退潮或风险扩张状态。",
+    "summary_en": "Monitor market regime from Pandadata index, breadth, volatility, and funding evidence.",
+    "license": "GPL-3.0",
+    "validation_level": "verified",
+    "maintainer_type": "official",
+    "last_validated": "2026-06-15"
+  },
+  {
+    "name": "agent-quantspace",
+    "url": "https://github.com/quantskills/agent-quantspace",
+    "description": "AI-native quantitative research framework with reusable skills, strategy domains, and thin orchestration scripts. Use when a coding agent needs to build, test, or review quantitative research workflows, strategy examples, backtests, reports, or reusable quant modules inside QuantSpace.",
+    "project_type": "agent",
+    "declaration_file": "AGENTS.md",
+    "category": "workflow-agent",
+    "tags": [
+      "quant-research",
+      "strategy-research",
+      "backtesting",
+      "pandadata"
+    ],
+    "platforms": [
+      "codex",
+      "claude-code",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "active",
+    "requires": [],
+    "summary_zh": "面向 AI 编码代理的量化研究框架，组织数据、技能、策略、回测和报告工作流。",
+    "summary_en": "AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.",
+    "license": "GPL-3.0",
+    "validation_level": "runnable",
+    "maintainer_type": "official",
+    "last_validated": "2026-06-15"
+  },
+  {
     "name": "skill-a-share-stock-dossier",
     "url": "https://github.com/quantskills/skill-a-share-stock-dossier",
     "description": "Generate a structured Chinese A-share stock due-diligence dossier from Pandadata interfaces, covering company profile, financials, dividends and capital actions, shareholder behavior, pledge/unlock/reduction risks, market funds, and sourced appendices. Use when the user asks for A股个股体检、个股尽调、公司全面分析、股票基本面报告、质押解禁减持风险排查, or a one-stop A-share company dossier.",
@@ -28,7 +176,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-backtest",
@@ -57,7 +205,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-event-risk-alert",
@@ -88,7 +236,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-factor-debug",
@@ -117,7 +265,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-factor-evaluate",
@@ -146,7 +294,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-factor-mine",
@@ -175,7 +323,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-factor-review",
@@ -204,7 +352,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-futures-deepview-analyst",
@@ -235,7 +383,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-gaetano-crux-capital-research-model",
@@ -266,7 +414,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-ic-analysis",
@@ -295,7 +443,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-index-valuation-rotation",
@@ -326,7 +474,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-macro-monitor",
@@ -357,7 +505,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-market-daily-review",
@@ -388,7 +536,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-options-vol-analyst",
@@ -419,7 +567,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-pandadata-api",
@@ -448,7 +596,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-pandadata-warehouse",
@@ -479,7 +627,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-paper-replication",
@@ -508,7 +656,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-quant-factor-directional-alpha",
@@ -537,7 +685,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-quant-factor-risk-pattern-alpha",
@@ -566,7 +714,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-quant-factor-skill-factory",
@@ -595,7 +743,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-quant-factor-volume-stat-alpha",
@@ -624,7 +772,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-quant-research-replication",
@@ -653,7 +801,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-report-replication",
@@ -682,7 +830,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-serenity-research-model",
@@ -713,7 +861,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-ssquant-ai-trader",
@@ -742,7 +890,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-ssquant-trader-generator",
@@ -773,7 +921,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-stock-screener",
@@ -804,7 +952,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   },
   {
     "name": "skill-x-trader-builder",
@@ -833,6 +981,6 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-14"
+    "last_validated": "2026-06-15"
   }
 ]

@@ -13,7 +13,7 @@ GitHub 组织侧每晚自动产出并维护以下公开数据,网站侧按需消
 ## 字段语义要点
 
 - `project_type`:`skill` / `agent`,建议作为一级展示分区。
-- `declaration_file`:`SKILL.md` / `AGENT.md`,说明该资产的声明入口。
+- `declaration_file`:`SKILL.md` / `AGENTS.md`,说明该资产的声明入口。
 - public registry 不包含 `health_items` 和人工复核细节。
 - `quarantined` 项目不会进入 public registry;详细原因只保存在维护者本地审计输出中。
 - `validation_level`:`listed` / `runnable` / `verified`,对应组织公开的三级验证体系,建议作为卡片徽章。

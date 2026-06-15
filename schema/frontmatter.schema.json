@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "quantskills SKILL.md / AGENT.md frontmatter contract",
+  "title": "quantskills SKILL.md / AGENTS.md frontmatter contract",
   "type": "object",
   "required": [
     "name",
@@ -57,6 +57,8 @@
             "analyst",
             "tooling",
             "research-agent",
+            "monitor-agent",
+            "risk-agent",
             "workflow-agent",
             "review-agent",
             "data-agent",
@@ -95,6 +97,7 @@
         "status": {
           "enum": [
             "draft",
+            "active",
             "stable",
             "deprecated"
           ]

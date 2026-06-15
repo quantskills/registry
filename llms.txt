@@ -32,6 +32,11 @@
 - [skill-x-trader-builder](https://github.com/quantskills/skill-x-trader-builder): Skill-builder workflow for turning public X/Twitter data and user materials into trader-specific research-model skills.
 
 ## Agents
+- [agent-derivatives-skew-sentiment-monitor](https://github.com/quantskills/agent-derivatives-skew-sentiment-monitor): Monitor derivatives sentiment from option implied volatility and underlying historical volatility.
+- [agent-market-regime-monitor](https://github.com/quantskills/agent-market-regime-monitor): Monitor market regime from Pandadata index, breadth, volatility, and funding evidence.
+- [agent-correlation-break-research](https://github.com/quantskills/agent-correlation-break-research): Detect correlation breaks, style shifts, and diversification stress from Pandadata return evidence.
+- [agent-crowding-risk-monitor](https://github.com/quantskills/agent-crowding-risk-monitor): Monitor crowded-trade risk from Pandadata price, turnover, margin, and LHB heat evidence.
+- [agent-quantspace](https://github.com/quantskills/agent-quantspace): AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.
 
 ## Registry
 - [registry.json](https://quantskills.ai/registry.json): machine-readable index of all assets
