@@ -76,6 +76,16 @@
       "category": "tooling"
     },
     {
+      "name": "doc-to-alphas",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-doc-to-alphas"
+      },
+      "description": "Generate OHLCV alpha factor expressions from document text, with a formula contract and automatic toy-data validation.",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
       "name": "event-risk-alert",
       "source": {
         "source": "github",
@@ -133,7 +143,7 @@
       },
       "description": "Mine interpretable code-based stock alpha factors from OHLCV market data with a FactorMAD-style LLM debate workflow.",
       "type": "skill",
-      "category": "factor"
+      "category": "tooling"
     },
     {
       "name": "factormad-factor-debugging",
