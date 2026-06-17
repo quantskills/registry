@@ -51,8 +51,6 @@
 
 | Asset | 简介 | 验证级别 | 状态 | 标签 |
 | --- | --- | --- | --- | --- |
-| [skill-doc-to-alphas](https://github.com/quantskills/skill-doc-to-alphas) | 从文档文本生成 OHLCV alpha 因子表达式，并提供公式契约与玩具数据自动验证。 | L1 Listed | draft | `alpha-generation` `factor-discovery` `ohlcv` `validation` `stock-selection` |
-| [skill-factormad-factor-debugging](https://github.com/quantskills/skill-factormad-factor-debugging) | 使用从 FactorMAD 抽取的 debug loop 验证、修复和导出代码型股票 Alpha 因子函数。 | L1 Listed | deprecated | `factormad` `factor-debugging` `alpha-factor` `code-validation` `llm-repair` |
 | [skill-quant-factor-directional-alpha](https://github.com/quantskills/skill-quant-factor-directional-alpha) | 方向类因子库：296 个独立 OHLCV 因子 Skill，真实行情验证 296/296 全部通过。 | L3 Verified | stable | `alpha-factor` `directional` `ohlcv` `trend` `breakout` |
 | [skill-quant-factor-risk-pattern-alpha](https://github.com/quantskills/skill-quant-factor-risk-pattern-alpha) | 风险状态与形态类因子库：288 个独立 OHLCV 因子 Skill，真实行情验证 288/288 全部通过。 | L3 Verified | stable | `alpha-factor` `risk-pattern` `ohlcv` `volatility` `drawdown` |
 | [skill-quant-factor-volume-stat-alpha](https://github.com/quantskills/skill-quant-factor-volume-stat-alpha) | 量能、量价和统计排序类因子库：216 个独立 OHLCV 因子 Skill，真实行情验证 216/216 全部通过。 | L3 Verified | stable | `alpha-factor` `volume` `volume-price` `ranking` `statistics` |
@@ -71,7 +69,7 @@
 | --- | --- | --- | --- | --- |
 | [skill-paper-replication](https://github.com/quantskills/skill-paper-replication) | 把一篇量化金融论文（arXiv 或本地 PDF），变成一套可运行、可审计的复现实验：检索 → 提取 → 回测 → 图表 → 指标对照，全程框架无关。 | L2 Runnable | stable | `paper-replication` `quant-finance` `backtest` `research` `workflow` |
 | [skill-quant-research-replication](https://github.com/quantskills/skill-quant-research-replication) | 搜索或接收量化论文、研报、PDF、网页、文本材料，产出一套完整的研究复现交付包：全文翻译 → 因子公式复现 → 有效性验证 → 策略代码 → 真实本地回测 → 交付摘要。 | L2 Runnable | stable | `research-replication` `quant-finance` `papers` `factors` `chinese-report` |
-| [skill-report-replication](https://github.com/quantskills/skill-report-replication) | 把一篇量化研报、论文、PDF、网页或文本材料，转化为完整的研究复现交付包：全文翻译 → 因子公式复现 → 有效性验证 → 策略代码 → 真实本地回测 → 交付摘要。 | L2 Runnable | stable | `report-replication` `factor-research` `backtest` `html-report` `chinese` |
+| [skill-report-replication](https://github.com/quantskills/skill-report-replication) | 把一篇量化研报、论文、PDF、网页或文本材料，转化为 Pandadata 真实数据驱动的研究复现交付包：全文翻译 → 因子公式复现 → 有效性验证 → 策略代码 → 真实本地回测 → 交付摘要。 | L2 Runnable | stable | `report-replication` `factor-research` `backtest` `pandadata` `html-report` |
 
 ## Skills / 工具流程类 / Tooling
 
@@ -82,7 +80,7 @@
 | [skill-factor-evaluate](https://github.com/quantskills/skill-factor-evaluate) | 不是回测引擎，而是给单个因子打综合分的评价 Skill：双 IC + Sharpe + MDD + 单调性 + 换手 → 归一加权主分。 | L1 Listed | stable | `factor-evaluation` `ic` `sharpe` `monotonicity` `turnover` |
 | [skill-factor-mine](https://github.com/quantskills/skill-factor-mine) | 不是因子库，而是因子挖掘的工作流 SOP：把"加一个新因子"这件事拆成可重复、可归因、可回滚的标准动作。 | L1 Listed | stable | `factor-mining` `alpha-research` `workflow` `iteration` `validation` |
 | [skill-factor-review](https://github.com/quantskills/skill-factor-review) | 不是单因子评价，而是因子库整体复盘 Skill：扫描实验日志 + 因子卡，输出三层报告（量化盘点 + 结构分析 + 研究建议），回答"已经做了什么、最优在哪、下一步该挖什么"。 | L1 Listed | stable | `factor-review` `factor-library` `research-review` `correlation` `workflow` |
-| [skill-factormad-debate-factor-mining](https://github.com/quantskills/skill-factormad-debate-factor-mining) | 使用 FactorMAD 风格的 LLM 多智能体辩论流程从 OHLCV 行情数据中挖掘代码型股票 Alpha 因子。 | L2 Runnable | activate | `factormad` `analyst` `tooling` `alpha-mining` `llm` |
+| [skill-factormad-debate-factor-mining](https://github.com/quantskills/skill-factormad-debate-factor-mining) | 使用 FactorMAD 风格的 LLM 多智能体辩论流程从 OHLCV 行情数据中挖掘代码型股票 Alpha 因子。 | L2 Runnable | activate | `factormad` `alpha-factor-mining` `multi-agent` `debate` `factor-debug` |
 | [skill-ic-analysis](https://github.com/quantskills/skill-ic-analysis) | 不是评分系统，而是IC 多维诊断 Skill：双 IC 对照 + IC 衰减曲线 + 子样本切片 + Top 篮 Jaccard + 时序累计图。回答"在哪类股票/什么周期上有效"。 | L1 Listed | stable | `ic-analysis` `rank-ic` `ic-decay` `factor-diagnostics` `quant-research` |
 | [skill-quant-factor-skill-factory](https://github.com/quantskills/skill-quant-factor-skill-factory) | 不是因子库本身，而是继续生产因子库的工具：批量生成、验证和打包框架中立的 OHLCV 量化因子 Skill。 | L2 Runnable | stable | `factor-factory` `alpha` `ohlcv` `validation` `skill-generation` |
 | [skill-ssquant-ai-trader](https://github.com/quantskills/skill-ssquant-ai-trader) | 你负责说话，AI 负责写代码、跑策略、盯盘、控风险。 | L2 Runnable | stable | `ssquant` `ai-trader` `strategy` `simnow` `automation` |

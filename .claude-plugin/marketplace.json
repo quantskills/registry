@@ -76,16 +76,6 @@
       "category": "tooling"
     },
     {
-      "name": "doc-to-alphas",
-      "source": {
-        "source": "github",
-        "repo": "quantskills/skill-doc-to-alphas"
-      },
-      "description": "Generate OHLCV alpha factor expressions from document text, with a formula contract and automatic toy-data validation.",
-      "type": "skill",
-      "category": "factor"
-    },
-    {
       "name": "event-risk-alert",
       "source": {
         "source": "github",
@@ -144,16 +134,6 @@
       "description": "Mine interpretable code-based stock alpha factors from OHLCV market data with a FactorMAD-style LLM debate workflow.",
       "type": "skill",
       "category": "tooling"
-    },
-    {
-      "name": "factormad-factor-debugging",
-      "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factormad-factor-debugging"
-      },
-      "description": "Validate, repair, and export code-based stock alpha factor functions with a debugging loop extracted from FactorMAD.",
-      "type": "skill",
-      "category": "factor"
     },
     {
       "name": "futures-deepview-analyst",
@@ -311,7 +291,7 @@
         "source": "github",
         "repo": "quantskills/skill-report-replication"
       },
-      "description": "Quant report replication skill that turns papers or reports into Chinese translations, factor formulas, validation reports, and strategy assets.",
+      "description": "Quant report replication skill that turns papers or reports into Chinese translations, factor formulas, Pandadata-backed validation reports, and strategy assets.",
       "type": "skill",
       "category": "replication"
     },
