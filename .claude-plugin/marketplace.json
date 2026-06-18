@@ -76,6 +76,16 @@
       "category": "tooling"
     },
     {
+      "name": "doc-to-alphas",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-doc-to-alphas"
+      },
+      "description": "Generate OHLCV alpha factor expressions from document text, with a formula contract and automatic toy-data validation.",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
       "name": "event-risk-alert",
       "source": {
         "source": "github",
@@ -274,16 +284,6 @@
       "description": "Volume, volume-price, ranking, and statistical OHLCV alpha factor library with 216 factor Skills validated on real market data.",
       "type": "skill",
       "category": "factor"
-    },
-    {
-      "name": "quant-research-replication",
-      "source": {
-        "source": "github",
-        "repo": "quantskills/skill-quant-research-replication"
-      },
-      "description": "Quant research replication skill for source discovery, formula reconstruction, Chinese summaries, validation, and deliverables.",
-      "type": "skill",
-      "category": "replication"
     },
     {
       "name": "report-replication",

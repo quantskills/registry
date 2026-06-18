@@ -27,7 +27,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "agent-crowding-risk-monitor",
@@ -57,7 +57,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "agent-derivatives-skew-sentiment-monitor",
@@ -87,7 +87,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "agent-market-regime-monitor",
@@ -117,7 +117,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "agent-quantspace",
@@ -145,7 +145,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-a-share-stock-dossier",
@@ -177,7 +177,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-backtest",
@@ -206,7 +206,38 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
+  },
+  {
+    "name": "skill-doc-to-alphas",
+    "url": "https://github.com/quantskills/skill-doc-to-alphas",
+    "description": "Generate novel alpha factor expressions from document text (research papers, financial reports, market commentary). Provides an OHLCV formula contract and a toy-data validator. Use when the user asks to derive stock-selection alpha ideas from unstructured text or produce a batch of diverse, validated factor expressions from a document.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "alpha-generation",
+      "factor-discovery",
+      "ohlcv",
+      "validation",
+      "stock-selection",
+      "doc-to-alphas"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "cursor",
+      "hermes",
+      "openclaw"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "从文档文本生成 OHLCV alpha 因子表达式，并提供公式契约与玩具数据自动验证。",
+    "summary_en": "Generate OHLCV alpha factor expressions from document text, with a formula contract and automatic toy-data validation.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-event-risk-alert",
@@ -237,7 +268,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-factor-debug",
@@ -266,7 +297,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-factor-evaluate",
@@ -295,7 +326,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-factor-mine",
@@ -324,7 +355,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-factor-review",
@@ -353,7 +384,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-factormad-debate-factor-mining",
@@ -379,7 +410,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-futures-deepview-analyst",
@@ -410,7 +441,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-gaetano-crux-capital-research-model",
@@ -441,7 +472,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-ic-analysis",
@@ -470,7 +501,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-index-valuation-rotation",
@@ -501,7 +532,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-macro-monitor",
@@ -532,7 +563,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-market-daily-review",
@@ -564,7 +595,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-options-vol-analyst",
@@ -595,7 +626,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-pandadata-api",
@@ -624,7 +655,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-pandadata-warehouse",
@@ -655,7 +686,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-paper-replication",
@@ -685,7 +716,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-quant-factor-directional-alpha",
@@ -715,7 +746,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-quant-factor-risk-pattern-alpha",
@@ -745,7 +776,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-quant-factor-skill-factory",
@@ -775,7 +806,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-quant-factor-volume-stat-alpha",
@@ -805,37 +836,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
-  },
-  {
-    "name": "skill-quant-research-replication",
-    "url": "https://github.com/quantskills/skill-quant-research-replication",
-    "description": "Search for quantitative finance papers or research reports, then reproduce them end to end: source discovery across arXiv/Crossref/Semantic Scholar/SSRN/NBER/RePEc/institutional reports/Chinese broker research, full Chinese translation, AI summary, factor formula reconstruction, factor effectiveness validation, standalone beginner-readable HTML factor report, BACKTEST strategy generation and local backtest execution, Chinese backtest explanation report, and final delivery summary. Use when the user asks to find quant papers/reports, replicate a report/PDF/link/text, validate a factor, generate BACKTEST strategy code, or create a beginner-readable research replication package.",
-    "project_type": "skill",
-    "declaration_file": "SKILL.md",
-    "category": "replication",
-    "tags": [
-      "research-replication",
-      "quant-finance",
-      "papers",
-      "factors",
-      "chinese-report"
-    ],
-    "platforms": [
-      "claude-code",
-      "codex",
-      "hermes",
-      "openclaw",
-      "cursor"
-    ],
-    "status": "stable",
-    "requires": [],
-    "summary_zh": "搜索或接收量化论文、研报、PDF、网页、文本材料，产出一套完整的研究复现交付包：全文翻译 → 因子公式复现 → 有效性验证 → 策略代码 → 真实本地回测 → 交付摘要。",
-    "summary_en": "Quant research replication skill for source discovery, formula reconstruction, Chinese summaries, validation, and deliverables.",
-    "license": "GPL-3.0",
-    "validation_level": "runnable",
-    "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-report-replication",
@@ -866,7 +867,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-serenity-research-model",
@@ -897,7 +898,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-ssquant-ai-trader",
@@ -927,7 +928,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-ssquant-trader-generator",
@@ -959,7 +960,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-stock-screener",
@@ -990,7 +991,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-time-series-analysis",
@@ -1019,7 +1020,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   },
   {
     "name": "skill-x-trader-builder",
@@ -1048,6 +1049,6 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-17"
+    "last_validated": "2026-06-18"
   }
 ]

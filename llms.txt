@@ -11,6 +11,7 @@
 - [skill-stock-screener](https://github.com/quantskills/skill-stock-screener): Natural-language A-share stock screener skill that maps fundamentals, dividends, valuation, pledges, northbound flows, sectors, holders, and risk filters to Pandadata calls.
 - [skill-pandadata-api](https://github.com/quantskills/skill-pandadata-api): Pandadata and panda_data Python SDK reference skill for selecting, calling, and troubleshooting quant data APIs.
 - [skill-pandadata-warehouse](https://github.com/quantskills/skill-pandadata-warehouse): Pandadata warehouse skill for caching, refreshing, querying, and validating local DuckDB and Parquet market-data stores.
+- [skill-doc-to-alphas](https://github.com/quantskills/skill-doc-to-alphas): Generate OHLCV alpha factor expressions from document text, with a formula contract and automatic toy-data validation.
 - [skill-quant-factor-directional-alpha](https://github.com/quantskills/skill-quant-factor-directional-alpha): Directional OHLCV alpha factor library with 296 trend, breakout, reversal, and channel-position factor Skills validated on real market data.
 - [skill-quant-factor-risk-pattern-alpha](https://github.com/quantskills/skill-quant-factor-risk-pattern-alpha): Risk-state and chart-pattern OHLCV alpha factor library with 288 factor Skills for volatility, K-line shape, shock, drawdown, and pressure analysis.
 - [skill-quant-factor-volume-stat-alpha](https://github.com/quantskills/skill-quant-factor-volume-stat-alpha): Volume, volume-price, ranking, and statistical OHLCV alpha factor library with 216 factor Skills validated on real market data.
@@ -18,7 +19,6 @@
 - [skill-macro-monitor](https://github.com/quantskills/skill-macro-monitor): Macro monitoring skill for Pandadata macro data, economic calendars, industry prosperity, and high-frequency signals.
 - [skill-market-daily-review](https://github.com/quantskills/skill-market-daily-review): A-share end-of-day review skill covering indexes, valuation, breadth, sentiment, sectors, themes, and capital-flow clues.
 - [skill-paper-replication](https://github.com/quantskills/skill-paper-replication): Framework-neutral quantitative paper replication skill for research scripts, backtests, charts, and auditable outputs.
-- [skill-quant-research-replication](https://github.com/quantskills/skill-quant-research-replication): Quant research replication skill for source discovery, formula reconstruction, Chinese summaries, validation, and deliverables.
 - [skill-report-replication](https://github.com/quantskills/skill-report-replication): Quant report replication skill that turns papers or reports into Chinese translations, factor formulas, Pandadata-backed validation reports, and strategy assets.
 - [skill-backtest](https://github.com/quantskills/skill-backtest): Standard cross-sectional long-only backtest protocol with T+1 execution, fees, limit filters, NAV curves, IC, drawdown, and diagnostic charts.
 - [skill-factor-debug](https://github.com/quantskills/skill-factor-debug): Factor debugging playbook for NaNs, signal validation failures, look-ahead bias, horizon mismatch, checksum drift, and correlation violations.
