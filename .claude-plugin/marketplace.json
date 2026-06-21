@@ -354,6 +354,16 @@
       "description": "Skill-builder workflow for turning public X/Twitter data and user materials into trader-specific research-model skills.",
       "type": "skill",
       "category": "tooling"
+    },
+    {
+      "name": "xingtai-catcher",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-xingtai-catcher"
+      },
+      "description": "Find similar A-share stock and futures K-line patterns from text, screenshots, or hand drawings, with a direct helper script for non-MCP agents.",
+      "type": "skill",
+      "category": "tooling"
     }
   ]
 }
