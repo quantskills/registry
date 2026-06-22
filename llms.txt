@@ -32,7 +32,6 @@
 - [skill-ssquant-trader-generator](https://github.com/quantskills/skill-ssquant-trader-generator): Trader-generator skill that turns natural-language trading ideas into deployable AI Trader rules, code, and operating plans.
 - [skill-time-series-analysis](https://github.com/quantskills/skill-time-series-analysis): Conclusion-first time-series diagnostics for original series, Log diff, distributions, stationarity, cointegration, and half-life.
 - [skill-x-trader-builder](https://github.com/quantskills/skill-x-trader-builder): Skill-builder workflow for turning public X/Twitter data and user materials into trader-specific research-model skills.
-- [skill-xingtai-catcher](https://github.com/quantskills/skill-xingtai-catcher): Find similar A-share stock and futures K-line patterns from text, screenshots, or hand drawings, with a direct helper script for non-MCP agents.
 
 ## Agents
 - [agent-derivatives-skew-sentiment-monitor](https://github.com/quantskills/agent-derivatives-skew-sentiment-monitor): Monitor derivatives sentiment from option implied volatility and underlying historical volatility.
