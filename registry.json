@@ -27,7 +27,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "agent-crowding-risk-monitor",
@@ -57,7 +57,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "agent-derivatives-skew-sentiment-monitor",
@@ -87,7 +87,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "agent-market-regime-monitor",
@@ -117,7 +117,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "agent-quantspace",
@@ -145,7 +145,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-a-share-stock-dossier",
@@ -177,7 +177,38 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
+  },
+  {
+    "name": "skill-a1-lhb-tracking",
+    "url": "https://github.com/quantskills/skill-a1-lhb-tracking",
+    "description": "A股龙虎榜席位追踪因子开发、校验和回测 skill，基于 pandadata 龙虎榜、行情和交易日历数据生成事件驱动排序分数。Use when an agent needs to build, validate, explain, or backtest an A-share LHB event-driven alpha factor with IC, Rank IC, look-ahead checks, and QuantFlow review materials.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "a-share",
+      "lhb",
+      "alpha-factor",
+      "event-driven",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "active",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "用 pandadata 龙虎榜数据追踪席位胜率、盈亏比和次日溢价，生成事件驱动排序因子。",
+    "summary_en": "A-share LHB event-ranking factor using seat win rate, payoff, premium, and buy-size evidence from Pandadata.",
+    "license": "GPL-3.0",
+    "validation_level": "verified",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-backtest",
@@ -206,7 +237,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-doc-to-alphas",
@@ -237,7 +268,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-event-risk-alert",
@@ -268,7 +299,32 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
+  },
+  {
+    "name": "skill-factor-alpha191-alpha101",
+    "url": "https://github.com/quantskills/skill-factor-alpha191-alpha101",
+    "description": "Compute Alpha101 and Alpha191 factor-library values based on JoinQuant formulas from long-form OHLCV CSV market data. Use when an agent needs to calculate selected or full Alpha101/Alpha191 factor columns, export wide factor CSVs, and list skipped factors without running LLMs or factor evaluation.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "factor-library",
+      "alpha101",
+      "alpha191",
+      "alpha-factor"
+    ],
+    "platforms": [
+      "codex"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "基于长表 OHLCV CSV 批量计算参考 JoinQuant 公式的 Alpha101 和 Alpha191 因子值。",
+    "summary_en": "Compute Alpha101 and Alpha191 factor values based on JoinQuant formulas from long-form OHLCV CSV data.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-factor-debug",
@@ -297,7 +353,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-factor-evaluate",
@@ -326,7 +382,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-factor-mine",
@@ -355,7 +411,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-factor-review",
@@ -384,7 +440,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-factormad-debate-factor-mining",
@@ -410,7 +466,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-futures-deepview-analyst",
@@ -441,7 +497,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-gaetano-crux-capital-research-model",
@@ -472,7 +528,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-ic-analysis",
@@ -501,7 +557,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-index-valuation-rotation",
@@ -532,7 +588,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-macro-monitor",
@@ -563,7 +619,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-market-daily-review",
@@ -595,7 +651,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-options-vol-analyst",
@@ -626,7 +682,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-pandadata-api",
@@ -655,7 +711,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-pandadata-warehouse",
@@ -686,7 +742,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-paper-replication",
@@ -716,7 +772,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-quant-factor-directional-alpha",
@@ -746,7 +802,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-quant-factor-risk-pattern-alpha",
@@ -776,7 +832,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-quant-factor-skill-factory",
@@ -806,7 +862,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-quant-factor-volume-stat-alpha",
@@ -836,7 +892,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-report-replication",
@@ -867,7 +923,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-serenity-research-model",
@@ -898,7 +954,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-ssquant-ai-trader",
@@ -928,7 +984,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-ssquant-trader-generator",
@@ -960,7 +1016,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-stock-screener",
@@ -991,7 +1047,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-time-series-analysis",
@@ -1020,7 +1076,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   },
   {
     "name": "skill-x-trader-builder",
@@ -1049,6 +1105,6 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-22"
+    "last_validated": "2026-06-23"
   }
 ]

@@ -66,6 +66,16 @@
       "category": "analyst"
     },
     {
+      "name": "a1-lhb-tracking",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-a1-lhb-tracking"
+      },
+      "description": "A-share LHB event-ranking factor using seat win rate, payoff, premium, and buy-size evidence from Pandadata.",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
       "name": "backtest",
       "source": {
         "source": "github",
@@ -94,6 +104,16 @@
       "description": "A-share event-risk alert skill for watchlists, holdings, unlocks, pledges, reductions, ST changes, forecasts, audit opinions, and traceable reports.",
       "type": "skill",
       "category": "monitor"
+    },
+    {
+      "name": "factor-alpha191-alpha101",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factor-alpha191-alpha101"
+      },
+      "description": "Compute Alpha101 and Alpha191 factor values based on JoinQuant formulas from long-form OHLCV CSV data.",
+      "type": "skill",
+      "category": "factor"
     },
     {
       "name": "factor-debug",
