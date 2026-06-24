@@ -27,7 +27,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "agent-crowding-risk-monitor",
@@ -57,7 +57,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "agent-derivatives-skew-sentiment-monitor",
@@ -87,7 +87,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "agent-market-regime-monitor",
@@ -117,7 +117,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "agent-quantspace",
@@ -145,7 +145,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-a-share-stock-dossier",
@@ -177,7 +177,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-a1-lhb-tracking",
@@ -208,7 +208,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-backtest",
@@ -237,7 +237,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-doc-to-alphas",
@@ -268,7 +268,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-event-risk-alert",
@@ -299,7 +299,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-factor-alpha191-alpha101",
@@ -317,14 +317,48 @@
     "platforms": [
       "codex"
     ],
-    "status": "draft",
+    "status": "stable",
     "requires": [],
-    "summary_zh": "基于长表 OHLCV CSV 批量计算参考 JoinQuant 公式的 Alpha101 和 Alpha191 因子值。",
-    "summary_en": "Compute Alpha101 and Alpha191 factor values based on JoinQuant formulas from long-form OHLCV CSV data.",
+    "summary_zh": "参考 JoinQuant 公式计算 Alpha101 和 Alpha191 因子值，支持全量和指定因子运行。",
+    "summary_en": "Compute Alpha101 and Alpha191 factor values based on JoinQuant formulas with full or selected factor runs.",
     "license": "GPL-3.0",
-    "validation_level": "listed",
+    "validation_level": "verified",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
+  },
+  {
+    "name": "skill-factor-blend",
+    "url": "https://github.com/quantskills/skill-factor-blend",
+    "description": "Use when an agent needs to blend multiple evaluated quantitative factor signals into a single composite alpha signal (signal-level merge, not portfolio-level combination). Covers factor selection, redundancy removal, weighting, and composite evaluation.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "factor-blending",
+      "signal-merge",
+      "composite-alpha",
+      "factor-weighting",
+      "correlation-control",
+      "equal-weight",
+      "icir-weight",
+      "score-weight",
+      "z-score-synthesis",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "多因子信号层合并：去冗余（相关矩阵 + Top-bucket overlap）→ 等权/ICIR/Score 三种加权方案 → 逐日截面 z-score 合成 → 重新评价复合因子。信号层操作（产出 composite_signal），非组合层资金分配。",
+    "summary_en": "Multi-factor signal-level blending: redundancy removal via correlation matrix and top-bucket overlap, three weighting schemes (equal/ICIR/score), daily cross-sectional z-score synthesis, and composite re-evaluation. Signal-level only — outputs composite_signal, not portfolio weights.",
+    "license": "GPL-3.0",
+    "validation_level": "production",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-factor-debug",
@@ -353,7 +387,41 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
+  },
+  {
+    "name": "skill-factor-decay",
+    "url": "https://github.com/quantskills/skill-factor-decay",
+    "description": "Use when an agent needs to analyze how a factor signal's predictive power decays over holding horizons — compute IC decay curves, half-life, turnover decay, and group-return decay to determine optimal rebalancing frequency and signal shelf life.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "factor-decay",
+      "ic-half-life",
+      "signal-shelf-life",
+      "turnover-decay",
+      "horizon-analysis",
+      "bootstrap-ci",
+      "exponential-decay",
+      "sign-reversal",
+      "rank-ic-decay",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "因子衰减分析：多期限 Rank IC 衰减曲线 → 指数/幂律/双指数拟合 → Bootstrap 半衰期置信区间 → 换手衰减 + Q5-Q1 分组收益衰减 → 推荐最优再平衡频率。已对接 Pandadata 计算 1d/3d/5d/10d/20d 五期限 forward returns。",
+    "summary_en": "Factor decay analysis with multi-horizon Rank IC curves, exponential/power-law/bi-exponential fitting, bootstrap half-life CIs, turnover decay, and Q5-Q1 group-return decay. Recommends optimal rebalancing frequency. Integrated with Pandadata for 5-horizon forward returns.",
+    "license": "GPL-3.0",
+    "validation_level": "production",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-factor-evaluate",
@@ -382,7 +450,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-factor-mine",
@@ -411,7 +479,40 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
+  },
+  {
+    "name": "skill-factor-orthogonalize",
+    "url": "https://github.com/quantskills/skill-factor-orthogonalize",
+    "description": "Use when an agent needs to neutralize or orthogonalize a quantitative factor against industry, size, style exposures, or an existing factor library before evaluating, combining, or accepting the signal.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "factor-orthogonalization",
+      "neutralization",
+      "style-exposure",
+      "residual-factor",
+      "factor-correlation",
+      "daily-cross-sectional-regression",
+      "industry-neutral",
+      "size-neutral",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "逐日截面 OLS 正交化：剥离行业(L1 one-hot) + 市值(log_dollar_vol) + 风格(beta/volatility) + 旧因子暴露，输出残差因子与暴露清零诊断报告。已对接 Pandadata 获取行业分类(sector_code_name)和风格控制变量。",
+    "summary_en": "Daily cross-sectional OLS orthogonalization against industry one-hot dummies, size (log dollar volume), style (beta, volatility), and legacy factor exposures. Outputs residual signal with exposure-zeroing diagnostics. Integrated with Pandadata for sector classification and style controls.",
+    "license": "GPL-3.0",
+    "validation_level": "production",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-factor-review",
@@ -440,7 +541,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-factormad-debate-factor-mining",
@@ -466,7 +567,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-futures-deepview-analyst",
@@ -497,7 +598,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-gaetano-crux-capital-research-model",
@@ -528,7 +629,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-ic-analysis",
@@ -557,7 +658,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-index-valuation-rotation",
@@ -588,7 +689,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-macro-monitor",
@@ -619,7 +720,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-market-daily-review",
@@ -651,7 +752,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-options-vol-analyst",
@@ -682,7 +783,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-pandadata-api",
@@ -711,7 +812,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-pandadata-warehouse",
@@ -742,7 +843,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-paper-replication",
@@ -772,7 +873,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-quant-factor-directional-alpha",
@@ -802,7 +903,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-quant-factor-risk-pattern-alpha",
@@ -832,7 +933,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-quant-factor-skill-factory",
@@ -862,7 +963,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-quant-factor-volume-stat-alpha",
@@ -892,7 +993,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-report-replication",
@@ -923,7 +1024,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-serenity-research-model",
@@ -954,7 +1055,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-ssquant-ai-trader",
@@ -984,7 +1085,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-ssquant-trader-generator",
@@ -1016,7 +1117,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-stock-screener",
@@ -1047,7 +1148,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-time-series-analysis",
@@ -1076,7 +1177,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   },
   {
     "name": "skill-x-trader-builder",
@@ -1105,6 +1206,6 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-23"
+    "last_validated": "2026-06-24"
   }
 ]

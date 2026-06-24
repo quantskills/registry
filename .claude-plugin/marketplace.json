@@ -111,7 +111,17 @@
         "source": "github",
         "repo": "quantskills/skill-factor-alpha191-alpha101"
       },
-      "description": "Compute Alpha101 and Alpha191 factor values based on JoinQuant formulas from long-form OHLCV CSV data.",
+      "description": "Compute Alpha101 and Alpha191 factor values based on JoinQuant formulas with full or selected factor runs.",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
+      "name": "factor-blend",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factor-blend"
+      },
+      "description": "Multi-factor signal-level blending: redundancy removal via correlation matrix and top-bucket overlap, three weighting schemes (equal/ICIR/score), daily cross-sectional z-score synthesis, and composite re-evaluation. Signal-level only — outputs composite_signal, not portfolio weights.",
       "type": "skill",
       "category": "factor"
     },
@@ -124,6 +134,16 @@
       "description": "Factor debugging playbook for NaNs, signal validation failures, look-ahead bias, horizon mismatch, checksum drift, and correlation violations.",
       "type": "skill",
       "category": "tooling"
+    },
+    {
+      "name": "factor-decay",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factor-decay"
+      },
+      "description": "Factor decay analysis with multi-horizon Rank IC curves, exponential/power-law/bi-exponential fitting, bootstrap half-life CIs, turnover decay, and Q5-Q1 group-return decay. Recommends optimal rebalancing frequency. Integrated with Pandadata for 5-horizon forward returns.",
+      "type": "skill",
+      "category": "factor"
     },
     {
       "name": "factor-evaluate",
@@ -144,6 +164,16 @@
       "description": "Disciplined factor-mining workflow for hypothesis design, implementation, validation, iteration notes, acceptance, and rollback decisions.",
       "type": "skill",
       "category": "tooling"
+    },
+    {
+      "name": "factor-orthogonalize",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factor-orthogonalize"
+      },
+      "description": "Daily cross-sectional OLS orthogonalization against industry one-hot dummies, size (log dollar volume), style (beta, volatility), and legacy factor exposures. Outputs residual signal with exposure-zeroing diagnostics. Integrated with Pandadata for sector classification and style controls.",
+      "type": "skill",
+      "category": "factor"
     },
     {
       "name": "factor-review",
