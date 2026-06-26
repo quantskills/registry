@@ -166,6 +166,16 @@
       "category": "tooling"
     },
     {
+      "name": "factor-optimize",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factor-optimize"
+      },
+      "description": "Optimize an existing stock or futures factor with period sweeps, ablations, refinements, and a final keep-or-replace decision.",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
       "name": "factor-orthogonalize",
       "source": {
         "source": "github",
