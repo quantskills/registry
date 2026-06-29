@@ -44,6 +44,7 @@
 - [agent-market-regime-monitor](https://github.com/quantskills/agent-market-regime-monitor): Monitor market regime from Pandadata index, breadth, volatility, and funding evidence.
 - [agent-correlation-break-research](https://github.com/quantskills/agent-correlation-break-research): Detect correlation breaks, style shifts, and diversification stress from Pandadata return evidence.
 - [agent-crowding-risk-monitor](https://github.com/quantskills/agent-crowding-risk-monitor): Monitor crowded-trade risk from Pandadata price, turnover, margin, and LHB heat evidence.
+- [agent-for-liangshuyuan-tasks](https://github.com/quantskills/agent-for-liangshuyuan-tasks): 量枢学院多 Agent 协作框架——基于 Claude Code 的量化交易工具开发平台，将任务需求自动分析、路由、开发、测试、发布全流程自动化。内置 6 个专业 Agent，支持 BUILD 工具与 Alpha 因子的 Skill 架构开发。
 - [agent-quantspace](https://github.com/quantskills/agent-quantspace): AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.
 
 ## Registry

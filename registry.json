@@ -27,7 +27,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "agent-crowding-risk-monitor",
@@ -57,7 +57,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "agent-derivatives-skew-sentiment-monitor",
@@ -87,7 +87,25 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
+  },
+  {
+    "name": "agent-for-liangshuyuan-tasks",
+    "url": "https://github.com/quantskills/agent-for-liangshuyuan-tasks",
+    "description": "量枢学院多 Agent 协作框架——基于 Claude Code 的量化交易工具开发平台，将任务需求自动分析、路由、开发、测试、发布全流程自动化。内置 6 个专业 Agent，支持 BUILD 工具与 Alpha 因子的 Skill 架构开发。",
+    "project_type": "agent",
+    "declaration_file": "AGENTS.md",
+    "category": "uncategorized",
+    "tags": [],
+    "platforms": [],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "量枢学院多 Agent 协作框架——基于 Claude Code 的量化交易工具开发平台，将任务需求自动分析、路由、开发、测试、发布全流程自动化。内置 6 个专业 Agent，支持 BUILD 工具与 Alpha 因子的 Skill 架构开发。",
+    "summary_en": "量枢学院多 Agent 协作框架——基于 Claude Code 的量化交易工具开发平台，将任务需求自动分析、路由、开发、测试、发布全流程自动化。内置 6 个专业 Agent，支持 BUILD 工具与 Alpha 因子的 Skill 架构开发。",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-29"
   },
   {
     "name": "agent-market-regime-monitor",
@@ -117,7 +135,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "agent-quantspace",
@@ -145,7 +163,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-a-share-stock-dossier",
@@ -177,7 +195,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-a1-lhb-tracking",
@@ -208,7 +226,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-backtest",
@@ -237,7 +255,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-doc-to-alphas",
@@ -268,7 +286,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-event-risk-alert",
@@ -299,7 +317,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factor-alpha191-alpha101",
@@ -324,7 +342,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factor-blend",
@@ -358,7 +376,7 @@
     "license": "GPL-3.0",
     "validation_level": "production",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factor-debug",
@@ -387,7 +405,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factor-decay",
@@ -421,7 +439,7 @@
     "license": "GPL-3.0",
     "validation_level": "production",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factor-evaluate",
@@ -450,7 +468,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factor-mine",
@@ -479,7 +497,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factor-optimize",
@@ -508,7 +526,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factor-orthogonalize",
@@ -541,7 +559,7 @@
     "license": "GPL-3.0",
     "validation_level": "production",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factor-review",
@@ -570,7 +588,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-factormad-debate-factor-mining",
@@ -596,7 +614,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-futures-deepview-analyst",
@@ -627,7 +645,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-gaetano-crux-capital-research-model",
@@ -658,7 +676,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-ic-analysis",
@@ -687,7 +705,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-index-valuation-rotation",
@@ -718,7 +736,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-macro-monitor",
@@ -749,7 +767,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-market-daily-review",
@@ -781,7 +799,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-options-vol-analyst",
@@ -812,7 +830,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-pandadata-api",
@@ -841,7 +859,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-pandadata-warehouse",
@@ -872,7 +890,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-paper-replication",
@@ -902,7 +920,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-quant-factor-directional-alpha",
@@ -932,7 +950,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-quant-factor-risk-pattern-alpha",
@@ -962,7 +980,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-quant-factor-skill-factory",
@@ -992,7 +1010,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-quant-factor-volume-stat-alpha",
@@ -1022,7 +1040,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-report-replication",
@@ -1053,7 +1071,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-serenity-research-model",
@@ -1084,7 +1102,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-ssquant-ai-trader",
@@ -1114,7 +1132,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-ssquant-trader-generator",
@@ -1146,7 +1164,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-stock-screener",
@@ -1177,7 +1195,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-time-series-analysis",
@@ -1206,7 +1224,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   },
   {
     "name": "skill-x-trader-builder",
@@ -1235,6 +1253,6 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-06-28"
+    "last_validated": "2026-06-29"
   }
 ]

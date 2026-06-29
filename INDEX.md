@@ -28,6 +28,12 @@
 | --- | --- | --- | --- | --- |
 | [agent-quantspace](https://github.com/quantskills/agent-quantspace) | 面向 AI 编码代理的量化研究框架，组织数据、技能、策略、回测和报告工作流。 | L2 Runnable | active | `quant-research` `strategy-research` `backtesting` `pandadata` |
 
+## Agents / 未分类 / Uncategorized
+
+| Asset | 简介 | 验证级别 | 状态 | 标签 |
+| --- | --- | --- | --- | --- |
+| [agent-for-liangshuyuan-tasks](https://github.com/quantskills/agent-for-liangshuyuan-tasks) | 量枢学院多 Agent 协作框架——基于 Claude Code 的量化交易工具开发平台，将任务需求自动分析、路由、开发、测试、发布全流程自动化。内置 6 个专业 Agent，支持 BUILD 工具与 Alpha 因子的 Skill 架构开发。 | L1 Listed | draft |  |
+
 ## Skills / 分析类 / Analyst
 
 | Asset | 简介 | 验证级别 | 状态 | 标签 |
