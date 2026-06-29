@@ -166,6 +166,37 @@
     "last_validated": "2026-06-29"
   },
   {
+    "name": "agent-ssquant",
+    "url": "https://github.com/quantskills/agent-ssquant",
+    "description": "SSQuant Agent workflow for Chinese futures strategies, data_server diagnostics, CTP/SIMNOW runtime checks, and Chinese backtest reporting. Use when an agent needs to locate an SSQuant project, write or repair SSQuant futures strategies, validate StrategyAPI usage, run evidence-backed backtests, diagnose local or remote data behavior, inspect reports, or plan guarded live CTP operations.",
+    "project_type": "agent",
+    "declaration_file": "AGENTS.md",
+    "category": "workflow-agent",
+    "tags": [
+      "ssquant",
+      "futures",
+      "ctp",
+      "backtest",
+      "data-server",
+      "reporting"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor",
+      "workbuddy"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "SSQuant Agent：期货策略、数据服务、CTP门禁和中文报告工作流。",
+    "summary_en": "SSQuant Agent workflow for futures strategies, data services, CTP gates, and Chinese reports.",
+    "license": "GPL-3.0",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-29"
+  },
+  {
     "name": "skill-a-share-stock-dossier",
     "url": "https://github.com/quantskills/skill-a-share-stock-dossier",
     "description": "Generate a structured Chinese A-share stock due-diligence dossier from Pandadata interfaces, covering company profile, financials, dividends and capital actions, shareholder behavior, pledge/unlock/reduction risks, market funds, and sourced appendices. Use when the user asks for A股个股体检、个股尽调、公司全面分析、股票基本面报告、质押解禁减持风险排查, or a one-stop A-share company dossier.",
@@ -225,6 +256,24 @@
     "summary_en": "A-share LHB event-ranking factor using seat win rate, payoff, premium, and buy-size evidence from Pandadata.",
     "license": "GPL-3.0",
     "validation_level": "verified",
+    "maintainer_type": "community",
+    "last_validated": "2026-06-29"
+  },
+  {
+    "name": "skill-alpha-a06-hotmoney-reversal",
+    "url": "https://github.com/quantskills/skill-alpha-a06-hotmoney-reversal",
+    "description": "Use this skill to calculate, validate, backtest, and publish the A06 hot-money seat cooling-reversal and collaborative-breakout Alpha factor for A-share Dragon-Tiger List data.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "uncategorized",
+    "tags": [],
+    "platforms": [],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "Use this skill to calculate, validate, backtest, and publish the A06 hot-money seat cooling-reversal and collaborative-breakout Alpha factor for A-share...",
+    "summary_en": "Use this skill to calculate, validate, backtest, and publish the A06 hot-money seat cooling-reversal and collaborative-breakout Alpha factor for A-share Dragon-Tiger List data.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
     "maintainer_type": "community",
     "last_validated": "2026-06-29"
   },
@@ -517,13 +566,15 @@
     "platforms": [
       "claude-code",
       "codex",
+      "cursor",
+      "hermes",
       "openclaw"
     ],
     "status": "draft",
     "requires": [],
     "summary_zh": "对已有股票或期货因子做参数扫描、组件消融和核心版本增强，并输出是否替换原因子的结论。",
     "summary_en": "Optimize an existing stock or futures factor with period sweeps, ablations, refinements, and a final keep-or-replace decision.",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-only",
     "validation_level": "listed",
     "maintainer_type": "community",
     "last_validated": "2026-06-29"
@@ -1039,6 +1090,36 @@
     "summary_en": "Volume, volume-price, ranking, and statistical OHLCV alpha factor library with 216 factor Skills validated on real market data.",
     "license": "GPL-3.0",
     "validation_level": "verified",
+    "maintainer_type": "official",
+    "last_validated": "2026-06-29"
+  },
+  {
+    "name": "skill-quant-research-replication",
+    "url": "https://github.com/quantskills/skill-quant-research-replication",
+    "description": "Search for quantitative finance papers or research reports, then reproduce them end to end: source discovery across arXiv/Crossref/Semantic Scholar/SSRN/NBER/RePEc/institutional reports/Chinese broker research, full Chinese translation, AI summary, factor formula reconstruction, factor effectiveness validation, standalone beginner-readable HTML factor report, BACKTEST strategy generation and local backtest execution, Chinese backtest explanation report, and final delivery summary. Use when the user asks to find quant papers/reports, replicate a report/PDF/link/text, validate a factor, generate BACKTEST strategy code, or create a beginner-readable research replication package.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "replication",
+    "tags": [
+      "research-replication",
+      "quant-finance",
+      "papers",
+      "factors",
+      "chinese-report"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "搜索或接收量化论文、研报、PDF、网页、文本材料，产出一套完整的研究复现交付包：全文翻译 → 因子公式复现 → 有效性验证 → 策略代码 → 真实本地回测 → 交付摘要。",
+    "summary_en": "Quant research replication skill for source discovery, formula reconstruction, Chinese summaries, validation, and deliverables.",
+    "license": "GPL-3.0",
+    "validation_level": "runnable",
     "maintainer_type": "official",
     "last_validated": "2026-06-29"
   },

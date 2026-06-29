@@ -25,6 +25,7 @@
 - [skill-macro-monitor](https://github.com/quantskills/skill-macro-monitor): Macro monitoring skill for Pandadata macro data, economic calendars, industry prosperity, and high-frequency signals.
 - [skill-market-daily-review](https://github.com/quantskills/skill-market-daily-review): A-share end-of-day review skill covering indexes, valuation, breadth, sentiment, sectors, themes, and capital-flow clues.
 - [skill-paper-replication](https://github.com/quantskills/skill-paper-replication): Framework-neutral quantitative paper replication skill for research scripts, backtests, charts, and auditable outputs.
+- [skill-quant-research-replication](https://github.com/quantskills/skill-quant-research-replication): Quant research replication skill for source discovery, formula reconstruction, Chinese summaries, validation, and deliverables.
 - [skill-report-replication](https://github.com/quantskills/skill-report-replication): Quant report replication skill that turns papers or reports into Chinese translations, factor formulas, Pandadata-backed validation reports, and strategy assets.
 - [skill-backtest](https://github.com/quantskills/skill-backtest): Standard cross-sectional long-only backtest protocol with T+1 execution, fees, limit filters, NAV curves, IC, drawdown, and diagnostic charts.
 - [skill-factor-debug](https://github.com/quantskills/skill-factor-debug): Factor debugging playbook for NaNs, signal validation failures, look-ahead bias, horizon mismatch, checksum drift, and correlation violations.
@@ -38,6 +39,7 @@
 - [skill-ssquant-trader-generator](https://github.com/quantskills/skill-ssquant-trader-generator): Trader-generator skill that turns natural-language trading ideas into deployable AI Trader rules, code, and operating plans.
 - [skill-time-series-analysis](https://github.com/quantskills/skill-time-series-analysis): Conclusion-first time-series diagnostics for original series, Log diff, distributions, stationarity, cointegration, and half-life.
 - [skill-x-trader-builder](https://github.com/quantskills/skill-x-trader-builder): Skill-builder workflow for turning public X/Twitter data and user materials into trader-specific research-model skills.
+- [skill-alpha-a06-hotmoney-reversal](https://github.com/quantskills/skill-alpha-a06-hotmoney-reversal): Use this skill to calculate, validate, backtest, and publish the A06 hot-money seat cooling-reversal and collaborative-breakout Alpha factor for A-share Dragon-Tiger List data.
 
 ## Agents
 - [agent-derivatives-skew-sentiment-monitor](https://github.com/quantskills/agent-derivatives-skew-sentiment-monitor): Monitor derivatives sentiment from option implied volatility and underlying historical volatility.
@@ -46,6 +48,7 @@
 - [agent-crowding-risk-monitor](https://github.com/quantskills/agent-crowding-risk-monitor): Monitor crowded-trade risk from Pandadata price, turnover, margin, and LHB heat evidence.
 - [agent-for-liangshuyuan-tasks](https://github.com/quantskills/agent-for-liangshuyuan-tasks): 量枢学院多 Agent 协作框架——基于 Claude Code 的量化交易工具开发平台，将任务需求自动分析、路由、开发、测试、发布全流程自动化。内置 6 个专业 Agent，支持 BUILD 工具与 Alpha 因子的 Skill 架构开发。
 - [agent-quantspace](https://github.com/quantskills/agent-quantspace): AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.
+- [agent-ssquant](https://github.com/quantskills/agent-ssquant): SSQuant Agent workflow for futures strategies, data services, CTP gates, and Chinese reports.
 
 ## Registry
 - [registry.json](https://quantskills.ai/registry.json): machine-readable index of all assets

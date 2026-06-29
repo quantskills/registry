@@ -66,6 +66,16 @@
       "category": "workflow-agent"
     },
     {
+      "name": "ssquant",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/agent-ssquant"
+      },
+      "description": "SSQuant Agent workflow for futures strategies, data services, CTP gates, and Chinese reports.",
+      "type": "agent",
+      "category": "workflow-agent"
+    },
+    {
       "name": "a-share-stock-dossier",
       "source": {
         "source": "github",
@@ -84,6 +94,16 @@
       "description": "A-share LHB event-ranking factor using seat win rate, payoff, premium, and buy-size evidence from Pandadata.",
       "type": "skill",
       "category": "factor"
+    },
+    {
+      "name": "alpha-a06-hotmoney-reversal",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-alpha-a06-hotmoney-reversal"
+      },
+      "description": "Use this skill to calculate, validate, backtest, and publish the A06 hot-money seat cooling-reversal and collaborative-breakout Alpha factor for A-share Dragon-Tiger List data.",
+      "type": "skill",
+      "category": "uncategorized"
     },
     {
       "name": "backtest",
@@ -354,6 +374,16 @@
       "description": "Volume, volume-price, ranking, and statistical OHLCV alpha factor library with 216 factor Skills validated on real market data.",
       "type": "skill",
       "category": "factor"
+    },
+    {
+      "name": "quant-research-replication",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-quant-research-replication"
+      },
+      "description": "Quant research replication skill for source discovery, formula reconstruction, Chinese summaries, validation, and deliverables.",
+      "type": "skill",
+      "category": "replication"
     },
     {
       "name": "report-replication",
