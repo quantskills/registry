@@ -7,7 +7,7 @@
 **Creator / Maintainer**: [`abgyjaguo`](https://github.com/abgyjaguo)
 
 <p align="center">
-  <img alt="public assets" src="https://img.shields.io/badge/public_assets-36_skills_6_agents-blue">
+  <img alt="public assets" src="https://img.shields.io/badge/public_assets-38_skills_7_agents-blue">
   <img alt="health checks" src="https://img.shields.io/badge/health_checks-8-brightgreen">
   <img alt="validation levels" src="https://img.shields.io/badge/validation-L1%20%7C%20L2%20%7C%20L3-orange">
   <img alt="nightly scan" src="https://img.shields.io/badge/nightly_scan-00%3A30_UTC%2B8-9cf">
@@ -117,7 +117,7 @@ flowchart LR
 ## 📊 当前收录快照
 
 <!-- registry-snapshot:start -->
-截至 2026-06-29：**36 个 skill / 6 个 agent**。分类分布：`工具流程类 / tooling` 12 · `因子库 / factor` 10 · `分析类 / analyst` 7 · `监控类 / monitor` 3 · `数据类 / data-api` 2 · `复现类 / replication` 2 · `监控 Agent / monitor-agent` 2 · `研究 Agent / research-agent` 1 · `风险 Agent / risk-agent` 1 · `工作流 Agent / workflow-agent` 1 · `未分类 / uncategorized` 1；验证级别 L3 ×9 · L2 ×19 · L1 ×11 · production ×3。
+截至 2026-06-30：**38 个 skill / 7 个 agent**。分类分布：`工具流程类 / tooling` 12 · `因子库 / factor` 10 · `分析类 / analyst` 7 · `监控类 / monitor` 3 · `复现类 / replication` 3 · `数据类 / data-api` 2 · `监控 Agent / monitor-agent` 2 · `工作流 Agent / workflow-agent` 2 · `未分类 / uncategorized` 2 · `研究 Agent / research-agent` 1 · `风险 Agent / risk-agent` 1；验证级别 L3 ×9 · L2 ×21 · L1 ×12 · production ×3。
 <!-- registry-snapshot:end -->
 
 > 此快照会随每夜扫描变化，实时清单以 [INDEX.md](INDEX.md) / [registry.json](registry.json) 为准。
