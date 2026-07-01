@@ -106,9 +106,19 @@ PUBLIC_ENTRY_KEYS = (
 
 
 def gh(method: str, url: str, **kw):
-    r = requests.request(method, url, headers=HEADERS, timeout=30, **kw)
-    r.raise_for_status()
-    return r.json() if r.text else {}
+    last_error = None
+    for attempt in range(1, 4):
+        try:
+            r = requests.request(method, url, headers=HEADERS, timeout=30, **kw)
+            if r.status_code not in {500, 502, 503, 504}:
+                r.raise_for_status()
+                return r.json() if r.text else {}
+            last_error = requests.HTTPError(f"{r.status_code} {r.reason}", response=r)
+        except requests.RequestException as exc:
+            last_error = exc
+        if attempt < 3:
+            time.sleep(1.5 * attempt)
+    raise last_error
 
 
 def list_asset_repos() -> list[dict]:
