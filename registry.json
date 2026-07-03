@@ -307,6 +307,24 @@
     "last_validated": "2026-07-03"
   },
   {
+    "name": "skill-backtest-overfit",
+    "url": "https://github.com/quantskills/skill-backtest-overfit",
+    "description": "Detect backtest overfitting and selection bias from multiple testing. Use when a user has a backtest / factor result and asks whether the Sharpe is real, whether a strategy is overfit, or wants to validate results before trusting them. Computes Deflated Sharpe Ratio, Probability of Backtest Overfitting (PBO), multiple-testing haircut, and Minimum Track Record Length.\n",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "uncategorized",
+    "tags": [],
+    "platforms": [],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "Detect backtest overfitting and selection bias from multiple testing. Use when a user has a backtest / factor result and asks whether the Sharpe is real,...",
+    "summary_en": "Detect backtest overfitting and selection bias from multiple testing. Use when a user has a backtest / factor result and asks whether the Sharpe is real, whether a strategy is overfit, or wants to validate results...",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-03"
+  },
+  {
     "name": "skill-doc-to-alphas",
     "url": "https://github.com/quantskills/skill-doc-to-alphas",
     "description": "Generate novel alpha factor expressions from document text (research papers, financial reports, market commentary). Provides an OHLCV formula contract and a toy-data validator. Use when the user asks to derive stock-selection alpha ideas from unstructured text or produce a batch of diverse, validated factor expressions from a document.",
@@ -334,6 +352,38 @@
     "summary_en": "Generate OHLCV alpha factor expressions from document text, with a formula contract and automatic toy-data validation.",
     "license": "GPL-3.0",
     "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-03"
+  },
+  {
+    "name": "skill-earnings-season-tracker",
+    "url": "https://github.com/quantskills/skill-earnings-season-tracker",
+    "description": "Scan the whole A-share market across earnings-season time windows with Pandadata interfaces, aggregating performance forecasts, flash and quarterly reports, audit opinions, and industry-level earnings prosperity into a sourced cross-sectional report, with optional scheduled runs during earnings season. Use when the user asks for 财报季扫描, 业绩预告统计, 预增预减分布, 超预期暴雷个股榜, 审计非标清单, 行业业绩景气分布, 全市场财报横截面, or to set up a scheduled earnings-season scan.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "a-share",
+      "earnings-season",
+      "fina-forecast",
+      "cross-section",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "按财报季时间窗对全市场做业绩横截面扫描：预告类型分布、超预期/暴雷榜、行业业绩景气、年报季审计非标清单 —— 每个数据点可溯源，支持财报季定时运行。",
+    "summary_en": "Whole-market A-share earnings-season scanner covering forecast-type distribution, beat/miss leaders, industry earnings prosperity, and audit-opinion watchlists.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
     "maintainer_type": "community",
     "last_validated": "2026-07-03"
   },
@@ -974,6 +1024,57 @@
     "last_validated": "2026-07-03"
   },
   {
+    "name": "skill-portfolio-checkup",
+    "url": "https://github.com/quantskills/skill-portfolio-checkup",
+    "description": "Portfolio-level checkup skill for an A-share holdings list, built on Pandadata interfaces. It aggregates single-stock signals up to the portfolio layer, covering structure and concentration (industry/concept exposure, top-N weight, HHI), weighted valuation and financial-quality distribution, portfolio risk exposure aggregation (unlock/pledge/reduction/ST share of portfolio), and benchmark deviation (industry over/underweight vs an index, range return and correlation). Use when the user asks for 组合体检、持仓诊断、持仓组合分析、行业集中度、HHI 集中度、基准偏离、组合风险敞口、解禁质押减持聚合、组合估值分布、组合相对沪深300偏离, or a one-stop portfolio health report for a self-maintained holdings list.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "a-share",
+      "portfolio-checkup",
+      "concentration",
+      "benchmark-deviation",
+      "risk-exposure",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "输入一个持仓组合清单（代码+权重/市值），输出组合层级的体检报告：结构与集中度、估值与财务质量分布、风险敞口聚合（解禁/质押/减持/ST）、基准偏离与资金面。",
+    "summary_en": "Portfolio-level checkup skill that uses Pandadata to aggregate single-stock signals into portfolio structure, concentration, weighted valuation/quality, risk exposure, and benchmark deviation.",
+    "license": "GPL-3.0-only",
+    "validation_level": "rules-only",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-03"
+  },
+  {
+    "name": "skill-portfolio-optimize",
+    "url": "https://github.com/quantskills/skill-portfolio-optimize",
+    "description": "Turn an alpha signal into optimal portfolio weights under real constraints. Use when a user has factor scores / expected returns and wants portfolio weights, or asks about mean-variance / risk-parity / minimum-variance / maximum-diversification optimisation, sector-neutral or turnover-limited construction. Bridges factor signals and backtesting.\n",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "uncategorized",
+    "tags": [],
+    "platforms": [],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "Turn an alpha signal into optimal portfolio weights under real constraints. Use when a user has factor scores / expected returns and wants portfolio weights,...",
+    "summary_en": "Turn an alpha signal into optimal portfolio weights under real constraints. Use when a user has factor scores / expected returns and wants portfolio weights, or asks about mean-variance / risk-parity / minimum-variance...",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-03"
+  },
+  {
     "name": "skill-quant-factor-directional-alpha",
     "url": "https://github.com/quantskills/skill-quant-factor-directional-alpha",
     "description": "Use when an agent needs a verified library of directional OHLCV alpha factor Skills for trend, breakout, reversal, channel-position, or price-direction research across A-share and US equity samples.",
@@ -1155,6 +1256,24 @@
     "last_validated": "2026-07-03"
   },
   {
+    "name": "skill-risk-model",
+    "url": "https://github.com/quantskills/skill-risk-model",
+    "description": "Build a Barra-style structural multi-factor risk model and attribute portfolio risk. Use when a user wants a covariance matrix for optimisation, asks how risky a portfolio is, where its risk comes from (which factors / styles / industries), or wants factor vs specific risk decomposition. Estimates style & industry factor returns via cross-sectional regression, factor covariance and specific risk.\n",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "uncategorized",
+    "tags": [],
+    "platforms": [],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "Build a Barra-style structural multi-factor risk model and attribute portfolio risk.",
+    "summary_en": "Build a Barra-style structural multi-factor risk model and attribute portfolio risk. Use when a user wants a covariance matrix for optimisation, asks how risky a portfolio is, where its risk comes from (which factors /...",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-03"
+  },
+  {
     "name": "skill-serenity-research-model",
     "url": "https://github.com/quantskills/skill-serenity-research-model",
     "description": "Reconstruct Serenity-style investment research logic from public X/Twitter posts, saved threads, exported post datasets, public summaries, and ticker histories. Use when an agent needs to analyze @aleabitoreddit/Serenity, decompose AI or semiconductor supply-chain investment theses at the smallest practical unit, build a structured signal dataset, evaluate public calls versus later price action, or produce a reusable Serenity-style research model for portable agent platforms such as Claude Code, OpenClaw, Codex-style skill systems, or other local AI agent runtimes.",
@@ -1183,6 +1302,40 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
+    "last_validated": "2026-07-03"
+  },
+  {
+    "name": "skill-smart-money-profiler",
+    "url": "https://github.com/quantskills/skill-smart-money-profiler",
+    "description": "Identify and profile the capital actors behind A-share trading from Pandadata interfaces, then track how they behave across time. Builds 龙虎榜 seat identity profiles (机构专用席位、知名游资营业部、量化席位、外资/陆股通通道), northbound cross-period behavior (加仓/减仓 streaks, 板块轮动, 集中度), and multi-source capital consensus vs divergence (北向 × 机构席位 × 融资盘 × 大宗买方). Use when the user asks for 聪明钱、资金主体画像、龙虎榜席位身份、游资追踪、机构席位胜率、北向跨期行为、资金合力分歧、谁在买卖, or a smart-money actor profile and cross-period behavior report. This skill is descriptive behavior tracking, not factor backtesting, not crowding-risk alerting, and not a single-day market snapshot.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "a-share",
+      "smart-money",
+      "lhb-seat",
+      "northbound",
+      "capital-flow",
+      "profiling",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "追踪\"谁在买卖\"以及\"他们一贯怎么做\"：龙虎榜席位身份识别与画像档案、北向资金跨期行为、北向×机构×融资×大宗的多源资金合力与分歧，输出可溯源的资金主体行为画像报告。",
+    "summary_en": "Identify the capital actors behind A-share trades and profile their cross-period behavior using Pandadata seat, northbound, margin, and block-trade data.",
+    "license": "GPL-3.0-only",
+    "validation_level": "documentation",
+    "maintainer_type": "community",
     "last_validated": "2026-07-03"
   },
   {

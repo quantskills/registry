@@ -116,6 +116,16 @@
       "category": "tooling"
     },
     {
+      "name": "backtest-overfit",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-backtest-overfit"
+      },
+      "description": "Detect backtest overfitting and selection bias from multiple testing. Use when a user has a backtest / factor result and asks whether the Sharpe is real, whether a strategy is overfit, or wants to validate results...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
       "name": "doc-to-alphas",
       "source": {
         "source": "github",
@@ -124,6 +134,16 @@
       "description": "Generate OHLCV alpha factor expressions from document text, with a formula contract and automatic toy-data validation.",
       "type": "skill",
       "category": "factor"
+    },
+    {
+      "name": "earnings-season-tracker",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-earnings-season-tracker"
+      },
+      "description": "Whole-market A-share earnings-season scanner covering forecast-type distribution, beat/miss leaders, industry earnings prosperity, and audit-opinion watchlists.",
+      "type": "skill",
+      "category": "monitor"
     },
     {
       "name": "event-risk-alert",
@@ -336,6 +356,26 @@
       "category": "replication"
     },
     {
+      "name": "portfolio-checkup",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-portfolio-checkup"
+      },
+      "description": "Portfolio-level checkup skill that uses Pandadata to aggregate single-stock signals into portfolio structure, concentration, weighted valuation/quality, risk exposure, and benchmark deviation.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
+      "name": "portfolio-optimize",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-portfolio-optimize"
+      },
+      "description": "Turn an alpha signal into optimal portfolio weights under real constraints. Use when a user has factor scores / expected returns and wants portfolio weights, or asks about mean-variance / risk-parity / minimum-variance...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
       "name": "quant-factor-directional-alpha",
       "source": {
         "source": "github",
@@ -396,12 +436,32 @@
       "category": "replication"
     },
     {
+      "name": "risk-model",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-risk-model"
+      },
+      "description": "Build a Barra-style structural multi-factor risk model and attribute portfolio risk. Use when a user wants a covariance matrix for optimisation, asks how risky a portfolio is, where its risk comes from (which factors /...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
       "name": "serenity-research-model",
       "source": {
         "source": "github",
         "repo": "quantskills/skill-serenity-research-model"
       },
       "description": "Research-model skill for reconstructing Serenity-style AI, semiconductor, and supply-chain theses from public posts and datasets.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
+      "name": "smart-money-profiler",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-smart-money-profiler"
+      },
+      "description": "Identify the capital actors behind A-share trades and profile their cross-period behavior using Pandadata seat, northbound, margin, and block-trade data.",
       "type": "skill",
       "category": "analyst"
     },
