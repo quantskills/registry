@@ -325,6 +325,39 @@
     "last_validated": "2026-07-07"
   },
   {
+    "name": "skill-block-trade-radar",
+    "url": "https://github.com/quantskills/skill-block-trade-radar",
+    "description": "Scan and read A-share block-trade (大宗交易) activity with the Pandadata get_block_trade interface, joining each trade to the same-day close from get_stock_daily to compute discount/premium (折溢价率), reading institutional (机构专用) buy/sell direction, flagging repeated discounted takeovers and same-branch wash-like prints, and ranking names by block-trade amount and premium/discount — for the whole market over a window or a single name. Use when the user asks for 大宗交易, 大宗折价, 大宗溢价, 折溢价率, 机构专用接盘, 大宗交易扫描, 大宗成交榜, 折价接盘, or an A-share block-trade radar report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "a-share",
+      "block-trade",
+      "discount-premium",
+      "institutional-flow",
+      "corporate-action",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "A股大宗交易折溢价雷达：把每笔大宗成交价对齐同日收盘价算折溢价率、读机构专用买卖方向、标记重复折价接盘与同营业部对倒式打款、按成交额与折溢价排榜，支持全市场扫描、单票时间线与定时运行。",
+    "summary_en": "A-share block-trade radar that joins each block trade to the same-day close to compute discount/premium, reads institutional (机构专用) buy/sell direction, flags repeated discounted takeovers and same-branch wash-like prints, and ranks names by amount and premium/discount, for the whole market or a single name.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-07"
+  },
+  {
     "name": "skill-doc-to-alphas",
     "url": "https://github.com/quantskills/skill-doc-to-alphas",
     "description": "Generate novel alpha factor expressions from document text (research papers, financial reports, market commentary). Provides an OHLCV formula contract and a toy-data validator. Use when the user asks to derive stock-selection alpha ideas from unstructured text or produce a batch of diverse, validated factor expressions from a document.",
@@ -777,6 +810,39 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
+    "last_validated": "2026-07-07"
+  },
+  {
+    "name": "skill-hk-us-insider-radar",
+    "url": "https://github.com/quantskills/skill-hk-us-insider-radar",
+    "description": "Scan and read HK/US company insider (董监高/内部人) trading activity with the Pandadata get_stock_insider_trade (港股) and get_stock_insider_transaction (美股) interfaces — separating open-market buys from sales, option-exercise and gift-type dispositions, weighting by insider role (董事/高管/大股东) and is_main_role, netting shares and value over a window, flagging cluster buying/selling and post-trade holding changes, and ranking names by net insider direction — for one name or a watchlist. Use when the user asks for 港股美股内部人交易, 董监高增减持, insider buying/sell, 内部人交易信号, 内部人净买入, 内部人聚集买入, or an HK/US insider-trade radar report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "hk-stock",
+      "us-stock",
+      "insider-trading",
+      "corporate-insider",
+      "ownership-signal",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "港股/美股内部人（董监高/大股东）交易信号雷达：区分公开市场买入与卖出、期权行权/赠与等处置类型，按内部人身份与主要人物标记加权，窗口内净额（股数/金额）聚合，标记聚集买入/卖出与持股变化，按净内部人方向排榜，支持单票或自选清单与定时运行。",
+    "summary_en": "An HK/US insider-trading radar that reads get_stock_insider_trade (HK) and get_stock_insider_transaction (US), separates open-market buys from sales and option/gift dispositions, weights by insider role and is_main_role, nets shares and value over a window, flags cluster buying/selling and holding changes, and ranks names by net insider direction.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
     "last_validated": "2026-07-07"
   },
   {

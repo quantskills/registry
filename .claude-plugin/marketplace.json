@@ -126,6 +126,16 @@
       "category": "uncategorized"
     },
     {
+      "name": "block-trade-radar",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-block-trade-radar"
+      },
+      "description": "A-share block-trade radar that joins each block trade to the same-day close to compute discount/premium, reads institutional (机构专用) buy/sell direction, flags repeated discounted takeovers and same-branch wash-like prints, and ranks names by amount and premium/discount, for the whole market or a single name.",
+      "type": "skill",
+      "category": "monitor"
+    },
+    {
       "name": "doc-to-alphas",
       "source": {
         "source": "github",
@@ -274,6 +284,16 @@
       "description": "Research-model skill for public-material analysis of photonics, optical networking, Physical AI, and AI infrastructure themes.",
       "type": "skill",
       "category": "analyst"
+    },
+    {
+      "name": "hk-us-insider-radar",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-hk-us-insider-radar"
+      },
+      "description": "An HK/US insider-trading radar that reads get_stock_insider_trade (HK) and get_stock_insider_transaction (US), separates open-market buys from sales and option/gift dispositions, weights by insider role and is_main_role, nets shares and value over a window, flags cluster buying/selling and holding changes, and ranks names by net insider direction.",
+      "type": "skill",
+      "category": "monitor"
     },
     {
       "name": "ic-analysis",
