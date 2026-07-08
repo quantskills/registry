@@ -813,6 +813,24 @@
     "last_validated": "2026-07-08"
   },
   {
+    "name": "skill-gao-shanwen-research-model",
+    "url": "https://github.com/quantskills/skill-gao-shanwen-research-model",
+    "description": "Build and apply a Gao Shanwen-style China macro and capital-market research workflow from his books, public articles, and archived materials. Use when analyzing Chinese macro cycles, inflation, capacity cycles, real estate, shadow banking, RMB exchange rates, China equity strategy, asset revaluation theory, or when compiling Gao Shanwen bibliography and reading paths.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "uncategorized",
+    "tags": [],
+    "platforms": [],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "Build and apply a Gao Shanwen-style China macro and capital-market research workflow from his books, public articles, and archived materials.",
+    "summary_en": "Build and apply a Gao Shanwen-style China macro and capital-market research workflow from his books, public articles, and archived materials.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-08"
+  },
+  {
     "name": "skill-hk-us-insider-radar",
     "url": "https://github.com/quantskills/skill-hk-us-insider-radar",
     "description": "Scan and read HK/US company insider (董监高/内部人) trading activity with the Pandadata get_stock_insider_trade (港股) and get_stock_insider_transaction (美股) interfaces — separating open-market buys from sales, option-exercise and gift-type dispositions, weighting by insider role (董事/高管/大股东) and is_main_role, netting shares and value over a window, flagging cluster buying/selling and post-trade holding changes, and ranking names by net insider direction — for one name or a watchlist. Use when the user asks for 港股美股内部人交易, 董监高增减持, insider buying/sell, 内部人交易信号, 内部人净买入, 内部人聚集买入, or an HK/US insider-trade radar report.",
@@ -966,6 +984,31 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
+    "last_validated": "2026-07-08"
+  },
+  {
+    "name": "skill-model-hpo-evidence-driven",
+    "url": "https://github.com/quantskills/skill-model-hpo-evidence-driven",
+    "description": "One sentence on what this skill does, with concrete capabilities. Use when an agent needs to <trigger scenario 1>, <trigger scenario 2>, or <trigger scenario 3> on portable agent platforms such as Claude Code, OpenClaw, or Codex-style skill systems.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "tag-one",
+      "tag-two"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "一句话中文简介(8-120 字符)",
+    "summary_en": "One-line English summary (8-200 chars)",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
     "last_validated": "2026-07-08"
   },
   {

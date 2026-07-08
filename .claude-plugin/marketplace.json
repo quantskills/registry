@@ -286,6 +286,16 @@
       "category": "analyst"
     },
     {
+      "name": "gao-shanwen-research-model",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-gao-shanwen-research-model"
+      },
+      "description": "Build and apply a Gao Shanwen-style China macro and capital-market research workflow from his books, public articles, and archived materials.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
       "name": "hk-us-insider-radar",
       "source": {
         "source": "github",
@@ -334,6 +344,16 @@
       "description": "A-share end-of-day review skill covering indexes, valuation, breadth, sentiment, sectors, themes, and capital-flow clues.",
       "type": "skill",
       "category": "monitor"
+    },
+    {
+      "name": "model-hpo-evidence-driven",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-model-hpo-evidence-driven"
+      },
+      "description": "One-line English summary (8-200 chars)",
+      "type": "skill",
+      "category": "tooling"
     },
     {
       "name": "options-vol-analyst",
