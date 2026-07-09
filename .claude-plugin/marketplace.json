@@ -266,6 +266,16 @@
       "category": "tooling"
     },
     {
+      "name": "fundamental-factor-analysis",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-fundamental-factor-analysis"
+      },
+      "description": "Compute, validate, and analyze A-share fundamental factors. Covers value (EP/BP/SP/CP/FCFP/GP/A), quality (ROE/ROA/gross margin/accruals/leverage), growth (earnings growth/revenue growth/analyst revision) and composite factors. Uses Pandadata financial APIs with IC analysis, grouped returns, and Fama-MacBeth regression for validation.",
+      "type": "skill",
+      "category": "tooling"
+    },
+    {
       "name": "futures-deepview-analyst",
       "source": {
         "source": "github",
@@ -326,6 +336,16 @@
       "category": "analyst"
     },
     {
+      "name": "jq-to-panda-converter",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-jq-to-panda-converter"
+      },
+      "description": "Batch convert JoinQuant platform strategies to PandaAI-compatible code. Understands strategy intent rather than line-by-line translation, supports single file and batch directory conversion, produces runnable backtest configs with a summary report.",
+      "type": "skill",
+      "category": "tooling"
+    },
+    {
       "name": "macro-monitor",
       "source": {
         "source": "github",
@@ -354,6 +374,16 @@
       "description": "One-line English summary (8-200 chars)",
       "type": "skill",
       "category": "tooling"
+    },
+    {
+      "name": "numerical-leak-check",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-numerical-leak-check"
+      },
+      "description": "当 agent 需要检查时间序列计算、量化因子、特征工程、标签生成、回测信号或研究管线是否存在未来信息泄露时使用。Use this skill for numerical causality checks, lookahead/future-leakage detection, prefix replay, future mutation, batch checking many factors or cases, and...",
+      "type": "skill",
+      "category": "uncategorized"
     },
     {
       "name": "options-vol-analyst",
