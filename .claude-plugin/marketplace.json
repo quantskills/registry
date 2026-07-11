@@ -371,9 +371,9 @@
         "source": "github",
         "repo": "quantskills/skill-model-hpo-evidence-driven"
       },
-      "description": "One-line English summary (8-200 chars)",
+      "description": "Run evidence-driven LLM decision or deterministic grid hyperparameter search for quantitative multi-factor models.",
       "type": "skill",
-      "category": "tooling"
+      "category": "uncategorized"
     },
     {
       "name": "numerical-leak-check",
