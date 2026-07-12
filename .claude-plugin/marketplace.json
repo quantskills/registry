@@ -366,6 +366,16 @@
       "category": "monitor"
     },
     {
+      "name": "market-regime-analysis",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-market-regime-analysis"
+      },
+      "description": "Chinese A-share market regime analysis toolkit — classify market states (bull/bear/sideways/high-vol/low-vol) using HMMs or threshold rules on index data, macro indicators, and futures term structure; evaluate conditional factor performance; generate regime-aware risk forecasts; and build regime-switching strategies.",
+      "type": "skill",
+      "category": "tooling"
+    },
+    {
       "name": "model-hpo-evidence-driven",
       "source": {
         "source": "github",
