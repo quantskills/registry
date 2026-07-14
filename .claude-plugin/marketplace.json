@@ -266,6 +266,16 @@
       "category": "tooling"
     },
     {
+      "name": "fin-news",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-fin-news"
+      },
+      "description": "实时财经头条生成器。采集东方财富财经要闻 + Pandadata 市场数据，由 AI 精选 5 条并撰写深度文章（含事实描述、数据解读、大V点评）。",
+      "type": "skill",
+      "category": "finance-news"
+    },
+    {
       "name": "fundamental-factor-analysis",
       "source": {
         "source": "github",

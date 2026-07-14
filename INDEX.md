@@ -110,6 +110,12 @@
 | [skill-time-series-analysis](https://github.com/quantskills/skill-time-series-analysis) | 结论先行的时序分析 Skill：原始序列、Log diff、分布、平稳性、协整和半衰期。 | L2 Runnable | draft | `time-series` `stationarity` `cointegration` `mean-reversion` `quant-research` |
 | [skill-x-trader-builder](https://github.com/quantskills/skill-x-trader-builder) | 把任意 X/Twitter 公开交易员的发帖历史，加工成 trader 专属的研究模型 Skill：init-run → 采集 → extract → auto-review → split → evaluate → template → report 九步流水线，从噪... | L2 Runnable | stable | `trader-skill` `research-model` `x-twitter` `skill-builder` `workflow` |
 
+## Skills / finance-news / finance-news
+
+| Asset | 简介 | 验证级别 | 状态 | 标签 |
+| --- | --- | --- | --- | --- |
+| [skill-fin-news](https://github.com/quantskills/skill-fin-news) | 实时财经资讯聚合，AI 精选 5 条头条并撰写深度分析文章。 | L2 Runnable | stable | `finance-news` `realtime` `china-market` `a-share` |
+
 ## Skills / 未分类 / Uncategorized
 
 | Asset | 简介 | 验证级别 | 状态 | 标签 |
