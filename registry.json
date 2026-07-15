@@ -27,7 +27,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "agent-crowding-risk-monitor",
@@ -57,7 +57,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "agent-derivatives-skew-sentiment-monitor",
@@ -87,7 +87,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "agent-for-liangshuyuan-tasks",
@@ -105,7 +105,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "agent-market-regime-monitor",
@@ -135,7 +135,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "agent-quantspace",
@@ -163,7 +163,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "agent-ssquant",
@@ -194,7 +194,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-a-share-stock-dossier",
@@ -226,7 +226,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-a1-lhb-tracking",
@@ -257,7 +257,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-alpha-a06-hotmoney-reversal",
@@ -275,7 +275,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-backtest",
@@ -304,7 +304,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-backtest-overfit",
@@ -322,7 +322,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-block-trade-radar",
@@ -355,7 +355,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-doc-to-alphas",
@@ -386,7 +386,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-earnings-season-tracker",
@@ -418,7 +418,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-event-risk-alert",
@@ -449,7 +449,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factor-alpha191-alpha101",
@@ -474,7 +474,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "verified",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factor-blend",
@@ -508,7 +508,7 @@
     "license": "GPL-3.0",
     "validation_level": "production",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factor-debug",
@@ -537,7 +537,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factor-decay",
@@ -571,7 +571,7 @@
     "license": "GPL-3.0",
     "validation_level": "production",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factor-evaluate",
@@ -600,7 +600,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factor-mine",
@@ -629,7 +629,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factor-optimize",
@@ -660,7 +660,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factor-orthogonalize",
@@ -693,7 +693,37 @@
     "license": "GPL-3.0",
     "validation_level": "production",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
+  },
+  {
+    "name": "skill-factor-pool-evolution",
+    "url": "https://github.com/quantskills/skill-factor-pool-evolution",
+    "description": "Run one round of factor-pool recommendation from an existing stock alpha set. Use when an agent needs to start from user-provided seed factors, prepare mutation and crossover prompt packs for the current model to reason over, then evaluate generated factors by RankIC and RankICIR and output recommended factors for the next round of iteration, with maxCorr reported as diagnostic context only.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "factor-evolution",
+      "mutation",
+      "crossover",
+      "rankic",
+      "rankicir"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "cursor",
+      "hermes",
+      "openclaw"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "Run one round of factor-pool recommendation from an existing stock alpha set. Use when an agent needs to start from user-provided seed factors, prepare...",
+    "summary_en": "Run one round of factor-pool recommendation from an existing stock alpha set. Use when an agent needs to start from user-provided seed factors, prepare mutation and crossover prompt packs for the current model to reason...",
+    "license": "GPL-3.0-only",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factor-review",
@@ -722,7 +752,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-factormad-debate-factor-mining",
@@ -748,7 +778,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-fin-news",
@@ -774,7 +804,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "custom",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-fundamental-factor-analysis",
@@ -806,7 +836,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-futures-deepview-analyst",
@@ -837,7 +867,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-gaetano-crux-capital-research-model",
@@ -868,7 +898,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-gao-shanwen-research-model",
@@ -886,7 +916,96 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
+  },
+  {
+    "name": "skill-global-commodity-term-structure",
+    "url": "https://github.com/quantskills/skill-global-commodity-term-structure",
+    "description": "Analyze overseas/international commodity futures term structure - contango vs backwardation, roll yield, calendar and inter-commodity spreads, and inventory context - using public data. Use when a user asks to study overseas futures curves, roll cost, WTI/Brent/gold/copper term structure, or cross-commodity spreads for research.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "commodities",
+      "futures",
+      "term-structure",
+      "roll-yield",
+      "overseas"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "用公开数据研究海外商品期货期限结构：contango/backwardation、展期收益、跨期与跨品种价差、库存背景。",
+    "summary_en": "Research overseas commodity futures term structure, roll yield, and cross-commodity spreads from public data.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
+  },
+  {
+    "name": "skill-global-macro-rates-fx-lab",
+    "url": "https://github.com/quantskills/skill-global-macro-rates-fx-lab",
+    "description": "Study global macro, rates, and FX regime - DM central-bank policy, sovereign yield curves, real rates, DXY and major currency pairs - from public FRED/central-bank data and Pandadata international macro. Use when a user asks about overseas rates, the yield curve, USD or major FX trends, or the global macro regime for research.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "macro",
+      "rates",
+      "fx",
+      "yield-curve",
+      "overseas"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "用公开 FRED/央行数据与 Pandadata 国际宏观研究全球利率、外汇与宏观周期。",
+    "summary_en": "Study global rates, FX, and macro regime from public FRED/central-bank data and Pandadata international macro.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
+  },
+  {
+    "name": "skill-global-macro-trend-strategy",
+    "url": "https://github.com/quantskills/skill-global-macro-trend-strategy",
+    "description": "Turn an overseas commodity / macro / FX signal into a framework-neutral, backtestable research strategy - entry and exit rules, position sizing, risk limits, and a standalone backtest script. Use when a user wants to build and research-backtest an overseas trend or macro strategy from a signal, for research only, without live trading.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "trader-research",
+    "tags": [
+      "strategy",
+      "backtest",
+      "overseas",
+      "trend",
+      "macro"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "把海外商品/宏观/外汇信号做成框架无关、可回测的研究策略（规则+仓位+风控+回测脚本，仅研究）。",
+    "summary_en": "Turn an overseas commodity/macro/FX signal into a framework-neutral, backtestable research strategy.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-hk-us-insider-radar",
@@ -919,7 +1038,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-ic-analysis",
@@ -948,7 +1067,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-index-valuation-rotation",
@@ -979,7 +1098,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-jq-to-panda-converter",
@@ -1010,7 +1129,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-macro-monitor",
@@ -1041,7 +1160,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-market-daily-review",
@@ -1073,7 +1192,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-market-regime-analysis",
@@ -1106,7 +1225,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-model-hpo-evidence-driven",
@@ -1124,7 +1243,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-numerical-leak-check",
@@ -1142,7 +1261,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-options-vol-analyst",
@@ -1173,7 +1292,101 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
+  },
+  {
+    "name": "skill-overseas-equity-factor-miner",
+    "url": "https://github.com/quantskills/skill-overseas-equity-factor-miner",
+    "description": "Discover and validate cross-sectional alpha factors for Hong Kong and US equities - generate candidate factors, compute them, and screen by IC, decay, and turnover. Use when a user wants to mine, test, or rank overseas equity factors from Pandadata HK/US price and fundamental data rather than apply a fixed factor set.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "factor",
+      "alpha",
+      "hk-us",
+      "cross-section",
+      "mining"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "在港美股上发现并校验横截面 alpha 因子：生成候选、计算、按 IC/衰减/换手排名。",
+    "summary_en": "Discover and validate cross-sectional alpha factors for HK/US equities by IC, decay, and turnover.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
+  },
+  {
+    "name": "skill-pandaai-workflow-audit",
+    "url": "https://github.com/quantskills/skill-pandaai-workflow-audit",
+    "description": "Review PandaAI workflow JSON files like a code review by parsing litegraph, nodes, links, static inputs, strategy code, factor code, and backtest settings; identify structural defects, look-ahead or same-bar leakage risks, selection bias, excessive research flexibility, unrealistic execution assumptions, missing out-of-sample evidence, and unavailable overfitting evidence; then give severity-ranked, evidence-linked, actionable fixes. Use when a user provides a PandaAI exported workflow file or GET /api/workflow/query response and asks 是否过拟合 / 研究是否可信 / 工作流有什么缺陷 / 怎么优化 / review or audit a PandaAI strategy or factor workflow.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "trader-research",
+    "tags": [
+      "pandaai",
+      "workflow-audit",
+      "code-review",
+      "backtesting",
+      "overfitting",
+      "factor-validation",
+      "strategy-validation",
+      "look-ahead-bias"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "cursor",
+      "openclaw"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-backtest-overfit"
+    ],
+    "summary_zh": "像代码评审一样审计 PandaAI 工作流文件，检查图结构、策略与因子代码、数据时序、参数自由度、回测假设和验证证据，逐条给出缺陷、影响与优化方案。",
+    "summary_en": "Review PandaAI workflow files like code review by checking graph structure, strategy and factor code, data timing, research flexibility, backtest assumptions, and validation evidence, with severity-ranked defects and actionable fixes.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
+  },
+  {
+    "name": "skill-pandaai-workflow-generator",
+    "url": "https://github.com/quantskills/skill-pandaai-workflow-generator",
+    "description": "Generate complete PandaAI workflow JSON files (including LiteGraph nodes, links, and embedded Python strategy/factor code) based on user's natural language descriptions of quantitative ideas. Inject trading costs, universe settings, and timing constraints into templates to prepare them for one-click import into PandaAI. Use when a user describes a trading strategy or factor idea and wants an importable PandaAI workflow file, asks 帮我生成 PandaAI 工作流 / 把这个策略变成可导入的回测 / turn a QBTI strategy_brief.json into a PandaAI workflow, or needs PandaAI CodeControl strategy code assembled with correct node wiring and parameters.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "trader-research",
+    "tags": [
+      "pandaai",
+      "workflow-generator",
+      "code-generation",
+      "backtesting"
+    ],
+    "platforms": [
+      "claude-code",
+      "cursor",
+      "openclaw"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "根据用户的自然语言量化想法，自动生成包含 Python 因子/策略代码及完整连线图的 PandaAI 工作流 JSON 文件，支持一键导入官网进行回测。",
+    "summary_en": "Generate ready-to-import PandaAI workflow JSON files containing Python strategy/factor code and complete graph links based on user's natural language trading ideas.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-pandadata-api",
@@ -1202,7 +1415,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-pandadata-warehouse",
@@ -1233,7 +1446,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-paper-replication",
@@ -1263,7 +1476,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-portfolio-checkup",
@@ -1296,7 +1509,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "rules-only",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-portfolio-optimize",
@@ -1314,7 +1527,40 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
+  },
+  {
+    "name": "skill-qbti",
+    "url": "https://github.com/quantskills/skill-qbti",
+    "description": "QBTI (Quant Behavior Type Indicator, 量化行为类型指标) turns a non-professional user's investing personality into concrete factor directions and strategy parameters through a fun five-part quiz, then hands off to the QuantSkills factor libraries and backtest pipeline with plain-language explanations. Use when a retail user says 我不懂量化但想试试 / 帮我做一个适合我的策略 / 我是小白该怎么开始 / 给我做个QBTI / 来一个投资版性格测试, when an agent needs to elicit risk tolerance, involvement level, factor taste, sector preferences, and time horizon from the end user before touching any factor skill, or when translating quiz answers into profile.json and strategy_brief.json for downstream evaluation and backtesting on portable agent platforms such as Claude Code, Codex, or OpenClaw.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "trader-research",
+    "tags": [
+      "qbti",
+      "beginner-friendly",
+      "personalization",
+      "factor-selection",
+      "risk-profile",
+      "a-share",
+      "onboarding"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-quant-factor-directional-alpha",
+      "skill-quant-factor-risk-pattern-alpha",
+      "skill-backtest"
+    ],
+    "summary_zh": "QBTI 量化行为类型指标：五组趣味问答了解普通人的投资性格，按固定规则表翻译成因子方向与策略参数，再交给因子库和回测流水线，全程大白话解释。",
+    "summary_en": "QBTI (Quant Behavior Type Indicator): a personality-style quiz that translates a retail user's investing preferences into factor directions and strategy parameters via a fixed rule table, then hands off to the QuantSkills backtest pipeline.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-quant-factor-directional-alpha",
@@ -1344,7 +1590,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-quant-factor-risk-pattern-alpha",
@@ -1374,7 +1620,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-quant-factor-skill-factory",
@@ -1404,7 +1650,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-quant-factor-volume-stat-alpha",
@@ -1434,7 +1680,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-quant-research-replication",
@@ -1464,7 +1710,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-report-replication",
@@ -1495,7 +1741,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-risk-model",
@@ -1513,7 +1759,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-serenity-research-model",
@@ -1544,7 +1790,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-smart-money-profiler",
@@ -1578,7 +1824,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "documentation",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-ssquant-ai-trader",
@@ -1608,7 +1854,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-ssquant-trader-generator",
@@ -1640,7 +1886,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-stock-screener",
@@ -1671,7 +1917,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-time-series-analysis",
@@ -1700,7 +1946,36 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
+  },
+  {
+    "name": "skill-us-sec-edgar-harvester",
+    "url": "https://github.com/quantskills/skill-us-sec-edgar-harvester",
+    "description": "Harvest and structure US SEC EDGAR public filings - 8-K, Form 4, 13D/G, 13F, S-1 - into a deduplicated, sourced, time-lined dataset. Use when a user asks to collect SEC filings, track insider Form 4 or 13F activity from EDGAR, or build a filing timeline for a US ticker from public data.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "data-api",
+    "tags": [
+      "sec",
+      "edgar",
+      "filings",
+      "form4",
+      "13f"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "抓取并结构化美股 SEC EDGAR 公开文件（8-K/Form 4/13D-G/13F/S-1），去重、标注来源与时间线。",
+    "summary_en": "Harvest and structure US SEC EDGAR public filings into a deduplicated, sourced, time-lined dataset.",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
   },
   {
     "name": "skill-x-trader-builder",
@@ -1729,6 +2004,6 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-14"
+    "last_validated": "2026-07-15"
   }
 ]

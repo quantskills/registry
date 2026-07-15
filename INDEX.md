@@ -42,6 +42,8 @@
 | [skill-a-share-stock-dossier](https://github.com/quantskills/skill-a-share-stock-dossier) | 输入一个 A 股代码，输出一份可溯源的中文个股尽调报告：基本面、分红资本运作、股东行为、质押解禁减持风险、资金面，一次查清。 | L2 Runnable | stable | `a-share` `stock-dossier` `fundamentals` `due-diligence` `pandadata` |
 | [skill-futures-deepview-analyst](https://github.com/quantskills/skill-futures-deepview-analyst) | 把"分析螺纹钢席位博弈""看豆粕期限结构和仓单"这类自然语言请求，转成 Pandadata 期货 DeepView 数据调用计划，输出事实与推断分离的中文研判报告。 | L2 Runnable | stable | `futures` `deepview` `basis` `term-structure` `pandadata` |
 | [skill-gaetano-crux-capital-research-model](https://github.com/quantskills/skill-gaetano-crux-capital-research-model) | 基于公开资料复刻 Gaetano / Crux Capital 的研究方法：把公开 X 帖子、公开 Substack 页面、财报与技术论文，拆解成「光子堆栈定位 → chokepoint 识别 → 证据分级 → 催化与风险跟踪」的结构化研究模型。 | L1 Listed | stable | `ai-infrastructure` `photonics` `optical-networking` `physical-ai` `research-model` |
+| [skill-global-commodity-term-structure](https://github.com/quantskills/skill-global-commodity-term-structure) | 用公开数据研究海外商品期货期限结构：contango/backwardation、展期收益、跨期与跨品种价差、库存背景。 | L1 Listed | draft | `commodities` `futures` `term-structure` `roll-yield` `overseas` |
+| [skill-global-macro-rates-fx-lab](https://github.com/quantskills/skill-global-macro-rates-fx-lab) | 用公开 FRED/央行数据与 Pandadata 国际宏观研究全球利率、外汇与宏观周期。 | L1 Listed | draft | `macro` `rates` `fx` `yield-curve` `overseas` |
 | [skill-index-valuation-rotation](https://github.com/quantskills/skill-index-valuation-rotation) | 指数估值与行业轮动分析：PE/PB 分位、估值温度、宽基定投参考、行业动量排名与轮动摘要。 | L2 Runnable | stable | `a-share` `index-valuation` `industry-rotation` `valuation-percentile` `pandadata` |
 | [skill-options-vol-analyst](https://github.com/quantskills/skill-options-vol-analyst) | 期权波动率分析：期权链快照、隐含波动率、历史/实现波动率、IV 分位、期限结构、偏度与波动率溢价报告。 | L2 Runnable | stable | `options` `volatility` `implied-volatility` `derivatives` `pandadata` |
 | [skill-portfolio-checkup](https://github.com/quantskills/skill-portfolio-checkup) | 输入一个持仓组合清单（代码+权重/市值），输出组合层级的体检报告：结构与集中度、估值与财务质量分布、风险敞口聚合（解禁/质押/减持/ST）、基准偏离与资金面。 | None | draft | `a-share` `portfolio-checkup` `concentration` `benchmark-deviation` `risk-exposure` |
@@ -55,6 +57,7 @@
 | --- | --- | --- | --- | --- |
 | [skill-pandadata-api](https://github.com/quantskills/skill-pandadata-api) | 把自然语言数据需求，精准路由到正确的 pandadata API，并生成可直接运行的 Python 调用。 | L2 Runnable | stable | `pandadata` `panda-data` `market-data` `python-sdk` `api-reference` |
 | [skill-pandadata-warehouse](https://github.com/quantskills/skill-pandadata-warehouse) | Pandadata 本地数据仓库：用 DuckDB 与 Parquet 缓存、增量刷新、查询和校验行情数据，减少重复 API 调用。 | L2 Runnable | stable | `pandadata` `warehouse` `duckdb` `parquet` `data-engineering` |
+| [skill-us-sec-edgar-harvester](https://github.com/quantskills/skill-us-sec-edgar-harvester) | 抓取并结构化美股 SEC EDGAR 公开文件（8-K/Form 4/13D-G/13F/S-1），去重、标注来源与时间线。 | L1 Listed | draft | `sec` `edgar` `filings` `form4` `13f` |
 
 ## Skills / 因子库 / Factor Library
 
@@ -67,6 +70,8 @@
 | [skill-factor-decay](https://github.com/quantskills/skill-factor-decay) | 因子衰减分析：多期限 Rank IC 衰减曲线 → 指数/幂律/双指数拟合 → Bootstrap 半衰期置信区间 → 换手衰减 + Q5-Q1 分组收益衰减 → 推荐最优再平衡频率。已对接 Pandadata 计算 1d/3d/5d/10d/20d 五期限 forward returns。 | None | stable | `factor-decay` `ic-half-life` `signal-shelf-life` `turnover-decay` `horizon-analysis` |
 | [skill-factor-optimize](https://github.com/quantskills/skill-factor-optimize) | 对已有股票或期货因子做参数扫描、组件消融和核心版本增强，并输出是否替换原因子的结论。 | L1 Listed | draft | `factor-optimize` `factor-research` `period-sweep` `ablation` `refinement` |
 | [skill-factor-orthogonalize](https://github.com/quantskills/skill-factor-orthogonalize) | 逐日截面 OLS 正交化：剥离行业(L1 one-hot) + 市值(log_dollar_vol) + 风格(beta/volatility) + 旧因子暴露，输出残差因子与暴露清零诊断报告。已对接 Pandadata 获取行业分类(sector_code_name)和风格控制变量。 | None | stable | `factor-orthogonalization` `neutralization` `style-exposure` `residual-factor` `factor-correlation` |
+| [skill-factor-pool-evolution](https://github.com/quantskills/skill-factor-pool-evolution) | Run one round of factor-pool recommendation from an existing stock alpha set. Use when an agent needs to start from user-provided seed factors, prepare... | L1 Listed | draft | `factor-evolution` `mutation` `crossover` `rankic` `rankicir` |
+| [skill-overseas-equity-factor-miner](https://github.com/quantskills/skill-overseas-equity-factor-miner) | 在港美股上发现并校验横截面 alpha 因子：生成候选、计算、按 IC/衰减/换手排名。 | L1 Listed | draft | `factor` `alpha` `hk-us` `cross-section` `mining` |
 | [skill-quant-factor-directional-alpha](https://github.com/quantskills/skill-quant-factor-directional-alpha) | 方向类因子库：296 个独立 OHLCV 因子 Skill，真实行情验证 296/296 全部通过。 | L3 Verified | stable | `alpha-factor` `directional` `ohlcv` `trend` `breakout` |
 | [skill-quant-factor-risk-pattern-alpha](https://github.com/quantskills/skill-quant-factor-risk-pattern-alpha) | 风险状态与形态类因子库：288 个独立 OHLCV 因子 Skill，真实行情验证 288/288 全部通过。 | L3 Verified | stable | `alpha-factor` `risk-pattern` `ohlcv` `volatility` `drawdown` |
 | [skill-quant-factor-volume-stat-alpha](https://github.com/quantskills/skill-quant-factor-volume-stat-alpha) | 量能、量价和统计排序类因子库：216 个独立 OHLCV 因子 Skill，真实行情验证 216/216 全部通过。 | L3 Verified | stable | `alpha-factor` `volume` `volume-price` `ranking` `statistics` |
@@ -109,6 +114,15 @@
 | [skill-ssquant-trader-generator](https://github.com/quantskills/skill-ssquant-trader-generator) | 说一次想法，得到一个可以随时加载的 AI 交易员。 | L2 Runnable | stable | `ssquant` `trader-generator` `ai-trader` `natural-language` `deployment` |
 | [skill-time-series-analysis](https://github.com/quantskills/skill-time-series-analysis) | 结论先行的时序分析 Skill：原始序列、Log diff、分布、平稳性、协整和半衰期。 | L2 Runnable | draft | `time-series` `stationarity` `cointegration` `mean-reversion` `quant-research` |
 | [skill-x-trader-builder](https://github.com/quantskills/skill-x-trader-builder) | 把任意 X/Twitter 公开交易员的发帖历史，加工成 trader 专属的研究模型 Skill：init-run → 采集 → extract → auto-review → split → evaluate → template → report 九步流水线，从噪... | L2 Runnable | stable | `trader-skill` `research-model` `x-twitter` `skill-builder` `workflow` |
+
+## Skills / 交易者研究类 / Trader Research
+
+| Asset | 简介 | 验证级别 | 状态 | 标签 |
+| --- | --- | --- | --- | --- |
+| [skill-global-macro-trend-strategy](https://github.com/quantskills/skill-global-macro-trend-strategy) | 把海外商品/宏观/外汇信号做成框架无关、可回测的研究策略（规则+仓位+风控+回测脚本，仅研究）。 | L1 Listed | draft | `strategy` `backtest` `overseas` `trend` `macro` |
+| [skill-pandaai-workflow-audit](https://github.com/quantskills/skill-pandaai-workflow-audit) | 像代码评审一样审计 PandaAI 工作流文件，检查图结构、策略与因子代码、数据时序、参数自由度、回测假设和验证证据，逐条给出缺陷、影响与优化方案。 | L1 Listed | draft | `pandaai` `workflow-audit` `code-review` `backtesting` `overfitting` |
+| [skill-pandaai-workflow-generator](https://github.com/quantskills/skill-pandaai-workflow-generator) | 根据用户的自然语言量化想法，自动生成包含 Python 因子/策略代码及完整连线图的 PandaAI 工作流 JSON 文件，支持一键导入官网进行回测。 | L1 Listed | draft | `pandaai` `workflow-generator` `code-generation` `backtesting` |
+| [skill-qbti](https://github.com/quantskills/skill-qbti) | QBTI 量化行为类型指标：五组趣味问答了解普通人的投资性格，按固定规则表翻译成因子方向与策略参数，再交给因子库和回测流水线，全程大白话解释。 | L1 Listed | draft | `qbti` `beginner-friendly` `personalization` `factor-selection` `risk-profile` |
 
 ## Skills / finance-news / finance-news
 

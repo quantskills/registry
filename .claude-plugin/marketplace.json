@@ -246,6 +246,16 @@
       "category": "factor"
     },
     {
+      "name": "factor-pool-evolution",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factor-pool-evolution"
+      },
+      "description": "Run one round of factor-pool recommendation from an existing stock alpha set. Use when an agent needs to start from user-provided seed factors, prepare mutation and crossover prompt packs for the current model to reason...",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
       "name": "factor-review",
       "source": {
         "source": "github",
@@ -314,6 +324,36 @@
       "description": "Build and apply a Gao Shanwen-style China macro and capital-market research workflow from his books, public articles, and archived materials.",
       "type": "skill",
       "category": "uncategorized"
+    },
+    {
+      "name": "global-commodity-term-structure",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-global-commodity-term-structure"
+      },
+      "description": "Research overseas commodity futures term structure, roll yield, and cross-commodity spreads from public data.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
+      "name": "global-macro-rates-fx-lab",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-global-macro-rates-fx-lab"
+      },
+      "description": "Study global rates, FX, and macro regime from public FRED/central-bank data and Pandadata international macro.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
+      "name": "global-macro-trend-strategy",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-global-macro-trend-strategy"
+      },
+      "description": "Turn an overseas commodity/macro/FX signal into a framework-neutral, backtestable research strategy.",
+      "type": "skill",
+      "category": "trader-research"
     },
     {
       "name": "hk-us-insider-radar",
@@ -416,6 +456,36 @@
       "category": "analyst"
     },
     {
+      "name": "overseas-equity-factor-miner",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-overseas-equity-factor-miner"
+      },
+      "description": "Discover and validate cross-sectional alpha factors for HK/US equities by IC, decay, and turnover.",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
+      "name": "pandaai-workflow-audit",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-pandaai-workflow-audit"
+      },
+      "description": "Review PandaAI workflow files like code review by checking graph structure, strategy and factor code, data timing, research flexibility, backtest assumptions, and validation evidence, with severity-ranked defects and actionable fixes.",
+      "type": "skill",
+      "category": "trader-research"
+    },
+    {
+      "name": "pandaai-workflow-generator",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-pandaai-workflow-generator"
+      },
+      "description": "Generate ready-to-import PandaAI workflow JSON files containing Python strategy/factor code and complete graph links based on user's natural language trading ideas.",
+      "type": "skill",
+      "category": "trader-research"
+    },
+    {
       "name": "pandadata-api",
       "source": {
         "source": "github",
@@ -464,6 +534,16 @@
       "description": "Turn an alpha signal into optimal portfolio weights under real constraints. Use when a user has factor scores / expected returns and wants portfolio weights, or asks about mean-variance / risk-parity / minimum-variance...",
       "type": "skill",
       "category": "uncategorized"
+    },
+    {
+      "name": "qbti",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-qbti"
+      },
+      "description": "QBTI (Quant Behavior Type Indicator): a personality-style quiz that translates a retail user's investing preferences into factor directions and strategy parameters via a fixed rule table, then hands off to the QuantSkills backtest pipeline.",
+      "type": "skill",
+      "category": "trader-research"
     },
     {
       "name": "quant-factor-directional-alpha",
@@ -594,6 +674,16 @@
       "description": "Conclusion-first time-series diagnostics for original series, Log diff, distributions, stationarity, cointegration, and half-life.",
       "type": "skill",
       "category": "tooling"
+    },
+    {
+      "name": "us-sec-edgar-harvester",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-us-sec-edgar-harvester"
+      },
+      "description": "Harvest and structure US SEC EDGAR public filings into a deduplicated, sourced, time-lined dataset.",
+      "type": "skill",
+      "category": "data-api"
     },
     {
       "name": "x-trader-builder",
