@@ -656,6 +656,16 @@
       "category": "tooling"
     },
     {
+      "name": "stock-memory-analyzer-usa",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-stock-memory-analyzer-usa"
+      },
+      "description": "对 MU、SNDK、WDC、STX 等美股存储公司开展基于 panda_data 的可追溯研究分析，结合行情、财务、估值、DRAM/NAND/HBM 供需、库存、CapEx、技术节点和同业对标，生成交互式 HTML 研究报告。当用户提到存储芯片、内存、NAND、DRAM、HBM、存储周期，或要求研究这些美股公司时使用。首次响应先说明必须完成 panda_data 登录、列出本 Skill 当前可分析的美股，并要求用户明确选择一只；",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
       "name": "stock-screener",
       "source": {
         "source": "github",

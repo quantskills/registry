@@ -1889,6 +1889,24 @@
     "last_validated": "2026-07-15"
   },
   {
+    "name": "skill-stock-memory-analyzer-usa",
+    "url": "https://github.com/quantskills/skill-stock-memory-analyzer-usa",
+    "description": "对 MU、SNDK、WDC、STX 等美股存储公司开展基于 panda_data 的可追溯研究分析，结合行情、财务、估值、DRAM/NAND/HBM 供需、库存、CapEx、技术节点和同业对标，生成交互式 HTML 研究报告。当用户提到存储芯片、内存、NAND、DRAM、HBM、存储周期，或要求研究这些美股公司时使用。首次响应先说明必须完成 panda_data 登录、列出本 Skill 当前可分析的美股，并要求用户明确选择一只；在登录验证成功且用户指定代码前，不执行分析、不浏览网页补数、不默认选择标的。本技能仅用于研究与教育，不提供买卖建议、收益承诺或个性化投资建议。",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "uncategorized",
+    "tags": [],
+    "platforms": [],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "对 MU、SNDK、WDC、STX 等美股存储公司开展基于 panda_data 的可追溯研究分析，结合行情、财务、估值、DRAM/NAND/HBM 供需、库存、CapEx、技术节点和同业对标，生成交互式 HTML 研究报告。当用户提到存储芯片、内存、NAND、DRAM、HBM、存储周期，或要求研究这些美股公司时使用。",
+    "summary_en": "对 MU、SNDK、WDC、STX 等美股存储公司开展基于 panda_data 的可追溯研究分析，结合行情、财务、估值、DRAM/NAND/HBM 供需、库存、CapEx、技术节点和同业对标，生成交互式 HTML 研究报告。当用户提到存储芯片、内存、NAND、DRAM、HBM、存储周期，或要求研究这些美股公司时使用。首次响应先说明必须完成 panda_data 登录、列出本 Skill 当前可分析的美股，并要求用户明确选择一只；",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-15"
+  },
+  {
     "name": "skill-stock-screener",
     "url": "https://github.com/quantskills/skill-stock-screener",
     "description": "Natural-language A-share stock screening skill that translates user filters such as 连续分红, 低估值, 质押率, 北向加仓, 行业/概念/指数成分, 财务增长, 股东变化, and risk exclusions into verified Pandadata API calls and returns an evidence-backed stock list. Use when the user asks for 选股, 筛选股票, 找出满足条件的A股, 财务/分红/股东/资金面过滤, or natural-language stock screening.",
