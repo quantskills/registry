@@ -1,0 +1,35 @@
+name: Registry health check
+
+on:
+  schedule:
+    - cron: "30 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 注入生成时间
+        run: echo "HEALTH_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+      - name: 生成健康报告
+        run: node scripts/health-check.mjs
+      - name: 提交变化
+        run: |
+          if [ -z "$(git status --porcelain -- health.md)" ]; then
+            echo "health.md 没有变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add health.md
+          git commit -m "chore: update registry health"
+          git push origin HEAD:main
