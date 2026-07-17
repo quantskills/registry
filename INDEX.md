@@ -26,7 +26,6 @@
 
 | Asset | 简介 | 验证级别 | 状态 | 标签 |
 | --- | --- | --- | --- | --- |
-| [agent-quantspace](https://github.com/quantskills/agent-quantspace) | 面向 AI 编码代理的量化研究框架，组织数据、技能、策略、回测和报告工作流。 | L2 Runnable | active | `quant-research` `strategy-research` `backtesting` `pandadata` |
 | [agent-ssquant](https://github.com/quantskills/agent-ssquant) | SSQuant Agent：期货策略、数据服务、CTP门禁和中文报告工作流。 | L2 Runnable | stable | `ssquant` `futures` `ctp` `backtest` `data-server` |
 
 ## Agents / 未分类 / Uncategorized
@@ -45,6 +44,7 @@
 | [skill-global-commodity-term-structure](https://github.com/quantskills/skill-global-commodity-term-structure) | 用公开数据研究海外商品期货期限结构：contango/backwardation、展期收益、跨期与跨品种价差、库存背景。 | L1 Listed | draft | `commodities` `futures` `term-structure` `roll-yield` `overseas` |
 | [skill-global-macro-rates-fx-lab](https://github.com/quantskills/skill-global-macro-rates-fx-lab) | 用公开 FRED/央行数据与 Pandadata 国际宏观研究全球利率、外汇与宏观周期。 | L1 Listed | draft | `macro` `rates` `fx` `yield-curve` `overseas` |
 | [skill-index-valuation-rotation](https://github.com/quantskills/skill-index-valuation-rotation) | 指数估值与行业轮动分析：PE/PB 分位、估值温度、宽基定投参考、行业动量排名与轮动摘要。 | L2 Runnable | stable | `a-share` `index-valuation` `industry-rotation` `valuation-percentile` `pandadata` |
+| [skill-investment-decision](https://github.com/quantskills/skill-investment-decision) | 输入公司名称或股票代码，基于Yahoo Finance公开数据与网络搜索，输出长期（6-18个月）投资决策报告（买入/中性/卖出+置信度）.docx，含图表与完整数据来源。 | L2 Runnable | active | `investment-decision` `stock-analysis` `buy-sell-hold` `company-report` `docx-report` |
 | [skill-options-vol-analyst](https://github.com/quantskills/skill-options-vol-analyst) | 期权波动率分析：期权链快照、隐含波动率、历史/实现波动率、IV 分位、期限结构、偏度与波动率溢价报告。 | L2 Runnable | stable | `options` `volatility` `implied-volatility` `derivatives` `pandadata` |
 | [skill-portfolio-checkup](https://github.com/quantskills/skill-portfolio-checkup) | 输入一个持仓组合清单（代码+权重/市值），输出组合层级的体检报告：结构与集中度、估值与财务质量分布、风险敞口聚合（解禁/质押/减持/ST）、基准偏离与资金面。 | None | draft | `a-share` `portfolio-checkup` `concentration` `benchmark-deviation` `risk-exposure` |
 | [skill-serenity-research-model](https://github.com/quantskills/skill-serenity-research-model) | 从 Serenity（@aleabitoreddit）的公开 X 帖子里逆向研究逻辑：extract → clean → auto-review → evaluate → report 五段流水线，把帖子拆成最小信号单元，并用价格数据回看公开 call 的后续表现。 | L1 Listed | stable | `semiconductors` `ai` `public-posts` `research-model` `thesis-review` |
@@ -135,9 +135,20 @@
 | Asset | 简介 | 验证级别 | 状态 | 标签 |
 | --- | --- | --- | --- | --- |
 | [skill-alpha-a06-hotmoney-reversal](https://github.com/quantskills/skill-alpha-a06-hotmoney-reversal) | Use this skill to calculate, validate, backtest, and publish the A06 hot-money seat cooling-reversal and collaborative-breakout Alpha factor for A-share... | L1 Listed | draft |  |
+| [skill-alpha-f1-position-change](https://github.com/quantskills/skill-alpha-f1-position-change) | 当需要开发、计算、验证期货前20席位持仓突变因子时，使用此 skill。支持多空持仓优势分析、主力调仓方向判断。 | L1 Listed | draft |  |
+| [skill-alpha-f5-member-position-concentration](https://github.com/quantskills/skill-alpha-f5-member-position-concentration) | Use when researching or validating the F5 commodity futures member-position concentration factor in a local Panda data environment. | L1 Listed | draft |  |
+| [skill-alpha-f6-family-position-reverse](https://github.com/quantskills/skill-alpha-f6-family-position-reverse) | Use when researching or validating the F6 commodity futures family-position reverse factor in a local Panda data environment. | L1 Listed | draft |  |
+| [skill-alpha-f8-family-main-divergence](https://github.com/quantskills/skill-alpha-f8-family-main-divergence) | Use when researching or validating the F8 commodity futures broker-position divergence factor in a local Panda data environment. | L1 Listed | draft |  |
+| [skill-b11-auto-stop-loss-take-profit](https://github.com/quantskills/skill-b11-auto-stop-loss-take-profit) | 当需要对 A 股和期货持仓做自动止盈止损与仓位管理时，使用此 skill。支持次日高开止盈、次日低开止损、持仓满2交易日强平、单票名义仓位上限控制。交易日历唯一来源 = panda_data.get_trade_cal（硬依赖）。 | L1 Listed | draft |  |
+| [skill-b12-intraday-position-manager](https://github.com/quantskills/skill-b12-intraday-position-manager) | 当需要对日内多品种持仓做动态仓位管理时，使用此 skill。支持 A股/A股ETF/股指期货/商品期货/港股+ETF；区分 T+1/T+0、昨仓/今仓、保证金/现金，输出标准 8 字段调仓指令。 | L1 Listed | draft |  |
+| [skill-b6-limitup-pool](https://github.com/quantskills/skill-b6-limitup-pool) |  | L1 Listed | draft |  |
+| [skill-b7-lhb-monitor](https://github.com/quantskills/skill-b7-lhb-monitor) |  | L1 Listed | draft |  |
 | [skill-backtest-overfit](https://github.com/quantskills/skill-backtest-overfit) | Detect backtest overfitting and selection bias from multiple testing. Use when a user has a backtest / factor result and asks whether the Sharpe is real,... | L1 Listed | draft |  |
+| [skill-factor-idea-generation](https://github.com/quantskills/skill-factor-idea-generation) | Generate initial stock alpha ideas with economic rationale and concrete factor shapes, defaulting to daily OHLCV when no fields are specified. | L1 Listed | draft |  |
+| [skill-factor-ranking-sage](https://github.com/quantskills/skill-factor-ranking-sage) | Rank and select quantitative model factors from local factor and label CSV files with one of two self-contained methods: deterministic regression mRMR using... | L1 Listed | draft |  |
 | [skill-gao-shanwen-research-model](https://github.com/quantskills/skill-gao-shanwen-research-model) | Build and apply a Gao Shanwen-style China macro and capital-market research workflow from his books, public articles, and archived materials. | L1 Listed | draft |  |
-| [skill-model-hpo-evidence-driven](https://github.com/quantskills/skill-model-hpo-evidence-driven) | Run evidence-driven LLM decision or deterministic grid hyperparameter search for quantitative multi-factor models. | L1 Listed | draft |  |
+| [skill-model-hpo-evidence-driven](https://github.com/quantskills/skill-model-hpo-evidence-driven) | Run evidence-driven or deterministic grid hyperparameter search for quantitative multi-factor models. | L1 Listed | draft |  |
+| [skill-munger-mental-model](https://github.com/quantskills/skill-munger-mental-model) | Munger 5-维模型与一票否决的多角度cross-validation分析工具，面向 A 股。支持单票和行业批筛。 | L1 Listed | draft |  |
 | [skill-numerical-leak-check](https://github.com/quantskills/skill-numerical-leak-check) | 当 agent 需要检查时间序列计算、量化因子、特征工程、标签生成、回测信号或研究管线是否存在未来信息泄露时使用。Use this skill for numerical causality checks, lookahead/future-leakage detection, prefix replay,... | L1 Listed | draft |  |
 | [skill-portfolio-optimize](https://github.com/quantskills/skill-portfolio-optimize) | Turn an alpha signal into optimal portfolio weights under real constraints. Use when a user has factor scores / expected returns and wants portfolio weights,... | L1 Listed | draft |  |
 | [skill-risk-model](https://github.com/quantskills/skill-risk-model) | Build a Barra-style structural multi-factor risk model and attribute portfolio risk. | L1 Listed | draft |  |

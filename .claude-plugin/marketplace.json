@@ -56,16 +56,6 @@
       "category": "monitor-agent"
     },
     {
-      "name": "quantspace",
-      "source": {
-        "source": "github",
-        "repo": "quantskills/agent-quantspace"
-      },
-      "description": "AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.",
-      "type": "agent",
-      "category": "workflow-agent"
-    },
-    {
       "name": "ssquant",
       "source": {
         "source": "github",
@@ -102,6 +92,86 @@
         "repo": "quantskills/skill-alpha-a06-hotmoney-reversal"
       },
       "description": "Use this skill to calculate, validate, backtest, and publish the A06 hot-money seat cooling-reversal and collaborative-breakout Alpha factor for A-share Dragon-Tiger List data.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "alpha-f1-position-change",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-alpha-f1-position-change"
+      },
+      "description": "当需要开发、计算、验证期货前20席位持仓突变因子时，使用此 skill。支持多空持仓优势分析、主力调仓方向判断。",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "alpha-f5-member-position-concentration",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-alpha-f5-member-position-concentration"
+      },
+      "description": "Use when researching or validating the F5 commodity futures member-position concentration factor in a local Panda data environment.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "alpha-f6-family-position-reverse",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-alpha-f6-family-position-reverse"
+      },
+      "description": "Use when researching or validating the F6 commodity futures family-position reverse factor in a local Panda data environment.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "alpha-f8-family-main-divergence",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-alpha-f8-family-main-divergence"
+      },
+      "description": "Use when researching or validating the F8 commodity futures broker-position divergence factor in a local Panda data environment.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "b11-auto-stop-loss-take-profit",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-b11-auto-stop-loss-take-profit"
+      },
+      "description": "当需要对 A 股和期货持仓做自动止盈止损与仓位管理时，使用此 skill。支持次日高开止盈、次日低开止损、持仓满2交易日强平、单票名义仓位上限控制。交易日历唯一来源 = panda_data.get_trade_cal（硬依赖）。",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "b12-intraday-position-manager",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-b12-intraday-position-manager"
+      },
+      "description": "当需要对日内多品种持仓做动态仓位管理时，使用此 skill。支持 A股/A股ETF/股指期货/商品期货/港股+ETF；区分 T+1/T+0、昨仓/今仓、保证金/现金，输出标准 8 字段调仓指令。",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "b6-limitup-pool",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-b6-limitup-pool"
+      },
+      "description": "",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "b7-lhb-monitor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-b7-lhb-monitor"
+      },
+      "description": "",
       "type": "skill",
       "category": "uncategorized"
     },
@@ -216,6 +286,16 @@
       "category": "tooling"
     },
     {
+      "name": "factor-idea-generation",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factor-idea-generation"
+      },
+      "description": "Generate initial stock alpha ideas with economic rationale and concrete factor shapes, defaulting to daily OHLCV when no fields are specified.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
       "name": "factor-mine",
       "source": {
         "source": "github",
@@ -254,6 +334,16 @@
       "description": "Run one round of factor-pool recommendation from an existing stock alpha set. Use when an agent needs to start from user-provided seed factors, prepare mutation and crossover prompt packs for the current model to reason...",
       "type": "skill",
       "category": "factor"
+    },
+    {
+      "name": "factor-ranking-sage",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-factor-ranking-sage"
+      },
+      "description": "Rank and select quantitative model factors from local factor and label CSV files with one of two self-contained methods: deterministic regression mRMR using F-statistic relevance and Pearson redundancy, or fixed-model...",
+      "type": "skill",
+      "category": "uncategorized"
     },
     {
       "name": "factor-review",
@@ -386,6 +476,16 @@
       "category": "analyst"
     },
     {
+      "name": "investment-decision",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-investment-decision"
+      },
+      "description": "Given a company name or ticker, generate a long-term (6-18 month) BUY/NEUTRAL/SELL investment decision report with confidence, charts, and sources in .docx format — self-contained, uses public data.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
       "name": "jq-to-panda-converter",
       "source": {
         "source": "github",
@@ -431,7 +531,17 @@
         "source": "github",
         "repo": "quantskills/skill-model-hpo-evidence-driven"
       },
-      "description": "Run evidence-driven LLM decision or deterministic grid hyperparameter search for quantitative multi-factor models.",
+      "description": "Run evidence-driven or deterministic grid hyperparameter search for quantitative multi-factor models. Use when an agent needs legacy-compatible RankIC-IR LGBM/MLP results, or explicitly opts into robust block RankIC,...",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
+      "name": "munger-mental-model",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-munger-mental-model"
+      },
+      "description": "Munger 5-维模型与一票否决的多角度cross-validation分析工具，面向 A 股。支持单票和行业批筛。",
       "type": "skill",
       "category": "uncategorized"
     },
@@ -661,7 +771,7 @@
         "source": "github",
         "repo": "quantskills/skill-stock-memory-analyzer-usa"
       },
-      "description": "对 MU、SNDK、WDC、STX 等美股存储公司开展基于 panda_data 的可追溯研究分析，结合行情、财务、估值、DRAM/NAND/HBM 供需、库存、CapEx、技术节点和同业对标，生成交互式 HTML 研究报告。当用户提到存储芯片、内存、NAND、DRAM、HBM、存储周期，或要求研究这些美股公司时使用。首次响应先说明必须完成 panda_data 登录、列出本 Skill 当前可分析的美股，并要求用户明确选择一只；",
+      "description": "对 MU、SNDK、WDC、STX 等美股存储公司开展基于 panda_data 的可追溯研究分析，结合行情、财务、估值、DRAM/NAND/HBM 供需、库存、CapEx、技术节点和同业对标，生成交互式 HTML 研究报告。当用户提到存储芯片、内存、NAND、DRAM、HBM、存储周期，或要求研究这些美股公司时使用。首次响应列出可分析标的并要求用户明确选择一只；",
       "type": "skill",
       "category": "uncategorized"
     },
