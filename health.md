@@ -1,12 +1,12 @@
 # Registry 健康检查
 
-生成时间：2026-07-17T03:45:38Z
+生成时间：2026-07-18T03:40:43Z
 
 ## 汇总
 
 | 总数 | 可达 | 有声明 | 声明合法 |
 | ---: | ---: | ---: | ---: |
-| 70 | 69 | 69 | 69 |
+| 81 | 81 | 81 | 81 |
 
 ## 明细
 
@@ -17,11 +17,18 @@
 | agent-derivatives-skew-sentiment-monitor | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-for-liangshuyuan-tasks | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-market-regime-monitor | ✅ | ✅ | ✅ | ✅ | 无 |
-| agent-quantspace | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-ssquant | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-a-share-stock-dossier | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-a1-lhb-tracking | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-alpha-a06-hotmoney-reversal | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-alpha-f1-position-change | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-alpha-f5-member-position-concentration | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-alpha-f6-family-position-reverse | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-alpha-f8-family-main-divergence | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-b11-auto-stop-loss-take-profit | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-b12-intraday-position-manager | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-b6-limitup-pool | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-b7-lhb-monitor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-backtest | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-backtest-overfit | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-block-trade-radar | ✅ | ✅ | ✅ | ✅ | 无 |
@@ -33,10 +40,12 @@
 | skill-factor-debug | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-decay | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-evaluate | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-factor-idea-generation | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-factor-mine | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-optimize | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-orthogonalize | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-pool-evolution | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-factor-ranking-sage | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-factor-review | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factormad-debate-factor-mining | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-fin-news | ✅ | ✅ | ✅ | ✅ | 无 |
@@ -50,11 +59,13 @@
 | skill-hk-us-insider-radar | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-ic-analysis | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-index-valuation-rotation | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-investment-decision | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-jq-to-panda-converter | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-macro-monitor | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-market-daily-review | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-market-regime-analysis | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-model-hpo-evidence-driven | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-munger-mental-model | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-numerical-leak-check | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-options-vol-analyst | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-overseas-equity-factor-miner | ✅ | ✅ | ✅ | ✅ | 无 |
@@ -65,7 +76,7 @@
 | skill-paper-replication | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-portfolio-checkup | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-portfolio-optimize | ✅ | ✅ | ✅ | ✅ | 无 |
-| skill-qbti | ❌ | ❌ | ❌ | ❌ | 仓库不可达 |
+| skill-qbti | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-quant-factor-directional-alpha | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-quant-factor-risk-pattern-alpha | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-quant-factor-skill-factory | ✅ | ✅ | ✅ | ✅ | 无 |
