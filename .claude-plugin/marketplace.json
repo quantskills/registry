@@ -206,6 +206,16 @@
       "category": "monitor"
     },
     {
+      "name": "dalio-all-weather",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-dalio-all-weather"
+      },
+      "description": "Build and audit reproducible, research-only A-share All Weather allocations with PandaData, growth-inflation regimes, inverse-volatility risk budgets, quarterly backtests, and risk-contribution diagnostics.",
+      "type": "skill",
+      "category": "uncategorized"
+    },
+    {
       "name": "doc-to-alphas",
       "source": {
         "source": "github",
@@ -734,6 +744,16 @@
       "description": "Research-model skill for reconstructing Serenity-style AI, semiconductor, and supply-chain theses from public posts and datasets.",
       "type": "skill",
       "category": "analyst"
+    },
+    {
+      "name": "simons-pairs-trading",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-simons-pairs-trading"
+      },
+      "description": "Screen and audit reproducible, research-only A-share pairs with adjusted PandaData prices, same-industry Engle-Granger tests, Benjamini-Hochberg FDR, formation-only clustering, rolling backtests, conservative gates, and...",
+      "type": "skill",
+      "category": "uncategorized"
     },
     {
       "name": "smart-money-profiler",
