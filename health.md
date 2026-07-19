@@ -1,12 +1,12 @@
 # Registry 健康检查
 
-生成时间：2026-07-18T03:40:43Z
+生成时间：2026-07-19T04:02:32Z
 
 ## 汇总
 
 | 总数 | 可达 | 有声明 | 声明合法 |
 | ---: | ---: | ---: | ---: |
-| 81 | 81 | 81 | 81 |
+| 84 | 84 | 84 | 84 |
 
 ## 明细
 
@@ -32,6 +32,7 @@
 | skill-backtest | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-backtest-overfit | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-block-trade-radar | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-dalio-all-weather | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-doc-to-alphas | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-earnings-season-tracker | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-event-risk-alert | ✅ | ✅ | ✅ | ✅ | 无 |
@@ -85,11 +86,13 @@
 | skill-report-replication | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-risk-model | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-serenity-research-model | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-simons-pairs-trading | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-smart-money-profiler | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-ssquant-ai-trader | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-ssquant-trader-generator | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-stock-memory-analyzer-usa | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-stock-screener | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-templeton-global-contrarian | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-time-series-analysis | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-us-sec-edgar-harvester | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-x-trader-builder | ✅ | ✅ | ✅ | ✅ | 无 |
