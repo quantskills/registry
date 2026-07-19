@@ -806,6 +806,16 @@
       "category": "analyst"
     },
     {
+      "name": "templeton-global-contrarian",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-templeton-global-contrarian"
+      },
+      "description": "John Templeton contrarian global value factor for cross-market valuation deviation screening",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
       "name": "time-series-analysis",
       "source": {
         "source": "github",
