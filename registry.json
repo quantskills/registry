@@ -2178,38 +2178,6 @@
     "last_validated": "2026-07-19"
   },
   {
-    "name": "skill-templeton-global-contrarian",
-    "url": "https://github.com/quantskills/skill-templeton-global-contrarian",
-    "description": "当需要开发、计算、验证 John Templeton 逆向全球价值因子时，使用此 skill。适用于 A 股/港股/美股跨市场价值筛选，基于估值偏离度识别极端低估/高估机会，生成 buy/sell/hold 信号。",
-    "project_type": "skill",
-    "declaration_file": "SKILL.md",
-    "category": "factor",
-    "tags": [
-      "quant",
-      "alpha",
-      "stock",
-      "global",
-      "contrarian",
-      "value",
-      "逆向",
-      "价值因子",
-      "跨市场"
-    ],
-    "platforms": [
-      "claude-code",
-      "codex",
-      "openclaw"
-    ],
-    "status": "stable",
-    "requires": [],
-    "summary_zh": "邓普顿逆向全球价值因子，A股/港股/美股跨市场估值偏离度筛选",
-    "summary_en": "John Templeton contrarian global value factor for cross-market valuation deviation screening",
-    "license": "GPL-3.0",
-    "validation_level": "verified",
-    "maintainer_type": "community",
-    "last_validated": "2026-07-19"
-  },
-  {
     "name": "skill-time-series-analysis",
     "url": "https://github.com/quantskills/skill-time-series-analysis",
     "description": "Use when an agent needs conclusion-first diagnostics or Markdown reports for financial time series, including KDE/QQ distribution checks, Hurst/ADF/KPSS stationarity, Log diff analysis, spread half-life, and Engle-Granger cointegration.",
