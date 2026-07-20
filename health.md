@@ -1,12 +1,12 @@
 # Registry 健康检查
 
-生成时间：2026-07-19T04:02:32Z
+生成时间：2026-07-20T04:12:12Z
 
 ## 汇总
 
 | 总数 | 可达 | 有声明 | 声明合法 |
 | ---: | ---: | ---: | ---: |
-| 84 | 84 | 84 | 84 |
+| 83 | 83 | 83 | 83 |
 
 ## 明细
 
@@ -92,7 +92,6 @@
 | skill-ssquant-trader-generator | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-stock-memory-analyzer-usa | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-stock-screener | ✅ | ✅ | ✅ | ✅ | 无 |
-| skill-templeton-global-contrarian | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-time-series-analysis | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-us-sec-edgar-harvester | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-x-trader-builder | ✅ | ✅ | ✅ | ✅ | 无 |
