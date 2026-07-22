@@ -27,7 +27,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "agent-crowding-risk-monitor",
@@ -57,7 +57,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "agent-derivatives-skew-sentiment-monitor",
@@ -87,7 +87,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "agent-for-liangshuyuan-tasks",
@@ -105,7 +105,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "agent-market-regime-monitor",
@@ -135,7 +135,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "agent-ssquant",
@@ -166,7 +166,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-a-share-stock-dossier",
@@ -198,7 +198,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-a1-lhb-tracking",
@@ -229,7 +229,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-alpha-a06-hotmoney-reversal",
@@ -247,7 +247,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-alpha-f1-position-change",
@@ -265,7 +265,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-alpha-f5-member-position-concentration",
@@ -283,7 +283,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-alpha-f6-family-position-reverse",
@@ -301,7 +301,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-alpha-f8-family-main-divergence",
@@ -319,7 +319,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-b11-auto-stop-loss-take-profit",
@@ -337,7 +337,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-b12-intraday-position-manager",
@@ -355,7 +355,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-b6-limitup-pool",
@@ -373,7 +373,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-b7-lhb-monitor",
@@ -391,7 +391,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-backtest",
@@ -420,7 +420,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-backtest-overfit",
@@ -438,7 +438,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-block-trade-radar",
@@ -471,7 +471,137 @@
     "license": "GPL-3.0-only",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-buyback-monitor",
+    "url": "https://github.com/quantskills/skill-buyback-monitor",
+    "description": "Scan and track A-share share-buyback (repurchase) events with the Pandadata get_repurchase interface, following each event through its procedure stages, classifying buyback purpose (cancellation vs incentive vs value-management), measuring buyback intensity against total share capital, and comparing the price band to the market price, for the whole market over a window or a single name. Use when the user asks for 回购监控, 股票回购, 回购扫描, 回购进度, 注销式回购, 回购强度, 回购目的分类, 回购预案, 回购价格区间, or an A-share buyback watch report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "a-share",
+      "buyback",
+      "repurchase",
+      "capital-return",
+      "corporate-action",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "A股股票回购监控：按事件进程(预案→决案→实施→完成/注销)追踪回购、区分回购目的(注销/激励/市值管理)、以占总股本比例衡量回购强度、价格区间对比现价，支持全市场扫描与定时运行。",
+    "summary_en": "A-share share-buyback monitor tracking repurchase events through their procedure stages, classifying purpose, measuring intensity vs total share capital, and comparing price band to market price, for the whole market or a single name.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-concept-rotation-monitor",
+    "url": "https://github.com/quantskills/skill-concept-rotation-monitor",
+    "description": "Rank and track A-share concept/theme (概念题材) rotation with the Pandadata get_concept_list and get_concept_constituents interfaces, aggregating each concept's constituent daily returns from get_stock_daily into a concept-level momentum and breadth ranking, detecting newly-formed concepts, and reading short-vs-long-window momentum to see which themes are heating up or cooling down. Use when the user asks for 概念轮动, 题材轮动, 概念热度, 板块轮动, 概念动量排名, 题材涨幅榜, 新概念, 概念成分股, or an A-share concept-rotation monitor report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "a-share",
+      "concept",
+      "theme-rotation",
+      "momentum",
+      "breadth",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "A股概念题材热度轮动监控：把每个概念的成分股日涨跌用 get_stock_daily 聚合成概念级动量与广度排名、识别新成立概念、比较短/长窗口动量看题材升温还是降温，明确等权口径、成分时点、概念重叠与滞后。",
+    "summary_en": "A-share concept/theme rotation monitor that aggregates each concept's constituent daily returns into concept-level momentum and breadth rankings, detects newly-formed concepts, and compares short-vs-long-window momentum to see which themes are heating up or cooling down.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-corporate-action-adjustment-auditor",
+    "url": "https://github.com/quantskills/skill-corporate-action-adjustment-auditor",
+    "description": "Use when raw close, adjusted close, cash-dividend, and split-factor data must be checked for invalid event inputs, unexplained price jumps, or adjusted-return mismatches before equity research or backtesting.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "corporate-action",
+      "adjusted-price",
+      "dividend",
+      "split",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "核对现金分红与拆并股场景下原始价格、复权价格和总收益的一致性。",
+    "summary_en": "Check raw and adjusted prices for cash-dividend and split consistency before research or backtesting.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-cross-listing-parity",
+    "url": "https://github.com/quantskills/skill-cross-listing-parity",
+    "description": "监控 A/H 溢价、ADR 折溢价、跨市场配对 Parity 与汇率折算，输出异常与收敛观察报告. Use when the user asks for A/H 溢价, ADR 折溢价, 跨市场 parity, 港股/A股价差, 中概股 ADR parity, or 套利监控.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "a-share",
+      "hk-stock",
+      "us-stock",
+      "cross-listing",
+      "parity",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "按数据日、汇率和股数比监控 A/H 与中概 ADR 跨市场折溢价。",
+    "summary_en": "A/H and China ADR cross-listing parity monitoring with explicit market dates, FX rates, and share ratios.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-dalio-all-weather",
@@ -489,7 +619,41 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-dividend-yield-scan",
+    "url": "https://github.com/quantskills/skill-dividend-yield-scan",
+    "description": "Build an A-share high-dividend / dividend-quality cross-section from Pandadata dividend interfaces (get_stock_cash_dividend, get_stock_dividend, get_stock_dividend_amount, get_stock_split), computing trailing dividend yield from cash dividends and price, ranking yield, measuring payout continuity (consecutive dividend years), separating real cash return from stock dividends (送转), listing upcoming ex-dividend dates, and rolling up by industry, for the whole market or a basket. Use when the user asks for 高股息, 股息率, 股息率排行, 红利, 红利策略, 分红质量, 连续分红, 分红稳定性, 现金分红 vs 送转, 除权除息日历, 股息率分位, or an A-share dividend / high-yield scan.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "a-share",
+      "dividend",
+      "dividend-yield",
+      "high-yield",
+      "payout",
+      "corporate-action",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "A股高股息与分红质量横截面：基于现金分红/分红/分红总额/拆分接口计算滚动股息率并排行、衡量连续分红年数与稳定性、区分现金分红与送转、列示除权除息日历、按行业聚合，全市场或篮子。",
+    "summary_en": "A-share high-dividend / dividend-quality cross-section from Pandadata dividend interfaces, computing trailing dividend yield, ranking it, measuring payout continuity, separating cash return from stock dividends, listing upcoming ex-dividend dates, and rolling up by industry, for the whole market or a basket.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-doc-to-alphas",
@@ -520,7 +684,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-earnings-season-tracker",
@@ -552,7 +716,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-event-risk-alert",
@@ -583,7 +747,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-alpha191-alpha101",
@@ -608,7 +772,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "verified",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-blend",
@@ -642,7 +806,7 @@
     "license": "GPL-3.0",
     "validation_level": "production",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-debug",
@@ -671,7 +835,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-decay",
@@ -705,7 +869,7 @@
     "license": "GPL-3.0",
     "validation_level": "production",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-evaluate",
@@ -734,7 +898,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-idea-generation",
@@ -752,7 +916,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-mine",
@@ -781,7 +945,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-optimize",
@@ -812,7 +976,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-orthogonalize",
@@ -845,7 +1009,7 @@
     "license": "GPL-3.0",
     "validation_level": "production",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-pool-evolution",
@@ -875,12 +1039,12 @@
     "license": "GPL-3.0-only",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-ranking-sage",
     "url": "https://github.com/quantskills/skill-factor-ranking-sage",
-    "description": "Rank and select quantitative model factors from local factor and label CSV files with one of two self-contained methods: deterministic regression mRMR using F-statistic relevance and Pearson redundancy, or fixed-model Marginal-SAGE MSE contribution for LGBM and MLP. Use when an agent needs a reproducible Top-K factor ranking, mRMR redundancy filtering, SAGE global contribution estimates, or auditable selection artifacts without third-party mRMR/SAGE runtime packages, model HPO, factor generation, portfolio optimization, or backtesting.",
+    "description": "Rank and select quantitative model factors from local factor and label CSV files with regression mRMR using F-statistic relevance and Pearson redundancy, or fixed-model Marginal-SAGE MSE contribution for LGBM and MLP. Use when an agent needs reproducible Top-K factor rankings, mRMR redundancy filtering, SAGE global contribution estimates, convergence diagnostics, or auditable selection artifacts.",
     "project_type": "skill",
     "declaration_file": "SKILL.md",
     "category": "uncategorized",
@@ -888,12 +1052,12 @@
     "platforms": [],
     "status": "draft",
     "requires": [],
-    "summary_zh": "Rank and select quantitative model factors from local factor and label CSV files with one of two self-contained methods: deterministic regression mRMR using...",
-    "summary_en": "Rank and select quantitative model factors from local factor and label CSV files with one of two self-contained methods: deterministic regression mRMR using F-statistic relevance and Pearson redundancy, or fixed-model...",
+    "summary_zh": "Rank and select quantitative model factors from local factor and label CSV files with regression mRMR using F-statistic relevance and Pearson redundancy, or...",
+    "summary_en": "Rank and select quantitative model factors from local factor and label CSV files with regression mRMR using F-statistic relevance and Pearson redundancy, or fixed-model Marginal-SAGE MSE contribution for LGBM and MLP.",
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factor-review",
@@ -922,7 +1086,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-factormad-debate-factor-mining",
@@ -948,7 +1112,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-fin-news",
@@ -974,7 +1138,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "custom",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-fundamental-factor-analysis",
@@ -1006,7 +1170,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-futures-deepview-analyst",
@@ -1037,7 +1201,38 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-futures-roll-auditor",
+    "url": "https://github.com/quantskills/skill-futures-roll-auditor",
+    "description": "Use when a futures continuous series or backtest needs structural checks on selected contracts, roll dates, same-day contract price gaps, difference or ratio adjustment factors, and a reproducible roll ledger.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "futures",
+      "continuous-contract",
+      "roll",
+      "back-adjustment",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "审计期货连续合约的选择序列、换月事件、价差及差值/比例调整台账。",
+    "summary_en": "Audit futures contract selection, roll events, price gaps, and difference or ratio adjustment ledgers.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-gaetano-crux-capital-research-model",
@@ -1068,7 +1263,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-gao-shanwen-research-model",
@@ -1086,7 +1281,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-global-commodity-term-structure",
@@ -1115,7 +1310,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-global-macro-rates-fx-lab",
@@ -1146,7 +1341,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-global-macro-trend-strategy",
@@ -1175,7 +1370,72 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-hk-us-consensus-radar",
+    "url": "https://github.com/quantskills/skill-hk-us-consensus-radar",
+    "description": "Track sell-side analyst consensus for Hong Kong and US equities with Pandadata consensus interfaces, aggregating buy/hold/sell rating diffusion, target-price upside versus current price, long-term growth expectations, and week/month consensus revisions into a sourced report for a single name or a basket. Use when the user asks for 港股一致预期, 美股一致预期, 卖方评级, 分析师评级分布, 目标价上行空间, 目标价空间, 评级上调下调, 一致预期变化, 港美股买卖建议, or a Hong Kong / US analyst-consensus report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "hk-stock",
+      "us-stock",
+      "analyst-consensus",
+      "target-price",
+      "rating",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "港美股卖方一致预期雷达：评级分布(强买/买/持有/卖/强卖)、目标价相对现价上行空间、长期成长预期、周/月一致预期变化，每个数值标注来源接口与数据日。",
+    "summary_en": "Sell-side consensus radar for HK/US equities — rating diffusion, target-price upside vs current price, long-term growth expectations, and week/month revisions, each traced to a Pandadata interface.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-hk-us-dividend-events",
+    "url": "https://github.com/quantskills/skill-hk-us-dividend-events",
+    "description": "港美股分红事件监控与 Dividend calendar/DRIP 再投资示意，覆盖 ex-dividend、TTM yield、currency 分池、T+1 snapshot 与 Pandadata 外盘 dividend_event/activity. Use when the user asks for 港股或美股分红日程、除息日、派息记录、高股息榜、Dividend calendar、ex-dividend events, DRIP illustration.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "hk-stock",
+      "us-stock",
+      "dividend",
+      "event-calendar",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "港美股除息日历、近期派息、分币种 TTM 股息率与 DRIP 算术示意。",
+    "summary_en": "HK and US ex-dividend calendars, recent payouts, currency-bucketed TTM yields, and simplified DRIP illustrations.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-hk-us-insider-radar",
@@ -1208,7 +1468,73 @@
     "license": "GPL-3.0-only",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-hk-us-quote-scan",
+    "url": "https://github.com/quantskills/skill-hk-us-quote-scan",
+    "description": "Scan Hong Kong and US equities with Pandadata HK/US interfaces, building a sourced cross-market snapshot of quotes, adjusted returns, liquidity, valuation price-volume metrics, and industry-relative position for a single name or a basket. Use when the user asks for 港股行情, 美股行情, 港美股扫描, 港股估值, 美股估值分位, 港美股对比, 港美股相对行业位置, 港美股流动性, ADR/中概股快照, or a Hong Kong / US equity quote-and-valuation report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "hk-stock",
+      "us-stock",
+      "quote",
+      "valuation",
+      "cross-market",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "港美股行情、复权收益、流动性、价量估值与行业相对位的横截面快照，每个数据点标注来源接口、市场、币种与数据日。",
+    "summary_en": "Hong Kong and US equity cross-market snapshot covering quotes, adjusted returns, liquidity, price-volume valuation, and industry-relative position, each figure traced to a Pandadata interface.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-holder-structure-scan",
+    "url": "https://github.com/quantskills/skill-holder-structure-scan",
+    "description": "Read A-share shareholder structure and chip concentration with the Pandadata get_holder_count, get_top_holders and get_share_float interfaces — tracking holder-count trend (户数) and average holding per account, top-holder concentration (前十大合计占比, flow vs total), and free-float share (自由流通占比), to see whether chips are concentrating or dispersing over successive disclosure periods, for a single name or a small watchlist. Use when the user asks for 股东户数, 户数变化, 筹码集中度, 户均持股, 前十大股东占比, 股东结构, 筹码分散, 股东户数趋势, or an A-share shareholder-structure scan.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "a-share",
+      "shareholder-structure",
+      "chip-concentration",
+      "holder-count",
+      "top-holders",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "A股股东户数与筹码集中度扫描：跟踪股东户数趋势与户均持股、前十大股东合计占比(流通/总股本口径)、自由流通占比，判断多个披露期内筹码是在集中还是分散，支持单票与小自选清单，明确披露频率与滞后。",
+    "summary_en": "A-share shareholder-structure and chip-concentration scan tracking holder-count trend and average holding per account, top-holder concentration (flow vs total), and free-float share, to see whether chips are concentrating or dispersing across disclosure periods, for a single name or a small watchlist.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-ic-analysis",
@@ -1237,7 +1563,38 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-index-rebalance-event-study",
+    "url": "https://github.com/quantskills/skill-index-rebalance-event-study",
+    "description": "Use when historical index additions, deletions, or weight changes need a reproducible abnormal-return and volume event study around announcement or effective dates without using current constituents as a proxy.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "index",
+      "rebalance",
+      "event-study",
+      "abnormal-return",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "按公告日或生效日研究指数调整事件的异常收益、成交量及可选权重变化。",
+    "summary_en": "Study index-rebalance abnormal returns, volume, and optional weight changes by announcement or effective-date anchor.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-index-valuation-rotation",
@@ -1268,7 +1625,71 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-institutional-research-tracker",
+    "url": "https://github.com/quantskills/skill-institutional-research-tracker",
+    "description": "Scan and track A-share institutional-research (investor-relations) activity with the Pandadata get_investor_activity interface, ranking which listed companies are being visited most, measuring how many distinct institutions participate, classifying participant institution types from the source text, rolling activity up by industry, and building a single-name research timeline, for the whole market over a window or one company. Use when the user asks for 机构调研监控, 机构调研热度, 调研统计, 被调研排行, 调研次数, 机构关注度, 投资者关系活动, 谁在调研, 调研密集股, or an A-share institutional-research activity report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "a-share",
+      "institutional-research",
+      "investor-relations",
+      "attention",
+      "corporate-action",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "A股机构调研热度监控：基于 get_investor_activity 统计被调研次数、参与机构广度、机构类型分布(从文本判定)、行业调研分布，并支持单票调研时间线，全市场扫描或单票，支持定时运行。",
+    "summary_en": "A-share institutional-research (investor-relations) activity monitor that ranks the most-visited companies, measures distinct-institution breadth, classifies participant institution types from source text, rolls up by industry, and builds a single-name research timeline, for the whole market or one company.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-intraday-data-quality-auditor",
+    "url": "https://github.com/quantskills/skill-intraday-data-quality-auditor",
+    "description": "Use when normalized intraday OHLCV bars must be checked for duplicate or non-monotonic timestamps, missing intervals, invalid price relationships, non-positive prices, negative volume, or trading-date mismatches before research or backtesting.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "intraday",
+      "data-quality",
+      "ohlcv",
+      "market-data",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "审计标准化日内 OHLCV 行情的时间戳、缺口、价格不变量、成交量和交易日一致性。",
+    "summary_en": "Audit normalized intraday OHLCV bars for timestamp, gap, price-invariant, volume, and trading-date defects.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-investment-decision",
@@ -1302,7 +1723,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-jq-to-panda-converter",
@@ -1333,7 +1754,40 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-macro-altdata-nowcast",
+    "url": "https://github.com/quantskills/skill-macro-altdata-nowcast",
+    "description": "Track and nowcast industry prosperity from Pandadata's 宏观特色数据 (alternative-data) high-frequency series — online e-commerce (get_macro_ec), pharma (get_macro_md), energy-chemical (get_macro_eh), autos (get_macro_ad), home appliances (get_macro_ha), offline retail (get_macro_of), hiring (get_macro_rb), real estate (get_macro_re), electronics (get_macro_ed) and new-energy (get_macro_ep) — by first resolving opaque indicator codes via get_macro_detail, then computing YoY/MoM changes, trend, and lead/lag against official stats, for a single sector nowcast or a cross-sector prosperity dashboard. Use when the user asks for 另类数据, 高频行业景气, 电商/招聘/地产/汽车/家电高频数据, 行业 nowcast, 特色数据监控, 景气度前瞻, or an alternative-data industry nowcasting report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "macro",
+      "alternative-data",
+      "high-frequency",
+      "industry-nowcast",
+      "prosperity",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "宏观特色（另类）高频数据行业景气 nowcasting：先用 get_macro_detail 解出不透明指标代码字典，再拉电商/医药/能化/汽车/家电/商超/招聘/地产/电子/电新等特色序列，算同比环比与趋势、与官方数据比领先滞后，输出单行业 nowcast 或跨行业景气仪表盘，支持定时监控。",
+    "summary_en": "Alternative-data high-frequency industry nowcasting that first resolves opaque indicator codes via get_macro_detail, then pulls e-commerce/pharma/energy-chemical/auto/ appliance/offline-retail/hiring/real-estate/electronics/new-energy series, computes YoY/MoM and trend, and reads lead/lag against official stats, for a single-sector nowcast or a cross-sector prosperity dashboard.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-macro-monitor",
@@ -1364,7 +1818,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-market-daily-review",
@@ -1396,7 +1850,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-market-regime-analysis",
@@ -1429,7 +1883,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-model-hpo-evidence-driven",
@@ -1447,7 +1901,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-munger-mental-model",
@@ -1465,7 +1919,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-numerical-leak-check",
@@ -1483,7 +1937,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-options-vol-analyst",
@@ -1514,7 +1968,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-overseas-equity-factor-miner",
@@ -1545,7 +1999,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-pandaai-workflow-audit",
@@ -1579,7 +2033,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-pandaai-workflow-generator",
@@ -1608,7 +2062,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-pandadata-api",
@@ -1637,7 +2091,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-pandadata-warehouse",
@@ -1668,7 +2122,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-paper-replication",
@@ -1698,7 +2152,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-portfolio-checkup",
@@ -1731,7 +2185,38 @@
     "license": "GPL-3.0-only",
     "validation_level": "rules-only",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-portfolio-liquidity-stress-test",
+    "url": "https://github.com/quantskills/skill-portfolio-liquidity-stress-test",
+    "description": "Use when holdings, value-based ADV, spread, and volatility data must be stress-tested for days-to-liquidate, horizon cash raised, redemption shortfall, and spread plus square-root impact costs.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "portfolio",
+      "liquidity",
+      "stress-test",
+      "redemption",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "估算组合在成交量冲击下的清算天数、期限内变现、赎回缺口和冲击成本。",
+    "summary_en": "Estimate portfolio liquidation days, horizon cash, redemption shortfall, and impact costs under volume stress.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-portfolio-optimize",
@@ -1749,7 +2234,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-qbti",
@@ -1782,7 +2267,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-quant-factor-directional-alpha",
@@ -1812,7 +2297,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-quant-factor-risk-pattern-alpha",
@@ -1842,7 +2327,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-quant-factor-skill-factory",
@@ -1872,7 +2357,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-quant-factor-volume-stat-alpha",
@@ -1902,7 +2387,7 @@
     "license": "GPL-3.0",
     "validation_level": "verified",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-quant-research-replication",
@@ -1932,7 +2417,41 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-refinancing-monitor",
+    "url": "https://github.com/quantskills/skill-refinancing-monitor",
+    "description": "Scan and track A-share equity-refinancing events — private placements (定向增发) and rights issues (配股) — with the Pandadata get_stock_private_placement and get_stock_allotment interfaces, following each event through its approval stages, measuring dilution against total share capital, comparing the issue/allotment price to the market price (discount and break-issue), and rolling events up by industry, for the whole market over a window or a single name. Use when the user asks for 再融资监控, 定增监控, 定向增发扫描, 定增破发, 定增折价, 配股监控, 配股比例, 稀释比例, 再融资进度, 增发预案, or an A-share equity-refinancing / dilution watch report.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "monitor",
+    "tags": [
+      "a-share",
+      "refinancing",
+      "private-placement",
+      "rights-issue",
+      "dilution",
+      "corporate-action",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "A股再融资监控：以定向增发(get_stock_private_placement)与配股(get_stock_allotment)为中心，按进程(预案→过会→核准→实施完成)追踪事件、以占总股本比例衡量稀释强度、发行/配股价对比现价(折价与破发)、按行业聚合，支持全市场扫描与定时运行。",
+    "summary_en": "A-share equity-refinancing monitor tracking private placements and rights issues through their approval stages, measuring dilution vs total share capital, comparing issue/allotment price to market price (discount and break-issue), and rolling up by industry, for the whole market or a single name.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-report-replication",
@@ -1963,7 +2482,25 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-residual-guided-factor-selection",
+    "url": "https://github.com/quantskills/skill-residual-guided-factor-selection",
+    "description": "Select complementary quantitative factors by fitting fixed-parameter Ridge models on a base factor set, ranking candidates against in-sample training residuals, and accepting factors only after add-one retraining improves a later evaluation window. Use when an agent needs to test training-residual-guided forward selection, extend factor set A from candidate set B, produce an auditable greedy selection path, or freeze a compact factor set for independent downstream evaluation.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "uncategorized",
+    "tags": [],
+    "platforms": [],
+    "status": "draft",
+    "requires": [],
+    "summary_zh": "Select complementary quantitative factors by fitting fixed-parameter Ridge models on a base factor set, ranking candidates against in-sample training...",
+    "summary_en": "Select complementary quantitative factors by fitting fixed-parameter Ridge models on a base factor set, ranking candidates against in-sample training residuals, and accepting factors only after add-one retraining...",
+    "license": "GPL-3.0",
+    "validation_level": "listed",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-risk-model",
@@ -1981,7 +2518,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-serenity-research-model",
@@ -2012,7 +2549,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-simons-pairs-trading",
@@ -2030,7 +2567,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-smart-money-profiler",
@@ -2064,7 +2601,7 @@
     "license": "GPL-3.0-only",
     "validation_level": "documentation",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-ssquant-ai-trader",
@@ -2094,7 +2631,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-ssquant-trader-generator",
@@ -2126,7 +2663,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-stock-memory-analyzer-usa",
@@ -2144,7 +2681,7 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-stock-screener",
@@ -2175,7 +2712,70 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-survivorship-universe-auditor",
+    "url": "https://github.com/quantskills/skill-survivorship-universe-auditor",
+    "description": "Use when historical symbol-date membership rows must be checked against listing and delisting dates, rebuilt into point-in-time universes, or inspected for missing delisting returns before backtesting.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "tooling",
+    "tags": [
+      "survivorship-bias",
+      "point-in-time",
+      "delisting",
+      "universe",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "审计证券生命周期和成员资格，并按输入快照重建历史股票池、检查退市收益缺口。",
+    "summary_en": "Audit lifecycle and membership rows, rebuild supplied point-in-time universes, and flag missing delisting returns.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-templeton-global-contrarian",
+    "url": "https://github.com/quantskills/skill-templeton-global-contrarian",
+    "description": "当需要开发、计算、验证 John Templeton 逆向全球价值因子时，使用此 skill。适用于 A 股/港股/美股跨市场价值筛选，基于估值偏离度识别极端低估/高估机会，生成 buy/sell/hold 信号。",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "factor",
+    "tags": [
+      "quant",
+      "alpha",
+      "stock",
+      "global",
+      "contrarian",
+      "value",
+      "逆向",
+      "价值因子",
+      "跨市场"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "openclaw"
+    ],
+    "status": "stable",
+    "requires": [],
+    "summary_zh": "邓普顿逆向全球价值因子，A股/港股/美股跨市场估值偏离度筛选",
+    "summary_en": "John Templeton contrarian global value factor for cross-market valuation deviation screening",
+    "license": "GPL-3.0",
+    "validation_level": "verified",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-time-series-analysis",
@@ -2204,7 +2804,7 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-us-sec-edgar-harvester",
@@ -2233,7 +2833,38 @@
     "license": "GPL-3.0",
     "validation_level": "listed",
     "maintainer_type": "community",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
+  },
+  {
+    "name": "skill-us-sector-rotation",
+    "url": "https://github.com/quantskills/skill-us-sector-rotation",
+    "description": "生成美股 US sector rotation 行业/板块轮动报告，覆盖 sector median、成分聚合收益、PE/PB snapshot 估值与排名变化速度。Use when the user asks for US sector rotation, 美股行业轮动, 美股板块表现, or 美股行业估值对比.",
+    "project_type": "skill",
+    "declaration_file": "SKILL.md",
+    "category": "analyst",
+    "tags": [
+      "us-stock",
+      "sector-rotation",
+      "valuation",
+      "pandadata"
+    ],
+    "platforms": [
+      "claude-code",
+      "codex",
+      "hermes",
+      "openclaw",
+      "cursor"
+    ],
+    "status": "draft",
+    "requires": [
+      "skill-pandadata-api"
+    ],
+    "summary_zh": "基于 Pandadata 成分与行业字段生成美股行业收益、估值快照和排名变化报告。",
+    "summary_en": "US equity sector rotation reports covering constituent returns, valuation snapshots, and ranking changes from Pandadata.",
+    "license": "GPL-3.0-only",
+    "validation_level": "runnable",
+    "maintainer_type": "community",
+    "last_validated": "2026-07-22"
   },
   {
     "name": "skill-x-trader-builder",
@@ -2262,6 +2893,6 @@
     "license": "GPL-3.0",
     "validation_level": "runnable",
     "maintainer_type": "official",
-    "last_validated": "2026-07-19"
+    "last_validated": "2026-07-22"
   }
 ]

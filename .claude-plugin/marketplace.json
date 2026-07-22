@@ -206,6 +206,46 @@
       "category": "monitor"
     },
     {
+      "name": "buyback-monitor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-buyback-monitor"
+      },
+      "description": "A-share share-buyback monitor tracking repurchase events through their procedure stages, classifying purpose, measuring intensity vs total share capital, and comparing price band to market price, for the whole market or a single name.",
+      "type": "skill",
+      "category": "monitor"
+    },
+    {
+      "name": "concept-rotation-monitor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-concept-rotation-monitor"
+      },
+      "description": "A-share concept/theme rotation monitor that aggregates each concept's constituent daily returns into concept-level momentum and breadth rankings, detects newly-formed concepts, and compares short-vs-long-window momentum to see which themes are heating up or cooling down.",
+      "type": "skill",
+      "category": "monitor"
+    },
+    {
+      "name": "corporate-action-adjustment-auditor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-corporate-action-adjustment-auditor"
+      },
+      "description": "Check raw and adjusted prices for cash-dividend and split consistency before research or backtesting.",
+      "type": "skill",
+      "category": "tooling"
+    },
+    {
+      "name": "cross-listing-parity",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-cross-listing-parity"
+      },
+      "description": "A/H and China ADR cross-listing parity monitoring with explicit market dates, FX rates, and share ratios.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
       "name": "dalio-all-weather",
       "source": {
         "source": "github",
@@ -214,6 +254,16 @@
       "description": "Build and audit reproducible, research-only A-share All Weather allocations with PandaData, growth-inflation regimes, inverse-volatility risk budgets, quarterly backtests, and risk-contribution diagnostics.",
       "type": "skill",
       "category": "uncategorized"
+    },
+    {
+      "name": "dividend-yield-scan",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-dividend-yield-scan"
+      },
+      "description": "A-share high-dividend / dividend-quality cross-section from Pandadata dividend interfaces, computing trailing dividend yield, ranking it, measuring payout continuity, separating cash return from stock dividends, listing upcoming ex-dividend dates, and rolling up by industry, for the whole market or a basket.",
+      "type": "skill",
+      "category": "analyst"
     },
     {
       "name": "doc-to-alphas",
@@ -351,7 +401,7 @@
         "source": "github",
         "repo": "quantskills/skill-factor-ranking-sage"
       },
-      "description": "Rank and select quantitative model factors from local factor and label CSV files with one of two self-contained methods: deterministic regression mRMR using F-statistic relevance and Pearson redundancy, or fixed-model...",
+      "description": "Rank and select quantitative model factors from local factor and label CSV files with regression mRMR using F-statistic relevance and Pearson redundancy, or fixed-model Marginal-SAGE MSE contribution for LGBM and MLP.",
       "type": "skill",
       "category": "uncategorized"
     },
@@ -406,6 +456,16 @@
       "category": "analyst"
     },
     {
+      "name": "futures-roll-auditor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-futures-roll-auditor"
+      },
+      "description": "Audit futures contract selection, roll events, price gaps, and difference or ratio adjustment ledgers.",
+      "type": "skill",
+      "category": "tooling"
+    },
+    {
       "name": "gaetano-crux-capital-research-model",
       "source": {
         "source": "github",
@@ -456,12 +516,52 @@
       "category": "trader-research"
     },
     {
+      "name": "hk-us-consensus-radar",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-hk-us-consensus-radar"
+      },
+      "description": "Sell-side consensus radar for HK/US equities — rating diffusion, target-price upside vs current price, long-term growth expectations, and week/month revisions, each traced to a Pandadata interface.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
+      "name": "hk-us-dividend-events",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-hk-us-dividend-events"
+      },
+      "description": "HK and US ex-dividend calendars, recent payouts, currency-bucketed TTM yields, and simplified DRIP illustrations.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
       "name": "hk-us-insider-radar",
       "source": {
         "source": "github",
         "repo": "quantskills/skill-hk-us-insider-radar"
       },
       "description": "An HK/US insider-trading radar that reads get_stock_insider_trade (HK) and get_stock_insider_transaction (US), separates open-market buys from sales and option/gift dispositions, weights by insider role and is_main_role, nets shares and value over a window, flags cluster buying/selling and holding changes, and ranks names by net insider direction.",
+      "type": "skill",
+      "category": "monitor"
+    },
+    {
+      "name": "hk-us-quote-scan",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-hk-us-quote-scan"
+      },
+      "description": "Hong Kong and US equity cross-market snapshot covering quotes, adjusted returns, liquidity, price-volume valuation, and industry-relative position, each figure traced to a Pandadata interface.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
+      "name": "holder-structure-scan",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-holder-structure-scan"
+      },
+      "description": "A-share shareholder-structure and chip-concentration scan tracking holder-count trend and average holding per account, top-holder concentration (flow vs total), and free-float share, to see whether chips are concentrating or dispersing across disclosure periods, for a single name or a small watchlist.",
       "type": "skill",
       "category": "monitor"
     },
@@ -476,6 +576,16 @@
       "category": "tooling"
     },
     {
+      "name": "index-rebalance-event-study",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-index-rebalance-event-study"
+      },
+      "description": "Study index-rebalance abnormal returns, volume, and optional weight changes by announcement or effective-date anchor.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
       "name": "index-valuation-rotation",
       "source": {
         "source": "github",
@@ -484,6 +594,26 @@
       "description": "Index valuation and A-share industry rotation skill for PE/PB percentiles, valuation temperature, broad-index references, momentum ranks, and rotation summaries.",
       "type": "skill",
       "category": "analyst"
+    },
+    {
+      "name": "institutional-research-tracker",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-institutional-research-tracker"
+      },
+      "description": "A-share institutional-research (investor-relations) activity monitor that ranks the most-visited companies, measures distinct-institution breadth, classifies participant institution types from source text, rolls up by industry, and builds a single-name research timeline, for the whole market or one company.",
+      "type": "skill",
+      "category": "monitor"
+    },
+    {
+      "name": "intraday-data-quality-auditor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-intraday-data-quality-auditor"
+      },
+      "description": "Audit normalized intraday OHLCV bars for timestamp, gap, price-invariant, volume, and trading-date defects.",
+      "type": "skill",
+      "category": "tooling"
     },
     {
       "name": "investment-decision",
@@ -504,6 +634,16 @@
       "description": "Batch convert JoinQuant platform strategies to PandaAI-compatible code. Understands strategy intent rather than line-by-line translation, supports single file and batch directory conversion, produces runnable backtest configs with a summary report.",
       "type": "skill",
       "category": "tooling"
+    },
+    {
+      "name": "macro-altdata-nowcast",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-macro-altdata-nowcast"
+      },
+      "description": "Alternative-data high-frequency industry nowcasting that first resolves opaque indicator codes via get_macro_detail, then pulls e-commerce/pharma/energy-chemical/auto/ appliance/offline-retail/hiring/real-estate/electronics/new-energy series, computes YoY/MoM and trend, and reads lead/lag against official stats, for a single-sector nowcast or a cross-sector prosperity dashboard.",
+      "type": "skill",
+      "category": "monitor"
     },
     {
       "name": "macro-monitor",
@@ -646,6 +786,16 @@
       "category": "analyst"
     },
     {
+      "name": "portfolio-liquidity-stress-test",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-portfolio-liquidity-stress-test"
+      },
+      "description": "Estimate portfolio liquidation days, horizon cash, redemption shortfall, and impact costs under volume stress.",
+      "type": "skill",
+      "category": "analyst"
+    },
+    {
       "name": "portfolio-optimize",
       "source": {
         "source": "github",
@@ -716,6 +866,16 @@
       "category": "replication"
     },
     {
+      "name": "refinancing-monitor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-refinancing-monitor"
+      },
+      "description": "A-share equity-refinancing monitor tracking private placements and rights issues through their approval stages, measuring dilution vs total share capital, comparing issue/allotment price to market price (discount and break-issue), and rolling up by industry, for the whole market or a single name.",
+      "type": "skill",
+      "category": "monitor"
+    },
+    {
       "name": "report-replication",
       "source": {
         "source": "github",
@@ -724,6 +884,16 @@
       "description": "Quant report replication skill that turns papers or reports into Chinese translations, factor formulas, Pandadata-backed validation reports, and strategy assets.",
       "type": "skill",
       "category": "replication"
+    },
+    {
+      "name": "residual-guided-factor-selection",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-residual-guided-factor-selection"
+      },
+      "description": "Select complementary quantitative factors by fitting fixed-parameter Ridge models on a base factor set, ranking candidates against in-sample training residuals, and accepting factors only after add-one retraining...",
+      "type": "skill",
+      "category": "uncategorized"
     },
     {
       "name": "risk-model",
@@ -806,6 +976,26 @@
       "category": "analyst"
     },
     {
+      "name": "survivorship-universe-auditor",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-survivorship-universe-auditor"
+      },
+      "description": "Audit lifecycle and membership rows, rebuild supplied point-in-time universes, and flag missing delisting returns.",
+      "type": "skill",
+      "category": "tooling"
+    },
+    {
+      "name": "templeton-global-contrarian",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-templeton-global-contrarian"
+      },
+      "description": "John Templeton contrarian global value factor for cross-market valuation deviation screening",
+      "type": "skill",
+      "category": "factor"
+    },
+    {
       "name": "time-series-analysis",
       "source": {
         "source": "github",
@@ -824,6 +1014,16 @@
       "description": "Harvest and structure US SEC EDGAR public filings into a deduplicated, sourced, time-lined dataset.",
       "type": "skill",
       "category": "data-api"
+    },
+    {
+      "name": "us-sector-rotation",
+      "source": {
+        "source": "github",
+        "repo": "quantskills/skill-us-sector-rotation"
+      },
+      "description": "US equity sector rotation reports covering constituent returns, valuation snapshots, and ranking changes from Pandadata.",
+      "type": "skill",
+      "category": "analyst"
     },
     {
       "name": "x-trader-builder",
