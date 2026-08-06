@@ -1,12 +1,12 @@
 # Registry 健康检查
 
-生成时间：2026-08-05T03:42:15Z
+生成时间：2026-08-06T03:48:02Z
 
 ## 汇总
 
 | 总数 | 可达 | 有声明 | 声明合法 |
 | ---: | ---: | ---: | ---: |
-| 103 | 103 | 103 | 103 |
+| 103 | 102 | 102 | 102 |
 
 ## 明细
 
@@ -110,7 +110,7 @@
 | skill-stock-memory-analyzer-usa | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-stock-screener | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-survivorship-universe-auditor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
-| skill-templeton-global-contrarian | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-templeton-global-contrarian | ❌ | ❌ | ❌ | ❌ | 仓库不可达 |
 | skill-time-series-analysis | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-us-sec-edgar-harvester | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-us-sector-rotation | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
