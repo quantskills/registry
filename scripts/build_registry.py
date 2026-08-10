@@ -74,7 +74,7 @@ def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", 
             workflow = {"primary_stage": "orchestration", "workflow_stages": ["orchestration"]} if name in {"skill-template", "agent-template"} else {"primary_stage": "unknown", "workflow_stages": []}
         if not isinstance(interface, dict) or not interface.get("mode"):
             interface = {"mode": "unknown", "reason": "pending-v2-migration"}
-    return {
+    entry = {
         "name": name, "url": f"https://github.com/{ORG}/{name}", "description": frontmatter.get("description", ""),
         "project_type": project_type, "declaration_file": "AGENTS.md" if project_type == "agent" else "SKILL.md",
         "catalog": catalog, "workflow": workflow, "interface": interface,
@@ -85,6 +85,35 @@ def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", 
         "maintainer_type": qs.get("maintainer_type", "community"), "last_validated": validation_date, "commit_sha": commit_sha,
         **({"migration_state": "pending-v2", "migration_issues": [{"code": issue["check"], "path": issue["path"]} for issue in issues] or [{"code": "missing-v2", "path": "$.quantSkills"}]} if missing_v2 else {}),
     }
+    if missing_v2:
+        _normalize_audit_entry(entry, name, issues)
+    return entry
+
+
+def _normalize_audit_entry(entry: dict, name: str, issues: list[dict]) -> None:
+    """Keep only independently schema-valid public facts in an audit migration row."""
+    paths = {issue["path"] for issue in issues}
+    qs_path = "$.quantSkills"
+    entry["project_type"] = entry["project_type"] if entry["project_type"] in {"skill", "agent"} and f"{qs_path}.project_type" not in paths else ("agent" if name.startswith("agent-") else "skill")
+    entry["declaration_file"] = "AGENTS.md" if entry["project_type"] == "agent" else "SKILL.md"
+    entry["description"] = entry["description"] if isinstance(entry["description"], str) else ""
+    entry["status"] = entry["status"] if entry["status"] in {"draft", "active", "stable", "deprecated"} and f"{qs_path}.status" not in paths else "draft"
+    entry["validation_level"] = entry["validation_level"] if entry["validation_level"] in {"listed", "runnable", "verified"} and f"{qs_path}.validation_level" not in paths else "listed"
+    entry["maintainer_type"] = entry["maintainer_type"] if entry["maintainer_type"] in {"official", "community"} and f"{qs_path}.maintainer_type" not in paths else "community"
+    entry["license"] = entry["license"] if isinstance(entry["license"], str) and entry["license"] and f"{qs_path}.license" not in paths else "GPL-3.0-only"
+    entry["tags"] = entry["tags"] if isinstance(entry["tags"], list) and all(isinstance(item, str) for item in entry["tags"]) else []
+    entry["requires"] = entry["requires"] if isinstance(entry["requires"], list) and all(isinstance(item, str) for item in entry["requires"]) else []
+    entry["platforms"] = entry["platforms"] if isinstance(entry["platforms"], list) and all(isinstance(item, str) for item in entry["platforms"]) else []
+    entry["summary_zh"] = entry["summary_zh"] if isinstance(entry["summary_zh"], str) and f"{qs_path}.summary_zh" not in paths else "unknown"
+    entry["summary_en"] = entry["summary_en"] if isinstance(entry["summary_en"], str) and f"{qs_path}.summary_en" not in paths else "unknown"
+    if any(path.startswith(f"{qs_path}.catalog") for path in paths) and name not in {"skill-template", "agent-template"}:
+        entry["catalog"] = {"category": "unknown", "subcategory": "unknown"}
+    if any(path.startswith(f"{qs_path}.workflow") for path in paths) and name not in {"skill-template", "agent-template"}:
+        entry["workflow"] = {"primary_stage": "unknown", "workflow_stages": []}
+    if any(path.startswith(f"{qs_path}.interface") for path in paths):
+        entry["interface"] = {"mode": "unknown", "reason": "pending-v2-migration"}
+    entry["category"], entry["subcategory"] = entry["catalog"]["category"], entry["catalog"]["subcategory"]
+    entry["stage"] = entry["workflow"]["primary_stage"]
 
 
 def collect_entries(repos: list[dict], previous: dict, contract_mode: str, inventory: dict | None = None, validation_date: str = "") -> tuple[list[dict], list[dict]]:
