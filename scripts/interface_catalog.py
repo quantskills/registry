@@ -122,7 +122,20 @@ def _envelope(root: Path) -> dict[str, Any]:
     document = _load(root, "schema/envelope/index.json")
     if type(document) is not dict or set(document) != {"name", "versions"} or document.get("name") != _ENVELOPE or document.get("versions") != {_VERSION: f"{_VERSION}.schema.json"}:
         raise ValueError("invalid interface catalog")
-    _load(root, "schema/envelope/" + document["versions"][_VERSION])
+    schema = _load(root, "schema/envelope/" + document["versions"][_VERSION])
+    try:
+        contract = schema["properties"]["$contract"]
+        required = contract["required"]
+        properties = contract["properties"]
+        expected = {"envelope", "envelope_version", "profile", "profile_version"}
+        if (contract.get("type") != "object" or contract.get("additionalProperties") is not False
+                or type(required) is not list or len(required) != len(expected) or set(required) != expected
+                or type(properties) is not dict or set(properties) != expected
+                or properties["envelope"].get("const") != _ENVELOPE
+                or properties["envelope_version"].get("const") != _VERSION):
+            raise ValueError
+    except (AttributeError, KeyError, TypeError, ValueError) as error:
+        raise ValueError("invalid interface catalog") from error
     return {"version": _VERSION, "name": _ENVELOPE, "items": [{"version": _VERSION, "schema": f"{_VERSION}.schema.json"}]}
 
 

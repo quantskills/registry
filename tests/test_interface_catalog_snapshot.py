@@ -71,6 +71,12 @@ class InterfaceCatalogSnapshotTests(unittest.TestCase):
 
         rejected("schema/envelope/index.json", lambda path: path.write_text('{"name":"quantskills-envelope","name":"evil","versions":{"1.0.0":"1.0.0.schema.json"}}', encoding="utf-8"))
         rejected("schema/envelope/index.json", json_mutation(lambda doc: doc["versions"].update({"2.0.0": "2.0.0.schema.json"})))
+        def remove_envelope_const(document):
+            identity = document["properties"]["$contract"]["properties"]["envelope"]
+            identity.pop("const")
+            identity["type"] = "string"
+        rejected("schema/envelope/1.0.0.schema.json", json_mutation(remove_envelope_const))
+        rejected("schema/envelope/1.0.0.schema.json", json_mutation(lambda doc: doc["properties"]["$contract"]["properties"]["envelope_version"].update({"const": "1.0.1"})))
         rejected("schema/profiles/index.json", json_mutation(lambda doc: doc["profiles"][0].update({"version": "1.0.1"})))
         rejected("schema/profiles/index.json", json_mutation(lambda doc: doc["profiles"][0].update({"schema": "base/market-bar/1.0.0.schema.json"})))
         rejected("schema/profiles/index.json", json_mutation(lambda doc: doc["profiles"][0].update({"primary_key": ["wrong"], "time_semantics": "wrong"})))
