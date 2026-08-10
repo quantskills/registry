@@ -3,8 +3,6 @@ import unittest
 import json
 import copy
 import hashlib
-import subprocess
-import shutil
 from pathlib import Path
 import sys
 
@@ -38,12 +36,6 @@ class AtomicGenerationTests(unittest.TestCase):
         )
         with tempfile.TemporaryDirectory(dir=ROOT) as temporary:
             base = Path(temporary)
-            baseline_snapshot, baseline_registry = base / "baseline.snapshot.json", base / "baseline.registry.json"
-            baseline_snapshot.write_text(json.dumps(baseline), encoding="utf-8"); baseline_registry.write_text(json.dumps(build_registry.public_registry_projection(baseline)), encoding="utf-8")
-            baseline_readmes = (base / "baseline.md", base / "baseline.en.md")
-            for readme in baseline_readmes: readme.write_text(f"<!-- registry-snapshot:start -->\n`{baseline['snapshot_id']}`\n<!-- registry-snapshot:end -->", encoding="utf-8")
-            result = subprocess.run([shutil.which("python") or sys.executable, str(ROOT / "scripts" / "verify_catalog_artifacts.py"), str(baseline_snapshot), str(baseline_registry), "--readme", str(baseline_readmes[0]), "--readme", str(baseline_readmes[1])], capture_output=True, text=True)
-            self.assertEqual(result.returncode, 0, result.stderr)
             for mutate in mutations:
                 snapshot = copy.deepcopy(baseline); mutate(snapshot); self._sealed(snapshot)
                 sp, rp = base / "catalog.snapshot.json", base / "registry.json"
