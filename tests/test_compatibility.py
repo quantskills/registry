@@ -95,6 +95,25 @@ class CompatibilityTests(unittest.TestCase):
         self.assertEqual(first, {"status": "incompatible", "errors": [], "adapter_path": []})
         self.assertEqual(second, first)
 
+    def test_pending_evidence_is_scoped_to_a_reached_source_node(self):
+        source = endpoint("market-bar", "1.0.0")
+        same = endpoint("market-bar", version_range="1.0.0")
+        wanted = endpoint("factor-panel", version_range="1.0.0")
+        irrelevant = adapter("holdings-factor-pending", "holdings", "factor-panel", validation_status="pending")
+        self.assertEqual(compare_endpoints(source, same, [irrelevant]), {"status": "compatible", "errors": [], "adapter_path": []})
+        direct_pending = adapter("market-factor-pending", "market-bar", "factor-panel", validation_status="pending")
+        self.assertEqual(compare_endpoints(source, wanted, [direct_pending]), {"status": "unknown", "errors": [{"code": "adapter-evidence", "path": "/adapters"}], "adapter_path": []})
+        first_hop = adapter("market-holdings", "market-bar", "holdings")
+        self.assertEqual(compare_endpoints(source, wanted, [first_hop, irrelevant]), {"status": "unknown", "errors": [{"code": "adapter-evidence", "path": "/adapters"}], "adapter_path": []})
+
+    def test_lossy_adapters_remain_non_traversable(self):
+        source = endpoint("market-bar", "1.0.0")
+        wanted = endpoint("factor-panel", version_range="1.0.0")
+        direct_lossy = adapter("market-factor-lossy", "market-bar", "factor-panel", lossless=False)
+        irrelevant_lossy = adapter("holdings-factor-lossy", "holdings", "factor-panel", lossless=False)
+        self.assertEqual(compare_endpoints(source, wanted, [direct_lossy]), {"status": "incompatible", "errors": [], "adapter_path": []})
+        self.assertEqual(compare_endpoints(source, wanted, [irrelevant_lossy]), {"status": "incompatible", "errors": [], "adapter_path": []})
+
 
 if __name__ == "__main__":
     unittest.main()

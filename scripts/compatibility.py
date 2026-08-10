@@ -114,15 +114,15 @@ def _adapter_validator() -> Draft202012Validator:
     return Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8"), object_pairs_hook=_strict_pairs))
 
 
-def _validate_adapters(adapters: object, known: set[tuple[str, str]]) -> tuple[list[dict], list[dict]]:
+def _validate_adapters(adapters: object, known: set[tuple[str, str]]) -> tuple[list[dict], dict[tuple[str, str], list[dict]], list[dict]]:
     """Validate the closed registry shape before inspecting any row values."""
     try:
         validator = _adapter_validator()
         document = {"schema_version": "1.0.0", "adapters": adapters}
         if list(validator.iter_errors(document)):
-            return [], [{"code": "adapter-registry", "path": "/adapters"}]
+            return [], {}, [{"code": "adapter-registry", "path": "/adapters"}]
     except (OSError, ValueError, TypeError, json.JSONDecodeError):
-        return [], [{"code": "adapter-registry", "path": "/adapters"}]
+        return [], {}, [{"code": "adapter-registry", "path": "/adapters"}]
     assert isinstance(adapters, list)
     id_groups: dict[str, list[dict]] = {}
     edge_groups: dict[tuple[str, str, str, str], list[dict]] = {}
@@ -133,19 +133,20 @@ def _validate_adapters(adapters: object, known: set[tuple[str, str]]) -> tuple[l
     errors = []
     if any(len(group) > 1 for group in id_groups.values()): errors.append({"code": "adapter-duplicate-id", "path": "/adapters"})
     if any(len(group) > 1 for group in edge_groups.values()): errors.append({"code": "adapter-duplicate-edge", "path": "/adapters"})
-    if errors: return [], errors
-    valid = []
+    if errors: return [], {}, errors
+    valid, invalid = [], {}
     for row in adapters:
         source, target = row["source"], row["target"]
+        node = (source["profile"], source["version"])
         identities_known = (source["profile"], source["version"]) in known and (target["profile"], target["version"]) in known
         implementation = _safe(Path(row["implementation"]["path"])) if identities_known else None
         if not identities_known or implementation is None or not implementation.is_file():
-            errors.append({"code": "adapter", "path": "/adapters"})
+            invalid.setdefault(node, []).append({"code": "adapter", "path": "/adapters"})
         elif row["lossless"] and row["validation_status"] == "validated":
             valid.append(row)
         elif row["lossless"]:
-            errors.append({"code": "adapter-evidence", "path": "/adapters"})
-    return valid, errors
+            invalid.setdefault(node, []).append({"code": "adapter-evidence", "path": "/adapters"})
+    return valid, invalid, []
 
 
 def compare_endpoints(output: dict, input_: dict, adapters: list[dict]) -> dict:
@@ -158,7 +159,7 @@ def compare_endpoints(output: dict, input_: dict, adapters: list[dict]) -> dict:
     assert out and inn
     start, wanted = out[:2], inn[:2]
     if out[2] != inn[2]: return _result("incompatible")
-    rows, errors = _validate_adapters(adapters, known)
+    rows, invalid, errors = _validate_adapters(adapters, known)
     if errors: return _result("unknown", errors)
     graph = {}
     for row in rows:
@@ -169,6 +170,7 @@ def compare_endpoints(output: dict, input_: dict, adapters: list[dict]) -> dict:
         if node in visited: continue
         visited.add(node)
         if node[0] == wanted[0] and version_satisfies(node[1], wanted[1]): return _result("compatible" if not route else "adapter-required", adapter_path=list(route))
+        if node in invalid: return _result("unknown", invalid[node])
         for row in sorted(graph.get(node, []), key=lambda item: item["id"]):
             target = (row["target"]["profile"], row["target"]["version"])
             if target not in visited: heappush(queue, (route + (row["id"],), target))
