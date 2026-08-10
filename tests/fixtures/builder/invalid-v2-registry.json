@@ -1,0 +1,3 @@
+[
+  {"name":"skill-alpha","url":"https://github.com/quantskills/skill-alpha","description":"x","project_type":"skill","declaration_file":"SKILL.md","tags":[],"platforms":[],"status":"active","requires":[],"summary_zh":"待迁移","summary_en":"unknown","license":"GPL-3.0-only","validation_level":"listed","maintainer_type":"community","last_validated":"2026-08-10","commit_sha":"a","category":"uncategorized","subcategory":"unknown","stage":"unknown","catalog":{"category":"uncategorized","subcategory":"unknown"},"workflow":{"primary_stage":"unknown","workflow_stages":["unknown"]},"interface":{"mode":"unknown"},"snapshot_id":"sha256:965b69a704e702a14484037f5a21700f6cac75c0f13407a7b2a414ea7af60fcd"}
+]

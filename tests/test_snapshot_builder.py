@@ -16,7 +16,7 @@ class SnapshotBuilderTests(unittest.TestCase):
         fixture = ROOT / "tests" / "fixtures" / "builder"
         cls.repos = json.loads((fixture / "repos.json").read_text(encoding="utf-8"))
         declarations = json.loads((fixture / "declarations.json").read_text(encoding="utf-8"))
-        cls.repos = [{**repo, "frontmatter": declarations[repo["name"]]} for repo in cls.repos]
+        cls.repos = [{**repo, "frontmatter": declarations[repo["name"]]} if repo["name"] in declarations else repo for repo in cls.repos]
         cls.taxonomy = json.loads((ROOT / "schema" / "taxonomy.v1.json").read_text(encoding="utf-8"))
 
     def snapshot(self, repos=None):
@@ -51,6 +51,18 @@ class SnapshotBuilderTests(unittest.TestCase):
         broken = [{**self.repos[0], "frontmatter": {}}]
         with self.assertRaises(ValueError):
             collect_entries(broken, {}, "enforce")
+
+    def test_audit_keeps_legacy_templates_visible_but_enforce_rejects_them(self):
+        legacy = [{"name": "skill-template", "frontmatter": {"description": "Legacy template"}}, *self.repos[3:]]
+        entries, _ = collect_entries(legacy, {}, "audit")
+        self.assertEqual(entries[0]["catalog"]["category"], "10")
+        self.assertEqual(entries[0]["migration_state"], "pending-v2")
+        with self.assertRaises(ValueError):
+            collect_entries(legacy, {}, "enforce")
+
+    def test_missing_real_resource_fails_before_snapshot(self):
+        with self.assertRaisesRegex(ValueError, "resource inventory"):
+            collect_entries(self.repos[:-1], {}, "audit")
 
 
 if __name__ == "__main__":

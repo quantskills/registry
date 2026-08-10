@@ -32,7 +32,7 @@ def gh(method: str, url: str, **kwargs):
 def list_asset_repos() -> list[dict]:
     repos, page = [], 1
     while batch := gh("GET", f"{API}/orgs/{ORG}/repos", params={"per_page": 100, "page": page}):
-        repos.extend(repo for repo in batch if repo["name"].startswith(("skill-", "agent-")) and not repo.get("archived") and not repo.get("private"))
+        repos.extend(repo for repo in batch if (repo["name"].startswith(("skill-", "agent-")) or repo["name"] in RESOURCE_NAMES) and not repo.get("archived") and not repo.get("private"))
         page += 1
     return repos
 
@@ -41,21 +41,24 @@ def head_sha(repo: dict) -> str:
     return gh("GET", f"{API}/repos/{ORG}/{repo['name']}/commits/{repo['default_branch']}")["sha"]
 
 
-def shallow_clone(name: str, destination: Path) -> None:
+def shallow_clone(name: str, destination: Path) -> str:
     import subprocess
     subprocess.run(["git", "clone", "--depth", "1", "--quiet", f"https://github.com/{ORG}/{name}.git", str(destination)], check=True)
+    return subprocess.run(["git", "-C", str(destination), "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
 
 
-def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "") -> dict:
+def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", contract_mode: str = "enforce") -> dict:
     qs = frontmatter.get("quantSkills") or {}
     catalog, workflow, interface = qs.get("catalog") or {}, qs.get("workflow") or {}, qs.get("interface") or {}
     project_type = qs.get("project_type") or ("agent" if name.startswith("agent-") else "skill")
-    if not isinstance(catalog.get("category"), str) or not isinstance(catalog.get("subcategory"), str):
-        raise ValueError(f"invalid declaration for {name}: missing catalog")
-    if not isinstance(workflow.get("primary_stage"), str) or not isinstance(workflow.get("workflow_stages"), list):
-        raise ValueError(f"invalid declaration for {name}: missing workflow")
-    if not isinstance(interface, dict) or not interface.get("mode"):
-        raise ValueError(f"invalid declaration for {name}: missing interface")
+    missing_v2 = not isinstance(catalog.get("category"), str) or not isinstance(catalog.get("subcategory"), str) or not isinstance(workflow.get("primary_stage"), str) or not isinstance(workflow.get("workflow_stages"), list) or not isinstance(interface, dict) or not interface.get("mode")
+    if missing_v2:
+        if contract_mode != "audit" or name not in {"skill-template", "agent-template"}:
+            raise ValueError(f"invalid declaration for {name}: missing v2 catalog/workflow/interface")
+        subcategory = "10.skill-template" if name == "skill-template" else "10.agent-template"
+        catalog = {"category": "10", "subcategory": subcategory}
+        workflow = {"primary_stage": "orchestration", "workflow_stages": ["orchestration"]}
+        interface = {"mode": "unknown", "reason": "pending-v2-migration"}
     return {
         "name": name, "url": f"https://github.com/{ORG}/{name}", "description": frontmatter.get("description", ""),
         "project_type": project_type, "declaration_file": "AGENTS.md" if project_type == "agent" else "SKILL.md",
@@ -65,6 +68,7 @@ def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "") 
         "requires": qs.get("requires", []), "summary_zh": qs.get("summary_zh", ""), "summary_en": qs.get("summary_en", ""),
         "license": qs.get("license", "GPL-3.0-only"), "validation_level": qs.get("validation_level", "listed"),
         "maintainer_type": qs.get("maintainer_type", "community"), "last_validated": qs.get("last_validated", ""), "commit_sha": commit_sha,
+        **({"migration_state": "pending-v2"} if missing_v2 else {}),
     }
 
 
@@ -75,24 +79,27 @@ def collect_entries(repos: list[dict], previous: dict, contract_mode: str) -> tu
     names = [repo.get("name") for repo in repos]
     if any(not isinstance(name, str) or not name for name in names) or len(names) != len(set(names)):
         raise ValueError("duplicate or empty asset name")
+    resources_by_name = {repo["name"]: {"name": repo["name"], "url": repo.get("html_url") or repo.get("url") or f"https://github.com/{ORG}/{repo['name']}"} for repo in repos if repo["name"] in RESOURCE_NAMES}
+    if set(resources_by_name) != set(RESOURCE_NAMES):
+        raise ValueError("closed organization resource inventory is incomplete")
     entries = []
-    for repo in repos:
+    for repo in (repo for repo in repos if repo["name"] not in RESOURCE_NAMES):
         name = repo["name"]
         if "frontmatter" in repo:
-            entries.append(_entry_from_frontmatter(name, repo["frontmatter"], repo.get("commit_sha", "")))
+            entries.append(_entry_from_frontmatter(name, repo["frontmatter"], repo.get("commit_sha", ""), contract_mode))
             continue
         with tempfile.TemporaryDirectory() as temp:
             directory = Path(temp) / name
-            shallow_clone(name, directory)
+            clone_sha = shallow_clone(name, directory)
             kind, declaration = declaration_info(directory)
             frontmatter = parse_frontmatter(directory / declaration) if declaration else None
             report = validate(directory, set(names), contract_mode)
             if report.health == "quarantined" or not frontmatter:
                 raise ValueError(f"invalid declaration for {name}")
-            entry = _entry_from_frontmatter(name, frontmatter, head_sha(repo))
+            entry = _entry_from_frontmatter(name, frontmatter, clone_sha, contract_mode)
             entry["health"] = report.health
             entries.append(entry)
-    return sorted(entries, key=lambda entry: entry["name"]), [{"name": name, "url": f"https://github.com/{ORG}/{name}"} for name in RESOURCE_NAMES]
+    return sorted(entries, key=lambda entry: entry["name"]), [resources_by_name[name] for name in RESOURCE_NAMES]
 
 
 def _stable_snapshot(snapshot: dict) -> dict:

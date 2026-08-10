@@ -32,6 +32,24 @@ class AtomicGenerationTests(unittest.TestCase):
             self.assertEqual(first.read_bytes(), b"old-first")
             self.assertFalse(second.exists())
 
+    def test_production_collection_uses_clone_head_not_remote_head(self):
+        with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
+            temp = Path(tmp)
+            original_clone, original_head, original_validate = build_registry.shallow_clone, build_registry.head_sha, build_registry.validate
+            def fake_clone(name, destination):
+                destination.mkdir()
+                (destination / "SKILL.md").write_text("---\ndescription: local\nquantSkills:\n  project_type: skill\n  catalog: {category: '02', subcategory: '02.factor-evaluation'}\n  workflow: {primary_stage: evaluation, workflow_stages: [evaluation]}\n  interface: {mode: not-applicable}\n---\n", encoding="utf-8")
+                return "local-clone-sha"
+            build_registry.shallow_clone = fake_clone
+            build_registry.head_sha = lambda repo: self.fail("remote HEAD must not be read after clone")
+            build_registry.validate = lambda *args: type("Report", (), {"health": "healthy"})()
+            repos = [{"name": "skill-alpha"}, {"name": ".github"}, {"name": "join"}, {"name": "quantskills"}, {"name": "registry"}]
+            try:
+                entries, _ = build_registry.collect_entries(repos, {}, "enforce")
+            finally:
+                build_registry.shallow_clone, build_registry.head_sha, build_registry.validate = original_clone, original_head, original_validate
+            self.assertEqual(entries[0]["commit_sha"], "local-clone-sha")
+
 
 if __name__ == "__main__":
     unittest.main()
