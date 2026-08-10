@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -52,6 +53,20 @@ class InterfaceCatalogSnapshotTests(unittest.TestCase):
         snapshot = build_snapshot(incomplete, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
         self.assertTrue(snapshot["interface_diagnostics"] == [])
         self.assertNotIn(("skill-factor-mining-pandaai", "skill-factor-grouped-wrapper"), [(edge["producer"], edge["consumer"]) for edge in snapshot["compatibility_edges"]])
+
+    def test_enforce_binds_only_the_complete_declared_chain(self):
+        snapshot = build_snapshot(self.chain(), self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings, contract_mode="enforce")
+        self.assertEqual(len(snapshot["core_lineage"]["artifacts"]), 7)
+        incomplete = self.chain(); incomplete.pop()
+        with self.assertRaisesRegex(ValueError, "approved closed core chain"):
+            build_snapshot(incomplete, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings, contract_mode="enforce")
+
+    def test_snapshot_schema_rejects_shallow_taxonomy_asset_and_interface_mutations(self):
+        snapshot = build_snapshot(self.chain(), self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
+        schema = json.loads((ROOT / "schema/catalog-snapshot.schema.json").read_text(encoding="utf-8"))
+        for mutate in (lambda value: value["taxonomy"].update(extra=True), lambda value: value["assets"][0].update(extra=True), lambda value: value["assets"][0]["catalog"].update(extra=True), lambda value: value["assets"][0]["interface"].update(extra=True)):
+            value = copy.deepcopy(snapshot); mutate(value)
+            self.assertTrue(list(Draft202012Validator(schema).iter_errors(value)))
 
     def test_catalog_loader_rejects_malicious_local_catalogs_value_free(self):
         def rejected(relative, mutate):

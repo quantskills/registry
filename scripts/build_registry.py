@@ -171,9 +171,9 @@ _ENFORCE_ASSETS = {
     "skill-portfolio-optimize", "skill-backtest", "skill-ssquant-ai-trader",
 }
 _ENFORCE_EDGES = {
-    ("skill-pandadata-warehouse", "skill-factor-mining-pandaai", "market-bar", "factor-panel"),
-    ("skill-factor-mining-pandaai", "skill-factor-grouped-wrapper", "factor-panel", "ranked-factor-set"),
-    ("skill-factor-grouped-wrapper", "skill-portfolio-optimize", "ranked-factor-set", "portfolio-target"),
+    ("skill-pandadata-warehouse", "skill-factor-mining-pandaai", "market-bar", "market-bar"),
+    ("skill-factor-mining-pandaai", "skill-factor-grouped-wrapper", "factor-panel", "factor-panel"),
+    ("skill-factor-grouped-wrapper", "skill-portfolio-optimize", "ranked-factor-set", "ranked-factor-set"),
     ("skill-portfolio-optimize", "skill-backtest", "portfolio-target", "portfolio-target"),
     ("skill-backtest", "skill-ssquant-ai-trader", "evaluation-result", "evaluation-result"),
 }
@@ -239,9 +239,10 @@ def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, p
         if not mapping or not outputs or mapping["target"]["profile"] != {"id": outputs[0].get("profile"), "version": outputs[0].get("version")}:
             raise ValueError("invalid declaration lineage mapping")
     edges = build_compatibility_edges(valid_entries, adapters["items"])
+    actual_edges = {(edge["producer"], edge["consumer"], edge["output"]["profile"], edge["input"]["profile"]) for edge in edges}
+    closed_chain = not diagnostics and set(names) == _ENFORCE_ASSETS and actual_edges == _ENFORCE_EDGES
     if contract_mode == "enforce":
-        actual_edges = {(edge["producer"], edge["consumer"], edge["output"]["profile"], edge["input"]["profile"]) for edge in edges}
-        if diagnostics or set(names) != _ENFORCE_ASSETS or actual_edges != _ENFORCE_EDGES:
+        if not closed_chain:
             raise ValueError("enforce requires the approved closed core chain")
     snapshot = {
         "schema_version": "1.0.0", "taxonomy_version": taxonomy.get("schema_version"), "contract_mode": contract_mode,
@@ -251,7 +252,7 @@ def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, p
         "profiles": {"version": profiles["version"], "items": sorted(profiles["items"], key=canonical_json)},
         "adapters": {"version": adapters["version"], "items": sorted(adapters["items"], key=canonical_json)},
         "provider_mappings": {"version": provider_mappings["version"], "items": sorted(provider_mappings["items"], key=canonical_json)},
-        "core_lineage": canonical_lineage, "interface_diagnostics": sorted(diagnostics, key=canonical_json),
+        "core_lineage": canonical_lineage if closed_chain else {"version": "1.0.0", "artifacts": []}, "interface_diagnostics": sorted(diagnostics, key=canonical_json),
         "compatibility_edges": edges,
     }
     snapshot["snapshot_id"] = "sha256:" + hashlib.sha256(canonical_json(_stable_snapshot(snapshot))).hexdigest()
@@ -331,7 +332,7 @@ def main() -> None:
     previous = {row["name"]: row for row in json.loads(previous_path.read_text(encoding="utf-8"))} if previous_path.exists() else {}
     entries, resources = collect_entries(list_asset_repos(), previous, args.contract_mode, validation_date=dt.date.today().isoformat())
     envelope, profiles, adapters, mappings = load_contract_catalogs()
-    snapshot = build_snapshot(entries, resources, load_taxonomy(ROOT), profiles, adapters, envelope, mappings)
+    snapshot = build_snapshot(entries, resources, load_taxonomy(ROOT), profiles, adapters, envelope, mappings, contract_mode=args.contract_mode)
     promote_artifacts(render_artifacts(snapshot))
     print(f"published snapshot {snapshot['snapshot_id']} ({len(entries)} assets)")
 

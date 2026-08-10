@@ -1,32 +1,1074 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "quantskills closed catalog snapshot",
-  "type": "object", "additionalProperties": false,
-  "required": ["schema_version", "taxonomy_version", "snapshot_id", "contract_mode", "interface_diagnostics", "taxonomy", "assets", "resources", "envelope", "profiles", "adapters", "provider_mappings", "core_lineage", "compatibility_edges"],
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "taxonomy_version",
+    "snapshot_id",
+    "contract_mode",
+    "interface_diagnostics",
+    "taxonomy",
+    "assets",
+    "resources",
+    "envelope",
+    "profiles",
+    "adapters",
+    "provider_mappings",
+    "core_lineage",
+    "compatibility_edges"
+  ],
   "properties": {
-    "schema_version": {"const": "1.0.0"}, "taxonomy_version": {"type": "string"},
-    "snapshot_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}, "contract_mode": {"enum": ["audit", "enforce"]},
-    "interface_diagnostics": {"type": "array", "items": {"$ref": "#/$defs/diagnostic"}},
-    "taxonomy": {"type": "object", "required": ["schema_version", "categories", "workflow_stages"], "properties": {"schema_version": {"type": "string"}, "categories": {"type": "object"}, "workflow_stages": {"type": "array"}}},
-    "assets": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/asset"}},
-    "resources": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/resource"}},
-    "envelope": {"$ref": "#/$defs/envelopeCatalog"}, "profiles": {"$ref": "#/$defs/profileCatalog"}, "adapters": {"$ref": "#/$defs/adapterCatalog"}, "provider_mappings": {"$ref": "#/$defs/mappingCatalog"},
-    "core_lineage": {"$ref": "#/$defs/coreLineage"}, "compatibility_edges": {"type": "array", "items": {"$ref": "#/$defs/edge"}}
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "taxonomy_version": {
+      "type": "string"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "contract_mode": {
+      "enum": [
+        "audit",
+        "enforce"
+      ]
+    },
+    "interface_diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/diagnostic"
+      }
+    },
+    "taxonomy": {
+      "$ref": "#/$defs/taxonomy"
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    },
+    "resources": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/resource"
+      }
+    },
+    "envelope": {
+      "$ref": "#/$defs/envelopeCatalog"
+    },
+    "profiles": {
+      "$ref": "#/$defs/profileCatalog"
+    },
+    "adapters": {
+      "$ref": "#/$defs/adapterCatalog"
+    },
+    "provider_mappings": {
+      "$ref": "#/$defs/mappingCatalog"
+    },
+    "core_lineage": {
+      "$ref": "#/$defs/coreLineage"
+    },
+    "compatibility_edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    }
   },
   "$defs": {
-    "sha": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
-    "diagnostic": {"type": "object", "additionalProperties": false, "required": ["code", "path"], "properties": {"code": {"type": "string", "pattern": "^[a-z0-9-]+$"}, "path": {"type": "string", "pattern": "^\\$"}}},
-    "resource": {"type": "object", "additionalProperties": false, "required": ["name", "url"], "properties": {"name": {"type": "string", "minLength": 1}, "url": {"type": "string", "format": "uri"}}},
-    "asset": {"type": "object", "required": ["name", "url", "project_type", "catalog", "workflow", "interface", "last_validated"], "properties": {"name": {"type": "string", "minLength": 1}, "url": {"type": "string", "format": "uri"}, "project_type": {"enum": ["skill", "agent"]}, "catalog": {"type": "object", "required": ["category", "subcategory"]}, "workflow": {"type": "object", "required": ["primary_stage", "workflow_stages"]}, "interface": {"type": "object", "required": ["mode"]}, "last_validated": {"type": "string", "format": "date"}}},
-    "envelopeCatalog": {"type": "object", "additionalProperties": false, "required": ["version", "name", "items"], "properties": {"version": {"const": "1.0.0"}, "name": {"const": "quantskills-envelope"}, "items": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["version", "schema"], "properties": {"version": {"const": "1.0.0"}, "schema": {"const": "1.0.0.schema.json"}}}}}},
-    "profileCatalog": {"type": "object", "additionalProperties": false, "required": ["version", "items"], "properties": {"version": {"const": "1.0.0"}, "items": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["id", "version", "schema", "kind", "primary_key", "time_semantics"], "properties": {"id": {"type": "string"}, "version": {"const": "1.0.0"}, "schema": {"type": "string"}, "kind": {"enum": ["base", "result"]}, "primary_key": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "time_semantics": {"type": "string"}}}}}},
-    "adapterCatalog": {"type": "object", "additionalProperties": false, "required": ["version", "items"], "properties": {"version": {"const": "1.0.0"}, "items": {"type": "array", "items": {"$ref": "#/$defs/adapter"}}}},
-    "adapter": {"type": "object", "additionalProperties": false, "required": ["id", "source", "target", "implementation", "lossless", "validation_status", "evidence", "envelope_major"], "properties": {"id": {"type": "string"}, "source": {"$ref": "#/$defs/profileRef"}, "target": {"$ref": "#/$defs/profileRef"}, "implementation": {"type": "object", "additionalProperties": false, "required": ["repository", "path"], "properties": {"repository": {"type": "string"}, "path": {"type": "string"}}}, "lossless": {"const": true}, "validation_status": {"const": "validated"}, "evidence": {"type": "object", "additionalProperties": false, "required": ["fixture_sha256", "test_command", "validated_at"], "properties": {"fixture_sha256": {"$ref": "#/$defs/sha"}, "test_command": {"type": "string"}, "validated_at": {"type": "string", "format": "date"}}}, "envelope_major": {"const": 1}}},
-    "profileRef": {"type": "object", "additionalProperties": false, "required": ["profile", "version"], "properties": {"profile": {"type": "string"}, "version": {"const": "1.0.0"}}},
-    "mappingCatalog": {"type": "object", "additionalProperties": false, "required": ["version", "items"], "properties": {"version": {"const": "1.0.0"}, "items": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/mapping"}}}},
-    "mapping": {"type": "object", "additionalProperties": false, "required": ["id", "source", "target", "implementation", "lossless", "validation_status", "evidence", "fields", "native_fields_retained", "policies", "units"], "properties": {"id": {"type": "string"}, "source": {"type": "object", "additionalProperties": false, "required": ["provider", "dataset", "representation"], "properties": {"provider": {"type": "string"}, "dataset": {"type": "string"}, "representation": {"type": "string"}}}, "target": {"type": "object", "additionalProperties": false, "required": ["envelope", "profile"], "properties": {"envelope": {"type": "object", "additionalProperties": false, "required": ["name", "version"], "properties": {"name": {"const": "quantskills-envelope"}, "version": {"const": "1.0.0"}}}, "profile": {"type": "object", "additionalProperties": false, "required": ["id", "version"], "properties": {"id": {"type": "string"}, "version": {"const": "1.0.0"}}}}}, "implementation": {"type": "object", "additionalProperties": false, "required": ["module", "callable"], "properties": {"module": {"type": "string"}, "callable": {"type": "string"}}}, "lossless": {"const": true}, "validation_status": {"const": "validated"}, "evidence": {"type": "object", "additionalProperties": false, "required": ["fixture", "raw_sha256"], "properties": {"fixture": {"type": "string"}, "raw_sha256": {"$ref": "#/$defs/sha"}}}, "fields": {"type": "object", "additionalProperties": {"type": "string"}}, "native_fields_retained": {"type": "array", "items": {"type": "string"}}, "policies": {"type": "object", "additionalProperties": {"type": "string"}}, "units": {"type": "object", "additionalProperties": {"type": "string"}}}},
-    "coreLineage": {"type": "object", "additionalProperties": false, "required": ["version", "artifacts"], "properties": {"version": {"const": "1.0.0"}, "artifacts": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"$ref": "#/$defs/lineageItem"}}}},
-    "lineageItem": {"type": "object", "additionalProperties": false, "required": ["id", "file", "artifact_sha256", "producer", "profile", "version", "inputs"], "properties": {"id": {"type": "string"}, "file": {"type": "string", "pattern": "^0[1-7]-[a-z-]+\\.json$"}, "artifact_sha256": {"$ref": "#/$defs/sha"}, "producer": {"type": "string"}, "profile": {"type": "string"}, "version": {"const": "1.0.0"}, "inputs": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "artifact_sha256"], "properties": {"id": {"type": "string"}, "artifact_sha256": {"$ref": "#/$defs/sha"}}}}, "source_mapping_id": {"type": "string"}, "provenance": {"type": "object", "additionalProperties": false, "required": ["provider", "dataset", "raw_sha256"], "properties": {"provider": {"type": "string"}, "dataset": {"type": "string"}, "raw_sha256": {"$ref": "#/$defs/sha"}}}}, "allOf": [{"if": {"properties": {"id": {"const": "market-bar"}}}, "then": {"required": ["source_mapping_id", "provenance"]}, "else": {"not": {"anyOf": [{"required": ["source_mapping_id"]}, {"required": ["provenance"]}]}}}]},
-    "edge": {"type": "object", "additionalProperties": false, "required": ["producer", "consumer", "output", "input", "status", "adapter_path"], "properties": {"producer": {"type": "string"}, "consumer": {"type": "string"}, "output": {"$ref": "#/$defs/profileRef"}, "input": {"type": "object", "additionalProperties": false, "required": ["profile", "version_range", "required"], "properties": {"profile": {"type": "string"}, "version_range": {"type": "string"}, "required": {"type": "boolean"}}}, "status": {"enum": ["compatible", "adapter-required"]}, "adapter_path": {"type": "array", "items": {"type": "string"}}}}
+    "sha": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "path"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^\\$"
+        }
+      }
+    },
+    "resource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "url"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "url",
+        "description",
+        "project_type",
+        "declaration_file",
+        "catalog",
+        "workflow",
+        "interface",
+        "category",
+        "subcategory",
+        "stage",
+        "tags",
+        "platforms",
+        "status",
+        "requires",
+        "summary_zh",
+        "summary_en",
+        "license",
+        "validation_level",
+        "maintainer_type",
+        "last_validated",
+        "commit_sha"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "description": {
+          "type": "string"
+        },
+        "project_type": {
+          "enum": [
+            "skill",
+            "agent"
+          ]
+        },
+        "declaration_file": {
+          "enum": [
+            "SKILL.md",
+            "AGENTS.md"
+          ]
+        },
+        "catalog": {
+          "$ref": "#/$defs/catalog"
+        },
+        "workflow": {
+          "$ref": "#/$defs/workflow"
+        },
+        "interface": {
+          "$ref": "#/$defs/interface"
+        },
+        "category": {
+          "type": "string"
+        },
+        "subcategory": {
+          "type": "string"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summary_zh": {
+          "type": "string"
+        },
+        "summary_en": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "validation_level": {
+          "type": "string"
+        },
+        "maintainer_type": {
+          "type": "string"
+        },
+        "last_validated": {
+          "type": "string",
+          "format": "date"
+        },
+        "commit_sha": {
+          "type": "string"
+        },
+        "migration_state": {
+          "const": "pending-v2"
+        },
+        "migration_issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "code",
+              "path"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "health": {
+          "type": "string"
+        },
+        "workflow_groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lineage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_mapping_id"
+          ],
+          "properties": {
+            "source_mapping_id": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "envelopeCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "name",
+        "items"
+      ],
+      "properties": {
+        "version": {
+          "const": "1.0.0"
+        },
+        "name": {
+          "const": "quantskills-envelope"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "version",
+              "schema"
+            ],
+            "properties": {
+              "version": {
+                "const": "1.0.0"
+              },
+              "schema": {
+                "const": "1.0.0.schema.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "profileCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "items"
+      ],
+      "properties": {
+        "version": {
+          "const": "1.0.0"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "version",
+              "schema",
+              "kind",
+              "primary_key",
+              "time_semantics"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "version": {
+                "const": "1.0.0"
+              },
+              "schema": {
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "base",
+                  "result"
+                ]
+              },
+              "primary_key": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "time_semantics": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "adapterCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "items"
+      ],
+      "properties": {
+        "version": {
+          "const": "1.0.0"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/adapter"
+          }
+        }
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source",
+        "target",
+        "implementation",
+        "lossless",
+        "validation_status",
+        "evidence",
+        "envelope_major"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/profileRef"
+        },
+        "target": {
+          "$ref": "#/$defs/profileRef"
+        },
+        "implementation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "path"
+          ],
+          "properties": {
+            "repository": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            }
+          }
+        },
+        "lossless": {
+          "const": true
+        },
+        "validation_status": {
+          "const": "validated"
+        },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fixture_sha256",
+            "test_command",
+            "validated_at"
+          ],
+          "properties": {
+            "fixture_sha256": {
+              "$ref": "#/$defs/sha"
+            },
+            "test_command": {
+              "type": "string"
+            },
+            "validated_at": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "envelope_major": {
+          "const": 1
+        }
+      }
+    },
+    "profileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "version"
+      ],
+      "properties": {
+        "profile": {
+          "type": "string"
+        },
+        "version": {
+          "const": "1.0.0"
+        }
+      }
+    },
+    "mappingCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "items"
+      ],
+      "properties": {
+        "version": {
+          "const": "1.0.0"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/mapping"
+          }
+        }
+      }
+    },
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source",
+        "target",
+        "implementation",
+        "lossless",
+        "validation_status",
+        "evidence",
+        "fields",
+        "native_fields_retained",
+        "policies",
+        "units"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider",
+            "dataset",
+            "representation"
+          ],
+          "properties": {
+            "provider": {
+              "type": "string"
+            },
+            "dataset": {
+              "type": "string"
+            },
+            "representation": {
+              "type": "string"
+            }
+          }
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "envelope",
+            "profile"
+          ],
+          "properties": {
+            "envelope": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "version"
+              ],
+              "properties": {
+                "name": {
+                  "const": "quantskills-envelope"
+                },
+                "version": {
+                  "const": "1.0.0"
+                }
+              }
+            },
+            "profile": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "version"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "version": {
+                  "const": "1.0.0"
+                }
+              }
+            }
+          }
+        },
+        "implementation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "module",
+            "callable"
+          ],
+          "properties": {
+            "module": {
+              "type": "string"
+            },
+            "callable": {
+              "type": "string"
+            }
+          }
+        },
+        "lossless": {
+          "const": true
+        },
+        "validation_status": {
+          "const": "validated"
+        },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fixture",
+            "raw_sha256"
+          ],
+          "properties": {
+            "fixture": {
+              "type": "string"
+            },
+            "raw_sha256": {
+              "$ref": "#/$defs/sha"
+            }
+          }
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "native_fields_retained": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "policies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "units": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "coreLineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "artifacts"
+      ],
+      "properties": {
+        "version": {
+          "const": "1.0.0"
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 7,
+          "items": {
+            "$ref": "#/$defs/lineageItem"
+          }
+        }
+      }
+    },
+    "lineageItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "file",
+        "artifact_sha256",
+        "producer",
+        "profile",
+        "version",
+        "inputs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string",
+          "pattern": "^0[1-7]-[a-z-]+\\.json$"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "producer": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "string"
+        },
+        "version": {
+          "const": "1.0.0"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "artifact_sha256"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "artifact_sha256": {
+                "$ref": "#/$defs/sha"
+              }
+            }
+          }
+        },
+        "source_mapping_id": {
+          "type": "string"
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider",
+            "dataset",
+            "raw_sha256"
+          ],
+          "properties": {
+            "provider": {
+              "type": "string"
+            },
+            "dataset": {
+              "type": "string"
+            },
+            "raw_sha256": {
+              "$ref": "#/$defs/sha"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "market-bar"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "source_mapping_id",
+              "provenance"
+            ]
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "source_mapping_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "provenance"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "producer",
+        "consumer",
+        "output",
+        "input",
+        "status",
+        "adapter_path"
+      ],
+      "properties": {
+        "producer": {
+          "type": "string"
+        },
+        "consumer": {
+          "type": "string"
+        },
+        "output": {
+          "$ref": "#/$defs/profileRef"
+        },
+        "input": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profile",
+            "version_range",
+            "required"
+          ],
+          "properties": {
+            "profile": {
+              "type": "string"
+            },
+            "version_range": {
+              "type": "string"
+            },
+            "required": {
+              "type": "boolean"
+            }
+          }
+        },
+        "status": {
+          "enum": [
+            "compatible",
+            "adapter-required"
+          ]
+        },
+        "adapter_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "taxonomyCategory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label_zh",
+        "label_en",
+        "subcategories"
+      ],
+      "properties": {
+        "label_zh": {
+          "type": "string"
+        },
+        "label_en": {
+          "type": "string"
+        },
+        "subcategories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "label_zh",
+              "label_en"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "label_zh": {
+                "type": "string"
+              },
+              "label_en": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "taxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "categories",
+        "workflow_stages"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "categories": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^(0[1-9]|10)$": {
+              "$ref": "#/$defs/taxonomyCategory"
+            }
+          },
+          "minProperties": 1
+        },
+        "workflow_stages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "workflow_groups": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "subcategory"
+      ],
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "subcategory": {
+          "type": "string"
+        }
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_stage",
+        "workflow_stages"
+      ],
+      "properties": {
+        "primary_stage": {
+          "type": "string"
+        },
+        "workflow_stages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "endpointInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "version_range",
+        "required"
+      ],
+      "properties": {
+        "profile": {
+          "type": "string"
+        },
+        "version_range": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "endpointOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "version"
+      ],
+      "properties": {
+        "profile": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "interface": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "envelope",
+            "inputs",
+            "outputs",
+            "adapters"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "structured",
+                "hybrid"
+              ]
+            },
+            "envelope": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "version"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            },
+            "inputs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/endpointInput"
+              }
+            },
+            "outputs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/endpointOutput"
+              }
+            },
+            "adapters": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode"
+          ],
+          "properties": {
+            "mode": {
+              "const": "natural-language"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "reason"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "not-applicable",
+                "unknown"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
   }
 }

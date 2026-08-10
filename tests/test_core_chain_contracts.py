@@ -24,6 +24,7 @@ class CoreChainContractsTests(unittest.TestCase):
         known = {}
         for index, item in enumerate(lineage):
             raw = (root / item["file"]).read_bytes()
+            self.assertEqual(raw, (ROOT / "schema/core-lineage/1.0.0" / item["file"]).read_bytes())
             document = json.loads(raw)
             self.assertEqual("sha256:" + hashlib.sha256(raw).hexdigest(), item["artifact_sha256"])
             self.assertEqual(validate_contract(document, ROOT)["status"], "valid")
@@ -41,6 +42,7 @@ class CoreChainContractsTests(unittest.TestCase):
         self.assertEqual(lineage[0]["provenance"]["raw_sha256"], "sha256:4522f0923640a466e91ec61e1e7a988b384511e82637f6b54cd6febae154087f")
         execution = json.loads((root / "07-execution-plan.json").read_text(encoding="utf-8"))
         self.assertFalse(execution["payload"]["records"][0]["live_submission_allowed"])
+        self.assertEqual((root / "lineage.json").read_bytes(), (ROOT / "schema/core-lineage/1.0.0/lineage.json").read_bytes())
 
 
 if __name__ == "__main__":
