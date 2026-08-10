@@ -3,6 +3,7 @@
   "$id": "https://quantskills.github.io/registry/schema/envelope/1.0.0.schema.json",
   "title": "quantskills-envelope 1.0.0",
   "type": "object",
+  "additionalProperties": false,
   "required": ["$contract", "meta", "schema", "payload", "quality"],
   "properties": {
     "$contract": {"type": "object", "additionalProperties": false, "required": ["name", "version"], "properties": {"name": {"const": "quantskills-envelope"}, "version": {"const": "1.0.0"}}},
