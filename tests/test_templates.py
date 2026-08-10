@@ -104,6 +104,7 @@ class CanonicalTemplateTests(unittest.TestCase):
         registry = yaml.safe_load((ROOT / ".github" / "workflows" / "validate-registry.yml").read_text(encoding="utf-8"))
         steps = registry["jobs"]["validate"]["steps"]
         checkouts = [step for step in steps if step.get("uses") == "actions/checkout@v4"]
+        self.assertEqual(checkouts[0]["with"]["fetch-depth"], 0)
         self.assertEqual(checkouts[1]["with"]["path"], ".contract/skill-template")
         self.assertEqual(checkouts[2]["with"]["path"], ".contract/agent-template")
         test_step = next(step for step in steps if step.get("name") == "Run Python tests")
@@ -137,6 +138,8 @@ class CanonicalTemplateTests(unittest.TestCase):
 
     def test_legacy_base_runner_enforces_v2_facts_and_known_warning_allowlist(self):
         base = "2e766e820250705a65d40e08c8bea9beb187134b"
+        availability = subprocess.run(["git", "-C", str(ROOT), "cat-file", "-e", f"{base}^{{commit}}"], text=True, capture_output=True, check=False)
+        self.assertEqual(availability.returncode, 0, "CI checkout must retain the exact legacy Registry base for compatibility tests")
         archive = subprocess.run(["git", "-C", str(ROOT), "archive", "--format=zip", base], capture_output=True, check=True)
         layout = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, layout)
