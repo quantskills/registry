@@ -40,7 +40,7 @@ flowchart LR
     B --> C["📥 只读浅克隆<br/>QS_READ_TOKEN（仅 Metadata/Contents 读）"]
     C --> D["🩺 validate_skill.py<br/>8 项确定性健康检查"]
     D --> E{"健康分级"}
-    E -->|"healthy / warning"| F["📦 生成 4 个公开产物<br/>registry.json · INDEX.md<br/>llms.txt · marketplace.json"]
+    E -->|"healthy / warning"| F["📦 生成目录产物<br/>catalog.snapshot.json · registry.json<br/>INDEX.md · llms.txt · marketplace.json"]
     E -->|"quarantined"| G["🚧 过滤出公开层<br/>细节仅留维护者本地审计"]
     F --> H["🌐 quantskills.ai · LLM agents<br/>Claude Code 插件市场 · 用户"]
 
@@ -54,16 +54,17 @@ flowchart LR
 
 ---
 
-## 📦 四个公开产物
+## 📦 目录产物
 
 | 文件 | 给谁用 | 稳定 URL |
 |---|---|---|
 | [`registry.json`](registry.json) | 网站、工具、自动化系统 | `https://raw.githubusercontent.com/quantskills/registry/main/registry.json` |
+| [`catalog.snapshot.json`](catalog.snapshot.json) | 完整目录契约 | `https://raw.githubusercontent.com/quantskills/registry/main/catalog.snapshot.json` |
 | [`INDEX.md`](INDEX.md) | 人类，按 类型/分类 分组浏览 | 本仓库直接看 |
 | [`llms.txt`](llms.txt) | LLM / AI agent 发现 | 部署为 `https://quantskills.ai/llms.txt` |
 | [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | Claude Code 插件市场 | `/plugin marketplace add quantskills/registry` |
 
-四个文件全部由 `build_registry.py` 自动生成，**请勿手工编辑**。公开 `registry.json` 刻意不包含 `health_items`、内部扫描失败详情或本地审计备注。
+这些生成产物由 `build_registry.py` 管理，**请勿手工编辑**。`catalog.snapshot.json` 是完整目录，`registry.json` 是向后兼容的数组投影。修改声明前请阅读双语[目录契约（中文）](docs/CATALOG_CONTRACT_zh.md)与[Catalog Contract (English)](docs/CATALOG_CONTRACT_en.md)。
 
 ---
 
@@ -92,13 +93,13 @@ flowchart LR
 - 元数据写在声明文件的 `quantSkills` frontmatter 中，完整 JSON Schema 见 [`schema/frontmatter.schema.json`](schema/frontmatter.schema.json)；
 - 公开注册表条目结构见 [`schema/registry.schema.json`](schema/registry.schema.json)。
 
-**`quantSkills` 必填字段**：
+**`quantSkills` 必填字段**遵循 Catalog Contract v2（`schema_version: 2.0.0`）：
 
 | 字段 | 约束 |
 |---|---|
-| `category` | 14 个枚举：skill 类 `trader-research` `factor` `data-api` `replication` `monitor` `analyst` `tooling`；agent 类 `research-agent` `monitor-agent` `risk-agent` `workflow-agent` `review-agent` `data-agent` `automation-agent` |
+| `catalog` / `workflow` | 一个分类/子分类及有效的主阶段/工作流阶段；见[目录契约](docs/CATALOG_CONTRACT_zh.md) |
 | `tags` | 1–10 个，kebab-case |
-| `platforms` | `claude-code` `codex` `openclaw` `cursor` `workbuddy` |
+| `platforms` | `cursor` `claude-code` `codex` `hermes` `openclaw` |
 | `status` | `draft` / `active` / `stable` / `deprecated` |
 | `validation_level` | 见下方三级验证体系 |
 | `maintainer_type` | `official` / `community` |
@@ -192,6 +193,12 @@ registry/
 本项目采用 GNU General Public License v3.0（`GPL-3.0`）发布，完整文本见 [`LICENSE`](LICENSE)。
 
 ## 🐼 PandaAI / QUANTSKILLS 社群
+
+## Catalog Contract v2
+
+当前目录契约使用 `schema_version: 2.0.0`：10 个一级分类、61 个二级分类、14 个阶段，以及五个工作流展示组。`catalog.snapshot.json` 是完整目录，`registry.json` 是向后兼容的数组投影；两者均由构建器生成，禁止手工编辑。旧的 14 类枚举说明已不再是当前契约。
+
+声明、迁移和发布规则请阅读双语[目录契约（中文）](docs/CATALOG_CONTRACT_zh.md)与[Catalog Contract (English)](docs/CATALOG_CONTRACT_en.md)。
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/quantskills/.github/main/profile/assets/pandaai-community-qr.jpg" alt="PandaAI 社群二维码" width="220">
