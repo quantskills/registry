@@ -4,6 +4,8 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import zipfile
+from io import BytesIO
 from pathlib import Path
 
 import yaml
@@ -91,10 +93,9 @@ class CanonicalTemplateTests(unittest.TestCase):
                 self.assertIn(f"{repo.name} --contract-mode enforce", commands)
                 self.assertIn("--help", commands)
                 self.assertIn("else", commands)
-                self.assertIn("--json", commands)
-                self.assertIn("len(items) == 2", commands)
-                self.assertIn('"category"', commands)
-                self.assertIn('"hermes"', commands)
+                self.assertIn("requirements-dev.txt", commands)
+                self.assertIn("PyYAML", commands)
+                self.assertIn("validate-registry-compat.py", commands)
                 self.assertNotIn("validate_skill.py .", commands)
                 self.assertNotIn(f"{repo.name}/contract-registry", commands)
                 if repo == self.skill:
@@ -133,6 +134,41 @@ class CanonicalTemplateTests(unittest.TestCase):
         recursive = subprocess.run([sys.executable, str(script), ".", "--contract-mode", "enforce"], cwd=nested, text=True, capture_output=True, check=False)
         self.assertNotEqual(recursive.returncode, 0)
         self.assertIn("secrets", recursive.stdout)
+
+    def test_legacy_base_runner_enforces_v2_facts_and_known_warning_allowlist(self):
+        base = "2e766e820250705a65d40e08c8bea9beb187134b"
+        archive = subprocess.run(["git", "-C", str(ROOT), "archive", "--format=zip", base], capture_output=True, check=True)
+        layout = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, layout)
+        legacy = layout / "contract-registry"
+        with zipfile.ZipFile(BytesIO(archive.stdout)) as source:
+            source.extractall(legacy)
+        self.assertFalse((legacy / "requirements-dev.txt").exists())
+        validator = legacy / "scripts" / "validate_skill.py"
+
+        for source, declaration in ((self.skill, "SKILL.md"), (self.agent, "AGENTS.md")):
+            with self.subTest(repo=source.name):
+                target = layout / source.name
+                shutil.copytree(source, target)
+                runner = target / "scripts" / "validate-registry-compat.py"
+                legacy_result = subprocess.run([sys.executable, str(runner), str(validator), str(target)], text=True, capture_output=True, check=False)
+                self.assertEqual(legacy_result.returncode, 0, legacy_result.stdout + legacy_result.stderr)
+                current_result = subprocess.run([sys.executable, str(ROOT / "scripts" / "validate_skill.py"), str(target), "--contract-mode", "enforce"], text=True, capture_output=True, check=False)
+                self.assertEqual(current_result.returncode, 0, current_result.stdout + current_result.stderr)
+
+                frontmatter = self.frontmatter(target / declaration)
+                frontmatter["quantSkills"]["schema_version"] = "1.0.0"
+                (target / declaration).write_text("---\n" + yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False) + "---\n", encoding="utf-8")
+                mutated = subprocess.run([sys.executable, str(runner), str(validator), str(target)], text=True, capture_output=True, check=False)
+                self.assertNotEqual(mutated.returncode, 0)
+
+                shutil.rmtree(target)
+                shutil.copytree(source, target)
+                frontmatter = self.frontmatter(target / declaration)
+                frontmatter["description"] = "short"
+                (target / declaration).write_text("---\n" + yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False) + "---\n", encoding="utf-8")
+                warned = subprocess.run([sys.executable, str(runner), str(validator), str(target)], text=True, capture_output=True, check=False)
+                self.assertNotEqual(warned.returncode, 0)
 
 
 if __name__ == "__main__":
