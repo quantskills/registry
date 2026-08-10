@@ -261,6 +261,8 @@ class BaseProfileTests(unittest.TestCase):
                         )
 
         for untrusted in (
+            {"$contract": {"profile": []}, "payload": {"records": []}},
+            {"$contract": {"profile": {}}, "payload": {"records": []}},
             {"$contract": {"profile": "event-record"}, "payload": {"records": [None, [], "x"]}},
             {"$contract": {"profile": "market-bar"}, "payload": {"records": [{"timestamp": {"x": 1}}]}},
             {"$contract": {"profile": "option-chain"}, "payload": {"records": {"0": {}}}},

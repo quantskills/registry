@@ -77,6 +77,8 @@ def profile_semantic_issues(document: object) -> list[dict]:
     if not isinstance(contract, dict):
         return []
     profile = contract.get("profile")
+    if not isinstance(profile, str):
+        return []
     temporal_fields = _PROFILE_TEMPORAL_FIELDS.get(profile)
     if temporal_fields is None:
         return []
@@ -111,7 +113,7 @@ def profile_semantic_issues(document: object) -> list[dict]:
             fields = schema.get("fields") if isinstance(schema, dict) else None
             value_descriptor = fields.get("value") if isinstance(fields, dict) else None
             descriptor_unit = value_descriptor.get("unit") if isinstance(value_descriptor, dict) else None
-            if descriptor_unit in _MACRO_UNITS and record.get("unit") != descriptor_unit:
+            if isinstance(descriptor_unit, str) and descriptor_unit in _MACRO_UNITS and record.get("unit") != descriptor_unit:
                 issues.append(_issue("macro-series-unit", f"/payload/records/{index}/unit"))
             if descriptor_unit == "currency":
                 meta = document.get("meta")
