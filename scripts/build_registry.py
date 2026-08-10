@@ -94,23 +94,31 @@ def _normalize_audit_entry(entry: dict, name: str, issues: list[dict]) -> None:
     """Keep only independently schema-valid public facts in an audit migration row."""
     paths = {issue["path"] for issue in issues}
     qs_path = "$.quantSkills"
+    def rejected(field: str) -> bool:
+        prefix = f"{qs_path}.{field}"
+        return any(path == prefix or path.startswith(prefix + ".") or path.startswith(prefix + "[") for path in paths)
+
     entry["project_type"] = entry["project_type"] if entry["project_type"] in {"skill", "agent"} and f"{qs_path}.project_type" not in paths else ("agent" if name.startswith("agent-") else "skill")
     entry["declaration_file"] = "AGENTS.md" if entry["project_type"] == "agent" else "SKILL.md"
-    entry["description"] = entry["description"] if isinstance(entry["description"], str) else ""
-    entry["status"] = entry["status"] if entry["status"] in {"draft", "active", "stable", "deprecated"} and f"{qs_path}.status" not in paths else "draft"
-    entry["validation_level"] = entry["validation_level"] if entry["validation_level"] in {"listed", "runnable", "verified"} and f"{qs_path}.validation_level" not in paths else "listed"
-    entry["maintainer_type"] = entry["maintainer_type"] if entry["maintainer_type"] in {"official", "community"} and f"{qs_path}.maintainer_type" not in paths else "community"
-    entry["license"] = entry["license"] if isinstance(entry["license"], str) and entry["license"] and f"{qs_path}.license" not in paths else "GPL-3.0-only"
-    entry["tags"] = entry["tags"] if isinstance(entry["tags"], list) and all(isinstance(item, str) for item in entry["tags"]) else []
-    entry["requires"] = entry["requires"] if isinstance(entry["requires"], list) and all(isinstance(item, str) for item in entry["requires"]) else []
-    entry["platforms"] = entry["platforms"] if isinstance(entry["platforms"], list) and all(isinstance(item, str) for item in entry["platforms"]) else []
-    entry["summary_zh"] = entry["summary_zh"] if isinstance(entry["summary_zh"], str) and f"{qs_path}.summary_zh" not in paths else "unknown"
-    entry["summary_en"] = entry["summary_en"] if isinstance(entry["summary_en"], str) and f"{qs_path}.summary_en" not in paths else "unknown"
-    if any(path.startswith(f"{qs_path}.catalog") for path in paths) and name not in {"skill-template", "agent-template"}:
+    entry["description"] = entry["description"] if isinstance(entry["description"], str) and "$.description" not in paths else ""
+    entry["status"] = entry["status"] if entry["status"] in {"draft", "active", "stable", "deprecated"} and not rejected("status") else "draft"
+    entry["validation_level"] = entry["validation_level"] if entry["validation_level"] in {"listed", "runnable", "verified"} and not rejected("validation_level") else "listed"
+    entry["maintainer_type"] = entry["maintainer_type"] if entry["maintainer_type"] in {"official", "community"} and not rejected("maintainer_type") else "community"
+    entry["license"] = entry["license"] if isinstance(entry["license"], str) and entry["license"] and not rejected("license") else "GPL-3.0-only"
+    entry["tags"] = entry["tags"] if isinstance(entry["tags"], list) and all(isinstance(item, str) for item in entry["tags"]) and not rejected("tags") else []
+    entry["requires"] = entry["requires"] if isinstance(entry["requires"], list) and all(isinstance(item, str) for item in entry["requires"]) and not rejected("requires") else []
+    entry["platforms"] = entry["platforms"] if isinstance(entry["platforms"], list) and all(isinstance(item, str) for item in entry["platforms"]) and not rejected("platforms") else []
+    entry["summary_zh"] = entry["summary_zh"] if isinstance(entry["summary_zh"], str) and not rejected("summary_zh") else "unknown"
+    entry["summary_en"] = entry["summary_en"] if isinstance(entry["summary_en"], str) and not rejected("summary_en") else "unknown"
+    if rejected("catalog") and name not in {"skill-template", "agent-template"}:
         entry["catalog"] = {"category": "unknown", "subcategory": "unknown"}
-    if any(path.startswith(f"{qs_path}.workflow") for path in paths) and name not in {"skill-template", "agent-template"}:
+    if rejected("workflow") and name not in {"skill-template", "agent-template"}:
         entry["workflow"] = {"primary_stage": "unknown", "workflow_stages": []}
-    if any(path.startswith(f"{qs_path}.interface") for path in paths):
+    if rejected("catalog") and name in {"skill-template", "agent-template"}:
+        entry["catalog"] = {"category": "10", "subcategory": f"10.{name}"}
+    if rejected("workflow") and name in {"skill-template", "agent-template"}:
+        entry["workflow"] = {"primary_stage": "orchestration", "workflow_stages": ["orchestration"]}
+    if rejected("interface"):
         entry["interface"] = {"mode": "unknown", "reason": "pending-v2-migration"}
     entry["category"], entry["subcategory"] = entry["catalog"]["category"], entry["catalog"]["subcategory"]
     entry["stage"] = entry["workflow"]["primary_stage"]

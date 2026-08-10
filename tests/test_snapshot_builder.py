@@ -131,6 +131,32 @@ class SnapshotBuilderTests(unittest.TestCase):
                 self.assertTrue(entries[0]["migration_issues"])
                 with self.assertRaises(ValueError): collect_entries(repos, {}, "enforce", inventory=inventory)
 
+    def test_audit_path_rejection_normalizes_same_type_values_and_template_facts(self):
+        base = yaml.safe_load((ROOT / "tests" / "fixtures" / "declarations" / "valid-structured.yml").read_text(encoding="utf-8"))
+        base["name"] = "skill-alpha"; base["quantSkills"]["repository"] = "skill-alpha"; base["quantSkills"]["repository_url"] = "https://github.com/quantskills/skill-alpha"
+        cases = [
+            ("short-description", "short", lambda d: d.update(description="short")),
+            ("bogus-platform", "bogus-platform", lambda d: d["quantSkills"].update(platforms=["bogus-platform"])),
+            ("bogus_tag", "bogus_tag", lambda d: d["quantSkills"].update(tags=["bogus_tag"])),
+            ("bad-require", "bad-require", lambda d: d["quantSkills"].update(requires=["bad-require"])),
+        ]
+        inventory = {"assets": ["skill-alpha"], "resources": [".github", "join", "quantskills", "registry"]}
+        for token, forbidden, mutate in cases:
+            with self.subTest(token=token):
+                declaration = copy.deepcopy(base); mutate(declaration)
+                repos = [{"name": "skill-alpha", "frontmatter": declaration}, *self.repos[3:]]
+                entries, resources = collect_entries(repos, {}, "audit", inventory=inventory)
+                snapshot = build_snapshot(entries, resources, self.taxonomy, {"items": []}, {"items": []})
+                self.assertNotIn(forbidden, json.dumps(snapshot))
+                self.assertTrue(entries[0]["migration_issues"])
+                with self.assertRaises(ValueError): collect_entries(repos, {}, "enforce", inventory=inventory)
+        template = yaml.safe_load((ROOT / "tests" / "fixtures" / "declarations" / "valid-not-applicable.yml").read_text(encoding="utf-8"))
+        template["quantSkills"]["catalog"] = {"category": "bogus", "subcategory": "bogus"}; template["quantSkills"]["workflow"] = {"primary_stage": "bogus", "workflow_stages": ["bogus"]}
+        repos = [{"name": "agent-template", "frontmatter": template}, *self.repos[3:]]
+        entries, _ = collect_entries(repos, {}, "audit", inventory={"assets": ["agent-template"], "resources": [".github", "join", "quantskills", "registry"]})
+        self.assertEqual(entries[0]["catalog"], {"category": "10", "subcategory": "10.agent-template"})
+        self.assertEqual(entries[0]["workflow"]["primary_stage"], "orchestration")
+
     def test_builder_fixture_declarations_have_no_contract_issues(self):
         from catalog_contract import validate_asset_semantics, validate_frontmatter_schema
         schema = ROOT / "schema" / "frontmatter.schema.json"
