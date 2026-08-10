@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "quantskills catalog snapshot",
+  "type": "object",
+  "required": ["schema_version", "taxonomy_version", "snapshot_id", "taxonomy", "assets", "resources", "profiles", "adapters", "compatibility_edges"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"}, "taxonomy_version": {"type": "string"},
+    "snapshot_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "taxonomy": {"type": "object"},
+    "assets": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["name", "url", "catalog", "workflow", "interface"]}},
+    "resources": {"type": "array", "items": {"type": "object", "required": ["name", "url"]}},
+    "profiles": {"type": "object", "required": ["version", "items"]},
+    "adapters": {"type": "object", "required": ["version", "items"]},
+    "compatibility_edges": {"type": "array"}
+  }
+}

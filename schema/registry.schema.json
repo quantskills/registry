@@ -1,99 +1,24 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "quantskills registry",
+  "title": "quantskills public registry v2 projection",
   "type": "array",
   "items": {
     "type": "object",
-    "required": [
-      "name",
-      "url",
-      "project_type",
-      "declaration_file",
-      "category",
-      "tags",
-      "status",
-      "last_validated",
-      "validation_level",
-      "maintainer_type"
-    ],
+    "required": ["name", "url", "description", "project_type", "declaration_file", "category", "subcategory", "stage", "tags", "platforms", "status", "requires", "summary_zh", "summary_en", "license", "last_validated", "validation_level", "maintainer_type", "catalog", "workflow", "interface", "snapshot_id"],
     "properties": {
-      "name": {
-        "type": "string"
-      },
-      "url": {
-        "type": "string",
-        "format": "uri"
-      },
-      "description": {
-        "type": "string"
-      },
-      "project_type": {
-        "enum": [
-          "skill",
-          "agent"
-        ]
-      },
-      "declaration_file": {
-        "enum": [
-          "SKILL.md",
-          "AGENTS.md"
-        ]
-      },
-      "category": {
-        "type": "string"
-      },
-      "tags": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
-      "platforms": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
-      "status": {
-        "enum": [
-          "draft",
-          "active",
-          "stable",
-          "deprecated"
-        ]
-      },
-      "requires": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
-      "summary_zh": {
-        "type": "string"
-      },
-      "summary_en": {
-        "type": "string"
-      },
-      "license": {
-        "type": "string"
-      },
-      "last_validated": {
-        "type": "string",
-        "format": "date"
-      },
-      "validation_level": {
-        "enum": [
-          "listed",
-          "runnable",
-          "verified"
-        ]
-      },
-      "maintainer_type": {
-        "enum": [
-          "official",
-          "community"
-        ]
-      }
+      "name": {"type": "string", "minLength": 1},
+      "url": {"type": "string", "format": "uri"},
+      "project_type": {"enum": ["skill", "agent"]},
+      "declaration_file": {"enum": ["SKILL.md", "AGENTS.md"]},
+      "category": {"type": "string", "pattern": "^[0-9]{2}$"},
+      "subcategory": {"type": "string", "minLength": 1},
+      "stage": {"type": "string", "minLength": 1},
+      "catalog": {"type": "object", "required": ["category", "subcategory"]},
+      "workflow": {"type": "object", "required": ["primary_stage", "workflow_stages"]},
+      "interface": {"type": "object", "required": ["mode"]},
+      "summary_zh": {"type": "string"}, "summary_en": {"type": "string"},
+      "last_validated": {"type": "string"},
+      "snapshot_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
     }
   }
 }
