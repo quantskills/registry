@@ -7,10 +7,12 @@
     "schema_version": {"const": "1.0.0"}, "taxonomy_version": {"type": "string"},
     "snapshot_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
     "taxonomy": {"type": "object", "required": ["schema_version", "categories", "workflow_stages"]},
-    "assets": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["name", "url", "project_type", "catalog", "workflow", "interface", "last_validated"]}},
-    "resources": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "object", "required": ["name", "url"]}},
+    "assets": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["name", "url", "project_type", "catalog", "workflow", "interface", "last_validated"], "properties": {"name": {"type": "string", "minLength": 1}, "url": {"type": "string", "format": "uri"}, "project_type": {"enum": ["skill", "agent"]}, "catalog": {"type": "object", "required": ["category", "subcategory"]}, "workflow": {"type": "object", "required": ["primary_stage", "workflow_stages"]}, "interface": {"type": "object", "required": ["mode"]}, "last_validated": {"type": "string", "format": "date"}}}},
+    "resources": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "object", "additionalProperties": false, "required": ["name", "url"], "properties": {"name": {"type": "string", "minLength": 1}, "url": {"type": "string", "format": "uri"}}}},
+    "envelope": {"type": "object", "required": ["version", "name", "items"], "properties": {"version": {"type": "string"}, "name": {"type": "string"}, "items": {"type": "array"}}},
     "profiles": {"type": "object", "required": ["version", "items"], "properties": {"version": {"type": "string"}, "items": {"type": "array"}}},
     "adapters": {"type": "object", "required": ["version", "items"], "properties": {"version": {"type": "string"}, "items": {"type": "array"}}},
-    "compatibility_edges": {"type": "array"}
+    "provider_mappings": {"type": "object", "required": ["version", "items"], "properties": {"version": {"type": "string"}, "items": {"type": "array"}}},
+    "compatibility_edges": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["producer", "consumer", "output", "input", "status", "adapter_path"], "properties": {"producer": {"type": "string"}, "consumer": {"type": "string"}, "output": {"type": "object", "required": ["profile", "version"]}, "input": {"type": "object", "required": ["profile", "version_range", "required"]}, "status": {"enum": ["compatible", "adapter-required"]}, "adapter_path": {"type": "array", "items": {"type": "string"}}}}}
   }
 }
