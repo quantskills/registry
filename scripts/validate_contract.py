@@ -23,12 +23,22 @@ _VERSION = re.compile(r"^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)
 
 def load_profile_index(root: Path) -> dict:
     """Load the canonical profile index without applying any fallback policy."""
-    return _load_json_strict((Path(root) / "schema" / "profiles" / "index.json").read_text(encoding="utf-8"))
+    path = _safe_path(Path(root), Path("schema") / "profiles" / "index.json")
+    if path is None:
+        raise ValueError("unsafe profile index path")
+    return _load_json_strict(path.read_text(encoding="utf-8"))
 
 
 def resolve_profile(profile: str, version: str, index: dict) -> Path | None:
     """Return the exact relative schema path for a profile/version pair."""
-    if not isinstance(index, dict) or not isinstance(index.get("profiles"), list):
+    if (
+        not isinstance(profile, str)
+        or _PROFILE_ID.fullmatch(profile) is None
+        or not isinstance(version, str)
+        or _VERSION.fullmatch(version) is None
+        or not isinstance(index, dict)
+        or not isinstance(index.get("profiles"), list)
+    ):
         return None
     matches = [
         row
@@ -42,7 +52,8 @@ def resolve_profile(profile: str, version: str, index: dict) -> Path | None:
         return None
     row = matches[0]
     schema = Path(row["schema"])
-    expected = Path(row.get("kind", "")) / profile / f"{version}.schema.json"
+    kind = row.get("kind")
+    expected = Path(kind) / profile / f"{version}.schema.json" if kind in {"base", "result"} else None
     if schema.is_absolute() or ".." in schema.parts or schema != expected:
         return None
     return schema
@@ -217,8 +228,10 @@ def _read_schema(root: Path, relative: Path, layer: str) -> tuple[dict | None, l
 
 
 def _load_envelope_index(root: Path) -> tuple[dict | None, list[dict]]:
-    path = Path(root) / "schema" / "envelope" / "index.json"
     try:
+        path = _safe_path(Path(root), Path("schema") / "envelope" / "index.json")
+        if path is None:
+            raise ValueError("unsafe envelope index path")
         index = _load_json_strict(path.read_text(encoding="utf-8"))
     except (OSError, ValueError, json.JSONDecodeError):
         return None, [_diagnostic("envelope", "envelope-index", "/schema/envelope/index.json")]
@@ -345,6 +358,10 @@ def _load_document(path: Path) -> dict:
     return document
 
 
+def _write_stdout(text: str) -> None:
+    sys.stdout.write(text.encode("ascii", "backslashreplace").decode("ascii"))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Validate a canonical Envelope/Profile contract")
     parser.add_argument("document", type=Path)
@@ -359,11 +376,12 @@ def main(argv: list[str] | None = None) -> int:
     else:
         result = validate_contract(document, Path(__file__).resolve().parents[1])
     if args.as_json:
-        print(json.dumps(result, ensure_ascii=True, sort_keys=True, separators=(",", ":"), allow_nan=False))
+        _write_stdout(json.dumps(result, ensure_ascii=True, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n")
     else:
-        print(result["status"])
+        lines = [result["status"]]
         for error in result["errors"]:
-            print(f"{error['layer']} {error['code']} {error['path']}")
+            lines.append(f"{error['layer']} {error['code']} {error['path']}")
+        _write_stdout("\n".join(lines) + "\n")
     return {"valid": 0, "invalid": 1, "unknown": 2}[result["status"]]
 
 

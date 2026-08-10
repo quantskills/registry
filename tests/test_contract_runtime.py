@@ -44,6 +44,14 @@ class ContractRuntimeTests(unittest.TestCase):
         )
         self.assertIsNone(resolve_profile("market-bar", "1.0.1", index))
         self.assertIsNone(resolve_profile("missing", "1.0.0", index))
+        for profile, version, kind, schema in (
+            ("market-bar\n", "1.0.0", "base", "base/market-bar\n/1.0.0.schema.json"),
+            ("market-bar", "01.0.0", "base", "base/market-bar/01.0.0.schema.json"),
+            ("market-bar", "1.0.0", "other", "other/market-bar/1.0.0.schema.json"),
+            ("market-bar", "1.0.0", "base", "../base/market-bar/1.0.0.schema.json"),
+        ):
+            with self.subTest(profile=profile, version=version, kind=kind):
+                self.assertIsNone(resolve_profile(profile, version, {"profiles": [{"id": profile, "version": version, "kind": kind, "schema": schema}]}))
         self.assertIsNone(
             resolve_profile(
                 "market-bar",
@@ -264,6 +272,27 @@ class ContractRuntimeTests(unittest.TestCase):
         self.assertIsNone(result["profile"])
         self.assertEqual(result["errors"], [{"layer": "profile", "code": "profile-index", "path": "/schema/profiles/index.json"}])
 
+    def test_index_symlinks_outside_supplied_root_fail_closed(self):
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as outside_directory:
+            root, outside = Path(directory), Path(outside_directory)
+            (root / "schema" / "envelope").mkdir(parents=True)
+            (root / "schema" / "profiles").mkdir(parents=True)
+            shutil.copy2(ROOT / "schema" / "envelope" / "index.json", outside / "envelope-index.json")
+            os.symlink(outside / "envelope-index.json", root / "schema" / "envelope" / "index.json")
+            result = validate_contract(document, root)
+            self.assertEqual(result["status"], "unknown")
+            self.assertEqual(result["errors"], [{"layer": "envelope", "code": "envelope-index", "path": "/schema/envelope/index.json"}])
+
+            (root / "schema" / "envelope" / "index.json").unlink()
+            shutil.copy2(ROOT / "schema" / "envelope" / "index.json", root / "schema" / "envelope" / "index.json")
+            shutil.copy2(ROOT / "schema" / "envelope" / "1.0.0.schema.json", root / "schema" / "envelope" / "1.0.0.schema.json")
+            shutil.copy2(ROOT / "schema" / "profiles" / "index.json", outside / "profile-index.json")
+            os.symlink(outside / "profile-index.json", root / "schema" / "profiles" / "index.json")
+            result = validate_contract(document, root)
+            self.assertEqual(result["status"], "unknown")
+            self.assertEqual(result["errors"], [{"layer": "profile", "code": "profile-index", "path": "/schema/profiles/index.json"}])
+
     def test_unsafe_schema_path_and_unresolved_refs_fail_closed(self):
         document = read_fixture("profiles/base/market-bar/valid.json")
         base_row = {
@@ -366,6 +395,24 @@ class ContractRuntimeTests(unittest.TestCase):
         self.assertEqual(completed.stdout.count("\n"), 1)
         parsed = json.loads(completed.stdout)
         self.assertIn({"layer": "envelope", "code": "enum", "path": "/schema/fields/\ud800/type"}, parsed["errors"])
+
+    def test_cli_human_output_is_ascii_safe_for_unicode_and_surrogate_pointers(self):
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        document["schema"]["fields"]["\ud800"] = {"type": "not-a-field-type"}
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "unicode.json"
+            path.write_text(json.dumps(document, ensure_ascii=True), encoding="utf-8")
+            completed = subprocess.run(
+                [sys.executable, str(SCRIPTS / "validate_contract.py"), str(path)],
+                cwd=ROOT,
+                env={**os.environ, "PYTHONIOENCODING": "cp1252"},
+                text=True,
+                encoding="ascii",
+                errors="strict",
+                capture_output=True,
+            )
+        self.assertEqual(completed.returncode, 1, completed.stderr)
+        self.assertEqual(completed.stdout, "invalid\nenvelope enum /schema/fields/\\ud800/type\n")
 
 
 if __name__ == "__main__":
