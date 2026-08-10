@@ -130,7 +130,8 @@
         "inputs": {"$ref": "#/$defs/interfaceInputs"},
         "outputs": {"$ref": "#/$defs/interfaceOutputs"},
         "adapters": {"$ref": "#/$defs/adapters"}
-      }
+      },
+      "anyOf": [{"properties": {"inputs": {"minItems": 1}}}, {"properties": {"outputs": {"minItems": 1}}}]
     },
     "hybridInterface": {
       "type": "object", "additionalProperties": false,
@@ -141,7 +142,8 @@
         "inputs": {"$ref": "#/$defs/interfaceInputs"},
         "outputs": {"$ref": "#/$defs/interfaceOutputs"},
         "adapters": {"$ref": "#/$defs/adapters"}
-      }
+      },
+      "anyOf": [{"properties": {"inputs": {"minItems": 1}}}, {"properties": {"outputs": {"minItems": 1}}}]
     },
     "naturalLanguageInterface": {
       "type": "object", "additionalProperties": false,
@@ -164,8 +166,8 @@
         "version": {"$ref": "#/$defs/exactSemver"}
       }
     },
-    "interfaceInputs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/interfaceInput"}},
-    "interfaceOutputs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/interfaceOutput"}},
+    "interfaceInputs": {"type": "array", "items": {"$ref": "#/$defs/interfaceInput"}},
+    "interfaceOutputs": {"type": "array", "items": {"$ref": "#/$defs/interfaceOutput"}},
     "adapters": {
       "type": "array", "uniqueItems": true,
       "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}

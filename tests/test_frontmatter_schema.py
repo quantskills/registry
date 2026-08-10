@@ -1,4 +1,5 @@
 import json
+import copy
 import unittest
 from pathlib import Path
 
@@ -81,6 +82,18 @@ class FrontmatterSchemaTests(unittest.TestCase):
             ("quantSkills", "summary_zh"),
             validator="pattern",
         )
+
+    def test_structured_producer_or_consumer_is_valid_but_empty_both_sides_is_not(self):
+        source = load_yaml("valid-structured.yml")
+        for field in ("inputs", "outputs"):
+            with self.subTest(empty=field):
+                declaration = copy.deepcopy(source)
+                declaration["quantSkills"]["interface"][field] = []
+                self.assertEqual(list(self.validator.iter_errors(declaration)), [])
+        declaration = copy.deepcopy(source)
+        declaration["quantSkills"]["interface"]["inputs"] = []
+        declaration["quantSkills"]["interface"]["outputs"] = []
+        self.assertTrue(list(self.validator.iter_errors(declaration)))
 
 
 if __name__ == "__main__":

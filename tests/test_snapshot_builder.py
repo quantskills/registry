@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from build_registry import build_snapshot, collect_entries, public_registry_projection, render_artifacts
+import build_registry
 
 
 class SnapshotBuilderTests(unittest.TestCase):
@@ -20,7 +21,9 @@ class SnapshotBuilderTests(unittest.TestCase):
         cls.taxonomy = json.loads((ROOT / "schema" / "taxonomy.v1.json").read_text(encoding="utf-8"))
 
     def snapshot(self, repos=None):
-        entries, resources = collect_entries(repos or self.repos, {}, "enforce")
+        repos = repos or self.repos
+        inventory = {"assets": sorted(repo["name"] for repo in repos if repo["name"] not in {".github", "join", "quantskills", "registry"}), "resources": [".github", "join", "quantskills", "registry"]}
+        entries, resources = collect_entries(repos, {}, "enforce", inventory=inventory, validation_date="2026-08-10")
         return build_snapshot(entries, resources, self.taxonomy, {"version": "1.0.0", "items": []}, {"version": "1.0.0", "items": []})
 
     def test_snapshot_is_order_independent_and_canonical(self):
@@ -28,9 +31,18 @@ class SnapshotBuilderTests(unittest.TestCase):
         self.assertEqual(first["snapshot_id"], second["snapshot_id"])
         self.assertEqual(render_artifacts(first), render_artifacts(second))
         self.assertRegex(first["snapshot_id"], r"^sha256:[0-9a-f]{64}$")
-        stable = {key: value for key, value in first.items() if key not in {"snapshot_id", "generated_at", "validated_at"}}
+        stable = build_registry._stable_snapshot(first)
         digest = hashlib.sha256(json.dumps(stable, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
         self.assertEqual(first["snapshot_id"], f"sha256:{digest}")
+
+    def test_validation_date_is_builder_metadata_and_excluded_from_snapshot_id(self):
+        first_repos = self.repos
+        second_repos = self.repos
+        inventory = {"assets": ["agent-template", "skill-alpha", "skill-template"], "resources": [".github", "join", "quantskills", "registry"]}
+        one, resources = collect_entries(first_repos, {}, "enforce", inventory=inventory, validation_date="2026-08-10")
+        two, _ = collect_entries(second_repos, {}, "enforce", inventory=inventory, validation_date="2026-08-11")
+        self.assertTrue(all(entry["last_validated"] == "2026-08-10" for entry in one))
+        self.assertEqual(build_snapshot(one, resources, self.taxonomy, {"items": []}, {"items": []})["snapshot_id"], build_snapshot(two, resources, self.taxonomy, {"items": []}, {"items": []})["snapshot_id"])
 
     def test_snapshot_and_projection_have_required_boundaries(self):
         snapshot = self.snapshot()
@@ -47,22 +59,40 @@ class SnapshotBuilderTests(unittest.TestCase):
 
     def test_collection_rejects_duplicate_and_invalid_declarations(self):
         with self.assertRaisesRegex(ValueError, "duplicate"):
-            collect_entries(self.repos + [self.repos[0]], {}, "enforce")
+            collect_entries(self.repos + [self.repos[0]], {}, "enforce", inventory={"assets": [], "resources": [".github", "join", "quantskills", "registry"]})
         broken = [{**self.repos[0], "frontmatter": {}}]
         with self.assertRaises(ValueError):
-            collect_entries(broken, {}, "enforce")
+            collect_entries(broken, {}, "enforce", inventory={"assets": ["skill-alpha"], "resources": [".github", "join", "quantskills", "registry"]})
 
     def test_audit_keeps_legacy_templates_visible_but_enforce_rejects_them(self):
         legacy = [{"name": "skill-template", "frontmatter": {"description": "Legacy template"}}, *self.repos[3:]]
-        entries, _ = collect_entries(legacy, {}, "audit")
+        entries, _ = collect_entries(legacy, {}, "audit", inventory={"assets": ["skill-template"], "resources": [".github", "join", "quantskills", "registry"]})
         self.assertEqual(entries[0]["catalog"]["category"], "10")
         self.assertEqual(entries[0]["migration_state"], "pending-v2")
         with self.assertRaises(ValueError):
-            collect_entries(legacy, {}, "enforce")
+            collect_entries(legacy, {}, "enforce", inventory={"assets": ["skill-template"], "resources": [".github", "join", "quantskills", "registry"]})
 
     def test_missing_real_resource_fails_before_snapshot(self):
-        with self.assertRaisesRegex(ValueError, "resource inventory"):
-            collect_entries(self.repos[:-1], {}, "audit")
+        with self.assertRaisesRegex(ValueError, "inventory"):
+            collect_entries(self.repos[:-1], {}, "audit", inventory={"assets": ["skill-alpha", "skill-template", "agent-template"], "resources": [".github", "join", "quantskills", "registry"]})
+
+    def test_inventory_rejects_removed_or_unapproved_assets_before_rendering(self):
+        with self.assertRaisesRegex(ValueError, "inventory"):
+            collect_entries(self.repos[1:], {}, "audit")
+        with self.assertRaisesRegex(ValueError, "inventory"):
+            collect_entries(self.repos + [{"name": "skill-unapproved", "frontmatter": self.repos[0]["frontmatter"]}], {}, "audit")
+
+    def test_audit_keeps_generic_legacy_skill_and_agent_with_migration_issues(self):
+        legacy = [
+            {"name": "skill-alpha", "frontmatter": {"name": "skill-alpha", "description": "old skill"}},
+            {"name": "agent-alpha", "frontmatter": {"name": "agent-alpha", "description": "old agent"}},
+            *self.repos[3:],
+        ]
+        entries, _ = collect_entries(legacy, {}, "audit", inventory={"assets": ["skill-alpha", "agent-alpha"], "resources": [".github", "join", "quantskills", "registry"]})
+        self.assertEqual([entry["migration_state"] for entry in entries[:2]], ["pending-v2", "pending-v2"])
+        self.assertTrue(all(entry["migration_issues"] for entry in entries[:2]))
+        with self.assertRaises(ValueError):
+            collect_entries(legacy, {}, "enforce", inventory={"assets": ["skill-alpha", "agent-alpha"], "resources": [".github", "join", "quantskills", "registry"]})
 
 
 if __name__ == "__main__":

@@ -6,11 +6,11 @@
   "properties": {
     "schema_version": {"const": "1.0.0"}, "taxonomy_version": {"type": "string"},
     "snapshot_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
-    "taxonomy": {"type": "object"},
-    "assets": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["name", "url", "catalog", "workflow", "interface"]}},
-    "resources": {"type": "array", "items": {"type": "object", "required": ["name", "url"]}},
-    "profiles": {"type": "object", "required": ["version", "items"]},
-    "adapters": {"type": "object", "required": ["version", "items"]},
+    "taxonomy": {"type": "object", "required": ["schema_version", "categories", "workflow_stages"]},
+    "assets": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["name", "url", "project_type", "catalog", "workflow", "interface", "last_validated"]}},
+    "resources": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "object", "required": ["name", "url"]}},
+    "profiles": {"type": "object", "required": ["version", "items"], "properties": {"version": {"type": "string"}, "items": {"type": "array"}}},
+    "adapters": {"type": "object", "required": ["version", "items"], "properties": {"version": {"type": "string"}, "items": {"type": "array"}}},
     "compatibility_edges": {"type": "array"}
   }
 }

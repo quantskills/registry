@@ -24,7 +24,7 @@ async function main() {
   const categories = new Set(Object.keys(taxonomy.categories));
   const subcategories = new Set(Object.values(taxonomy.categories).flatMap(category => category.subcategories.map(item => item.id)));
   const stages = new Set(taxonomy.workflow_stages);
-  const interfaceModes = new Set(["structured", "hybrid", "not-applicable"]);
+  const interfaceModes = new Set(["structured", "hybrid", "natural-language", "not-applicable"]);
   let registry;
   try { registry = JSON.parse(await readFile(registryPath, "utf8")); }
   catch (error) { console.error(`Unable to read ${registryPath}: ${error.message}`); process.exitCode = 1; return; }

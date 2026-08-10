@@ -8,12 +8,14 @@ import json
 import os
 import re
 import tempfile
+import datetime as dt
 from pathlib import Path
 
 import requests
 
-from catalog_contract import canonical_json, load_taxonomy
+from catalog_contract import canonical_json, load_taxonomy, validate_asset_semantics, validate_frontmatter_schema
 from validate_skill import declaration_info, parse_frontmatter, validate
+from verify_catalog_artifacts import verify
 
 ROOT = Path(__file__).resolve().parent.parent
 ORG = os.environ.get("QS_ORG", "quantskills")
@@ -21,6 +23,7 @@ API = "https://api.github.com"
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 HEADERS = {"Authorization": f"Bearer {TOKEN}", "Accept": "application/vnd.github+json"} if TOKEN else {}
 RESOURCE_NAMES = (".github", "join", "quantskills", "registry")
+INVENTORY_PATH = ROOT / "catalog-inventory.v1.json"
 
 
 def gh(method: str, url: str, **kwargs):
@@ -47,17 +50,23 @@ def shallow_clone(name: str, destination: Path) -> str:
     return subprocess.run(["git", "-C", str(destination), "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
 
 
-def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", contract_mode: str = "enforce") -> dict:
+def load_inventory(path: Path = INVENTORY_PATH) -> dict:
+    inventory = json.loads(path.read_text(encoding="utf-8"))
+    if inventory.get("schema_version") != "1.0.0" or not isinstance(inventory.get("assets"), list) or sorted(inventory.get("resources", [])) != sorted(RESOURCE_NAMES):
+        raise ValueError("invalid catalog inventory")
+    return inventory
+
+
+def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", contract_mode: str = "enforce", validation_date: str = "") -> dict:
     qs = frontmatter.get("quantSkills") or {}
     catalog, workflow, interface = qs.get("catalog") or {}, qs.get("workflow") or {}, qs.get("interface") or {}
     project_type = qs.get("project_type") or ("agent" if name.startswith("agent-") else "skill")
     missing_v2 = not isinstance(catalog.get("category"), str) or not isinstance(catalog.get("subcategory"), str) or not isinstance(workflow.get("primary_stage"), str) or not isinstance(workflow.get("workflow_stages"), list) or not isinstance(interface, dict) or not interface.get("mode")
     if missing_v2:
-        if contract_mode != "audit" or name not in {"skill-template", "agent-template"}:
+        if contract_mode != "audit":
             raise ValueError(f"invalid declaration for {name}: missing v2 catalog/workflow/interface")
-        subcategory = "10.skill-template" if name == "skill-template" else "10.agent-template"
-        catalog = {"category": "10", "subcategory": subcategory}
-        workflow = {"primary_stage": "orchestration", "workflow_stages": ["orchestration"]}
+        catalog = {"category": "10", "subcategory": f"10.{name}"} if name in {"skill-template", "agent-template"} else {"category": "unknown", "subcategory": "unknown"}
+        workflow = {"primary_stage": "orchestration", "workflow_stages": ["orchestration"]} if name in {"skill-template", "agent-template"} else {"primary_stage": "unknown", "workflow_stages": []}
         interface = {"mode": "unknown", "reason": "pending-v2-migration"}
     return {
         "name": name, "url": f"https://github.com/{ORG}/{name}", "description": frontmatter.get("description", ""),
@@ -67,26 +76,28 @@ def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", 
         "tags": qs.get("tags", []), "platforms": qs.get("platforms", []), "status": qs.get("status", "active"),
         "requires": qs.get("requires", []), "summary_zh": qs.get("summary_zh", ""), "summary_en": qs.get("summary_en", ""),
         "license": qs.get("license", "GPL-3.0-only"), "validation_level": qs.get("validation_level", "listed"),
-        "maintainer_type": qs.get("maintainer_type", "community"), "last_validated": qs.get("last_validated", ""), "commit_sha": commit_sha,
-        **({"migration_state": "pending-v2"} if missing_v2 else {}),
+        "maintainer_type": qs.get("maintainer_type", "community"), "last_validated": validation_date, "commit_sha": commit_sha,
+        **({"migration_state": "pending-v2", "migration_issues": ["missing-v2-catalog", "missing-v2-workflow", "missing-v2-interface"]} if missing_v2 else {}),
     }
 
 
-def collect_entries(repos: list[dict], previous: dict, contract_mode: str) -> tuple[list[dict], list[dict]]:
+def collect_entries(repos: list[dict], previous: dict, contract_mode: str, inventory: dict | None = None, validation_date: str = "") -> tuple[list[dict], list[dict]]:
     """Collect entries without writing artifacts; fixtures inject ``frontmatter`` directly."""
     if contract_mode not in {"audit", "enforce"}:
         raise ValueError("contract_mode must be 'audit' or 'enforce'")
     names = [repo.get("name") for repo in repos]
     if any(not isinstance(name, str) or not name for name in names) or len(names) != len(set(names)):
         raise ValueError("duplicate or empty asset name")
+    inventory = inventory or load_inventory()
+    expected = set(inventory["assets"]) | set(inventory["resources"])
+    if set(names) != expected:
+        raise ValueError("catalog inventory mismatch")
     resources_by_name = {repo["name"]: {"name": repo["name"], "url": repo.get("html_url") or repo.get("url") or f"https://github.com/{ORG}/{repo['name']}"} for repo in repos if repo["name"] in RESOURCE_NAMES}
-    if set(resources_by_name) != set(RESOURCE_NAMES):
-        raise ValueError("closed organization resource inventory is incomplete")
     entries = []
     for repo in (repo for repo in repos if repo["name"] not in RESOURCE_NAMES):
         name = repo["name"]
         if "frontmatter" in repo:
-            entries.append(_entry_from_frontmatter(name, repo["frontmatter"], repo.get("commit_sha", ""), contract_mode))
+            entries.append(_entry_from_frontmatter(name, repo["frontmatter"], repo.get("commit_sha", ""), contract_mode, validation_date))
             continue
         with tempfile.TemporaryDirectory() as temp:
             directory = Path(temp) / name
@@ -96,14 +107,18 @@ def collect_entries(repos: list[dict], previous: dict, contract_mode: str) -> tu
             report = validate(directory, set(names), contract_mode)
             if report.health == "quarantined" or not frontmatter:
                 raise ValueError(f"invalid declaration for {name}")
-            entry = _entry_from_frontmatter(name, frontmatter, clone_sha, contract_mode)
+            entry = _entry_from_frontmatter(name, frontmatter, clone_sha, contract_mode, validation_date)
             entry["health"] = report.health
             entries.append(entry)
     return sorted(entries, key=lambda entry: entry["name"]), [resources_by_name[name] for name in RESOURCE_NAMES]
 
 
 def _stable_snapshot(snapshot: dict) -> dict:
-    return {key: value for key, value in snapshot.items() if key not in {"snapshot_id", "generated_at", "validated_at", "scan_time"}}
+    if isinstance(snapshot, dict):
+        return {key: _stable_snapshot(value) for key, value in snapshot.items() if key not in {"snapshot_id", "generated_at", "validated_at", "scan_time", "last_validated"}}
+    if isinstance(snapshot, list):
+        return [_stable_snapshot(value) for value in snapshot]
+    return snapshot
 
 
 def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, profiles: dict, adapters: dict) -> dict:
@@ -163,10 +178,7 @@ def _validate_staged(outputs: dict[Path, bytes], staged: dict[Path, Path]) -> No
         raise ValueError("staged artifact hash mismatch")
     if ROOT / "catalog.snapshot.json" not in staged or ROOT / "registry.json" not in staged:
         return
-    snapshot = json.loads(staged[ROOT / "catalog.snapshot.json"].read_text(encoding="utf-8"))
-    registry = json.loads(staged[ROOT / "registry.json"].read_text(encoding="utf-8"))
-    if not isinstance(registry, list) or any(row.get("snapshot_id") != snapshot.get("snapshot_id") for row in registry):
-        raise ValueError("staged snapshot cross-reference mismatch")
+    verify(staged[ROOT / "catalog.snapshot.json"], staged[ROOT / "registry.json"])
 
 
 def promote_artifacts(outputs: dict[Path, bytes]) -> None:
@@ -202,7 +214,7 @@ def main() -> None:
     args = parser.parse_args()
     previous_path = ROOT / "registry.json"
     previous = {row["name"]: row for row in json.loads(previous_path.read_text(encoding="utf-8"))} if previous_path.exists() else {}
-    entries, resources = collect_entries(list_asset_repos(), previous, args.contract_mode)
+    entries, resources = collect_entries(list_asset_repos(), previous, args.contract_mode, validation_date=dt.date.today().isoformat())
     snapshot = build_snapshot(entries, resources, load_taxonomy(ROOT), {"version": "1.0.0", "items": []}, {"version": "1.0.0", "items": []})
     promote_artifacts(render_artifacts(snapshot))
     print(f"published snapshot {snapshot['snapshot_id']} ({len(entries)} assets)")
