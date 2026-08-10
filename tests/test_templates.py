@@ -91,6 +91,10 @@ class CanonicalTemplateTests(unittest.TestCase):
                 self.assertIn(f"{repo.name} --contract-mode enforce", commands)
                 self.assertIn("--help", commands)
                 self.assertIn("else", commands)
+                self.assertIn("--json", commands)
+                self.assertIn("len(items) == 2", commands)
+                self.assertIn('"category"', commands)
+                self.assertIn('"hermes"', commands)
                 self.assertNotIn("validate_skill.py .", commands)
                 self.assertNotIn(f"{repo.name}/contract-registry", commands)
                 if repo == self.skill:
