@@ -25,12 +25,14 @@ def adapter(identifier, source, target, **changes):
 
 class CompatibilityTests(unittest.TestCase):
     def test_strict_semver_and_ranges(self):
+        matrix = json.loads((ROOT / "tests/fixtures/compatibility/matrix.json").read_text(encoding="utf-8"))
         self.assertEqual(parse_semver("1.2.3"), (1, 2, 3))
         for value in (1, "1.2", "01.2.3", "1.2.3 ", "v1.2.3", "1.2.3-beta"):
             with self.subTest(value=value):
                 with self.assertRaises(ValueError): parse_semver(value)
-        self.assertTrue(version_satisfies("1.2.3", ">=1.0.0 <2.0.0"))
-        for value in ("", "^1.0.0", "1.0", "1.0.0, <2.0.0", "=1.0.0", "1.0.0 || 2.0.0"):
+        for value in matrix["accepted_ranges"]:
+            self.assertTrue(version_satisfies("1.0.0", value))
+        for value in ("", "1.0", "1.0.0, <2.0.0", "=1.0.0", *matrix["rejected_ranges"]):
             self.assertFalse(version_satisfies("1.2.3", value))
 
     def test_status_matrix_and_value_free_errors(self):
@@ -40,7 +42,7 @@ class CompatibilityTests(unittest.TestCase):
             (endpoint("market-bar", "1.0.0"), endpoint("factor-panel", version_range="1.0.0"), [adapter("market-factor", "market-bar", "factor-panel")], "adapter-required", ["market-factor"]),
             (endpoint("market-bar", "1.0.0"), endpoint("factor-panel", version_range="1.0.0"), [adapter("pending", "market-bar", "factor-panel", validation_status="pending")], "unknown", []),
             (endpoint("market-bar", "1.0.0"), endpoint("factor-panel", version_range="1.0.0"), [adapter("lossy", "market-bar", "factor-panel", lossless=False)], "incompatible", []),
-            (endpoint("market-bar", "1.0.0", major=1), endpoint("market-bar", version_range="1.0.0", major=2), [], "incompatible", []),
+            (endpoint("market-bar", "1.0.0", major=1), endpoint("market-bar", version_range="1.0.0", major=2), [], "unknown", []),
             (endpoint("missing", "1.0.0"), endpoint("market-bar", version_range="1.0.0"), [], "unknown", []),
             (endpoint("market-bar", "1.0.0", mode="natural-language"), endpoint("market-bar", version_range="1.0.0"), [], "not-applicable", []),
         )

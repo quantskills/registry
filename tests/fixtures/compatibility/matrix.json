@@ -1,1 +1,1 @@
-{"same":{"profile":"market-bar","version":"1.0.0"},"input":{"profile":"market-bar","version_range":">=1.0.0 <2.0.0"}}
+{"same":{"profile":"market-bar","version":"1.0.0"},"input":{"profile":"market-bar","version_range":">=1.0.0 <2.0.0"},"accepted_ranges":["1.0.0",">=1.0.0 <2.0.0"],"rejected_ranges":["1.0.0 >=1.0.0",">=1.0.0 >=1.0.0","^1.0.0","1.0.0 || 2.0.0"]}
