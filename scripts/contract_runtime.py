@@ -42,3 +42,36 @@ def envelope_semantic_issues(document: object) -> list[dict]:
                 if isinstance(key, str) and key not in fields
             )
     return issues
+
+
+def profile_semantic_issues(document: object) -> list[dict]:
+    """Return value-free Profile issues; tolerate schema-invalid documents."""
+    if not isinstance(document, dict):
+        return []
+    contract = document.get("$contract")
+    if not isinstance(contract, dict) or contract.get("profile") != "market-bar":
+        return []
+    payload = document.get("payload")
+    if not isinstance(payload, dict):
+        return []
+    records = payload.get("records")
+    if not isinstance(records, list):
+        return []
+    issues: list[dict] = []
+    for index, record in enumerate(records):
+        if not isinstance(record, dict):
+            continue
+        if not all(
+            isinstance(record.get(key), (int, float))
+            and not isinstance(record.get(key), bool)
+            for key in ("low", "open", "close", "high")
+        ):
+            continue
+        low, open_, close, high = record["low"], record["open"], record["close"], record["high"]
+        if low > high:
+            issues.append(_issue("market-bar-ohlc-range", f"/payload/records/{index}"))
+        if open_ < low or open_ > high:
+            issues.append(_issue("market-bar-open-outside-range", f"/payload/records/{index}/open"))
+        if close < low or close > high:
+            issues.append(_issue("market-bar-close-outside-range", f"/payload/records/{index}/close"))
+    return issues
