@@ -39,7 +39,10 @@ class EnvelopeSchemaTests(unittest.TestCase):
                 document = self.document(); document["meta"]["generated_at"] = value
                 self.assertIn("/meta/generated_at", {issue["path"] for issue in envelope_semantic_issues(document)})
         document = self.document(); document["schema"]["primary_key"] = ["missing"]
-        self.assertIn("/schema/primary_key/0", {issue["path"] for issue in envelope_semantic_issues(document)})
+        self.assertEqual(
+            envelope_semantic_issues(document),
+            [{"code": "envelope-primary-key", "path": "/schema/primary_key/0"}],
+        )
 
     def test_semantics_leave_primary_key_type_errors_to_json_schema(self):
         for value in ([[]], [{}]):
@@ -54,7 +57,6 @@ class EnvelopeSchemaTests(unittest.TestCase):
                 document = self.document(); document["meta"]["generated_at"] = generated_at
                 issues = envelope_semantic_issues(document)
                 self.assertEqual(issues, [])
-                self.assertTrue(all(set(issue) == {"code", "path"} for issue in issues))
         document = self.document(); document["payload"]["native"] = {"raw_records": []}
         self.assertEqual(list(self.validator.iter_errors(document)), [])
 
