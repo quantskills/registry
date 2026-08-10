@@ -1,5 +1,5 @@
-import os
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -13,20 +13,22 @@ from validate_skill import validate
 
 
 class ValidateSkillTests(unittest.TestCase):
-    def make_repo(self, name="skill-example", risk=False, complete=False):
+    def make_repo(self, name="skill-example", risk=False, complete=False, declaration_file="SKILL.md"):
         directory = Path(tempfile.mkdtemp()) / name
         directory.mkdir()
         fixture = ROOT / "tests" / "fixtures" / "declarations" / "valid-structured.yml"
         frontmatter = yaml.safe_load(fixture.read_text(encoding="utf-8"))
         frontmatter["name"] = name
+        frontmatter["description"] += " Use when validating a catalog-contract fixture."
         frontmatter["quantSkills"]["repository"] = name
         frontmatter["quantSkills"]["repository_url"] = f"https://github.com/quantskills/{name}"
+        frontmatter["quantSkills"]["project_type"] = "agent" if declaration_file == "AGENTS.md" else "skill"
         if not risk:
             frontmatter["quantSkills"]["workflow"]["workflow_stages"] = ["reporting"]
             frontmatter["quantSkills"]["workflow"]["primary_stage"] = "reporting"
             frontmatter["quantSkills"]["tags"] = ["reporting"]
         text = "---\n" + yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False) + "---\nBody\n"
-        (directory / "SKILL.md").write_text(text, encoding="utf-8")
+        (directory / declaration_file).write_text(text, encoding="utf-8")
         (directory / "README.md").write_text("Use when validating examples. " * 4, encoding="utf-8")
         (directory / "LICENSE").write_text("GPL", encoding="utf-8")
         if complete:
@@ -64,15 +66,28 @@ class ValidateSkillTests(unittest.TestCase):
         checks = {item["check"] for item in validate(repo, {"other"}).items}
         self.assertTrue({"required-files", "frontmatter", "path-refs", "git-hygiene", "secrets", "quant-risk-disclosures", "python-syntax", "requires"} <= checks)
 
-    def test_relative_dot_path_matches_absolute_repository_path(self):
-        repo = self.make_repo("skill-relative-dot")
-        expected = validate(repo, set(), "enforce").health
-        previous = Path.cwd()
-        try:
-            os.chdir(repo)
-            self.assertEqual(validate(Path("."), set(), "enforce").health, expected)
-        finally:
-            os.chdir(previous)
+    def test_cli_relative_dot_path_matches_absolute_repository_path(self):
+        script = ROOT / "scripts" / "validate_skill.py"
+        for repo in (self.make_repo("skill-relative-dot"), self.make_repo("agent-relative-dot", declaration_file="AGENTS.md")):
+            with self.subTest(repo=repo.name):
+                relative = subprocess.run(
+                    [sys.executable, str(script), ".", "--contract-mode", "enforce"],
+                    cwd=repo,
+                    text=True,
+                    capture_output=True,
+                    check=False,
+                )
+                absolute = subprocess.run(
+                    [sys.executable, str(script), str(repo), "--contract-mode", "enforce"],
+                    cwd=repo,
+                    text=True,
+                    capture_output=True,
+                    check=False,
+                )
+                self.assertEqual(relative.returncode, 0, relative.stdout + relative.stderr)
+                self.assertEqual(absolute.returncode, 0, absolute.stdout + absolute.stderr)
+                self.assertEqual(relative.stdout.splitlines()[0], "health: healthy")
+                self.assertEqual(absolute.stdout.splitlines()[0], "health: healthy")
 
 
 if __name__ == "__main__":
