@@ -35,16 +35,22 @@ jobs:
         run: pip install -r requirements-dev.txt
 
       - name: Build registry
+        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.full == false) }}
         env:
           # Read token is only used to list and clone asset repositories.
           GITHUB_TOKEN: ${{ secrets.QS_READ_TOKEN }}
           QS_ORG: quantskills
         run: |
-          build_args=(--contract-mode "$CONTRACT_MODE")
-          if [[ "${{ github.event_name == 'workflow_dispatch' && inputs.full || false }}" == "true" ]]; then
-            build_args+=(--full)
-          fi
-          python scripts/build_registry.py "${build_args[@]}"
+          python scripts/build_registry.py --contract-mode "$CONTRACT_MODE"
+
+      - name: Build registry (full compatibility)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.full == true }}
+        env:
+          # Read token is only used to list and clone asset repositories.
+          GITHUB_TOKEN: ${{ secrets.QS_READ_TOKEN }}
+          QS_ORG: quantskills
+        run: |
+          python scripts/build_registry.py --contract-mode "$CONTRACT_MODE" --full
 
       - name: Final enforce validation
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.contract_mode == 'enforce' }}

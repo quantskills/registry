@@ -38,16 +38,34 @@ class ContractDocumentationTests(unittest.TestCase):
         workflow = yaml.safe_load((ROOT / ".github" / "workflows" / "nightly-scan.yml").read_text(encoding="utf-8"))
         triggers = workflow.get("on", workflow.get(True))
         dispatch = triggers["workflow_dispatch"]["inputs"]
+        self.assertEqual(dispatch["full"]["type"], "boolean")
+        self.assertIs(dispatch["full"]["default"], False)
         self.assertEqual(dispatch["contract_mode"]["type"], "choice")
         self.assertEqual(set(dispatch["contract_mode"]["options"]), {"audit", "enforce"})
         self.assertEqual(dispatch["contract_mode"]["default"], "audit")
         steps = workflow["jobs"]["scan"]["steps"]
-        build = next(step for step in steps if step.get("name") == "Build registry")
+        normal_build = next(step for step in steps if step.get("name") == "Build registry")
+        full_build = next(step for step in steps if step.get("name") == "Build registry (full compatibility)")
         publish = next(step for step in steps if step.get("name") == "Commit artifacts")
         final_validation = next(step for step in steps if step.get("name") == "Final enforce validation")
-        self.assertIn("--contract-mode", build["run"])
-        self.assertIn("--full", build["run"])
-        self.assertIn("inputs.full", build["run"])
+        normal_condition = "${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.full == false) }}"
+        full_condition = "${{ github.event_name == 'workflow_dispatch' && inputs.full == true }}"
+        self.assertEqual(normal_build["if"], normal_condition)
+        self.assertEqual(full_build["if"], full_condition)
+        self.assertIn("--contract-mode \"$CONTRACT_MODE\"", normal_build["run"])
+        self.assertIn("--contract-mode \"$CONTRACT_MODE\"", full_build["run"])
+        self.assertNotIn("--full", normal_build["run"])
+        self.assertIn("--full", full_build["run"])
+        for build in (normal_build, full_build):
+            self.assertEqual(build["env"]["GITHUB_TOKEN"], "${{ secrets.QS_READ_TOKEN }}")
+        cases = (("schedule", False, (True, False)), ("workflow_dispatch", False, (True, False)), ("workflow_dispatch", True, (False, True)))
+        for event, full, expected in cases:
+            actual = (
+                event == "schedule" or (event == "workflow_dispatch" and full is False),
+                event == "workflow_dispatch" and full is True,
+            )
+            self.assertEqual(actual, expected, (event, full))
+            self.assertEqual(sum(actual), 1, (event, full))
         self.assertIn("github.event_name == 'workflow_dispatch'", publish["if"])
         self.assertIn("inputs.contract_mode == 'enforce'", publish["if"])
         self.assertEqual(final_validation["if"], publish["if"])
