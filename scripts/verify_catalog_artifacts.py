@@ -6,14 +6,18 @@ import argparse
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
 
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from catalog_projection import public_registry_projection
 from interface_catalog import load_contract_catalogs, load_core_lineage
 
-ROOT = Path(__file__).resolve().parent.parent
 RESOURCE_NAMES = [".github", "join", "quantskills", "registry"]
 _CHAIN = (
     ("skill-pandadata-warehouse", "skill-factor-mining-pandaai", "market-bar", "market-bar"),
@@ -153,7 +157,9 @@ def _closed_chain(assets: list, edges: list, lineage: dict, envelope: dict, mapp
             and mapping.get("target", {}).get("profile") == {"id": first["profile"], "version": first["version"]})
 
 
-def verify(snapshot_path: Path, registry_path: Path, readmes: tuple[Path, ...] = ()) -> None:
+def verify(snapshot_path: Path, registry_path: Path, readmes: tuple[Path, ...] = (), expected_contract_mode: str | None = None) -> None:
+    if expected_contract_mode not in {None, "audit", "enforce"}:
+        raise ValueError("expected_contract_mode must be audit or enforce")
     try:
         snapshot, registry = _load(snapshot_path), _load(registry_path)
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as error:
@@ -174,7 +180,11 @@ def verify(snapshot_path: Path, registry_path: Path, readmes: tuple[Path, ...] =
             errors.append("snapshot_id does not match canonical content")
         if canonical(registry) != canonical(public_registry_projection(snapshot)):
             errors.append("registry does not exactly equal the snapshot public projection")
-        if [item.get("name") for item in snapshot.get("resources", []) if isinstance(item, dict)] != RESOURCE_NAMES:
+        names = [asset.get("name") for asset in snapshot.get("assets", []) if isinstance(asset, dict)]
+        if not names or any(not isinstance(name, str) or not name for name in names) or len(names) != len(set(names)):
+            errors.append("snapshot assets must have nonempty unique names")
+        expected_resources = [{"name": name, "url": f"https://github.com/quantskills/{name}"} for name in RESOURCE_NAMES]
+        if snapshot.get("resources") != expected_resources:
             errors.append("snapshot resources must be the four closed resources")
         if any(item.get("snapshot_id") != snapshot.get("snapshot_id") for item in registry if isinstance(item, dict)):
             errors.append("registry rows do not share snapshot_id")
@@ -189,18 +199,21 @@ def verify(snapshot_path: Path, registry_path: Path, readmes: tuple[Path, ...] =
             expected_lineage = lineage if closed else {"version": "1.0.0", "artifacts": []}
             if canonical(snapshot.get("core_lineage")) != canonical(expected_lineage): errors.append("core lineage does not match trusted physical lineage")
             if snapshot.get("contract_mode") == "enforce" and not closed: errors.append("enforce snapshot is not the approved closed core chain")
+            if expected_contract_mode == "enforce" and (snapshot.get("contract_mode") != "enforce" or not closed): errors.append("expected enforce snapshot is not the approved closed core chain")
+            if expected_contract_mode == "audit" and snapshot.get("contract_mode") != "audit": errors.append("snapshot does not have expected audit contract mode")
     for readme in readmes:
         text = readme.read_text(encoding="utf-8")
-        marker = re.search(r"<!-- registry-snapshot:start -->.*?`(sha256:[0-9a-f]{64})`.*?<!-- registry-snapshot:end -->", text, re.S)
-        if not marker or marker.group(1) != snapshot.get("snapshot_id"):
+        starts, ends = text.count("<!-- registry-snapshot:start -->"), text.count("<!-- registry-snapshot:end -->")
+        markers = re.findall(r"<!-- registry-snapshot:start -->.*?`(sha256:[0-9a-f]{64})`.*?<!-- registry-snapshot:end -->", text, re.S)
+        if starts != 1 or ends != 1 or len(markers) != 1 or markers[0] != snapshot.get("snapshot_id"):
             errors.append(f"README snapshot marker mismatch: {readme.name}")
     if errors:
         raise ValueError("; ".join(errors))
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(); parser.add_argument("snapshot", nargs="?", default="catalog.snapshot.json"); parser.add_argument("registry", nargs="?", default="registry.json"); parser.add_argument("--readme", action="append", default=[])
-    args = parser.parse_args(); verify(Path(args.snapshot), Path(args.registry), tuple(Path(path) for path in args.readme)); print("catalog artifacts verification passed")
+    parser = argparse.ArgumentParser(); parser.add_argument("snapshot", nargs="?", default="catalog.snapshot.json"); parser.add_argument("registry", nargs="?", default="registry.json"); parser.add_argument("--readme", action="append", default=[]); parser.add_argument("--expected-contract-mode", choices=("audit", "enforce"))
+    args = parser.parse_args(); verify(Path(args.snapshot), Path(args.registry), tuple(Path(path) for path in args.readme), args.expected_contract_mode); print("catalog artifacts verification passed")
 
 
 if __name__ == "__main__": main()

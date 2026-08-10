@@ -3,6 +3,8 @@ import unittest
 import json
 import copy
 import hashlib
+import os
+import subprocess
 from pathlib import Path
 import sys
 
@@ -33,24 +35,47 @@ class AtomicGenerationTests(unittest.TestCase):
             lambda value: value["provider_mappings"]["items"][0]["evidence"].update(raw_sha256="sha256:" + "0" * 64),
             lambda value: value["adapters"]["items"].append(copy.deepcopy(fake)),
             lambda value: value["core_lineage"]["artifacts"][0].update(artifact_sha256="sha256:" + "0" * 64),
+            lambda value: value["assets"].append(copy.deepcopy(value["assets"][0])),
+            lambda value: value["resources"].append(copy.deepcopy(value["resources"][0])),
+            lambda value: value["resources"][0].update(url="https://evil.example/.github"),
         )
         with tempfile.TemporaryDirectory(dir=ROOT) as temporary:
             base = Path(temporary)
+            sp, rp = base / "catalog.snapshot.json", base / "registry.json"
+            readmes = (base / "README.md", base / "README.en.md")
+            sp.write_text(json.dumps(baseline), encoding="utf-8"); rp.write_text(json.dumps(build_registry.public_registry_projection(baseline)), encoding="utf-8")
+            for readme in readmes: readme.write_text(f"<!-- registry-snapshot:start -->\n`{baseline['snapshot_id']}`\n<!-- registry-snapshot:end -->", encoding="utf-8")
+            command = [sys.executable, str(ROOT / "scripts" / "verify_catalog_artifacts.py"), str(sp), str(rp), "--readme", str(readmes[0]), "--readme", str(readmes[1]), "--expected-contract-mode", "enforce"]
+            self.assertEqual(subprocess.run(command, capture_output=True, text=True).returncode, 0)
+            self.assertEqual(subprocess.run(["node", str(ROOT / "scripts" / "validate-registry.mjs"), "--contract-mode", "enforce", str(rp)], capture_output=True, text=True).returncode, 0)
+            audit = copy.deepcopy(baseline); audit["contract_mode"] = "audit"; self._sealed(audit)
+            sp.write_text(json.dumps(audit), encoding="utf-8"); rp.write_text(json.dumps(build_registry.public_registry_projection(audit)), encoding="utf-8")
+            for readme in readmes: readme.write_text(f"<!-- registry-snapshot:start -->\n`{audit['snapshot_id']}`\n<!-- registry-snapshot:end -->", encoding="utf-8")
+            self.assertNotEqual(subprocess.run(command, capture_output=True, text=True).returncode, 0)
+            self.assertEqual(subprocess.run(["node", str(ROOT / "scripts" / "validate-registry.mjs"), "--contract-mode", "enforce", str(rp)], capture_output=True, text=True).returncode, 0)
             for mutate in mutations:
                 snapshot = copy.deepcopy(baseline); mutate(snapshot); self._sealed(snapshot)
-                sp, rp = base / "catalog.snapshot.json", base / "registry.json"
                 sp.write_text(json.dumps(snapshot), encoding="utf-8"); rp.write_text(json.dumps(build_registry.public_registry_projection(snapshot)), encoding="utf-8")
                 with self.assertRaises(ValueError):
                     verify(sp, rp)
-                readmes = (base / "README.md", base / "README.en.md")
                 for readme in readmes: readme.write_text(f"<!-- registry-snapshot:start -->\n`{snapshot['snapshot_id']}`\n<!-- registry-snapshot:end -->", encoding="utf-8")
                 first = base / "first.json"; first.write_bytes(b"old")
                 original_root, build_registry.ROOT = build_registry.ROOT, base
+                original_replace, calls = build_registry.os.replace, 0
+                def count_replace(source, destination):
+                    nonlocal calls
+                    calls += 1
+                    return original_replace(source, destination)
+                build_registry.os.replace = count_replace
                 try:
                     with self.assertRaises(ValueError): build_registry.promote_artifacts({first: b"replacement", sp: sp.read_bytes(), rp: rp.read_bytes(), readmes[0]: readmes[0].read_bytes(), readmes[1]: readmes[1].read_bytes()})
                 finally:
-                    build_registry.ROOT = original_root
+                    build_registry.ROOT, build_registry.os.replace = original_root, original_replace
                 self.assertEqual(first.read_bytes(), b"old")
+                self.assertEqual(calls, 0)
+            sp.write_text(json.dumps(baseline), encoding="utf-8"); rp.write_text(json.dumps(build_registry.public_registry_projection(baseline)), encoding="utf-8")
+            readmes[0].write_text(f"<!-- registry-snapshot:start -->\n`{baseline['snapshot_id']}`\n<!-- registry-snapshot:end -->\n<!-- registry-snapshot:start -->\n`{baseline['snapshot_id']}`\n<!-- registry-snapshot:end -->", encoding="utf-8")
+            with self.assertRaises(ValueError): verify(sp, rp, readmes)
     def test_promotion_failure_restores_all_destinations(self):
         with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
             tmp = Path(tmp)
