@@ -27,21 +27,40 @@ A completed Skill or Agent declares all five runtimes: `cursor`, `claude-code`, 
 
 `catalog` declares one category and matching subcategory; `workflow` declares a `primary_stage` included in its unique `workflow_stages`. `summary_zh` and `summary_en` are one-line, truthful bilingual display summaries. `status` is `draft`, `active`, `stable`, or `deprecated`; `validation_level` is `listed`, `runnable`, or `verified`; `maintainer` identifies the responsible person or team and `maintainer_type` is `official` or `community`.
 
-`interface` describes machine-facing exchange:
+`interface` describes machine-facing exchange. The following fenced block is a complete copy-ready v2 declaration:
 
+<!-- catalog-declaration-example:start -->
 ```yaml
-catalog: {category: "02", subcategory: "02.factor-evaluation"}
-workflow: {primary_stage: evaluation, workflow_stages: [factor-screening, evaluation]}
-summary_zh: 因子评估结果的可复现实验流程。
-summary_en: Reproducible evaluation workflow for factor results.
-interface:
-  mode: structured
-  envelope: {input: ">=1.0.0 <2.0.0", output: "1.0.0"}
-  inputs: [{profile: factor-panel, version_range: ">=1.0.0 <2.0.0", required: true}]
-  outputs: [{profile: evaluation-result, version: "1.0.0"}]
+name: skill-factor-grouped-wrapper
+description: A structured wrapper that ranks candidate factors from market data and returns evaluation-ready outputs for quantitative research workflows.
+quantSkills:
+  schema_version: 2.0.0
+  organization: quantskills
+  organization_url: https://github.com/quantskills
+  repository: skill-factor-grouped-wrapper
+  repository_url: https://github.com/quantskills/skill-factor-grouped-wrapper
+  project_type: skill
+  license: GPL-3.0-only
+  maintainer: abgyjaguo
+  catalog: {category: "02", subcategory: 02.factor-selection}
+  workflow: {primary_stage: factor-screening, workflow_stages: [factor-screening, evaluation]}
+  summary_zh: 用于因子筛选与评估的结构化工作流。
+  summary_en: Structured workflow for factor screening and evaluation.
+  status: active
+  validation_level: listed
+  maintainer_type: community
+  platforms: [cursor, claude-code, codex, hermes, openclaw]
+  interface:
+    mode: structured
+    envelope: {name: quantskills-envelope, version: 1.0.0}
+    inputs: [{profile: factor-panel, version_range: ">=1.0.0 <2.0.0", required: true}]
+    outputs: [{profile: evaluation-result, version: 1.0.0}]
+    adapters: [factor-ranking]
+  tags: [factor-selection]
 ```
+<!-- catalog-declaration-example:end -->
 
-The modes are `structured`, `hybrid`, `natural-language`, and `not-applicable`. Structured/hybrid assets use input semver ranges and exact output versions in the Envelope/Profile contract. `qsh-form` is optional and independent of this contract. For `not-applicable`, the only reasons are `natural-language-only`, `report-only`, and `orchestration-only`.
+The modes are `structured`, `hybrid`, `natural-language`, and `not-applicable`. Structured/hybrid assets identify the Envelope as `{name: quantskills-envelope, version: 1.0.0}`, use input Profile semver ranges and exact output Profile versions, and declare `adapters`. `qsh-form` is optional and independent of this contract. For `not-applicable`, the only reasons are `natural-language-only`, `report-only`, and `orchestration-only`.
 
 GitHub's `summary_zh｜summary_en` description is generated only after validation; it is never an unchecked source of either summary.
 

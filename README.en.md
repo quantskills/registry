@@ -35,7 +35,7 @@ It is **not** an internal issue list: detailed audits, `health_items`, and human
 
 ```mermaid
 flowchart LR
-    A["🏢 quantskills org<br/>skill-* / agent-* repos"] --> B["🌙 nightly-scan<br/>00:30 UTC+8 nightly<br/>skip if HEAD sha unchanged"]
+    A["🏢 quantskills org<br/>skill-* / agent-* repos"] --> B["🌙 nightly-scan<br/>00:30 UTC+8 nightly<br/>all-or-nothing closed inventory"]
     B --> C["📥 Read-only shallow clone<br/>QS_READ_TOKEN (Metadata/Contents read only)"]
     C --> D["🩺 validate_skill.py<br/>8 deterministic health checks"]
     D --> E{"Health grading"}
@@ -58,12 +58,12 @@ The pipeline is driven by [`.github/workflows/nightly-scan.yml`](.github/workflo
 | File | Audience | Stable URL |
 |---|---|---|
 | [`registry.json`](registry.json) | Websites, tools, automation | `https://raw.githubusercontent.com/quantskills/registry/main/registry.json` |
-| [`catalog.snapshot.json`](catalog.snapshot.json) | Complete catalog contract | `https://raw.githubusercontent.com/quantskills/registry/main/catalog.snapshot.json` |
+| `catalog.snapshot.json` | Complete catalog contract; available after first enforce-clean publication | Published raw URL after the first enforce-clean publication |
 | [`INDEX.md`](INDEX.md) | Humans, browsing by type/category | Read it right here |
 | [`llms.txt`](llms.txt) | LLM / AI agent discovery | Deployed as `https://quantskills.ai/llms.txt` |
 | [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | Claude Code plugin marketplace | `/plugin marketplace add quantskills/registry` |
 
-These generated outputs are owned by `build_registry.py` — **do not edit by hand**. `catalog.snapshot.json` is the complete catalog; `registry.json` is its backward-compatible array projection. Read the bilingual [Catalog Contract (中文)](docs/CATALOG_CONTRACT_zh.md) and [Catalog Contract (English)](docs/CATALOG_CONTRACT_en.md) before changing declarations.
+These generated outputs are owned by `build_registry.py` — **do not edit by hand**. After the first enforce-clean publication, `catalog.snapshot.json` is the complete catalog and `registry.json` is its backward-compatible array projection. Every build reads the all-or-nothing closed inventory. Read the bilingual [Catalog Contract (中文)](docs/CATALOG_CONTRACT_zh.md) and [Catalog Contract (English)](docs/CATALOG_CONTRACT_en.md) before changing declarations.
 
 ---
 
@@ -78,7 +78,7 @@ These generated outputs are owned by `build_registry.py` — **do not edit by ha
 | `path-refs` | fail / warn | Markdown links must point to existing in-repo files (dead link = fail); missing backtick-mentioned paths and outside-repo references = warn |
 | `git-hygiene` | fail / warn | Any file >10MB quarantines; data files >2MB (csv/parquet/json/db/zip, …) warn |
 | `secrets` | fail | Lightweight regex scan for AWS keys, GitHub PATs, `sk-`-shaped API keys, Slack tokens |
-| `trader-disclaimer` | fail | `trader-research` repos must carry both a "not investment advice" and a "not affiliated" statement (standard text in [`docs/templates/disclaimer_zh_en.md`](docs/templates/disclaimer_zh_en.md)) |
+| `quant-risk-disclosures` | fail / warn | Quantitative factor, strategy, backtest, signal, execution, and trading assets require appropriate research-risk disclosures |
 | `python-syntax` | fail | Every `.py` in the repo must pass `py_compile` |
 | `requires` | warn | Repositories declared in `requires` must actually exist in the organization |
 
@@ -138,10 +138,9 @@ As of 2026-07-22: **97 skills / 6 agents**. Categories: `Uncategorized / uncateg
 Local full build for maintainers:
 
 ```bash
-pip install pyyaml requests
+pip install -r requirements-dev.txt
 python scripts/validate_skill.py /path/to/skill-or-agent-repo   # single-repo pre-check
 GITHUB_TOKEN=xxx python scripts/build_registry.py --full        # compatibility switch; every scan is already full-inventory
-# add --audit-dir reports to generate local scan-YYYYMMDD.json and human-review-YYYYMMDD.md (never committed publicly)
 ```
 
 `GITHUB_TOKEN` only needs read access; public-only scans work without a token but may hit GitHub API rate limits.

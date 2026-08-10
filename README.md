@@ -36,7 +36,7 @@
 
 ```mermaid
 flowchart LR
-    A["🏢 quantskills 组织<br/>skill-* / agent-* 仓库"] --> B["🌙 nightly-scan<br/>每晚 00:30 北京时间<br/>HEAD sha 未变则增量跳过"]
+    A["🏢 quantskills 组织<br/>skill-* / agent-* 仓库"] --> B["🌙 nightly-scan<br/>每晚 00:30 北京时间<br/>all-or-nothing closed inventory"]
     B --> C["📥 只读浅克隆<br/>QS_READ_TOKEN（仅 Metadata/Contents 读）"]
     C --> D["🩺 validate_skill.py<br/>8 项确定性健康检查"]
     D --> E{"健康分级"}
@@ -59,12 +59,12 @@ flowchart LR
 | 文件 | 给谁用 | 稳定 URL |
 |---|---|---|
 | [`registry.json`](registry.json) | 网站、工具、自动化系统 | `https://raw.githubusercontent.com/quantskills/registry/main/registry.json` |
-| [`catalog.snapshot.json`](catalog.snapshot.json) | 完整目录契约 | `https://raw.githubusercontent.com/quantskills/registry/main/catalog.snapshot.json` |
+| `catalog.snapshot.json` | 完整目录契约；首次 enforce-clean 发布后可用（first enforce-clean publication） | 首次 enforce-clean 发布后提供 raw URL |
 | [`INDEX.md`](INDEX.md) | 人类，按 类型/分类 分组浏览 | 本仓库直接看 |
 | [`llms.txt`](llms.txt) | LLM / AI agent 发现 | 部署为 `https://quantskills.ai/llms.txt` |
 | [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | Claude Code 插件市场 | `/plugin marketplace add quantskills/registry` |
 
-这些生成产物由 `build_registry.py` 管理，**请勿手工编辑**。`catalog.snapshot.json` 是完整目录，`registry.json` 是向后兼容的数组投影。修改声明前请阅读双语[目录契约（中文）](docs/CATALOG_CONTRACT_zh.md)与[Catalog Contract (English)](docs/CATALOG_CONTRACT_en.md)。
+这些生成产物由 `build_registry.py` 管理，**请勿手工编辑**。首次 enforce-clean 发布后，`catalog.snapshot.json` 是完整目录，`registry.json` 是向后兼容的数组投影。每次构建均读取 all-or-nothing closed inventory。修改声明前请阅读双语[目录契约（中文）](docs/CATALOG_CONTRACT_zh.md)与[Catalog Contract (English)](docs/CATALOG_CONTRACT_en.md)。
 
 ---
 
@@ -79,7 +79,7 @@ flowchart LR
 | `path-refs` | fail / warn | Markdown 链接指向的仓库内文件必须存在（死链 fail）；反引号提及路径缺失、引用仓库外路径为 warn |
 | `git-hygiene` | fail / warn | 单文件 >10MB 隔离；>2MB 的数据文件（csv/parquet/json/db/zip 等）warn |
 | `secrets` | fail | 轻量正则扫 AWS Key、GitHub PAT、`sk-` 形态密钥、Slack token |
-| `trader-disclaimer` | fail | `trader-research` 类目必须同时有「不构成投资建议」与「非官方/不隶属」声明（标准文案见 [`docs/templates/disclaimer_zh_en.md`](docs/templates/disclaimer_zh_en.md)） |
+| `quant-risk-disclosures` | fail / warn | 因子、策略、回测、信号、执行和交易类资产须具备恰当的研究风险披露 |
 | `python-syntax` | fail | 仓库内所有 `.py` 必须通过 `py_compile` |
 | `requires` | warn | `requires` 声明的依赖仓库必须真实存在于组织中 |
 
@@ -139,10 +139,9 @@ flowchart LR
 维护者本地全量构建：
 
 ```bash
-pip install pyyaml requests
+pip install -r requirements-dev.txt
 python scripts/validate_skill.py /path/to/skill-or-agent-repo   # 单仓库预检
 GITHUB_TOKEN=xxx python scripts/build_registry.py --full        # 兼容开关；每次扫描本来都是完整库存
-# 加 --audit-dir reports 可在本地生成 scan-YYYYMMDD.json 与 human-review-YYYYMMDD.md（不入公开仓库）
 ```
 
 `GITHUB_TOKEN` 只需读权限；纯公开仓库扫描可不带 token，但会受 GitHub API 限速。
@@ -196,7 +195,7 @@ registry/
 
 ## Catalog Contract v2
 
-当前目录契约使用 `schema_version: 2.0.0`：10 个一级分类、61 个二级分类、14 个阶段，以及五个工作流展示组。`catalog.snapshot.json` 是完整目录，`registry.json` 是向后兼容的数组投影；两者均由构建器生成，禁止手工编辑。旧的 14 类枚举说明已不再是当前契约。
+当前目录契约使用 `schema_version: 2.0.0`：10 个一级分类、61 个二级分类、14 个阶段，以及五个工作流展示组。首次 enforce-clean 发布后，`catalog.snapshot.json` 是完整目录，`registry.json` 是向后兼容的数组投影；两者均由构建器生成，禁止手工编辑。旧的 14 类枚举说明已不再是当前契约。
 
 声明、迁移和发布规则请阅读双语[目录契约（中文）](docs/CATALOG_CONTRACT_zh.md)与[Catalog Contract (English)](docs/CATALOG_CONTRACT_en.md)。
 

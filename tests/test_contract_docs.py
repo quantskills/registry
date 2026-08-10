@@ -2,11 +2,15 @@ import unittest
 from pathlib import Path
 import subprocess
 import sys
+import re
 
 import yaml
 
 
 ROOT = Path(__file__).parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from catalog_contract import load_taxonomy, validate_asset_semantics, validate_frontmatter_schema
+
 GUIDES = ("CATALOG_CONTRACT_zh.md", "CATALOG_CONTRACT_en.md")
 RUNTIMES = {"cursor", "claude-code", "codex", "hermes", "openclaw"}
 INTERFACE_MODES = {"structured", "hybrid", "natural-language", "not-applicable"}
@@ -14,6 +18,37 @@ NA_REASONS = {"natural-language-only", "report-only", "orchestration-only"}
 
 
 class ContractDocumentationTests(unittest.TestCase):
+    def test_each_guide_example_is_a_complete_valid_v2_declaration(self):
+        taxonomy = load_taxonomy(ROOT)
+        schema_path = ROOT / "schema" / "frontmatter.schema.json"
+        for name in GUIDES:
+            with self.subTest(guide=name):
+                text = (ROOT / "docs" / name).read_text(encoding="utf-8")
+                match = re.search(
+                    r"<!-- catalog-declaration-example:start -->\s*```yaml\s*\n(.*?)\n```\s*<!-- catalog-declaration-example:end -->",
+                    text,
+                    flags=re.DOTALL,
+                )
+                self.assertIsNotNone(match, "missing identifiable complete declaration example")
+                declaration = yaml.safe_load(match.group(1))
+                self.assertEqual(validate_frontmatter_schema(declaration, schema_path), [])
+                self.assertEqual(
+                    validate_asset_semantics(declaration, declaration["name"], "SKILL.md", taxonomy),
+                    [],
+                )
+
+    def test_readmes_describe_current_full_inventory_contract(self):
+        forbidden = ("skip if HEAD sha unchanged", "HEAD sha 未变则增量跳过", "trader-disclaimer", "--audit-dir", "](catalog.snapshot.json)")
+        for name in ("README.md", "README.en.md"):
+            with self.subTest(readme=name):
+                text = (ROOT / name).read_text(encoding="utf-8")
+                for phrase in forbidden:
+                    self.assertNotIn(phrase, text)
+                self.assertIn("quant-risk-disclosures", text)
+                self.assertIn("pip install -r requirements-dev.txt", text)
+                self.assertIn("all-or-nothing closed inventory", text)
+                self.assertIn("first enforce-clean publication", text)
+
     def test_each_guide_states_the_complete_operational_contract(self):
         for name in GUIDES:
             with self.subTest(guide=name):

@@ -27,21 +27,40 @@
 
 `catalog` 声明一个一级分类和与之匹配的二级分类；`workflow` 的 `primary_stage` 必须出现在去重后的 `workflow_stages` 中。`summary_zh` 与 `summary_en` 是单行、真实的双语展示摘要。`status` 可为 `draft`、`active`、`stable`、`deprecated`；`validation_level` 可为 `listed`、`runnable`、`verified`；`maintainer` 标识责任人或团队，`maintainer_type` 可为 `official` 或 `community`。
 
-`interface` 描述机器间接口，例如：
+`interface` 描述机器间接口。以下 fenced block 是完整、可复制的 v2 声明：
 
+<!-- catalog-declaration-example:start -->
 ```yaml
-catalog: {category: "02", subcategory: "02.factor-evaluation"}
-workflow: {primary_stage: evaluation, workflow_stages: [factor-screening, evaluation]}
-summary_zh: 因子评估结果的可复现实验流程。
-summary_en: Reproducible evaluation workflow for factor results.
-interface:
-  mode: structured
-  envelope: {input: ">=1.0.0 <2.0.0", output: "1.0.0"}
-  inputs: [{profile: factor-panel, version_range: ">=1.0.0 <2.0.0", required: true}]
-  outputs: [{profile: evaluation-result, version: "1.0.0"}]
+name: skill-factor-grouped-wrapper
+description: A structured wrapper that ranks candidate factors from market data and returns evaluation-ready outputs for quantitative research workflows.
+quantSkills:
+  schema_version: 2.0.0
+  organization: quantskills
+  organization_url: https://github.com/quantskills
+  repository: skill-factor-grouped-wrapper
+  repository_url: https://github.com/quantskills/skill-factor-grouped-wrapper
+  project_type: skill
+  license: GPL-3.0-only
+  maintainer: abgyjaguo
+  catalog: {category: "02", subcategory: 02.factor-selection}
+  workflow: {primary_stage: factor-screening, workflow_stages: [factor-screening, evaluation]}
+  summary_zh: 用于因子筛选与评估的结构化工作流。
+  summary_en: Structured workflow for factor screening and evaluation.
+  status: active
+  validation_level: listed
+  maintainer_type: community
+  platforms: [cursor, claude-code, codex, hermes, openclaw]
+  interface:
+    mode: structured
+    envelope: {name: quantskills-envelope, version: 1.0.0}
+    inputs: [{profile: factor-panel, version_range: ">=1.0.0 <2.0.0", required: true}]
+    outputs: [{profile: evaluation-result, version: 1.0.0}]
+    adapters: [factor-ranking]
+  tags: [factor-selection]
 ```
+<!-- catalog-declaration-example:end -->
 
-四种模式是 `structured`、`hybrid`、`natural-language`、`not-applicable`。structured/hybrid 的 Envelope/Profile 使用输入 semver 范围和精确输出版本；`qsh-form` 可选且独立于本契约。`not-applicable` 仅允许三种原因：`natural-language-only`、`report-only`、`orchestration-only`。
+四种模式是 `structured`、`hybrid`、`natural-language`、`not-applicable`。structured/hybrid 的 Envelope 固定为 `{name: quantskills-envelope, version: 1.0.0}`；输入 Profile 使用 semver 范围，输出 Profile 使用精确版本，并必须声明 `adapters`；`qsh-form` 可选且独立于本契约。`not-applicable` 仅允许三种原因：`natural-language-only`、`report-only`、`orchestration-only`。
 
 GitHub 描述 `summary_zh｜summary_en` 仅在验证后生成，绝不作为未经验证的摘要来源。
 

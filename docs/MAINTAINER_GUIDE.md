@@ -31,7 +31,7 @@ For deterministic fixed-input verification, run:
 python -m unittest tests.test_snapshot_builder tests.test_atomic_generation -v
 ```
 
-The builder produces one complete `catalog.snapshot.json`, then its backward-compatible `registry.json` array projection. Every projected asset has the same `snapshot_id`; the snapshot also includes organization resources, Profiles, adapters, and compatibility edges.
+After the first enforce-clean publication, the builder produces one complete `catalog.snapshot.json`, then its backward-compatible `registry.json` array projection. Every projected asset has the same `snapshot_id`; the snapshot also includes organization resources, Profiles, adapters, and compatibility edges. Every invocation reads the all-or-nothing closed inventory; `--full` is compatibility-only and does not select a different scan scope.
 
 ## Release gate and nightly publication
 
@@ -46,6 +46,6 @@ node scripts\validate-registry.mjs --contract-mode enforce tests\fixtures\builde
 git diff --check
 ```
 
-The nightly schedule always runs audit and never stages, commits, or pushes its diagnostic/fallback outputs. A manually dispatched `contract_mode: enforce` run must first finish the builder and a final enforce validation; only then it stages `catalog.snapshot.json`, `registry.json`, `INDEX.md`, `llms.txt`, `.claude-plugin/marketplace.json`, and builder-owned README snapshot sections. `QS_READ_TOKEN` remains separate and read-only; no remote metadata publisher is part of this workflow.
+The nightly schedule always runs audit and never stages, commits, or pushes its diagnostic/fallback outputs. A manually dispatched `contract_mode: enforce` run must first finish the builder and a final enforce validation; only then it stages the first or next enforce-clean `catalog.snapshot.json`, `registry.json`, `INDEX.md`, `llms.txt`, `.claude-plugin/marketplace.json`, and builder-owned README snapshot sections. `QS_READ_TOKEN` remains separate and read-only; no remote metadata publisher is part of this workflow.
 
 Do not begin an organization-wide 158-repository migration or write remote repository metadata as part of this foundation work. Publish only after taxonomy (10/61/14/five groups), both five-platform templates, audit visibility, enforce rejection, byte identity, atomic failure preservation, and no-fallback checks are green.
