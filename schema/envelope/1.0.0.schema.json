@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantskills.github.io/registry/schema/envelope/1.0.0.schema.json",
+  "title": "quantskills-envelope 1.0.0",
+  "type": "object",
+  "required": ["$contract", "meta", "schema", "payload", "quality"],
+  "properties": {
+    "$contract": {"type": "object", "additionalProperties": false, "required": ["name", "version"], "properties": {"name": {"const": "quantskills-envelope"}, "version": {"const": "1.0.0"}}},
+    "meta": {"type": "object", "additionalProperties": false, "required": ["generated_at", "provenance"], "properties": {"generated_at": {"$ref": "#/$defs/dateTime"}, "provenance": {"type": "object", "additionalProperties": false, "required": ["provider", "dataset", "raw_ref", "digest"], "properties": {"provider": {"type": "string", "minLength": 1}, "dataset": {"type": "string", "minLength": 1}, "raw_ref": {"type": "string", "minLength": 1}, "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}}}},
+    "schema": {"type": "object", "additionalProperties": false, "required": ["primary_key", "fields"], "properties": {"primary_key": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}, "fields": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/field"}}}},
+    "payload": {"type": "object", "additionalProperties": false, "required": ["native", "records"], "properties": {"native": {"type": "object", "additionalProperties": false, "properties": {"raw_ref": {"type": "string", "minLength": 1}, "raw_records": {"type": "array"}}, "anyOf": [{"required": ["raw_ref"]}, {"required": ["raw_records"]}]}, "records": {"type": "array", "items": {"type": "object"}}}},
+    "quality": {"type": "object", "additionalProperties": false, "required": ["status"], "properties": {"status": {"enum": ["pass", "warning", "fail"]}}}
+  },
+  "$defs": {
+    "dateTime": {"type": "string", "format": "date-time", "pattern": "(?:Z|[+-][0-9]{2}:[0-9]{2})$"},
+    "field": {"type": "object", "additionalProperties": false, "required": ["type"], "properties": {"type": {"enum": ["string", "number", "integer", "boolean", "object", "array"]}, "format": {"type": "string"}, "unit": {"type": "string", "minLength": 1}, "nullable": {"type": "boolean"}, "description": {"type": "string"}}, "allOf": [{"if": {"properties": {"type": {"enum": ["number", "integer"]}}, "required": ["type"]}, "then": {"required": ["unit"]}}]}
+  }
+}

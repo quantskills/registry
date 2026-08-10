@@ -1,0 +1,7 @@
+{
+  "$contract": {"name": "quantskills-envelope", "version": "1.0.0"},
+  "meta": {"generated_at": "2026-08-10T09:30:00+08:00", "provenance": {"provider": "synthetic-provider", "dataset": "market-bars", "raw_ref": "fixture://market-bars/20260810", "digest": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"}},
+  "schema": {"primary_key": ["symbol", "timestamp"], "fields": {"symbol": {"type": "string", "description": "Instrument symbol"}, "timestamp": {"type": "string", "format": "date-time"}, "close": {"type": "number", "unit": "CNY"}}},
+  "payload": {"native": {"raw_ref": "fixture://market-bars/20260810"}, "records": [{"symbol": "SYNTH", "timestamp": "2026-08-10T09:30:00+08:00", "close": 12.5}]},
+  "quality": {"status": "pass"}
+}
