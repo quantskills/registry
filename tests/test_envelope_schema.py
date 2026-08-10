@@ -40,6 +40,16 @@ class EnvelopeSchemaTests(unittest.TestCase):
         document = self.document(); document["meta"]["provenance"][0].pop("raw_sha256")
         self.assertIn(("meta", "provenance", 0), self.paths(document))
 
+    def test_profile_and_hash_identifiers_are_exact(self):
+        for value in ("01.0.0", "1.01.0", "1.0.01"):
+            with self.subTest(version=value):
+                document = self.document(); document["$contract"]["profile_version"] = value
+                self.assertIn(("$contract", "profile_version"), self.paths(document))
+        document = self.document(); document["$contract"]["profile"] = "market-bar\n"
+        self.assertIn(("$contract", "profile"), self.paths(document))
+        document = self.document(); document["meta"]["provenance"][0]["raw_sha256"] += "\n"
+        self.assertIn(("meta", "provenance", 0, "raw_sha256"), self.paths(document))
+
     def test_rich_meta_native_quality_and_units(self):
         document = self.document()
         self.assertEqual(self.paths(document), set())
@@ -58,6 +68,15 @@ class EnvelopeSchemaTests(unittest.TestCase):
             self.assertIn(f"/meta/{field}", {issue["path"] for issue in envelope_semantic_issues(document)})
         document = self.document(); document["schema"]["primary_key"] = ["missing"]
         self.assertEqual(envelope_semantic_issues(document), [{"code": "envelope-primary-key", "path": "/schema/primary_key/0"}])
+        for value in ([[]], [{}]):
+            with self.subTest(value=value):
+                document = self.document(); document["schema"]["primary_key"] = value
+                self.assertEqual(envelope_semantic_issues(document), [])
+                self.assertIn(("schema", "primary_key", 0), self.paths(document))
+        for timestamp in ("2026-08-10T09:30:00Z", "2026-08-10T09:30:00+08:00"):
+            with self.subTest(timestamp=timestamp):
+                document = self.document(); document["meta"]["generated_at"] = timestamp; document["meta"]["as_of"] = timestamp
+                self.assertEqual(envelope_semantic_issues(document), [])
         document = self.document(); document["extra"] = True
         self.assertIn((), self.paths(document))
 
