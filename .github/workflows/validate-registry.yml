@@ -27,6 +27,8 @@ jobs:
           QS_SKILL_TEMPLATE_PATH: ${{ github.workspace }}/.contract/skill-template
           QS_AGENT_TEMPLATE_PATH: ${{ github.workspace }}/.contract/agent-template
         run: python -m unittest discover -s tests -v
+      - name: Run deep verifier CLI fixture
+        run: python -m unittest tests.test_atomic_generation.AtomicGenerationTests.test_verifier_rejects_self_consistent_trusted_catalog_bypasses_before_promotion -v
       - name: Run contract validator tests
         run: python -m unittest tests.test_contract_runtime -v
       - name: Validate canonical contract sample

@@ -1,6 +1,10 @@
 import tempfile
 import unittest
 import json
+import copy
+import hashlib
+import subprocess
+import shutil
 from pathlib import Path
 import sys
 
@@ -11,6 +15,50 @@ from verify_catalog_artifacts import verify
 
 
 class AtomicGenerationTests(unittest.TestCase):
+    def _sealed(self, snapshot):
+        snapshot["snapshot_id"] = "sha256:" + hashlib.sha256(build_registry.canonical_json(build_registry._stable_snapshot(snapshot))).hexdigest()
+        return snapshot
+
+    def test_verifier_rejects_self_consistent_trusted_catalog_bypasses_before_promotion(self):
+        """Each tamper recomputes public projection and ID, so self-hashes cannot hide it."""
+        taxonomy = build_registry.load_taxonomy(ROOT)
+        envelope, profiles, adapters, mappings = build_registry.load_contract_catalogs()
+        names = (("skill-pandadata-warehouse", ("market-bar",), ()), ("skill-factor-mining-pandaai", ("factor-panel",), ("market-bar",)), ("skill-factor-grouped-wrapper", ("ranked-factor-set",), ("factor-panel",)), ("skill-portfolio-optimize", ("portfolio-target",), ("ranked-factor-set",)), ("skill-backtest", ("backtest-result", "evaluation-result"), ("portfolio-target",)), ("skill-ssquant-ai-trader", ("execution-plan",), ("evaluation-result",)))
+        def asset(name, outputs, inputs):
+            return {"name": name, "url": f"https://github.com/quantskills/{name}", "description": "fixture", "project_type": "skill", "declaration_file": "SKILL.md", "tags": [], "platforms": [], "status": "active", "requires": [], "summary_zh": "fixture", "summary_en": "fixture", "license": "GPL-3.0-only", "validation_level": "verified", "maintainer_type": "community", "commit_sha": "fixture", "catalog": {"category": "02", "subcategory": "02.factor-evaluation"}, "category": "02", "subcategory": "02.factor-evaluation", "workflow": {"primary_stage": "evaluation", "workflow_stages": ["evaluation"]}, "stage": "evaluation", "last_validated": "2026-08-10", "interface": {"mode": "structured", "envelope": {"name": "quantskills-envelope", "version": "1.0.0"}, "inputs": [{"profile": item, "version_range": ">=1.0.0 <2.0.0", "required": True} for item in inputs], "outputs": [{"profile": item, "version": "1.0.0"} for item in outputs], "adapters": []}}
+        baseline = build_registry.build_snapshot([asset(*row) for row in names], [{"name": name, "url": f"https://github.com/quantskills/{name}"} for name in (".github", "join", "quantskills", "registry")], taxonomy, profiles, adapters, envelope, mappings, contract_mode="enforce")
+        fake = {"id": "fake-adapter", "source": {"profile": "market-bar", "version": "1.0.0"}, "target": {"profile": "factor-panel", "version": "1.0.0"}, "implementation": {"repository": "registry", "path": "scripts/compatibility.py"}, "lossless": True, "validation_status": "validated", "evidence": {"fixture_sha256": "sha256:" + "0" * 64, "test_command": "fixture", "validated_at": "2026-08-10"}, "envelope_major": 1}
+        mutations = (
+            lambda value: (value.pop("envelope"), value.pop("provider_mappings")),
+            lambda value: value.update(compatibility_edges=[]),
+            lambda value: value["profiles"]["items"][0].update(schema="wrong.schema.json"),
+            lambda value: value["provider_mappings"]["items"][0]["evidence"].update(raw_sha256="sha256:" + "0" * 64),
+            lambda value: value["adapters"]["items"].append(copy.deepcopy(fake)),
+            lambda value: value["core_lineage"]["artifacts"][0].update(artifact_sha256="sha256:" + "0" * 64),
+        )
+        with tempfile.TemporaryDirectory(dir=ROOT) as temporary:
+            base = Path(temporary)
+            baseline_snapshot, baseline_registry = base / "baseline.snapshot.json", base / "baseline.registry.json"
+            baseline_snapshot.write_text(json.dumps(baseline), encoding="utf-8"); baseline_registry.write_text(json.dumps(build_registry.public_registry_projection(baseline)), encoding="utf-8")
+            baseline_readmes = (base / "baseline.md", base / "baseline.en.md")
+            for readme in baseline_readmes: readme.write_text(f"<!-- registry-snapshot:start -->\n`{baseline['snapshot_id']}`\n<!-- registry-snapshot:end -->", encoding="utf-8")
+            result = subprocess.run([shutil.which("python") or sys.executable, str(ROOT / "scripts" / "verify_catalog_artifacts.py"), str(baseline_snapshot), str(baseline_registry), "--readme", str(baseline_readmes[0]), "--readme", str(baseline_readmes[1])], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            for mutate in mutations:
+                snapshot = copy.deepcopy(baseline); mutate(snapshot); self._sealed(snapshot)
+                sp, rp = base / "catalog.snapshot.json", base / "registry.json"
+                sp.write_text(json.dumps(snapshot), encoding="utf-8"); rp.write_text(json.dumps(build_registry.public_registry_projection(snapshot)), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    verify(sp, rp)
+                readmes = (base / "README.md", base / "README.en.md")
+                for readme in readmes: readme.write_text(f"<!-- registry-snapshot:start -->\n`{snapshot['snapshot_id']}`\n<!-- registry-snapshot:end -->", encoding="utf-8")
+                first = base / "first.json"; first.write_bytes(b"old")
+                original_root, build_registry.ROOT = build_registry.ROOT, base
+                try:
+                    with self.assertRaises(ValueError): build_registry.promote_artifacts({first: b"replacement", sp: sp.read_bytes(), rp: rp.read_bytes(), readmes[0]: readmes[0].read_bytes(), readmes[1]: readmes[1].read_bytes()})
+                finally:
+                    build_registry.ROOT = original_root
+                self.assertEqual(first.read_bytes(), b"old")
     def test_promotion_failure_restores_all_destinations(self):
         with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
             tmp = Path(tmp)
@@ -57,7 +105,7 @@ class AtomicGenerationTests(unittest.TestCase):
         envelope, profiles, adapters, mappings = build_registry.load_contract_catalogs()
         snapshot["taxonomy"] = build_registry.load_taxonomy(ROOT)
         snapshot["assets"][0].update({"category": "02", "subcategory": "02.factor-evaluation", "stage": "evaluation"})
-        snapshot.update({"contract_mode": "audit", "interface_diagnostics": [], "envelope": envelope, "profiles": profiles, "adapters": adapters, "provider_mappings": mappings, "core_lineage": build_registry.load_core_lineage()})
+        snapshot.update({"contract_mode": "audit", "interface_diagnostics": [], "envelope": envelope, "profiles": profiles, "adapters": adapters, "provider_mappings": mappings, "core_lineage": {"version": "1.0.0", "artifacts": []}})
         snapshot["snapshot_id"] = "sha256:" + build_registry.hashlib.sha256(build_registry.canonical_json(build_registry._stable_snapshot(snapshot))).hexdigest()
         row = {"name": "skill-a", "url": "https://github.com/quantskills/skill-a", "description": "x", "project_type": "skill", "declaration_file": "SKILL.md", "category": "02", "subcategory": "02.factor-evaluation", "stage": "evaluation", "tags": [], "platforms": [], "status": "active", "requires": [], "summary_zh": "中文说明", "summary_en": "Natural language asset", "license": "GPL-3.0-only", "last_validated": "2026-08-10", "validation_level": "listed", "maintainer_type": "community", "commit_sha": "", "catalog": snapshot["assets"][0]["catalog"], "workflow": snapshot["assets"][0]["workflow"], "interface": {"mode": "natural-language"}, "snapshot_id": snapshot["snapshot_id"]}
         with tempfile.TemporaryDirectory(dir=ROOT) as tmp:

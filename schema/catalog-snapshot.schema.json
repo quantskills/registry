@@ -726,6 +726,7 @@
           "required": [
             "provider",
             "dataset",
+            "raw_ref",
             "raw_sha256"
           ],
           "properties": {
@@ -733,6 +734,9 @@
               "type": "string"
             },
             "dataset": {
+              "type": "string"
+            },
+            "raw_ref": {
               "type": "string"
             },
             "raw_sha256": {
