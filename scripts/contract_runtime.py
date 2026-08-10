@@ -18,6 +18,18 @@ _PROFILE_TEMPORAL_FIELDS = {
     "macro-series": (("observation_date", "date"), ("vintage_date", "date")),
     "market-bar": (("timestamp", "rfc3339"),),
     "option-chain": (("quote_time", "rfc3339"), ("expiry", "date")),
+    "ranked-factor-set": (("as_of", "rfc3339"),),
+    "model-artifact": (("training_cutoff", "rfc3339"),),
+    "portfolio-target": (("as_of", "rfc3339"),),
+    "backtest-result": (("period_start", "date"), ("period_end", "date")),
+    "evaluation-result": (
+        ("evaluated_at", "rfc3339"),
+        ("sample_start", "date"),
+        ("sample_end", "date"),
+    ),
+    "risk-result": (("as_of", "rfc3339"),),
+    "execution-plan": (("as_of", "rfc3339"),),
+    "report-artifact": (("as_of", "rfc3339"),),
 }
 _MACRO_UNITS = {"percent", "index", "currency", "count", "ratio"}
 
@@ -52,6 +64,28 @@ def _finite_number(value: object) -> bool:
     if isinstance(value, int):
         return True
     return isinstance(value, float) and math.isfinite(value)
+
+
+def _finite_profile_issues(value: object, path: str) -> list[dict]:
+    """Walk normalized records deterministically and report non-finite floats."""
+    if isinstance(value, dict):
+        issues: list[dict] = []
+        try:
+            fields = sorted(value)
+        except TypeError:
+            fields = sorted(value, key=str)
+        for field in fields:
+            token = str(field).replace("~", "~0").replace("/", "~1")
+            issues.extend(_finite_profile_issues(value[field], f"{path}/{token}"))
+        return issues
+    if isinstance(value, list):
+        issues: list[dict] = []
+        for index, item in enumerate(value):
+            issues.extend(_finite_profile_issues(item, f"{path}/{index}"))
+        return issues
+    if isinstance(value, float) and not math.isfinite(value):
+        return [_issue("profile-finite", path)]
+    return []
 
 
 def envelope_semantic_issues(document: object) -> list[dict]:
@@ -109,10 +143,7 @@ def profile_semantic_issues(document: object) -> list[dict]:
             if not valid:
                 issues.append(_issue(f"profile-{kind}", f"/payload/records/{index}/{field}"))
 
-        for field in sorted(record):
-            value = record[field]
-            if isinstance(value, float) and not math.isfinite(value):
-                issues.append(_issue("profile-finite", f"/payload/records/{index}/{field}"))
+        issues.extend(_finite_profile_issues(record, f"/payload/records/{index}"))
 
         if profile == "factor-panel" and "value" in record and record["value"] is None:
             policy = record.get("missing_policy")

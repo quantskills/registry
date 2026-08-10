@@ -82,9 +82,13 @@ class BaseProfileTests(unittest.TestCase):
         index = json.loads(
             (ROOT / "schema" / "profiles" / "index.json").read_text(encoding="utf-8")
         )["profiles"]
-        self.assertEqual([row["id"] for row in index], sorted(PROFILES))
-        self.assertEqual(set(row["id"] for row in index), set(PROFILES))
-        for row in index:
+        ids = [row["id"] for row in index]
+        self.assertEqual(ids, sorted(ids))
+        self.assertEqual(len(ids), len(set(ids)))
+        base_rows = [row for row in index if row["kind"] == "base"]
+        self.assertEqual([row["id"] for row in base_rows], sorted(PROFILES))
+        self.assertEqual(set(row["id"] for row in base_rows), set(PROFILES))
+        for row in base_rows:
             expected = PROFILES[row["id"]]
             self.assertEqual(
                 row,
