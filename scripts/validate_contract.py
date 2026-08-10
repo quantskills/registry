@@ -40,6 +40,32 @@ def resolve_profile(profile: str, version: str, index: dict) -> Path | None:
     return Path(matches[0]["schema"])
 
 
+def _profile_index_is_valid(index: object) -> bool:
+    if not isinstance(index, dict) or not isinstance(index.get("profiles"), list):
+        return False
+    seen: set[tuple[str, str]] = set()
+    for row in index["profiles"]:
+        if not isinstance(row, dict):
+            return False
+        profile = row.get("id")
+        version = row.get("version")
+        schema = row.get("schema")
+        kind = row.get("kind")
+        if (
+            not isinstance(profile, str)
+            or _PROFILE_ID.fullmatch(profile) is None
+            or not isinstance(version, str)
+            or _VERSION.fullmatch(version) is None
+            or not isinstance(schema, str)
+            or not schema
+            or kind not in {"base", "result"}
+            or (profile, version) in seen
+        ):
+            return False
+        seen.add((profile, version))
+    return True
+
+
 def _pointer(path: object) -> str:
     if isinstance(path, str):
         return path
@@ -198,6 +224,8 @@ def validate_contract(document: dict, root: Path) -> dict:
     try:
         profile_index = load_profile_index(root)
     except (OSError, ValueError, json.JSONDecodeError):
+        return _result("unknown", envelope, profile, [_diagnostic("profile", "profile-index", "/schema/profiles/index.json")])
+    if not _profile_index_is_valid(profile_index):
         return _result("unknown", envelope, profile, [_diagnostic("profile", "profile-index", "/schema/profiles/index.json")])
     profile_schema_name = resolve_profile(profile["id"], profile["version"], profile_index)
     if profile_schema_name is None:

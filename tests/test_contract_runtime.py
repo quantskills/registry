@@ -153,6 +153,32 @@ class ContractRuntimeTests(unittest.TestCase):
             self.assertEqual(result["status"], "unknown")
             self.assertEqual(result["errors"][0]["code"], "profile-schema")
 
+    def test_malformed_profile_indexes_fail_closed(self):
+        base_row = {
+            "id": "market-bar",
+            "version": "1.0.0",
+            "schema": "base/market-bar/1.0.0.schema.json",
+            "kind": "base",
+        }
+        cases = (
+            ("duplicate", [base_row, dict(base_row)]),
+            ("profile", [{**base_row, "id": "market-bar\n"}]),
+            ("version", [{**base_row, "version": "01.0.0"}]),
+            ("kind", [{**base_row, "kind": "unknown"}]),
+        )
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        for label, rows in cases:
+            with self.subTest(label=label), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / "schema" / "envelope").mkdir(parents=True)
+                (root / "schema" / "profiles").mkdir(parents=True)
+                shutil.copy2(ROOT / "schema" / "envelope" / "index.json", root / "schema" / "envelope" / "index.json")
+                shutil.copy2(ROOT / "schema" / "envelope" / "1.0.0.schema.json", root / "schema" / "envelope" / "1.0.0.schema.json")
+                (root / "schema" / "profiles" / "index.json").write_text(json.dumps({"profiles": rows}), encoding="utf-8")
+                result = validate_contract(document, root)
+                self.assertEqual(result["status"], "unknown")
+                self.assertEqual(result["errors"], [{"layer": "profile", "code": "profile-index", "path": "/schema/profiles/index.json"}])
+
     def test_cli_exit_codes_json_shape_and_relative_absolute_paths(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
