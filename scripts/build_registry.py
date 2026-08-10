@@ -61,6 +61,11 @@ def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", 
     qs = frontmatter.get("quantSkills") or {}
     catalog, workflow, interface = qs.get("catalog") or {}, qs.get("workflow") or {}, qs.get("interface") or {}
     project_type = qs.get("project_type") or ("agent" if name.startswith("agent-") else "skill")
+    if qs.get("schema_version") == "2.0.0":
+        issues = validate_frontmatter_schema(frontmatter, ROOT / "schema" / "frontmatter.schema.json")
+        issues += validate_asset_semantics(frontmatter, name, "AGENTS.md" if project_type == "agent" else "SKILL.md", load_taxonomy(ROOT))
+        if issues:
+            raise ValueError(f"invalid declaration for {name}: {issues[0]['detail']}")
     missing_v2 = not isinstance(catalog.get("category"), str) or not isinstance(catalog.get("subcategory"), str) or not isinstance(workflow.get("primary_stage"), str) or not isinstance(workflow.get("workflow_stages"), list) or not isinstance(interface, dict) or not interface.get("mode")
     if missing_v2:
         if contract_mode != "audit":
