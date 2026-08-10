@@ -4,6 +4,8 @@ import re
 import sys
 import unittest
 from pathlib import Path
+import copy
+import yaml
 
 ROOT = Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -93,6 +95,31 @@ class SnapshotBuilderTests(unittest.TestCase):
         self.assertTrue(all(entry["migration_issues"] for entry in entries[:2]))
         with self.assertRaises(ValueError):
             collect_entries(legacy, {}, "enforce", inventory={"assets": ["skill-alpha", "agent-alpha"], "resources": [".github", "join", "quantskills", "registry"]})
+
+    def test_partial_v2_skill_and_agent_are_visible_only_in_audit(self):
+        declarations = []
+        for fixture, name in (("valid-structured.yml", "skill-alpha"), ("valid-not-applicable.yml", "agent-alpha")):
+            declaration = yaml.safe_load((ROOT / "tests" / "fixtures" / "declarations" / fixture).read_text(encoding="utf-8"))
+            declaration["name"] = name
+            declaration["quantSkills"]["repository"] = name
+            declaration["quantSkills"]["repository_url"] = f"https://github.com/quantskills/{name}"
+            declaration["quantSkills"].pop("summary_en")
+            declarations.append({"name": name, "frontmatter": declaration})
+        repos = [*declarations, *self.repos[3:]]
+        inventory = {"assets": ["skill-alpha", "agent-alpha"], "resources": [".github", "join", "quantskills", "registry"]}
+        entries, _ = collect_entries(repos, {}, "audit", inventory=inventory)
+        self.assertEqual([entry["migration_state"] for entry in entries], ["pending-v2", "pending-v2"])
+        self.assertTrue(all({"code", "path"} <= set(issue) for entry in entries for issue in entry["migration_issues"]))
+        with self.assertRaises(ValueError):
+            collect_entries(repos, {}, "enforce", inventory=inventory)
+
+    def test_builder_fixture_declarations_have_no_contract_issues(self):
+        from catalog_contract import validate_asset_semantics, validate_frontmatter_schema
+        schema = ROOT / "schema" / "frontmatter.schema.json"
+        for name, declaration in json.loads((ROOT / "tests" / "fixtures" / "builder" / "declarations.json").read_text(encoding="utf-8")).items():
+            with self.subTest(name=name):
+                self.assertEqual(validate_frontmatter_schema(declaration, schema), [])
+                self.assertEqual(validate_asset_semantics(declaration, name, "AGENTS.md" if name.startswith("agent-") else "SKILL.md", self.taxonomy), [])
 
 
 if __name__ == "__main__":

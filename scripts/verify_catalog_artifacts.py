@@ -9,6 +9,7 @@ import re
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
+from catalog_projection import public_registry_projection
 
 ROOT = Path(__file__).resolve().parent.parent
 RESOURCE_NAMES = [".github", "join", "quantskills", "registry"]
@@ -38,10 +39,11 @@ def verify(snapshot_path: Path, registry_path: Path, readmes: tuple[Path, ...] =
     expected = "sha256:" + hashlib.sha256(canonical(stable(snapshot))).hexdigest()
     if snapshot.get("snapshot_id") != expected:
         errors.append("snapshot_id does not match canonical content")
+    expected_registry = public_registry_projection(snapshot) if isinstance(snapshot.get("assets"), list) else []
     asset_names = [asset.get("name") for asset in snapshot.get("assets", [])]
     registry_names = [asset.get("name") for asset in registry] if isinstance(registry, list) else []
-    if asset_names != registry_names:
-        errors.append("registry asset names/order do not exactly match snapshot")
+    if canonical(registry) != canonical(expected_registry):
+        errors.append("registry does not exactly equal the snapshot public projection")
     if len(asset_names) != len(set(asset_names)) or not asset_names:
         errors.append("snapshot assets must be nonempty and unique")
     if [item.get("name") for item in snapshot.get("resources", [])] != RESOURCE_NAMES:

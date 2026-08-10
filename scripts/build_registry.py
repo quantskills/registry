@@ -16,6 +16,7 @@ import requests
 from catalog_contract import canonical_json, load_taxonomy, validate_asset_semantics, validate_frontmatter_schema
 from validate_skill import declaration_info, parse_frontmatter, validate
 from verify_catalog_artifacts import verify
+from catalog_projection import public_registry_projection
 
 ROOT = Path(__file__).resolve().parent.parent
 ORG = os.environ.get("QS_ORG", "quantskills")
@@ -61,28 +62,28 @@ def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", 
     qs = frontmatter.get("quantSkills") or {}
     catalog, workflow, interface = qs.get("catalog") or {}, qs.get("workflow") or {}, qs.get("interface") or {}
     project_type = qs.get("project_type") or ("agent" if name.startswith("agent-") else "skill")
-    if qs.get("schema_version") == "2.0.0":
-        issues = validate_frontmatter_schema(frontmatter, ROOT / "schema" / "frontmatter.schema.json")
-        issues += validate_asset_semantics(frontmatter, name, "AGENTS.md" if project_type == "agent" else "SKILL.md", load_taxonomy(ROOT))
-        if issues:
-            raise ValueError(f"invalid declaration for {name}: {issues[0]['detail']}")
-    missing_v2 = not isinstance(catalog.get("category"), str) or not isinstance(catalog.get("subcategory"), str) or not isinstance(workflow.get("primary_stage"), str) or not isinstance(workflow.get("workflow_stages"), list) or not isinstance(interface, dict) or not interface.get("mode")
+    issues = validate_frontmatter_schema(frontmatter, ROOT / "schema" / "frontmatter.schema.json")
+    issues += validate_asset_semantics(frontmatter, name, "AGENTS.md" if project_type == "agent" else "SKILL.md", load_taxonomy(ROOT))
+    missing_v2 = not isinstance(catalog.get("category"), str) or not isinstance(catalog.get("subcategory"), str) or not isinstance(workflow.get("primary_stage"), str) or not isinstance(workflow.get("workflow_stages"), list) or not isinstance(interface, dict) or not interface.get("mode") or bool(issues)
     if missing_v2:
         if contract_mode != "audit":
-            raise ValueError(f"invalid declaration for {name}: missing v2 catalog/workflow/interface")
-        catalog = {"category": "10", "subcategory": f"10.{name}"} if name in {"skill-template", "agent-template"} else {"category": "unknown", "subcategory": "unknown"}
-        workflow = {"primary_stage": "orchestration", "workflow_stages": ["orchestration"]} if name in {"skill-template", "agent-template"} else {"primary_stage": "unknown", "workflow_stages": []}
-        interface = {"mode": "unknown", "reason": "pending-v2-migration"}
+            raise ValueError(f"invalid declaration for {name}: contract validation failed")
+        if not isinstance(catalog.get("category"), str) or not isinstance(catalog.get("subcategory"), str):
+            catalog = {"category": "10", "subcategory": f"10.{name}"} if name in {"skill-template", "agent-template"} else {"category": "unknown", "subcategory": "unknown"}
+        if not isinstance(workflow.get("primary_stage"), str) or not isinstance(workflow.get("workflow_stages"), list):
+            workflow = {"primary_stage": "orchestration", "workflow_stages": ["orchestration"]} if name in {"skill-template", "agent-template"} else {"primary_stage": "unknown", "workflow_stages": []}
+        if not isinstance(interface, dict) or not interface.get("mode"):
+            interface = {"mode": "unknown", "reason": "pending-v2-migration"}
     return {
         "name": name, "url": f"https://github.com/{ORG}/{name}", "description": frontmatter.get("description", ""),
         "project_type": project_type, "declaration_file": "AGENTS.md" if project_type == "agent" else "SKILL.md",
         "catalog": catalog, "workflow": workflow, "interface": interface,
         "category": catalog["category"], "subcategory": catalog["subcategory"], "stage": workflow["primary_stage"],
         "tags": qs.get("tags", []), "platforms": qs.get("platforms", []), "status": qs.get("status", "active"),
-        "requires": qs.get("requires", []), "summary_zh": qs.get("summary_zh", ""), "summary_en": qs.get("summary_en", ""),
+        "requires": qs.get("requires", []), "summary_zh": qs.get("summary_zh", "unknown") if qs.get("summary_zh") else "unknown", "summary_en": qs.get("summary_en", "unknown") if qs.get("summary_en") else "unknown",
         "license": qs.get("license", "GPL-3.0-only"), "validation_level": qs.get("validation_level", "listed"),
         "maintainer_type": qs.get("maintainer_type", "community"), "last_validated": validation_date, "commit_sha": commit_sha,
-        **({"migration_state": "pending-v2", "migration_issues": ["missing-v2-catalog", "missing-v2-workflow", "missing-v2-interface"]} if missing_v2 else {}),
+        **({"migration_state": "pending-v2", "migration_issues": [{"code": issue["check"], "path": issue["path"]} for issue in issues] or [{"code": "missing-v2", "path": "$.quantSkills"}]} if missing_v2 else {}),
     }
 
 
@@ -145,12 +146,6 @@ def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, p
     return snapshot
 
 
-def public_registry_projection(snapshot: dict) -> list[dict]:
-    snapshot_id = snapshot["snapshot_id"]
-    fields = ("name", "url", "description", "project_type", "declaration_file", "tags", "platforms", "status", "requires", "summary_zh", "summary_en", "license", "validation_level", "maintainer_type", "last_validated", "commit_sha")
-    return [{**{field: asset.get(field, "" if field not in {"tags", "platforms", "requires"} else []) for field in fields}, "category": asset["catalog"]["category"], "subcategory": asset["catalog"]["subcategory"], "stage": asset["workflow"]["primary_stage"], "catalog": asset["catalog"], "workflow": asset["workflow"], "interface": asset["interface"], "snapshot_id": snapshot_id} for asset in snapshot["assets"]]
-
-
 def _json_bytes(value: object) -> bytes:
     return json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True).encode("utf-8") + b"\n"
 
@@ -183,7 +178,10 @@ def _validate_staged(outputs: dict[Path, bytes], staged: dict[Path, Path]) -> No
         raise ValueError("staged artifact hash mismatch")
     if ROOT / "catalog.snapshot.json" not in staged or ROOT / "registry.json" not in staged:
         return
-    verify(staged[ROOT / "catalog.snapshot.json"], staged[ROOT / "registry.json"])
+    readmes = tuple(staged[path] for path in (ROOT / "README.md", ROOT / "README.en.md") if path in staged)
+    if len(readmes) != 2:
+        raise ValueError("staged README artifacts are required")
+    verify(staged[ROOT / "catalog.snapshot.json"], staged[ROOT / "registry.json"], readmes)
 
 
 def promote_artifacts(outputs: dict[Path, bytes]) -> None:
