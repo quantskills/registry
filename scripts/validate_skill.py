@@ -189,6 +189,7 @@ def check_requires(fm: dict, org_repos: set[str], rep: Report) -> None:
 def validate(repo: Path, org_repos: set[str], contract_mode: str = "audit") -> Report:
     if contract_mode not in {"audit", "enforce"}:
         raise ValueError("contract_mode must be 'audit' or 'enforce'")
+    repo = repo.resolve()
     rep = Report()
     asset_type, declaration_file = declaration_info(repo)
     check_required_files(repo, declaration_file, rep)

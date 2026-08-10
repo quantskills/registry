@@ -1,3 +1,4 @@
+import os
 import shutil
 import sys
 import tempfile
@@ -62,6 +63,16 @@ class ValidateSkillTests(unittest.TestCase):
         (repo / "oversized.json").write_bytes(b"x" * (10 * 1024 * 1024 + 1))
         checks = {item["check"] for item in validate(repo, {"other"}).items}
         self.assertTrue({"required-files", "frontmatter", "path-refs", "git-hygiene", "secrets", "quant-risk-disclosures", "python-syntax", "requires"} <= checks)
+
+    def test_relative_dot_path_matches_absolute_repository_path(self):
+        repo = self.make_repo("skill-relative-dot")
+        expected = validate(repo, set(), "enforce").health
+        previous = Path.cwd()
+        try:
+            os.chdir(repo)
+            self.assertEqual(validate(Path("."), set(), "enforce").health, expected)
+        finally:
+            os.chdir(previous)
 
 
 if __name__ == "__main__":
