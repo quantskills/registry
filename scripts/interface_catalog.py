@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import re
+import hashlib
 from pathlib import Path
 from typing import Any
 
@@ -187,3 +188,75 @@ def load_contract_catalogs(root: Path = ROOT) -> tuple[dict, dict, dict, dict]:
     return (envelope, {"version": _VERSION, "items": profiles},
             {"version": _VERSION, "items": adapters_doc["adapters"]},
             {"version": _VERSION, "items": mappings_doc["mappings"]})
+
+
+_CORE_FILES = (
+    "01-market-bar.json", "02-factor-panel.json", "03-ranked-factor-set.json",
+    "04-portfolio-target.json", "05-backtest-result.json", "06-evaluation-result.json",
+    "07-execution-plan.json",
+)
+_CORE_IDS = ("market-bar", "factor-panel", "ranking", "portfolio", "backtest", "evaluation", "execution")
+_CORE_PRODUCERS = (
+    "skill-pandadata-warehouse", "skill-factor-mining-pandaai", "skill-factor-grouped-wrapper",
+    "skill-portfolio-optimize", "skill-backtest", "skill-backtest", "skill-ssquant-ai-trader",
+)
+_CORE_PROFILES = ("market-bar", "factor-panel", "ranked-factor-set", "portfolio-target", "backtest-result", "evaluation-result", "execution-plan")
+
+
+def load_core_lineage(root: Path = ROOT) -> dict:
+    """Load the committed closed core chain without importing the builder."""
+    base = _root(root)
+    envelope, profiles, _, mappings = load_contract_catalogs(base)
+    manifest = _load(base, "tests/fixtures/e2e/core-chain/lineage.json")
+    if type(manifest) is not dict or set(manifest) != {"version", "artifacts"} or manifest.get("version") != _VERSION:
+        raise ValueError("invalid core lineage")
+    rows = manifest.get("artifacts")
+    if type(rows) is not list or len(rows) != len(_CORE_FILES):
+        raise ValueError("invalid core lineage")
+    mapping = {item["id"]: item for item in mappings["items"]}
+    profile_rows = {(item["id"], item["version"]) for item in profiles["items"]}
+    previous: dict[str, Any] | None = None
+    for index, row in enumerate(rows):
+        required = {"id", "file", "artifact_sha256", "producer", "profile", "version", "inputs"}
+        if index == 0:
+            required |= {"source_mapping_id", "provenance"}
+        if type(row) is not dict or set(row) != required or row.get("id") != _CORE_IDS[index] or row.get("file") != _CORE_FILES[index] or row.get("producer") != _CORE_PRODUCERS[index] or row.get("profile") != _CORE_PROFILES[index] or row.get("version") != _VERSION:
+            raise ValueError("invalid core lineage")
+        raw = _path(base, "tests/fixtures/e2e/core-chain/" + row["file"]).read_bytes()
+        actual = "sha256:" + hashlib.sha256(raw).hexdigest()
+        if row.get("artifact_sha256") != actual:
+            raise ValueError("invalid core lineage")
+        document = _load(base, "tests/fixtures/e2e/core-chain/" + row["file"])
+        try:
+            from validate_contract import validate_contract
+        except ModuleNotFoundError:
+            from scripts.validate_contract import validate_contract
+        if validate_contract(document, base).get("status") != "valid" or document["$contract"]["profile"] != row["profile"] or document["meta"]["producer"] != row["producer"]:
+            raise ValueError("invalid core lineage")
+        if (row["profile"], row["version"]) not in profile_rows:
+            raise ValueError("invalid core lineage")
+        if index == 0:
+            provenance = row["provenance"]
+            source_id = row["source_mapping_id"]
+            target = mapping.get(source_id, {}).get("target", {})
+            meta_source = document.get("meta", {}).get("provenance", [None])[0]
+            if (type(provenance) is not dict or set(provenance) != {"provider", "dataset", "raw_sha256"}
+                    or target.get("envelope") != {"name": envelope["name"], "version": _VERSION}
+                    or target.get("profile") != {"id": row["profile"], "version": _VERSION}
+                    or not isinstance(meta_source, dict) or meta_source.get("raw_sha256") != provenance.get("raw_sha256")
+                    or mapping[source_id]["evidence"]["raw_sha256"] != provenance.get("raw_sha256")):
+                raise ValueError("invalid core lineage")
+        else:
+            assert previous is not None
+            inputs = row["inputs"]
+            source = document.get("payload", {}).get("records", [None])[0].get("lineage", {}).get("sources", [None])[0] if index >= 2 and isinstance(document.get("payload", {}).get("records"), list) and document["payload"]["records"] else {}
+            meta_source = document.get("meta", {}).get("provenance", [None])[0]
+            expected_input = {"id": previous["id"], "artifact_sha256": previous["artifact_sha256"]}
+            if (inputs != [expected_input] or (index >= 2 and (not isinstance(source, dict)
+                    or source.get("sha256") != previous["artifact_sha256"]
+                    or source.get("profile") != previous["profile"] or source.get("version") != _VERSION
+                    or source.get("artifact_ref") != f"artifact://core-chain/{previous['id']}"))
+                    or not isinstance(meta_source, dict) or meta_source.get("raw_sha256") != previous["artifact_sha256"]):
+                raise ValueError("invalid core lineage")
+        previous = row
+    return manifest

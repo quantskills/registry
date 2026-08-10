@@ -37,7 +37,7 @@ class InterfaceCatalogSnapshotTests(unittest.TestCase):
 
     def test_red_core_chain_requires_enriched_catalogs_and_is_deterministic(self):
         snapshot = build_snapshot(self.chain(), self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
-        self.assertEqual(set(snapshot), {"schema_version", "taxonomy_version", "taxonomy", "assets", "resources", "envelope", "profiles", "adapters", "provider_mappings", "compatibility_edges", "snapshot_id"})
+        self.assertEqual(set(snapshot), {"schema_version", "taxonomy_version", "contract_mode", "interface_diagnostics", "taxonomy", "assets", "resources", "envelope", "profiles", "adapters", "provider_mappings", "core_lineage", "compatibility_edges", "snapshot_id"})
         self.assertEqual([(edge["producer"], edge["consumer"]) for edge in snapshot["compatibility_edges"]], [("skill-portfolio-optimize", "skill-backtest"), ("skill-factor-mining-pandaai", "skill-factor-grouped-wrapper"), ("skill-pandadata-warehouse", "skill-factor-mining-pandaai"), ("skill-factor-grouped-wrapper", "skill-portfolio-optimize"), ("skill-backtest", "skill-ssquant-ai-trader")])
         shuffled = build_snapshot(list(reversed(self.chain())), list(reversed(self.resources)), self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
         self.assertEqual(snapshot["snapshot_id"], shuffled["snapshot_id"])
@@ -50,7 +50,8 @@ class InterfaceCatalogSnapshotTests(unittest.TestCase):
             build_snapshot(broken, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
         incomplete = self.chain(); incomplete.pop(2)
         snapshot = build_snapshot(incomplete, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
-        self.assertNotEqual(snapshot["compatibility_edges"], before["compatibility_edges"])
+        self.assertTrue(snapshot["interface_diagnostics"] == [])
+        self.assertNotIn(("skill-factor-mining-pandaai", "skill-factor-grouped-wrapper"), [(edge["producer"], edge["consumer"]) for edge in snapshot["compatibility_edges"]])
 
     def test_catalog_loader_rejects_malicious_local_catalogs_value_free(self):
         def rejected(relative, mutate):
