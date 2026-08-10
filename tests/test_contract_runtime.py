@@ -1,4 +1,5 @@
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -9,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).parents[1]
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
-from validate_contract import load_profile_index, resolve_profile, validate_contract
+from validate_contract import _canonical_diagnostics, load_profile_index, resolve_profile, validate_contract
 
 
 def read_fixture(relative):
@@ -43,6 +44,17 @@ class ContractRuntimeTests(unittest.TestCase):
         )
         self.assertIsNone(resolve_profile("market-bar", "1.0.1", index))
         self.assertIsNone(resolve_profile("missing", "1.0.0", index))
+        self.assertIsNone(
+            resolve_profile(
+                "market-bar",
+                "1.0.0",
+                {"profiles": [{"id": "market-bar", "version": "1.0.0", "kind": "result", "schema": "base/market-bar/1.0.0.schema.json"}]},
+            )
+        )
+
+    def test_canonical_diagnostics_deduplicate_identical_entries(self):
+        duplicate = {"layer": "profile", "code": "type", "path": "/payload/\ud800"}
+        self.assertEqual(_canonical_diagnostics([duplicate, dict(duplicate)]), [duplicate])
 
     def test_valid_base_and_result_documents(self):
         for relative, profile in (
@@ -169,7 +181,7 @@ class ContractRuntimeTests(unittest.TestCase):
             )
             result = validate_contract(document, root)
             self.assertEqual(result["status"], "unknown")
-            self.assertEqual(result["errors"][0]["code"], "profile-schema")
+            self.assertEqual(result["errors"][0]["code"], "profile-index")
 
     def test_malformed_profile_indexes_fail_closed(self):
         base_row = {
@@ -196,6 +208,61 @@ class ContractRuntimeTests(unittest.TestCase):
                 result = validate_contract(document, root)
                 self.assertEqual(result["status"], "unknown")
                 self.assertEqual(result["errors"], [{"layer": "profile", "code": "profile-index", "path": "/schema/profiles/index.json"}])
+
+    def test_unknown_identity_and_duplicate_indexes_are_redacted_and_fail_closed(self):
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        document["$contract"]["envelope_version"] = "01.0.0"
+        result = validate_contract(document, ROOT)
+        self.assertEqual(result["status"], "unknown")
+        self.assertIsNone(result["envelope"])
+        self.assertIsNone(result["profile"])
+
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "schema" / "envelope").mkdir(parents=True)
+            (root / "schema" / "profiles").mkdir(parents=True)
+            (root / "schema" / "envelope" / "index.json").write_text(
+                '{"name":"quantskills-envelope","name":"other","versions":{"1.0.0":"1.0.0.schema.json"}}',
+                encoding="utf-8",
+            )
+            result = validate_contract(document, root)
+            self.assertEqual(result["status"], "unknown")
+            self.assertIsNone(result["envelope"])
+            self.assertIsNone(result["profile"])
+            self.assertEqual(result["errors"], [{"layer": "envelope", "code": "envelope-index", "path": "/schema/envelope/index.json"}])
+
+    def test_envelope_index_requires_exact_safe_structure(self):
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        for index in (
+            {"name": "quantskills-envelope", "versions": {"01.0.0": "1.0.0.schema.json"}},
+            {"name": "quantskills-envelope", "versions": {"1.0.0": "../escape.json"}},
+            {"name": "quantskills-envelope", "versions": {"1.0.0": "1.0.0.schema.json"}, "extra": True},
+        ):
+            with self.subTest(index=index), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / "schema" / "envelope").mkdir(parents=True)
+                (root / "schema" / "profiles").mkdir(parents=True)
+                (root / "schema" / "envelope" / "index.json").write_text(json.dumps(index), encoding="utf-8")
+                result = validate_contract(document, root)
+                self.assertEqual(result["status"], "unknown")
+                self.assertIsNone(result["envelope"])
+                self.assertIsNone(result["profile"])
+
+    def test_duplicate_profile_index_json_keys_fail_closed(self):
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "schema" / "envelope").mkdir(parents=True)
+            (root / "schema" / "profiles").mkdir(parents=True)
+            shutil.copy2(ROOT / "schema" / "envelope" / "index.json", root / "schema" / "envelope" / "index.json")
+            shutil.copy2(ROOT / "schema" / "envelope" / "1.0.0.schema.json", root / "schema" / "envelope" / "1.0.0.schema.json")
+            (root / "schema" / "profiles" / "index.json").write_text('{"profiles":[],"profiles":[]}', encoding="utf-8")
+            result = validate_contract(document, root)
+        self.assertEqual(result["status"], "unknown")
+        self.assertIsNone(result["envelope"])
+        self.assertIsNone(result["profile"])
+        self.assertEqual(result["errors"], [{"layer": "profile", "code": "profile-index", "path": "/schema/profiles/index.json"}])
 
     def test_unsafe_schema_path_and_unresolved_refs_fail_closed(self):
         document = read_fixture("profiles/base/market-bar/valid.json")
@@ -229,7 +296,12 @@ class ContractRuntimeTests(unittest.TestCase):
                     (root / "schema" / "profiles" / row["schema"]).write_text(json.dumps(schema), encoding="utf-8")
                 result = validate_contract(document, root)
                 self.assertEqual(result["status"], "unknown")
-                self.assertEqual(result["errors"], [{"layer": "profile", "code": "profile-schema", "path": "/schema/profile"}])
+                expected = (
+                    {"layer": "profile", "code": "profile-index", "path": "/schema/profiles/index.json"}
+                    if label == "nul-path"
+                    else {"layer": "profile", "code": "profile-schema", "path": "/schema/profile"}
+                )
+                self.assertEqual(result["errors"], [expected])
 
     def test_cli_exit_codes_json_shape_and_relative_absolute_paths(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -266,12 +338,34 @@ class ContractRuntimeTests(unittest.TestCase):
             malformed = root / "malformed.json"
             malformed.write_text("{", encoding="utf-8")
             self.assertEqual(run_cli(malformed, "--json").returncode, 2)
-            nonstandard = root / "nonstandard.json"
-            nonstandard.write_text('{"x": NaN}', encoding="utf-8")
-            self.assertEqual(run_cli(nonstandard, "--json").returncode, 2)
+            for constant in ("NaN", "Infinity", "-Infinity"):
+                nonstandard = root / f"nonstandard-{constant.replace('-', 'minus')}.json"
+                nonstandard.write_text('{"x": ' + constant + '}', encoding="utf-8")
+                self.assertEqual(run_cli(nonstandard, "--json").returncode, 2)
             duplicate = root / "duplicate.json"
             duplicate.write_text('{"x": 1, "x": 2}', encoding="utf-8")
             self.assertEqual(run_cli(duplicate, "--json").returncode, 2)
+
+    def test_cli_json_is_ascii_safe_for_unicode_and_surrogate_pointers(self):
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        document["schema"]["fields"]["\ud800"] = {"type": "not-a-field-type"}
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "unicode.json"
+            path.write_text(json.dumps(document, ensure_ascii=True), encoding="utf-8")
+            environment = {**os.environ, "PYTHONIOENCODING": "cp1252"}
+            completed = subprocess.run(
+                [sys.executable, str(SCRIPTS / "validate_contract.py"), str(path), "--json"],
+                cwd=ROOT,
+                env=environment,
+                text=True,
+                encoding="ascii",
+                errors="strict",
+                capture_output=True,
+            )
+        self.assertEqual(completed.returncode, 1, completed.stderr)
+        self.assertEqual(completed.stdout.count("\n"), 1)
+        parsed = json.loads(completed.stdout)
+        self.assertIn({"layer": "envelope", "code": "enum", "path": "/schema/fields/\ud800/type"}, parsed["errors"])
 
 
 if __name__ == "__main__":

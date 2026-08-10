@@ -23,7 +23,7 @@ _VERSION = re.compile(r"^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)
 
 def load_profile_index(root: Path) -> dict:
     """Load the canonical profile index without applying any fallback policy."""
-    return json.loads((Path(root) / "schema" / "profiles" / "index.json").read_text(encoding="utf-8"))
+    return _load_json_strict((Path(root) / "schema" / "profiles" / "index.json").read_text(encoding="utf-8"))
 
 
 def resolve_profile(profile: str, version: str, index: dict) -> Path | None:
@@ -40,7 +40,12 @@ def resolve_profile(profile: str, version: str, index: dict) -> Path | None:
     ]
     if len(matches) != 1:
         return None
-    return Path(matches[0]["schema"])
+    row = matches[0]
+    schema = Path(row["schema"])
+    expected = Path(row.get("kind", "")) / profile / f"{version}.schema.json"
+    if schema.is_absolute() or ".." in schema.parts or schema != expected:
+        return None
+    return schema
 
 
 def _profile_index_is_valid(index: object) -> bool:
@@ -62,6 +67,9 @@ def _profile_index_is_valid(index: object) -> bool:
             or not isinstance(schema, str)
             or not schema
             or kind not in {"base", "result"}
+            or Path(schema).is_absolute()
+            or ".." in Path(schema).parts
+            or Path(schema) != Path(kind) / profile / f"{version}.schema.json"
             or (profile, version) in seen
         ):
             return False
@@ -146,6 +154,16 @@ def _identity(document: object) -> tuple[dict | None, dict | None, list[dict]]:
         for _name, value, path in values
         if not isinstance(value, str) or not value
     ]
+    if not invalid:
+        checks = (
+            ("envelope", _PROFILE_ID, "envelope", "/$contract/envelope"),
+            ("envelope_version", _VERSION, "envelope", "/$contract/envelope_version"),
+            ("profile", _PROFILE_ID, "profile", "/$contract/profile"),
+            ("profile_version", _VERSION, "profile", "/$contract/profile_version"),
+        )
+        for field, pattern, layer, path in checks:
+            if pattern.fullmatch(contract[field]) is None:
+                invalid.append(_diagnostic(layer, "contract-identity", path))
     if invalid:
         return None, None, invalid
     envelope = {"name": contract["envelope"], "version": contract["envelope_version"]}
@@ -201,15 +219,28 @@ def _read_schema(root: Path, relative: Path, layer: str) -> tuple[dict | None, l
 def _load_envelope_index(root: Path) -> tuple[dict | None, list[dict]]:
     path = Path(root) / "schema" / "envelope" / "index.json"
     try:
-        index = json.loads(path.read_text(encoding="utf-8"))
+        index = _load_json_strict(path.read_text(encoding="utf-8"))
     except (OSError, ValueError, json.JSONDecodeError):
         return None, [_diagnostic("envelope", "envelope-index", "/schema/envelope/index.json")]
     if (
         not isinstance(index, dict)
+        or set(index) != {"name", "versions"}
         or not isinstance(index.get("name"), str)
+        or _PROFILE_ID.fullmatch(index["name"]) is None
         or not isinstance(index.get("versions"), dict)
+        or not index["versions"]
     ):
         return None, [_diagnostic("envelope", "envelope-index", "/schema/envelope/index.json")]
+    for version, schema in index["versions"].items():
+        if (
+            not isinstance(version, str)
+            or _VERSION.fullmatch(version) is None
+            or not isinstance(schema, str)
+            or not schema
+            or schema != f"{version}.schema.json"
+            or _safe_path(Path(root) / "schema" / "envelope", Path(schema)) is None
+        ):
+            return None, [_diagnostic("envelope", "envelope-index", "/schema/envelope/index.json")]
     return index, []
 
 
@@ -217,27 +248,23 @@ def validate_contract(document: dict, root: Path) -> dict:
     """Validate one document against its exact canonical Envelope and Profile schemas."""
     envelope, profile, identity_errors = _identity(document)
     if identity_errors:
-        return _result("unknown", envelope, profile, identity_errors)
+        return _result("unknown", None, None, identity_errors)
     assert envelope is not None and profile is not None
 
     envelope_index, index_errors = _load_envelope_index(root)
     if index_errors:
-        return _result("unknown", envelope, profile, index_errors)
+        return _result("unknown", None, None, index_errors)
     assert envelope_index is not None
     if envelope_index["name"] != envelope["name"]:
-        return _result("unknown", envelope, profile, [_diagnostic("envelope", "envelope-unknown", "/$contract/envelope")])
+        return _result("unknown", None, None, [_diagnostic("envelope", "envelope-unknown", "/$contract/envelope")])
     envelope_versions = envelope_index["versions"]
     envelope_schema_name = envelope_versions.get(envelope["version"])
     if not isinstance(envelope_schema_name, str):
-        return _result("unknown", envelope, profile, [_diagnostic("envelope", "envelope-version-unknown", "/$contract/envelope_version")])
-    if _PROFILE_ID.fullmatch(profile["id"]) is None:
-        return _result("unknown", envelope, profile, [_diagnostic("profile", "profile-identity", "/$contract/profile")])
-    if _VERSION.fullmatch(profile["version"]) is None:
-        return _result("unknown", envelope, profile, [_diagnostic("profile", "profile-version-identity", "/$contract/profile_version")])
+        return _result("unknown", None, None, [_diagnostic("envelope", "envelope-version-unknown", "/$contract/envelope_version")])
 
     envelope_schema, schema_errors = _read_schema(root, Path("schema") / "envelope" / envelope_schema_name, "envelope")
     if schema_errors:
-        return _result("unknown", envelope, profile, schema_errors)
+        return _result("unknown", None, None, schema_errors)
     assert envelope_schema is not None
     try:
         envelope_validator = Draft202012Validator(envelope_schema, format_checker=FormatChecker())
@@ -256,9 +283,9 @@ def validate_contract(document: dict, root: Path) -> dict:
     try:
         profile_index = load_profile_index(root)
     except (OSError, ValueError, json.JSONDecodeError):
-        return _result("unknown", envelope, profile, [_diagnostic("profile", "profile-index", "/schema/profiles/index.json")])
+        return _result("unknown", None, None, [_diagnostic("profile", "profile-index", "/schema/profiles/index.json")])
     if not _profile_index_is_valid(profile_index):
-        return _result("unknown", envelope, profile, [_diagnostic("profile", "profile-index", "/schema/profiles/index.json")])
+        return _result("unknown", None, None, [_diagnostic("profile", "profile-index", "/schema/profiles/index.json")])
     profile_schema_name = resolve_profile(profile["id"], profile["version"], profile_index)
     if profile_schema_name is None:
         rows = profile_index.get("profiles") if isinstance(profile_index, dict) else None
@@ -267,11 +294,11 @@ def validate_contract(document: dict, root: Path) -> dict:
         )
         code = "profile-version-unknown" if known_id else "profile-unknown"
         path = "/$contract/profile_version" if known_id else "/$contract/profile"
-        return _result("unknown", envelope, profile, [_diagnostic("profile", code, path)])
+        return _result("unknown", None, None, [_diagnostic("profile", code, path)])
 
     profile_schema, schema_errors = _read_schema(root, Path("schema") / "profiles" / profile_schema_name, "profile")
     if schema_errors:
-        return _result("unknown", envelope, profile, schema_errors)
+        return _result("unknown", None, None, schema_errors)
     assert profile_schema is not None
     try:
         profile_validator = Draft202012Validator(profile_schema, format_checker=FormatChecker())
@@ -279,8 +306,8 @@ def validate_contract(document: dict, root: Path) -> dict:
     except Exception:
         return _result(
             "unknown",
-            envelope,
-            profile,
+            None,
+            None,
             [_diagnostic("profile", "profile-schema", "/schema/profile")],
         )
     profile_errors.extend(_semantic_diagnostics("profile", profile_semantic_issues(document)))
@@ -298,6 +325,10 @@ def _strict_object_pairs(pairs: list[tuple[str, Any]]) -> dict:
     return result
 
 
+def _load_json_strict(text: str) -> Any:
+    return json.loads(text, object_pairs_hook=_strict_object_pairs, parse_constant=_reject_constant)
+
+
 def _reject_constant(value: str) -> None:
     raise ValueError(f"non-standard JSON constant: {value}")
 
@@ -308,11 +339,7 @@ def _unknown_input(code: str) -> dict:
 
 def _load_document(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
-    document = json.loads(
-        text,
-        object_pairs_hook=_strict_object_pairs,
-        parse_constant=_reject_constant,
-    )
+    document = _load_json_strict(text)
     if not isinstance(document, dict):
         raise ValueError("document must be a JSON object")
     return document
@@ -332,7 +359,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         result = validate_contract(document, Path(__file__).resolve().parents[1])
     if args.as_json:
-        print(json.dumps(result, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False))
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, separators=(",", ":"), allow_nan=False))
     else:
         print(result["status"])
         for error in result["errors"]:
