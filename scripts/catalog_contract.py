@@ -50,6 +50,7 @@ def github_description(frontmatter: dict) -> str:
 
 
 _MARKDOWN_LINK = re.compile(r"\[[^\]]+\]\([^)]*\)")
+_SEMVER = re.compile(r"^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$")
 _PROHIBITED = (
     "保证收益", "稳赚", "无风险", "官方认证", "生产可用",
     "guaranteed return", "risk-free", "officially certified", "production-ready",
@@ -120,11 +121,7 @@ def validate_asset_semantics(frontmatter: dict, repo_name: str, declaration_file
         if not interface.get("inputs") and not interface.get("outputs"):
             issues.append(_issue("contract-semantic", "$.quantSkills.interface", "structured or hybrid interface needs an input or output"))
         envelope = interface.get("envelope") or {}
-        version = envelope.get("version")
-        try:
-            major = int(str(version).split(".", 1)[0])
-        except (TypeError, ValueError):
-            major = None
-        if envelope.get("name") != "quantskills-envelope" or major != 1:
+        version_match = _SEMVER.fullmatch(envelope.get("version", "")) if isinstance(envelope.get("version"), str) else None
+        if envelope.get("name") != "quantskills-envelope" or not version_match or int(version_match.group(1)) != 1:
             issues.append(_issue("contract-semantic", "$.quantSkills.interface.envelope", "structured or hybrid interface requires quantskills-envelope major version 1"))
     return issues

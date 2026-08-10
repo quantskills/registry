@@ -44,6 +44,12 @@ class CatalogContractTests(unittest.TestCase):
         self.assertTrue(any("generic" in detail for detail in details))
         self.assertTrue(any("major version 1" in detail for detail in details))
 
+    def test_malformed_envelope_version_is_a_semantic_issue(self):
+        frontmatter = copy.deepcopy(self.valid)
+        frontmatter["quantSkills"]["interface"]["envelope"]["version"] = "1.invalid"
+        details = [issue["detail"] for issue in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)]
+        self.assertTrue(any("major version 1" in detail for detail in details))
+
     def test_missing_classification_never_falls_back(self):
         frontmatter = copy.deepcopy(self.valid)
         frontmatter["quantSkills"].pop("catalog")
@@ -54,10 +60,14 @@ class CatalogContractTests(unittest.TestCase):
         frontmatter = copy.deepcopy(self.valid)
         frontmatter["quantSkills"]["summary_en"] = "skill-factor-grouped-wrapper"
         self.assertTrue(validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy))
-        frontmatter["quantSkills"]["summary_en"] = "This tool offers guaranteed return."
-        self.assertTrue(any("prohibited" in item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)))
-        frontmatter["quantSkills"]["summary_en"] = "Research output, not investment advice, for factor evaluation."
-        self.assertFalse(any("prohibited" in item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)))
+        for claim in ("保证收益", "稳赚", "无风险", "官方认证", "生产可用", "guaranteed return", "risk-free", "officially certified", "production-ready"):
+            with self.subTest(claim=claim):
+                frontmatter["quantSkills"]["summary_en"] = f"This product is {claim}."
+                self.assertTrue(any("prohibited" in item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)))
+        for disclaimer in ("不构成投资建议", "Research output, not investment advice, for factor evaluation."):
+            with self.subTest(disclaimer=disclaimer):
+                frontmatter["quantSkills"]["summary_en"] = disclaimer
+                self.assertFalse(any("prohibited" in item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)))
 
 
 if __name__ == "__main__":

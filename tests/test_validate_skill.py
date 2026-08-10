@@ -33,6 +33,11 @@ class ValidateSkillTests(unittest.TestCase):
         self.addCleanup(shutil.rmtree, directory.parent)
         return directory
 
+    def rewrite_frontmatter(self, repo, mutate):
+        frontmatter = yaml.safe_load((repo / "SKILL.md").read_text(encoding="utf-8").split("---\n", 2)[1])
+        mutate(frontmatter)
+        (repo / "SKILL.md").write_text("---\n" + yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False) + "---\nBody\n", encoding="utf-8")
+
     def test_audit_vs_enforce_and_non_triggered_template(self):
         repo = self.make_repo()
         frontmatter = (repo / "SKILL.md").read_text(encoding="utf-8").replace("summary_en: Structured workflow for factor screening and evaluation.", "summary_en: QuantSkills factor Skill repository")
@@ -49,13 +54,14 @@ class ValidateSkillTests(unittest.TestCase):
         self.assertFalse(any(item["check"] == "quant-risk-disclosures" for item in validate(complete, set(), "enforce").items))
 
     def test_existing_check_families_remain_available(self):
-        repo = self.make_repo()
+        repo = self.make_repo(risk=True)
+        self.rewrite_frontmatter(repo, lambda frontmatter: frontmatter.update({"description": "short"}))
+        (repo / "LICENSE").unlink()
         (repo / "broken.py").write_text("def nope(:\n", encoding="utf-8")
-        (repo / "README.md").write_text("[missing](missing.md)", encoding="utf-8")
+        (repo / "README.md").write_text("[missing](missing.md)\nAKIA1234567890ABCDEF", encoding="utf-8")
+        (repo / "oversized.json").write_bytes(b"x" * (10 * 1024 * 1024 + 1))
         checks = {item["check"] for item in validate(repo, {"other"}).items}
-        self.assertIn("required-files", checks | {"required-files"})
-        self.assertIn("path-refs", checks)
-        self.assertIn("python-syntax", checks)
+        self.assertTrue({"required-files", "frontmatter", "path-refs", "git-hygiene", "secrets", "quant-risk-disclosures", "python-syntax", "requires"} <= checks)
 
 
 if __name__ == "__main__":
