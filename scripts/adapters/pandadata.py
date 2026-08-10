@@ -10,7 +10,7 @@ import math
 from pathlib import Path
 import re
 
-__all__ = ["market_bar_envelope", "fundamental_pit_envelope", "futures_contract_envelope"]
+__all__ = ["market_bar_envelope", "fundamental_pit_envelope", "futures_contract_envelope", "admit_pandadata_mappings"]
 
 _DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 _DATETIME = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$")
@@ -372,3 +372,7 @@ def _admit_pandadata_mappings(document: object, root: Path) -> bool:
         return True
     except Exception:
         return False
+
+
+# Public spelling for catalog admission; retain the private name for Task 6 callers.
+admit_pandadata_mappings = _admit_pandadata_mappings

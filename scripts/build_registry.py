@@ -18,6 +18,7 @@ from validate_skill import declaration_info, parse_frontmatter, validate
 from verify_catalog_artifacts import verify
 from catalog_projection import public_registry_projection
 from compatibility import build_compatibility_edges
+from interface_catalog import load_contract_catalogs
 
 ROOT = Path(__file__).resolve().parent.parent
 ORG = os.environ.get("QS_ORG", "quantskills")
@@ -26,57 +27,6 @@ TOKEN = os.environ.get("GITHUB_TOKEN", "")
 HEADERS = {"Authorization": f"Bearer {TOKEN}", "Accept": "application/vnd.github+json"} if TOKEN else {}
 RESOURCE_NAMES = (".github", "join", "quantskills", "registry")
 INVENTORY_PATH = ROOT / "catalog-inventory.v1.json"
-
-
-def _strict_pairs(pairs):
-    result = {}
-    for key, value in pairs:
-        if key in result:
-            raise ValueError("duplicate JSON key")
-        result[key] = value
-    return result
-
-
-def load_contract_catalogs(root: Path = ROOT) -> tuple[dict, dict, dict, dict]:
-    """Return closed, committed catalog sources; provider mappings are not adapters."""
-    try:
-        envelope = json.loads((root / "schema/envelope/index.json").read_text(encoding="utf-8"), object_pairs_hook=_strict_pairs)
-        profiles_doc = json.loads((root / "schema/profiles/index.json").read_text(encoding="utf-8"), object_pairs_hook=_strict_pairs)
-        adapters_doc = json.loads((root / "schema/adapters/registry.v1.json").read_text(encoding="utf-8"), object_pairs_hook=_strict_pairs)
-        mappings_doc = json.loads((root / "schema/adapters/pandadata-mappings.v1.json").read_text(encoding="utf-8"), object_pairs_hook=_strict_pairs)
-    except (OSError, ValueError, json.JSONDecodeError) as error:
-        raise ValueError("malformed local catalog") from error
-    if not isinstance(envelope, dict) or set(envelope) != {"name", "versions"} or envelope.get("name") != "quantskills-envelope" or not isinstance(envelope.get("versions"), dict) or list(envelope["versions"]) != sorted(envelope["versions"]):
-        raise ValueError("invalid envelope catalog")
-    for version, schema in envelope["versions"].items():
-        if schema != f"{version}.schema.json" or not (root / "schema/envelope" / schema).is_file():
-            raise ValueError("missing envelope schema target")
-    if not isinstance(profiles_doc, dict) or set(profiles_doc) != {"profiles"} or not isinstance(profiles_doc["profiles"], list):
-        raise ValueError("invalid profile catalog")
-    profiles = profiles_doc["profiles"]
-    keys = [(item.get("id"), item.get("version")) for item in profiles if isinstance(item, dict)]
-    if len(keys) != len(profiles) or keys != sorted(keys) or len(set(keys)) != len(keys):
-        raise ValueError("duplicate or unsorted profile catalog")
-    for item in profiles:
-        if set(item) != {"id", "version", "schema", "kind", "primary_key", "time_semantics"} or item["schema"] != f"{item['kind']}/{item['id']}/{item['version']}.schema.json" or not (root / "schema/profiles" / item["schema"]).is_file():
-            raise ValueError("invalid profile catalog entry")
-    if not isinstance(adapters_doc, dict) or set(adapters_doc) != {"schema_version", "adapters"} or adapters_doc.get("schema_version") != "1.0.0" or not isinstance(adapters_doc["adapters"], list):
-        raise ValueError("invalid adapter catalog")
-    adapter_ids = [item.get("id") for item in adapters_doc["adapters"] if isinstance(item, dict)]
-    if len(adapter_ids) != len(adapters_doc["adapters"]) or adapter_ids != sorted(adapter_ids) or len(set(adapter_ids)) != len(adapter_ids):
-        raise ValueError("duplicate or unsorted adapter catalog")
-    if not isinstance(mappings_doc, dict) or set(mappings_doc) != {"schema_version", "mappings"} or mappings_doc.get("schema_version") != "1.0.0" or not isinstance(mappings_doc["mappings"], list):
-        raise ValueError("invalid provider mapping catalog")
-    mappings = mappings_doc["mappings"]
-    mapping_ids = [item.get("id") for item in mappings if isinstance(item, dict)]
-    if len(mapping_ids) != len(mappings) or mapping_ids != sorted(mapping_ids) or len(set(mapping_ids)) != len(mapping_ids):
-        raise ValueError("duplicate or unsorted provider mapping catalog")
-    profile_ids = set(keys)
-    for mapping in mappings:
-        target, evidence, implementation = mapping.get("target", {}), mapping.get("evidence", {}), mapping.get("implementation", {})
-        if not isinstance(mapping, dict) or set(implementation) != {"module", "callable"} or "path" in implementation or not isinstance(target, dict) or target.get("envelope") != {"name": envelope["name"], "version": "1.0.0"} or not isinstance(target.get("profile"), dict) or (target["profile"].get("id"), target["profile"].get("version")) not in profile_ids or not isinstance(evidence, dict) or not isinstance(evidence.get("fixture"), str) or not isinstance(evidence.get("raw_sha256"), str) or not (root / evidence["fixture"]).is_file():
-            raise ValueError("invalid provider mapping catalog entry")
-    return ({"version": "1.0.0", "name": envelope["name"], "items": [{"version": version, "schema": schema} for version, schema in envelope["versions"].items()]}, {"version": "1.0.0", "items": profiles}, {"version": "1.0.0", "items": adapters_doc["adapters"]}, {"version": "1.0.0", "items": mappings})
 
 
 def gh(method: str, url: str, **kwargs):

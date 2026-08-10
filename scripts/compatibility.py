@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from jsonschema import Draft202012Validator
+from interface_catalog import admit_adapter_registry
 
 _ROOT = Path(__file__).resolve().parents[1]
 _SEMVER = re.compile(r"^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$")

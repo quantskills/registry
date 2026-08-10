@@ -1,12 +1,16 @@
 import copy
 import json
+import os
+import shutil
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from build_registry import build_snapshot, load_contract_catalogs, render_artifacts
+from interface_catalog import admit_adapter_registry
 
 
 class InterfaceCatalogSnapshotTests(unittest.TestCase):
@@ -47,6 +51,79 @@ class InterfaceCatalogSnapshotTests(unittest.TestCase):
         incomplete = self.chain(); incomplete.pop(2)
         snapshot = build_snapshot(incomplete, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
         self.assertNotEqual(snapshot["compatibility_edges"], before["compatibility_edges"])
+
+    def test_catalog_loader_rejects_malicious_local_catalogs_value_free(self):
+        def rejected(relative, mutate):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary) / "registry"
+                shutil.copytree(ROOT, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+                path = root / relative
+                mutate(path)
+                with self.assertRaisesRegex(ValueError, r"^invalid interface catalog$"):
+                    load_contract_catalogs(root)
+
+        def json_mutation(callback):
+            def mutate(path):
+                document = json.loads(path.read_text(encoding="utf-8"))
+                callback(document)
+                path.write_text(json.dumps(document), encoding="utf-8")
+            return mutate
+
+        rejected("schema/envelope/index.json", lambda path: path.write_text('{"name":"quantskills-envelope","name":"evil","versions":{"1.0.0":"1.0.0.schema.json"}}', encoding="utf-8"))
+        rejected("schema/envelope/index.json", json_mutation(lambda doc: doc["versions"].update({"2.0.0": "2.0.0.schema.json"})))
+        rejected("schema/profiles/index.json", json_mutation(lambda doc: doc["profiles"][0].update({"version": "1.0.1"})))
+        rejected("schema/profiles/index.json", json_mutation(lambda doc: doc["profiles"][0].update({"schema": "base/market-bar/1.0.0.schema.json"})))
+        rejected("schema/profiles/index.json", json_mutation(lambda doc: doc["profiles"][0].update({"primary_key": ["wrong"], "time_semantics": "wrong"})))
+        rejected("schema/profiles/index.json", json_mutation(lambda doc: doc["profiles"].reverse()))
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "registry"
+            outside = Path(temporary) / "outside.json"
+            shutil.copytree(ROOT, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            target = root / "schema/envelope/1.0.0.schema.json"
+            outside.write_text(target.read_text(encoding="utf-8"), encoding="utf-8")
+            target.unlink()
+            try:
+                os.symlink(outside, target)
+            except OSError as error:
+                self.skipTest(f"symlink unavailable: {error.winerror if hasattr(error, 'winerror') else 'unsupported'}")
+            with self.assertRaisesRegex(ValueError, r"^invalid interface catalog$"):
+                load_contract_catalogs(root)
+
+    def test_catalog_loader_rejects_untrusted_adapter_and_provider_rows(self):
+        def rejected(relative, mutate):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary) / "registry"
+                shutil.copytree(ROOT, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+                path = root / relative
+                document = json.loads(path.read_text(encoding="utf-8"))
+                mutate(document)
+                path.write_text(json.dumps(document), encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, r"^invalid interface catalog$"):
+                    load_contract_catalogs(root)
+
+        adapter = {"id": "bad-adapter", "source": {"profile": "market-bar", "version": "1.0.0"}, "target": {"profile": "factor-panel", "version": "1.0.0"}, "implementation": {"repository": "registry", "path": "scripts/compatibility.py"}, "lossless": True, "validation_status": "validated", "evidence": {"fixture_sha256": "sha256:" + "0" * 64, "test_command": "test", "validated_at": "2026-08-10"}, "envelope_major": 1}
+        for mutation in (
+            lambda doc: doc["adapters"].append({**adapter, "unknown": True}),
+            lambda doc: doc["adapters"].extend([adapter, {**adapter, "target": {"profile": "holdings", "version": "1.0.0"}}]),
+            lambda doc: doc["adapters"].append({**adapter, "source": {"profile": "unknown", "version": "1.0.0"}}),
+            lambda doc: doc["adapters"].append({**adapter, "lossless": False}),
+            lambda doc: doc["adapters"].append({**adapter, "validation_status": "rejected"}),
+            lambda doc: doc["adapters"].append({**adapter, "implementation": {"repository": "registry", "path": "../outside.py"}}),
+        ):
+            rejected("schema/adapters/registry.v1.json", mutation)
+        for mutation in (
+            lambda doc: doc["mappings"][0].update({"lossless": False}),
+            lambda doc: doc["mappings"][0].update({"validation_status": "rejected"}),
+            lambda doc: doc["mappings"][0].update({"extra": True}),
+            lambda doc: doc["mappings"][0]["evidence"].update({"fixture": "C:/outside.json"}),
+            lambda doc: doc["mappings"].reverse(),
+        ):
+            rejected("schema/adapters/pandadata-mappings.v1.json", mutation)
+
+    def test_public_adapter_admission_is_fail_closed(self):
+        self.assertTrue(admit_adapter_registry({"schema_version": "1.0.0", "adapters": []}, ROOT))
+        self.assertFalse(admit_adapter_registry({"schema_version": "1.0.0", "adapters": [{"id": "bad"}]}, ROOT))
 
 
 if __name__ == "__main__":
