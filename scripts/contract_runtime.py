@@ -34,5 +34,9 @@ def envelope_semantic_issues(document: object) -> list[dict]:
         fields = schema.get("fields")
         primary_key = schema.get("primary_key")
         if isinstance(fields, dict) and isinstance(primary_key, list):
-            issues.extend(_issue("envelope-primary-key", f"/schema/primary_key/{index}") for index, key in enumerate(primary_key) if key not in fields)
+            issues.extend(
+                _issue("envelope-primary-key", f"/schema/primary_key/{index}")
+                for index, key in enumerate(primary_key)
+                if isinstance(key, str) and key not in fields
+            )
     return issues

@@ -41,6 +41,23 @@ class EnvelopeSchemaTests(unittest.TestCase):
         document = self.document(); document["schema"]["primary_key"] = ["missing"]
         self.assertIn("/schema/primary_key/0", {issue["path"] for issue in envelope_semantic_issues(document)})
 
+    def test_semantics_leave_primary_key_type_errors_to_json_schema(self):
+        for value in ([[]], [{}]):
+            with self.subTest(value=value):
+                document = self.document(); document["schema"]["primary_key"] = value
+                self.assertEqual(envelope_semantic_issues(document), [])
+                self.assertIn(("schema", "primary_key", 0), {tuple(error.absolute_path) for error in self.validator.iter_errors(document)})
+
+    def test_semantics_accept_valid_timezones_and_native_raw_records(self):
+        for generated_at in ("2026-08-10T09:30:00Z", "2026-08-10T09:30:00+08:00"):
+            with self.subTest(generated_at=generated_at):
+                document = self.document(); document["meta"]["generated_at"] = generated_at
+                issues = envelope_semantic_issues(document)
+                self.assertEqual(issues, [])
+                self.assertTrue(all(set(issue) == {"code", "path"} for issue in issues))
+        document = self.document(); document["payload"]["native"] = {"raw_records": []}
+        self.assertEqual(list(self.validator.iter_errors(document)), [])
+
     def test_schema_mutation_matrix_and_open_records(self):
         cases = [
             ("$contract", "name", "wrong", ("$contract", "name")), ("$contract", "version", "2.0.0", ("$contract", "version")),
