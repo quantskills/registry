@@ -21,15 +21,36 @@ def _canonical_bytes(value: object) -> bytes:
     return (json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
 
 
-def _json_value(value: object) -> None:
+def _json_value(value: object, _active: set[int] | None = None) -> None:
+    """Validate a native JSON value without recursing through cycles.
+
+    Shared containers are valid JSON-shaped Python values, so the identity set
+    is active only for the current recursion path.  A repeated identity after
+    its first branch has completed is therefore not mistaken for a cycle.
+    """
+    active = set() if _active is None else _active
     if type(value) is dict:
-        if any(type(key) is not str for key in value):
+        identity = id(value)
+        if identity in active:
             raise ValueError("pandadata-native-json")
-        for item in value.values():
-            _json_value(item)
+        active.add(identity)
+        try:
+            if any(type(key) is not str for key in value):
+                raise ValueError("pandadata-native-json")
+            for item in value.values():
+                _json_value(item, active)
+        finally:
+            active.remove(identity)
     elif type(value) is list:
-        for item in value:
-            _json_value(item)
+        identity = id(value)
+        if identity in active:
+            raise ValueError("pandadata-native-json")
+        active.add(identity)
+        try:
+            for item in value:
+                _json_value(item, active)
+        finally:
+            active.remove(identity)
     elif type(value) is int:
         if abs(value) > _INTEGER_LIMIT:
             raise ValueError("pandadata-integer-range")
@@ -128,35 +149,226 @@ def futures_contract_envelope(native: dict) -> dict:
     return _envelope(native, "futures-contract", ["exchange", "contract_id", "trade_date"], fields, records)
 
 
+_PANDADATA_MAPPING_SPECS = {
+    "pandadata-fundamental-pit-v1": {
+        "dataset": "financial-pit", "profile": "fundamental-pit", "callable": "fundamental_pit_envelope", "fixture": "tests/fixtures/pandadata/fundamental-pit-native.json",
+        "fields": {"available_at": "available_at", "currency": "currency", "instrument": "instrument_id", "metric": "metric_id", "period_end": "period_end", "revision": "revision", "statement_scope": "statement_scope", "value": "value", "vintage": "vintage"},
+        "native_fields_retained": ["native_note"],
+        "policies": {"pit": "available_at, revision, and vintage are preserved unchanged", "timezone": "source timestamp strings are retained in payload.native"},
+        "units": {"currency": "CNY"},
+    },
+    "pandadata-futures-contract-v1": {
+        "dataset": "futures-settlement", "profile": "futures-contract", "callable": "futures_contract_envelope", "fixture": "tests/fixtures/pandadata/futures-contract-native.json",
+        "fields": {"continuous_series_id": "continuous_series_id", "contract": "contract_id", "delivery_terms": "delivery_terms", "exchange": "exchange", "expiry": "expiry", "open_interest": "open_interest", "roll_rule": "roll_rule", "settlement": "settlement", "trade_date": "trade_date"},
+        "native_fields_retained": ["native_note"],
+        "policies": {"roll": "contract identity, continuous series, and roll rule are preserved unchanged", "timezone": "source timezone metadata is retained"},
+        "units": {"currency": "CNY", "open_interest": "contracts"},
+    },
+    "pandadata-market-bar-v1": {
+        "dataset": "bars-daily", "profile": "market-bar", "callable": "market_bar_envelope", "fixture": "tests/fixtures/pandadata/market-bar-native.json",
+        "fields": {"adjustment": "adjustment", "close": "close", "high": "high", "instrument": "instrument_id", "low": "low", "open": "open", "source_timestamp": "timestamp", "volume": "volume"},
+        "native_fields_retained": ["native_note", "source_timestamp"],
+        "policies": {"adjustment": "raw/adjusted flag is preserved without conversion", "timezone": "original timestamp with offset is retained in normalized record and payload.native"},
+        "units": {"currency": "CNY", "volume": "shares"},
+    },
+}
+
+_PANDADATA_EXPECTED_MODULE = "scripts.adapters.pandadata"
+_PANDADATA_EXPECTED_ENVELOPE = {"name": "quantskills-envelope", "version": "1.0.0"}
+_PANDADATA_REPRESENTATION = "provider-native-json"
+
+
+def _strict_json_load(raw: bytes) -> object:
+    def reject_constant(value: str) -> None:
+        raise ValueError(f"non-standard JSON constant: {value}")
+
+    return json.loads(raw.decode("utf-8"), parse_constant=reject_constant)
+
+
+def _mapping_path(root: Path, relative: str) -> Path | None:
+    try:
+        candidate = Path(relative)
+        if candidate.is_absolute() or ".." in candidate.parts:
+            return None
+        root_resolved = Path(root).resolve()
+        resolved = (root_resolved / candidate).resolve()
+        resolved.relative_to(root_resolved)
+        return resolved
+    except (OSError, RuntimeError, TypeError, ValueError):
+        return None
+
+
 def _admit_pandadata_mappings(document: object, root: Path) -> bool:
-    expected_rows = {"id", "source", "target", "implementation", "fields", "native_fields_retained", "policies", "units", "lossless", "validation_status", "evidence"}
-    if type(document) is not dict or set(document) != {"schema_version", "mappings"} or document.get("schema_version") != "1.0.0" or type(document["mappings"]) is not list:
-        return False
-    rows = document["mappings"]
-    ids = [row.get("id") for row in rows if type(row) is dict]
-    if len(ids) != len(rows) or ids != sorted(ids) or len(set(ids)) != len(ids):
-        return False
-    for row in rows:
-        if type(row) is not dict or set(row) != expected_rows or not _text(row.get("id")) or not row["id"].startswith("pandadata-") or row.get("lossless") is not True or row.get("validation_status") != "validated":
+    """Admit only the three checked, lossless provider-normalization rows.
+
+    This is intentionally a closed-world check.  A malformed catalog, an
+    unreadable fixture, a callable/validator failure, or any evidence mismatch
+    is rejected rather than allowed to create provider evidence.
+    """
+    try:
+        expected_rows = {
+            "id",
+            "source",
+            "target",
+            "implementation",
+            "fields",
+            "native_fields_retained",
+            "policies",
+            "units",
+            "lossless",
+            "validation_status",
+            "evidence",
+        }
+        if (
+            type(document) is not dict
+            or set(document) != {"schema_version", "mappings"}
+            or document.get("schema_version") != "1.0.0"
+            or type(document.get("mappings")) is not list
+        ):
             return False
-        source, target, implementation, evidence = row["source"], row["target"], row["implementation"], row["evidence"]
-        if type(source) is not dict or set(source) != {"provider", "dataset", "representation"} or source.get("provider") != "pandadata" or not all(_text(source.get(key)) for key in source):
+        rows = document["mappings"]
+        expected_ids = sorted(_PANDADATA_MAPPING_SPECS)
+        if len(rows) != len(expected_ids):
             return False
-        if type(target) is not dict or set(target) != {"envelope", "profile"} or target.get("envelope") != {"name": "quantskills-envelope", "version": "1.0.0"} or type(target.get("profile")) is not dict or set(target["profile"]) != {"id", "version"} or not _text(target["profile"].get("id")) or target["profile"].get("version") != "1.0.0":
+        ids = [row.get("id") if type(row) is dict else None for row in rows]
+        if ids != expected_ids:
             return False
-        if type(implementation) is not dict or set(implementation) != {"module", "callable"} or type(evidence) is not dict or set(evidence) != {"fixture", "raw_sha256"}:
-            return False
-        if not all(type(row[key]) is dict and all(_text(key_) and _text(value) for key_, value in row[key].items()) for key in ("fields", "policies", "units")) or type(row["native_fields_retained"]) is not list or not all(_text(item) for item in row["native_fields_retained"]):
-            return False
-        try:
+
+        root_path = Path(root).resolve()
+        for row in rows:
+            if (
+                type(row) is not dict
+                or set(row) != expected_rows
+                or row["id"] not in _PANDADATA_MAPPING_SPECS
+                or row.get("lossless") is not True
+                or row.get("validation_status") != "validated"
+            ):
+                return False
+            spec = _PANDADATA_MAPPING_SPECS[row["id"]]
+            source = row["source"]
+            target = row["target"]
+            implementation = row["implementation"]
+            evidence = row["evidence"]
+            if (
+                type(source) is not dict
+                or source
+                != {
+                    "provider": "pandadata",
+                    "dataset": spec["dataset"],
+                    "representation": _PANDADATA_REPRESENTATION,
+                }
+            ):
+                return False
+            if (
+                type(target) is not dict
+                or target
+                != {"envelope": _PANDADATA_EXPECTED_ENVELOPE, "profile": {"id": spec["profile"], "version": "1.0.0"}}
+            ):
+                return False
+            if (
+                type(implementation) is not dict
+                or implementation != {"module": _PANDADATA_EXPECTED_MODULE, "callable": spec["callable"]}
+            ):
+                return False
+            if (
+                type(evidence) is not dict
+                or set(evidence) != {"fixture", "raw_sha256"}
+                or evidence.get("fixture") != spec["fixture"]
+            ):
+                return False
+            if (
+                row["fields"] != spec["fields"]
+                or row["native_fields_retained"] != spec["native_fields_retained"]
+                or row["policies"] != spec["policies"]
+                or row["units"] != spec["units"]
+            ):
+                return False
+
+            fixture = _mapping_path(root_path, evidence["fixture"])
+            expected_path = _mapping_path(root_path, f"tests/fixtures/pandadata/expected-{spec['profile']}-envelope.json")
+            if fixture is None or expected_path is None or not fixture.is_file() or not expected_path.is_file():
+                return False
+            fixture_bytes = fixture.read_bytes()
+            native = _strict_json_load(fixture_bytes)
+            if type(native) is not dict or fixture_bytes != _canonical_bytes(native):
+                return False
+            expected_bytes = expected_path.read_bytes()
+            expected = _strict_json_load(expected_bytes)
+            if type(expected) is not dict:
+                return False
+
+            if native.get("provider") != source["provider"] or native.get("dataset") != source["dataset"]:
+                return False
+            fixture_sha = "sha256:" + hashlib.sha256(fixture_bytes).hexdigest()
+            if evidence["raw_sha256"] != fixture_sha:
+                return False
+            provenance = expected.get("meta", {}).get("provenance") if type(expected.get("meta")) is dict else None
+            if type(provenance) is not list or len(provenance) != 1 or type(provenance[0]) is not dict:
+                return False
+            provenance_row = provenance[0]
+            if (
+                provenance_row.get("provider") != native.get("provider")
+                or provenance_row.get("dataset") != native.get("dataset")
+                or provenance_row.get("raw_ref") != native.get("raw_ref")
+                or provenance_row.get("raw_sha256") != fixture_sha
+            ):
+                return False
+
             module = importlib.import_module(implementation["module"])
             adapter = getattr(module, implementation["callable"])
-            fixture = root / evidence["fixture"]
-            native = json.loads(fixture.read_text(encoding="utf-8"))
-            expected = json.loads((fixture.parent / ("expected-" + target["profile"]["id"] + "-envelope.json")).read_text(encoding="utf-8"))
+            code = getattr(adapter, "__code__", None)
+            if (
+                not callable(adapter)
+                or getattr(adapter, "__module__", None) != implementation["module"]
+                or getattr(adapter, "__name__", None) != implementation["callable"]
+                or getattr(code, "co_filename", None) != __file__
+                or getattr(code, "co_name", None) != implementation["callable"]
+            ):
+                return False
+            native_for_call = copy.deepcopy(native)
+            actual = adapter(native_for_call)
+            if native_for_call != native or actual != expected or type(actual) is not dict:
+                return False
+
             from scripts.validate_contract import validate_contract
-        except (AttributeError, ImportError, OSError, TypeError, ValueError, json.JSONDecodeError):
-            return False
-        if not callable(adapter) or not fixture.is_file() or evidence["raw_sha256"] != "sha256:" + hashlib.sha256(fixture.read_bytes()).hexdigest() or adapter(native) != expected or validate_contract(expected, root)["status"] != "valid" or expected.get("$contract", {}).get("profile") != target["profile"]["id"]:
-            return False
-    return True
+
+            validation = validate_contract(expected, root_path)
+            if not isinstance(validation, dict) or validation.get("status") != "valid" or validation.get("errors") != []:
+                return False
+            contract = actual.get("$contract")
+            if contract != {
+                "envelope": "quantskills-envelope",
+                "envelope_version": "1.0.0",
+                "profile": spec["profile"],
+                "profile_version": "1.0.0",
+            }:
+                return False
+
+            actual_records = actual.get("payload", {}).get("records") if type(actual.get("payload")) is dict else None
+            actual_fields = actual.get("schema", {}).get("fields") if type(actual.get("schema")) is dict else None
+            if type(actual_records) is not list or not actual_records or type(actual_fields) is not dict:
+                return False
+            source_keys = set().union(*(set(record) for record in native.get("records", []) if type(record) is dict))
+            for source_key, target_key in row["fields"].items():
+                if source_key not in source_keys or target_key not in actual_fields:
+                    return False
+                for native_record, actual_record in zip(native["records"], actual_records):
+                    if source_key not in native_record or target_key not in actual_record or native_record[source_key] != actual_record[target_key]:
+                        return False
+            if any(field not in source_keys for field in row["native_fields_retained"]):
+                return False
+
+            metadata = native.get("metadata")
+            if type(metadata) is not dict or row["units"].get("currency") != metadata.get("currency"):
+                return False
+            if actual.get("meta", {}).get("currency") != metadata.get("currency"):
+                return False
+            if spec["profile"] == "market-bar":
+                volume_units = {record.get("volume_unit") for record in native["records"]}
+                if row["units"].get("volume") not in volume_units or actual_fields.get("volume", {}).get("unit") != row["units"]["volume"]:
+                    return False
+            if spec["profile"] == "futures-contract" and actual_fields.get("open_interest", {}).get("unit") != row["units"].get("open_interest"):
+                return False
+        return True
+    except BaseException:
+        return False

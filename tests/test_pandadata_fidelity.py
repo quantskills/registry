@@ -4,11 +4,13 @@ import json
 import math
 import sys
 import unittest
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from adapters.pandadata import (
+    _admit_pandadata_mappings,
     fundamental_pit_envelope,
     futures_contract_envelope,
     market_bar_envelope,
@@ -84,6 +86,21 @@ class PandaDataFidelityTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, r"^pandadata-nonfinite$"):
                     adapter(native)
 
+    def test_recursive_native_containers_fail_with_stable_json_error(self):
+        for name, adapter in self.cases:
+            with self.subTest(name=name, kind="dict"):
+                native = self.load(name)
+                native["cycle"] = native
+                with self.assertRaisesRegex(ValueError, r"^pandadata-native-json$"):
+                    adapter(native)
+            with self.subTest(name=name, kind="list"):
+                native = self.load(name)
+                cycle = []
+                cycle.append(cycle)
+                native["cycle"] = cycle
+                with self.assertRaisesRegex(ValueError, r"^pandadata-native-json$"):
+                    adapter(native)
+
     def test_preflight_rejects_non_json_and_invalid_profile_values(self):
         for name, adapter in self.cases:
             with self.subTest(name=name, kind="tuple"):
@@ -143,6 +160,79 @@ class PandaDataFidelityTests(unittest.TestCase):
             candidate = copy.deepcopy(mappings)
             mutate(candidate)
             self.assertFalse(_admit_pandadata_mappings(candidate, ROOT))
+
+    def test_mapping_admission_rejects_closed_world_mutations(self):
+        mappings = json.loads((ROOT / "schema" / "adapters" / "pandadata-mappings.v1.json").read_text(encoding="utf-8"))
+
+        def rejected(candidate):
+            try:
+                accepted = _admit_pandadata_mappings(candidate, ROOT)
+            except BaseException as exc:  # admission must be fail-closed, never leak a probe exception
+                self.fail(f"mapping admission raised {type(exc).__name__}")
+            self.assertFalse(accepted)
+
+        source_dataset = copy.deepcopy(mappings)
+        source_dataset["mappings"][0]["source"]["dataset"] = "bars-daily"
+        rejected(source_dataset)
+
+        empty_fields = copy.deepcopy(mappings)
+        empty_fields["mappings"][0]["fields"] = {}
+        rejected(empty_fields)
+
+        fake_field = copy.deepcopy(mappings)
+        fake_field["mappings"][0]["fields"] = {"not_a_native_field": "not_a_record_field"}
+        rejected(fake_field)
+
+        newline_id = copy.deepcopy(mappings)
+        newline_id["mappings"][0]["id"] += "\n"
+        rejected(newline_id)
+
+        wrong_callable = copy.deepcopy(mappings)
+        wrong_callable["mappings"][0]["implementation"]["callable"] = "market_bar_envelope"
+        rejected(wrong_callable)
+
+        fixture = FIXTURES / "market-bar-native.json"
+        original_fixture_bytes = fixture.read_bytes()
+        native = json.loads(original_fixture_bytes.decode("utf-8"))
+        noncanonical_fixture_bytes = (json.dumps(native, ensure_ascii=True, indent=2) + "\n").encode("utf-8")
+        noncanonical = copy.deepcopy(mappings)
+        noncanonical["mappings"][2]["evidence"]["raw_sha256"] = "sha256:" + hashlib.sha256(noncanonical_fixture_bytes).hexdigest()
+        original_read_bytes = Path.read_bytes
+        original_read_text = Path.read_text
+
+        def read_bytes(path, *args, **kwargs):
+            return noncanonical_fixture_bytes if path.name == fixture.name else original_read_bytes(path, *args, **kwargs)
+
+        def read_text(path, *args, **kwargs):
+            return noncanonical_fixture_bytes.decode("utf-8") if path.name == fixture.name else original_read_text(path, *args, **kwargs)
+
+        with mock.patch.object(Path, "read_bytes", read_bytes), mock.patch.object(Path, "read_text", read_text):
+            rejected(noncanonical)
+
+        expected_path = FIXTURES / "expected-market-bar-envelope.json"
+        expected = json.loads(expected_path.read_text(encoding="utf-8"))
+        bad_expected = copy.deepcopy(expected)
+        bad_expected["meta"]["provenance"][0]["dataset"] = "wrong-dataset"
+        bad_expected_bytes = (json.dumps(bad_expected, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+        bad_provenance = copy.deepcopy(mappings)
+        import scripts.adapters.pandadata as module
+
+        def fake_adapter(_native):
+            return copy.deepcopy(bad_expected)
+
+        fake_adapter.__name__ = "market_bar_envelope"
+        fake_adapter.__module__ = "scripts.adapters.pandadata"
+        original_module_callable = module.market_bar_envelope
+
+        def read_bad_bytes(path, *args, **kwargs):
+            return bad_expected_bytes if path.name == expected_path.name else original_read_bytes(path, *args, **kwargs)
+
+        def read_bad_text(path, *args, **kwargs):
+            return bad_expected_bytes.decode("utf-8") if path.name == expected_path.name else original_read_text(path, *args, **kwargs)
+
+        with mock.patch.object(Path, "read_bytes", read_bad_bytes), mock.patch.object(Path, "read_text", read_bad_text), mock.patch.object(module, "market_bar_envelope", fake_adapter):
+            rejected(bad_provenance)
+        self.assertIs(module.market_bar_envelope, original_module_callable)
 
 
 if __name__ == "__main__":
