@@ -1,139 +1,176 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "quantskills SKILL.md / AGENTS.md frontmatter contract",
+  "$id": "https://quantskills.github.io/registry/schema/frontmatter.schema.json",
+  "title": "QuantSkills asset declaration v2",
   "type": "object",
-  "required": [
-    "name",
-    "description",
-    "quantSkills"
-  ],
+  "additionalProperties": false,
+  "required": ["name", "description", "quantSkills"],
   "properties": {
-    "name": {
-      "type": "string",
-      "pattern": "^[a-z0-9][a-z0-9-]+$"
-    },
-    "description": {
-      "type": "string",
-      "minLength": 60
-    },
+    "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$"},
+    "description": {"type": "string", "minLength": 60},
     "quantSkills": {
       "type": "object",
+      "additionalProperties": false,
       "required": [
-        "category",
-        "tags",
-        "platforms",
-        "status",
-        "validation_level",
-        "maintainer_type",
-        "summary_zh",
-        "summary_en"
+        "schema_version", "organization", "organization_url", "repository",
+        "repository_url", "project_type", "license", "maintainer", "catalog",
+        "workflow", "summary_zh", "summary_en", "status", "validation_level",
+        "maintainer_type", "platforms", "interface"
       ],
       "properties": {
-        "organization": {
-          "type": "string"
-        },
-        "repository": {
-          "type": "string"
-        },
-        "collection": {
-          "type": "string"
-        },
-        "license": {
-          "type": "string"
-        },
-        "project_type": {
-          "enum": [
-            "skill",
-            "agent"
-          ]
-        },
-        "category": {
-          "enum": [
-            "trader-research",
-            "factor",
-            "data-api",
-            "replication",
-            "monitor",
-            "analyst",
-            "tooling",
-            "research-agent",
-            "monitor-agent",
-            "risk-agent",
-            "workflow-agent",
-            "review-agent",
-            "data-agent",
-            "automation-agent"
-          ]
-        },
+        "schema_version": {"const": "2.0.0"},
+        "organization": {"const": "quantskills"},
+        "organization_url": {"const": "https://github.com/quantskills"},
+        "repository": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$"},
+        "repository_url": {"type": "string"},
+        "project_type": {"enum": ["skill", "agent"]},
+        "license": {"const": "GPL-3.0-only"},
+        "maintainer": {"type": "string", "minLength": 1},
+        "collection": {"type": "string", "minLength": 1},
+        "catalog": {"$ref": "#/$defs/catalog"},
+        "workflow": {"$ref": "#/$defs/workflow"},
         "tags": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{0,49}$"
-          },
-          "minItems": 1,
-          "maxItems": 10
-        },
-        "platforms": {
-          "type": "array",
-          "items": {
-            "enum": [
-              "claude-code",
-              "codex",
-              "openclaw",
-              "cursor",
-              "workbuddy"
-            ]
-          },
-          "minItems": 1
-        },
-        "language": {
-          "enum": [
-            "zh",
-            "en",
-            "zh-en"
-          ]
-        },
-        "status": {
-          "enum": [
-            "draft",
-            "active",
-            "stable",
-            "deprecated"
-          ]
+          "type": "array", "minItems": 1, "maxItems": 10, "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}
         },
         "requires": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "array", "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^(?:skill|agent)-[a-z0-9]+(?:-[a-z0-9]+)*$"}
         },
-        "summary_zh": {
-          "type": "string",
-          "minLength": 8,
-          "maxLength": 120
+        "summary_zh": {"$ref": "#/$defs/summaryZh"},
+        "summary_en": {"$ref": "#/$defs/summaryEn"},
+        "status": {"enum": ["draft", "active", "stable", "deprecated"]},
+        "validation_level": {"enum": ["listed", "runnable", "verified"]},
+        "maintainer_type": {"enum": ["official", "community"]},
+        "platforms": {
+          "type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true,
+          "items": {"enum": ["cursor", "claude-code", "codex", "hermes", "openclaw"]},
+          "allOf": [
+            {"contains": {"const": "cursor"}},
+            {"contains": {"const": "claude-code"}},
+            {"contains": {"const": "codex"}},
+            {"contains": {"const": "hermes"}},
+            {"contains": {"const": "openclaw"}}
+          ]
         },
-        "summary_en": {
-          "type": "string",
-          "minLength": 8,
-          "maxLength": 200
-        },
-        "validation_level": {
-          "enum": [
-            "listed",
-            "runnable",
-            "verified"
-          ],
-          "description": "社区三级验证体系,默认 listed;runnable 需安装说明+示例输入输出;verified 需数据来源/无前视检查/回测证据/风险说明"
-        },
-        "maintainer_type": {
-          "enum": [
-            "official",
-            "community"
-          ],
-          "description": "官方维护或社区项目(对应组织治理规则)"
+        "interface": {
+          "oneOf": [
+            {"$ref": "#/$defs/structuredInterface"},
+            {"$ref": "#/$defs/hybridInterface"},
+            {"$ref": "#/$defs/naturalLanguageInterface"},
+            {"$ref": "#/$defs/notApplicableInterface"}
+          ]
         }
       }
+    }
+  },
+  "$defs": {
+    "exactSemver": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"
+    },
+    "semverRange": {
+      "type": "string",
+      "description": "One or more space-separated exact semantic versions, optionally prefixed by >=, <=, >, <, ^, or ~.",
+      "pattern": "^(?:(?:>=|<=|>|<|\\^|~)?(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*))(?: (?:>=|<=|>|<|\\^|~)?(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*))*$"
+    },
+    "catalog": {
+      "type": "object", "additionalProperties": false,
+      "required": ["category", "subcategory"],
+      "properties": {
+        "category": {"enum": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]},
+        "subcategory": {"type": "string", "pattern": "^(0[1-9]|10)\\.[a-z0-9][a-z0-9-]+$"}
+      }
+    },
+    "workflow": {
+      "type": "object", "additionalProperties": false,
+      "required": ["primary_stage", "workflow_stages"],
+      "properties": {
+        "primary_stage": {"$ref": "#/$defs/workflowStage"},
+        "workflow_stages": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"$ref": "#/$defs/workflowStage"}
+        }
+      }
+    },
+    "workflowStage": {
+      "enum": ["data-ingestion", "data-quality", "feature-engineering", "factor-generation", "factor-screening", "modeling", "portfolio-construction", "backtesting", "evaluation", "risk", "monitoring", "execution", "reporting", "orchestration"]
+    },
+    "summaryZh": {
+      "type": "string", "minLength": 8, "maxLength": 120,
+      "pattern": "^(?!.*[\\r\\n])(?!.*\\[[^\\]]*\\]\\([^)]*\\)).+$"
+    },
+    "summaryEn": {
+      "type": "string", "minLength": 8, "maxLength": 200,
+      "pattern": "^(?!.*[\\r\\n])(?!.*\\[[^\\]]*\\]\\([^)]*\\)).+$"
+    },
+    "interfaceInput": {
+      "type": "object", "additionalProperties": false,
+      "required": ["profile", "version_range", "required"],
+      "properties": {
+        "profile": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "version_range": {"$ref": "#/$defs/semverRange"},
+        "required": {"type": "boolean"}
+      }
+    },
+    "interfaceOutput": {
+      "type": "object", "additionalProperties": false,
+      "required": ["profile", "version"],
+      "properties": {
+        "profile": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "version": {"$ref": "#/$defs/exactSemver"}
+      }
+    },
+    "structuredInterface": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode", "envelope", "inputs", "outputs", "adapters"],
+      "properties": {
+        "mode": {"const": "structured"},
+        "envelope": {"$ref": "#/$defs/envelope"},
+        "inputs": {"$ref": "#/$defs/interfaceInputs"},
+        "outputs": {"$ref": "#/$defs/interfaceOutputs"},
+        "adapters": {"$ref": "#/$defs/adapters"}
+      },
+      "anyOf": [{"properties": {"inputs": {"minItems": 1}}}, {"properties": {"outputs": {"minItems": 1}}}]
+    },
+    "hybridInterface": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode", "envelope", "inputs", "outputs", "adapters"],
+      "properties": {
+        "mode": {"const": "hybrid"},
+        "envelope": {"$ref": "#/$defs/envelope"},
+        "inputs": {"$ref": "#/$defs/interfaceInputs"},
+        "outputs": {"$ref": "#/$defs/interfaceOutputs"},
+        "adapters": {"$ref": "#/$defs/adapters"}
+      },
+      "anyOf": [{"properties": {"inputs": {"minItems": 1}}}, {"properties": {"outputs": {"minItems": 1}}}]
+    },
+    "naturalLanguageInterface": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "natural-language"}}
+    },
+    "notApplicableInterface": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode", "reason"],
+      "properties": {
+        "mode": {"const": "not-applicable"},
+        "reason": {"enum": ["natural-language-only", "report-only", "orchestration-only"]}
+      }
+    },
+    "envelope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"const": "quantskills-envelope"},
+        "version": {"$ref": "#/$defs/exactSemver"}
+      }
+    },
+    "interfaceInputs": {"type": "array", "items": {"$ref": "#/$defs/interfaceInput"}},
+    "interfaceOutputs": {"type": "array", "items": {"$ref": "#/$defs/interfaceOutput"}},
+    "adapters": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}
     }
   }
 }

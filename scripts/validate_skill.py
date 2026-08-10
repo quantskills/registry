@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""validate_skill.py — quantskills asset 仓库确定性健康检查器(脚本层)。
-
-只做事实判断,不做语义判断。语义判断(标签准确性、敏感内容、文档漂移)交给 AI 层,见 AGENTS.md。
-
-用法:
-    python scripts/validate_skill.py /path/to/cloned/repo [--json] [--org-repos a,b,c]
-
-退出码: 0 = pass, 1 = warning, 2 = quarantined(含致命问题)
-"""
+"""Read-only deterministic health checks for QuantSkills asset repositories."""
 from __future__ import annotations
 
 import argparse
@@ -17,63 +9,24 @@ import re
 import sys
 from pathlib import Path
 
+from catalog_contract import load_taxonomy, validate_asset_semantics, validate_frontmatter_schema
+
 try:
     import yaml
 except ImportError:
-    sys.exit("缺少依赖: pip install pyyaml")
+    sys.exit("missing dependency: pip install pyyaml")
 
-# ---------------- 配置 ----------------
+
 DECLARATION_BY_TYPE = {"skill": "SKILL.md", "agent": "AGENTS.md"}
-ASSET_TYPES = {"skill", "agent"}
-CATEGORIES = {
-    "trader-research",
-    "factor",
-    "data-api",
-    "replication",
-    "monitor",
-    "analyst",
-    "tooling",
-    "research-agent",
-    "monitor-agent",
-    "risk-agent",
-    "workflow-agent",
-    "review-agent",
-    "data-agent",
-    "automation-agent",
-}
-STATUSES = {"draft", "active", "stable", "deprecated"}
-PLATFORMS = {"claude-code", "codex", "openclaw", "cursor", "workbuddy"}
-VALIDATION_LEVELS = {"listed", "runnable", "verified"}
-MAINTAINER_TYPES = {"official", "community"}
-REQUIRED_FM_FIELDS = [
-    "project_type",
-    "category",
-    "tags",
-    "platforms",
-    "status",
-    "validation_level",
-    "maintainer_type",
-    "summary_zh",
-    "summary_en",
-]
-
-MAX_FILE_WARN = 2 * 1024 * 1024      # >2MB warning
-MAX_FILE_FAIL = 10 * 1024 * 1024     # >10MB quarantine(违反 Git 卫生)
+MAX_FILE_WARN = 2 * 1024 * 1024
+MAX_FILE_FAIL = 10 * 1024 * 1024
 DATA_EXT_WATCHLIST = {".csv", ".parquet", ".json", ".jsonl", ".xlsx", ".db", ".sqlite", ".zip", ".gz"}
-
-# trader-research 类目硬门槛:两类声明缺一即 quarantine
-DISCLAIMER_PATTERNS = [r"不构成任何投资建议", r"not\s+(?:constitute\s+)?investment\s+advice"]
-AFFILIATION_PATTERNS = [r"不代表|非官方|不隶属", r"not\s+affiliated"]
-
-# 轻量泄密正则(重型扫描由 workflow 里的 gitleaks 负责)
 SECRET_PATTERNS = [
     (re.compile(r"AKIA[0-9A-Z]{16}"), "AWS Access Key"),
     (re.compile(r"ghp_[A-Za-z0-9]{36}"), "GitHub PAT"),
-    (re.compile(r"sk-[A-Za-z0-9]{20,}"), "API secret key 形态字符串"),
+    (re.compile(r"sk-[A-Za-z0-9]{20,}"), "API secret key pattern"),
     (re.compile(r"xox[baprs]-[A-Za-z0-9-]{10,}"), "Slack token"),
 ]
-
-# markdown 里的相对路径引用:链接、图片、以及反引号里的 scripts/references/collectors/validation 路径
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)#\s]+)\)")
 BACKTICK_PATH_RE = re.compile(r"`((?:\.\./)+[\w./\-]+|(?:scripts|references|collectors|validation|agents)/[\w./\-]+)`")
 
@@ -82,221 +35,198 @@ class Report:
     def __init__(self) -> None:
         self.items: list[dict] = []
 
-    def add(self, level: str, check: str, detail: str) -> None:
-        self.items.append({"level": level, "check": check, "detail": detail})
+    def add(self, level: str, check: str, detail: str, path: str = "") -> None:
+        self.items.append({"level": level, "check": check, "path": path, "detail": detail})
 
     @property
     def health(self) -> str:
-        levels = {i["level"] for i in self.items}
-        if "fail" in levels:
-            return "quarantined"
-        if "warn" in levels:
-            return "warning"
-        return "healthy"
+        levels = {item["level"] for item in self.items}
+        return "quarantined" if "fail" in levels else "warning" if "warn" in levels else "healthy"
 
 
 def declaration_info(repo: Path) -> tuple[str | None, str | None]:
-    """Return expected asset type and declaration filename for a repo/template."""
-    name = repo.name
-    if name.startswith("agent-"):
-        return "agent", DECLARATION_BY_TYPE["agent"]
-    if name.startswith("skill-"):
-        return "skill", DECLARATION_BY_TYPE["skill"]
+    if repo.name.startswith("agent-"):
+        return "agent", "AGENTS.md"
+    if repo.name.startswith("skill-"):
+        return "skill", "SKILL.md"
     if (repo / "AGENTS.md").is_file() and not (repo / "SKILL.md").is_file():
-        return "agent", DECLARATION_BY_TYPE["agent"]
+        return "agent", "AGENTS.md"
     if (repo / "SKILL.md").is_file():
-        return "skill", DECLARATION_BY_TYPE["skill"]
+        return "skill", "SKILL.md"
     return None, None
 
 
 def parse_frontmatter(declaration_md: Path) -> dict | None:
     text = declaration_md.read_text(encoding="utf-8", errors="replace")
-    m = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
-    if not m:
+    match = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
+    if not match:
         return None
     try:
-        return yaml.safe_load(m.group(1)) or {}
+        return yaml.safe_load(match.group(1)) or {}
     except yaml.YAMLError:
         return None
 
 
 def check_required_files(repo: Path, declaration_file: str | None, rep: Report) -> None:
-    required_files = [name for name in (declaration_file, "README.md", "LICENSE") if name]
     if not declaration_file:
-        rep.add("fail", "required-files", "缺少声明文件 SKILL.md 或 AGENTS.md")
-    for name in required_files:
-        if not (repo / name).is_file():
-            rep.add("fail", "required-files", f"缺少必备文件 {name}")
+        rep.add("fail", "required-files", "missing declaration file SKILL.md or AGENTS.md")
+    for name in (declaration_file, "README.md", "LICENSE"):
+        if name and not (repo / name).is_file():
+            rep.add("fail", "required-files", f"missing required file {name}", name)
 
 
-def check_frontmatter(repo: Path, asset_type: str | None, declaration_file: str | None, rep: Report) -> dict:
-    if not declaration_file:
+def _contract_level(contract_mode: str) -> str:
+    return "fail" if contract_mode == "enforce" else "warn"
+
+
+def check_frontmatter(repo: Path, asset_type: str | None, declaration_file: str | None, rep: Report, contract_mode: str = "audit") -> dict:
+    if not declaration_file or not (repo / declaration_file).is_file():
         return {}
-    declaration_md = repo / declaration_file
-    if not declaration_md.is_file():
+    frontmatter = parse_frontmatter(repo / declaration_file)
+    if frontmatter is None:
+        rep.add("fail", "frontmatter", "missing or invalid YAML frontmatter", declaration_file)
         return {}
-    fm = parse_frontmatter(declaration_md)
-    if fm is None:
-        rep.add("fail", "frontmatter", f"{declaration_file} 缺少 YAML frontmatter 或解析失败")
-        return {}
-    if not fm.get("name"):
-        rep.add("fail", "frontmatter", "frontmatter 缺少 name")
-    desc = fm.get("description") or ""
-    if len(str(desc)) < 60 or "use when" not in str(desc).lower():
-        rep.add("warn", "frontmatter", "description 过短或缺少 'Use when ...' 触发场景描述(影响 agent 选用)")
-    qs = fm.get("quantSkills") or {}
-    for field in REQUIRED_FM_FIELDS:
-        if field not in qs:
-            rep.add("warn", "frontmatter", f"quantSkills.{field} 缺失")
-    if qs.get("project_type") and qs["project_type"] not in ASSET_TYPES:
-        rep.add("warn", "frontmatter", f"project_type '{qs['project_type']}' 不在枚举 {sorted(ASSET_TYPES)}")
-    if asset_type and qs.get("project_type") and qs["project_type"] != asset_type:
-        rep.add("warn", "frontmatter", f"project_type '{qs['project_type']}' 与仓库声明类型 '{asset_type}' 不一致")
-    if qs.get("category") and qs["category"] not in CATEGORIES:
-        rep.add("warn", "frontmatter", f"category '{qs['category']}' 不在枚举 {sorted(CATEGORIES)}")
-    if qs.get("status") and qs["status"] not in STATUSES:
-        rep.add("warn", "frontmatter", f"status '{qs['status']}' 不在枚举 {sorted(STATUSES)}")
-    if qs.get("validation_level") and qs["validation_level"] not in VALIDATION_LEVELS:
-        rep.add("warn", "frontmatter", f"validation_level '{qs['validation_level']}' 不在枚举 {sorted(VALIDATION_LEVELS)}")
-    if qs.get("maintainer_type") and qs["maintainer_type"] not in MAINTAINER_TYPES:
-        rep.add("warn", "frontmatter", f"maintainer_type '{qs['maintainer_type']}' 不在枚举 {sorted(MAINTAINER_TYPES)}")
-    for p in qs.get("platforms") or []:
-        if p not in PLATFORMS:
-            rep.add("warn", "frontmatter", f"platform '{p}' 不在枚举 {sorted(PLATFORMS)}")
-    return fm
+    if not frontmatter.get("name"):
+        rep.add("fail", "frontmatter", "frontmatter missing name", "$.name")
+    description = str(frontmatter.get("description") or "")
+    if len(description) < 60 or "use when" not in description.lower():
+        rep.add("warn", "frontmatter", "description is too short or lacks a 'Use when' trigger", "$.description")
+    root = Path(__file__).resolve().parent.parent
+    for issue in validate_frontmatter_schema(frontmatter, root / "schema" / "frontmatter.schema.json"):
+        rep.add(_contract_level(contract_mode), issue["check"], issue["detail"], issue["path"])
+    try:
+        taxonomy = load_taxonomy(root)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        rep.add("fail", "contract-taxonomy", f"taxonomy unavailable: {exc.__class__.__name__}", "$")
+    else:
+        for issue in validate_asset_semantics(frontmatter, repo.name, declaration_file, taxonomy):
+            rep.add(_contract_level(contract_mode), issue["check"], issue["detail"], issue["path"])
+    return frontmatter
 
 
 def check_path_references(repo: Path, rep: Report) -> None:
-    """提到的文件必须真实存在 —— 死链 / 幽灵路径检查。"""
-    for md in repo.rglob("*.md"):
-        if ".git" in md.parts:
+    for markdown in repo.rglob("*.md"):
+        if ".git" in markdown.parts:
             continue
-        text = md.read_text(encoding="utf-8", errors="replace")
-        refs: dict[str, str] = {}  # path -> "link"(markdown 链接,缺失即 fail) / "mention"(反引号提及,缺失为 warn)
-        for target in LINK_RE.findall(text):
-            if target.startswith(("http://", "https://", "mailto:")):
-                continue
-            refs[target] = "link"
-        for target in BACKTICK_PATH_RE.findall(text):
-            refs.setdefault(target, "mention")
+        refs = {target: "link" for target in LINK_RE.findall(markdown.read_text(encoding="utf-8", errors="replace")) if not target.startswith(("http://", "https://", "mailto:"))}
+        refs.update({target: refs.get(target, "mention") for target in BACKTICK_PATH_RE.findall(markdown.read_text(encoding="utf-8", errors="replace"))})
         for ref, kind in sorted(refs.items()):
             clean = ref.split("#", 1)[0].strip()
             if not clean:
                 continue
-            resolved = (md.parent / clean).resolve()
-            if not resolved.exists():
-                root_try = (repo / clean).resolve()
-                if root_try.exists():
-                    resolved = root_try
+            resolved = (markdown.parent / clean).resolve()
+            if not resolved.exists() and (repo / clean).resolve().exists():
+                resolved = (repo / clean).resolve()
             try:
                 resolved.relative_to(repo.resolve())
                 inside = True
             except ValueError:
                 inside = False
-            where = md.relative_to(repo)
             if not inside:
-                rep.add("warn", "path-refs", f"{where} 引用了仓库外路径(请改为仓库内路径或删除): {ref}")
+                rep.add("warn", "path-refs", f"{markdown.relative_to(repo)} references a path outside the repository: {ref}")
             elif not resolved.exists():
-                level = "fail" if kind == "link" else "warn"
-                hint = "链接目标不存在" if kind == "link" else "提及的路径不存在(若为示例/生成物可忽略,建议改写避免歧义)"
-                rep.add(level, "path-refs", f"{where} {hint}: {ref}")
+                rep.add("fail" if kind == "link" else "warn", "path-refs", f"{markdown.relative_to(repo)} references a missing path: {ref}")
 
 
 def check_git_hygiene(repo: Path, rep: Report) -> None:
-    for f in repo.rglob("*"):
-        if ".git" in f.parts or not f.is_file():
+    for file in repo.rglob("*"):
+        if ".git" in file.parts or not file.is_file():
             continue
-        size = f.stat().st_size
-        rel = f.relative_to(repo)
+        size = file.stat().st_size
         if size > MAX_FILE_FAIL:
-            rep.add("fail", "git-hygiene", f"{rel} 大小 {size//1024//1024}MB 超过 10MB 上限")
-        elif size > MAX_FILE_WARN and f.suffix.lower() in DATA_EXT_WATCHLIST:
-            rep.add("warn", "git-hygiene", f"{rel} 是 >2MB 的数据文件,确认是否应入库")
+            rep.add("fail", "git-hygiene", f"{file.relative_to(repo)} exceeds 10MB")
+        elif size > MAX_FILE_WARN and file.suffix.lower() in DATA_EXT_WATCHLIST:
+            rep.add("warn", "git-hygiene", f"{file.relative_to(repo)} is a data file over 2MB")
 
 
 def check_secrets(repo: Path, rep: Report) -> None:
-    for f in repo.rglob("*"):
-        if ".git" in f.parts or not f.is_file() or f.stat().st_size > MAX_FILE_WARN:
+    for file in repo.rglob("*"):
+        if ".git" in file.parts or not file.is_file() or file.stat().st_size > MAX_FILE_WARN:
             continue
         try:
-            text = f.read_text(encoding="utf-8", errors="ignore")
+            text = file.read_text(encoding="utf-8", errors="ignore")
         except OSError:
             continue
         for pattern, label in SECRET_PATTERNS:
             if pattern.search(text):
-                rep.add("fail", "secrets", f"{f.relative_to(repo)} 疑似包含 {label}")
+                rep.add("fail", "secrets", f"{file.relative_to(repo)} appears to contain {label}")
 
 
-def check_trader_disclaimers(repo: Path, fm: dict, declaration_file: str | None, rep: Report) -> None:
-    """实名 trader 仓库硬门槛:免责 + 非隶属声明,缺失即 quarantine。"""
+def check_quant_risk_disclosures(repo: Path, fm: dict, declaration_file: str | None, rep: Report, contract_mode: str = "audit") -> None:
     qs = (fm or {}).get("quantSkills") or {}
-    if qs.get("category") != "trader-research":
+    stages = set((qs.get("workflow") or {}).get("workflow_stages") or [])
+    catalog = qs.get("catalog") or {}
+    risk_tokens = {"factor", "strategy", "backtest", "signal", "trading", "execution"}
+    metadata = [repo.name, catalog.get("category", ""), catalog.get("subcategory", ""), *(qs.get("tags") or [])]
+    metadata_tokens = {token for value in metadata if isinstance(value, str) for token in re.findall(r"[a-z0-9]+", value.lower())}
+    if not stages & {"factor-generation", "factor-screening", "portfolio-construction", "backtesting", "execution"} and not metadata_tokens & risk_tokens:
         return
-    corpus = ""
-    for name in ("README.md", "README.en.md", declaration_file):
-        if not name:
-            continue
-        p = repo / name
-        if p.is_file():
-            corpus += p.read_text(encoding="utf-8", errors="replace")
-    if not any(re.search(pat, corpus, re.IGNORECASE) for pat in DISCLAIMER_PATTERNS):
-        rep.add("fail", "trader-disclaimer", "trader-research 仓库缺少『不构成投资建议』免责声明")
-    if not any(re.search(pat, corpus, re.IGNORECASE) for pat in AFFILIATION_PATTERNS):
-        rep.add("fail", "trader-disclaimer", "trader-research 仓库缺少『非官方/不隶属』声明")
+    concepts = {"data source": ("数据来源", "data source"), "assumptions": ("假设", "assumption"), "parameters": ("参数", "parameter"), "limitations": ("限制", "limitation"), "risk boundary": ("风险", "risk")}
+    level = _contract_level(contract_mode)
+    for name in ("README.md", declaration_file):
+        text = (repo / name).read_text(encoding="utf-8", errors="replace").lower() if name and (repo / name).is_file() else ""
+        for concept, tokens in concepts.items():
+            if not any(token.lower() in text for token in tokens):
+                rep.add(level, "quant-risk-disclosures", f"missing {concept} disclosure in {name}")
+        research = any(token in text for token in ("研究", "教育", "research", "education"))
+        non_advice = any(token in text for token in ("不构成任何投资建议", "不构成投资建议", "not investment advice", "does not constitute investment advice"))
+        if not (research and non_advice):
+            rep.add(level, "quant-risk-disclosures", f"missing research/education and non-advice disclosure in {name}")
 
 
 def check_python_syntax(repo: Path, rep: Report) -> None:
-    for f in repo.rglob("*.py"):
-        if ".git" in f.parts:
+    for file in repo.rglob("*.py"):
+        if ".git" in file.parts:
             continue
         try:
-            py_compile.compile(str(f), doraise=True)
-        except py_compile.PyCompileError as e:
-            rep.add("fail", "python-syntax", f"{f.relative_to(repo)} 语法错误: {e.msg.splitlines()[0]}")
+            py_compile.compile(str(file), doraise=True)
+        except py_compile.PyCompileError as exc:
+            rep.add("fail", "python-syntax", f"{file.relative_to(repo)} syntax error: {exc.msg.splitlines()[0]}")
 
 
 def check_requires(fm: dict, org_repos: set[str], rep: Report) -> None:
     if not org_repos:
         return
-    for dep in ((fm or {}).get("quantSkills") or {}).get("requires") or []:
-        if dep not in org_repos:
-            rep.add("warn", "requires", f"requires 指向的仓库 '{dep}' 在组织中不存在")
+    for dependency in ((fm or {}).get("quantSkills") or {}).get("requires") or []:
+        if dependency not in org_repos:
+            rep.add("warn", "requires", f"requires references unknown organization repository '{dependency}'")
 
 
-def validate(repo: Path, org_repos: set[str]) -> Report:
+def validate(repo: Path, org_repos: set[str], contract_mode: str = "audit") -> Report:
+    if contract_mode not in {"audit", "enforce"}:
+        raise ValueError("contract_mode must be 'audit' or 'enforce'")
+    repo = repo.resolve()
     rep = Report()
     asset_type, declaration_file = declaration_info(repo)
     check_required_files(repo, declaration_file, rep)
-    fm = check_frontmatter(repo, asset_type, declaration_file, rep)
+    frontmatter = check_frontmatter(repo, asset_type, declaration_file, rep, contract_mode)
     check_path_references(repo, rep)
     check_git_hygiene(repo, rep)
     check_secrets(repo, rep)
-    check_trader_disclaimers(repo, fm, declaration_file, rep)
+    check_quant_risk_disclosures(repo, frontmatter, declaration_file, rep, contract_mode)
     check_python_syntax(repo, rep)
-    check_requires(fm, org_repos, rep)
+    check_requires(frontmatter, org_repos, rep)
     return rep
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("repo")
-    ap.add_argument("--json", action="store_true")
-    ap.add_argument("--org-repos", default="", help="逗号分隔的组织仓库名清单,用于校验 requires")
-    args = ap.parse_args()
-
+    parser = argparse.ArgumentParser()
+    parser.add_argument("repo")
+    parser.add_argument("--json", action="store_true")
+    parser.add_argument("--org-repos", default="", help="comma-separated organization repositories for requires validation")
+    parser.add_argument("--contract-mode", choices=("audit", "enforce"), default="audit")
+    args = parser.parse_args()
     repo = Path(args.repo)
     if not repo.is_dir():
-        sys.exit(f"目录不存在: {repo}")
-    org_repos = {r.strip() for r in args.org_repos.split(",") if r.strip()}
-    rep = validate(repo, org_repos)
-
+        sys.exit(f"directory does not exist: {repo}")
+    report = validate(repo, {name.strip() for name in args.org_repos.split(",") if name.strip()}, args.contract_mode)
     if args.json:
-        print(json.dumps({"health": rep.health, "items": rep.items}, ensure_ascii=False, indent=2))
+        print(json.dumps({"health": report.health, "items": report.items}, ensure_ascii=False, indent=2))
     else:
-        print(f"health: {rep.health}")
-        for item in rep.items:
+        print(f"health: {report.health}")
+        for item in report.items:
             print(f"  [{item['level']:4}] {item['check']}: {item['detail']}")
-    sys.exit({"healthy": 0, "warning": 1, "quarantined": 2}[rep.health])
+    sys.exit({"healthy": 0, "warning": 1, "quarantined": 2}[report.health])
 
 
 if __name__ == "__main__":

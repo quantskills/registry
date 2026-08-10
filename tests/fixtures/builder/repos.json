@@ -1,0 +1,9 @@
+[
+  {"name": "skill-alpha", "commit_sha": "a"},
+  {"name": "skill-template", "commit_sha": "b"},
+  {"name": "agent-template", "commit_sha": "c"},
+  {"name": ".github"},
+  {"name": "join"},
+  {"name": "quantskills"},
+  {"name": "registry"}
+]

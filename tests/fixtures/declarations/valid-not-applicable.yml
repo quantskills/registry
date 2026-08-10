@@ -1,0 +1,32 @@
+name: agent-template
+description: A reusable agent template that coordinates task execution and documents a minimal orchestration contract for QuantSkills contributors.
+quantSkills:
+  schema_version: 2.0.0
+  organization: quantskills
+  organization_url: https://github.com/quantskills
+  repository: agent-template
+  repository_url: https://github.com/quantskills/agent-template
+  project_type: agent
+  license: GPL-3.0-only
+  maintainer: abgyjaguo
+  catalog:
+    category: "10"
+    subcategory: 10.agent-template
+  workflow:
+    primary_stage: orchestration
+    workflow_stages:
+      - orchestration
+  summary_zh: 面向任务编排的智能体模板
+  summary_en: Reusable template for task orchestration agents.
+  status: draft
+  validation_level: listed
+  maintainer_type: official
+  platforms:
+    - cursor
+    - claude-code
+    - codex
+    - hermes
+    - openclaw
+  interface:
+    mode: not-applicable
+    reason: orchestration-only
