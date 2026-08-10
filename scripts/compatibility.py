@@ -12,9 +12,6 @@ from jsonschema import Draft202012Validator
 _ROOT = Path(__file__).resolve().parents[1]
 _SEMVER = re.compile(r"^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$")
 _ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-_ROW_KEYS = {"id", "source", "target", "implementation", "lossless", "validation_status", "evidence", "envelope_major"}
-
-
 def parse_semver(value: str) -> tuple[int, int, int]:
     if not isinstance(value, str) or _SEMVER.fullmatch(value) is None:
         raise ValueError("invalid semver")
@@ -64,17 +61,17 @@ def _safe(relative: Path) -> Path | None:
     except (OSError, ValueError): return None
 
 
-def _indexes() -> tuple[set[tuple[str, str]], set[tuple[str, int]]] | None:
+def _indexes() -> tuple[set[tuple[str, str]], set[tuple[str, str]]] | None:
     try:
         ep, pp = _safe(Path("schema/envelope/index.json")), _safe(Path("schema/profiles/index.json"))
         if ep is None or pp is None or not ep.is_file() or not pp.is_file(): return None
         envelope = json.loads(ep.read_text(encoding="utf-8"), object_pairs_hook=_strict_pairs)
         profiles = json.loads(pp.read_text(encoding="utf-8"), object_pairs_hook=_strict_pairs)
         if set(envelope) != {"name", "versions"} or envelope.get("name") != "quantskills-envelope" or not isinstance(envelope["versions"], dict): return None
-        majors = set()
+        envelopes = set()
         for version, filename in envelope["versions"].items():
             if parse_semver(version)[0] < 0 or filename != f"{version}.schema.json" or _safe(Path("schema/envelope") / filename) is None: return None
-            majors.add((envelope["name"], parse_semver(version)[0]))
+            envelopes.add((envelope["name"], version))
         if not isinstance(profiles, dict) or set(profiles) != {"profiles"} or not isinstance(profiles["profiles"], list): return None
         known = set()
         for row in profiles["profiles"]:
@@ -82,7 +79,7 @@ def _indexes() -> tuple[set[tuple[str, str]], set[tuple[str, int]]] | None:
             path = Path(row.get("schema", "")); expected = Path(row["kind"]) / row["id"] / f"{row['version']}.schema.json"
             if path != expected or _safe(Path("schema/profiles") / path) is None or (row["id"], row["version"]) in known: return None
             known.add((row["id"], row["version"]))
-        return known, majors
+        return known, envelopes
     except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError): return None
 
 
@@ -91,14 +88,16 @@ def _result(status: str, errors: list[dict] | None = None, adapter_path: list[st
     return {"status": status, "errors": [{"code": code, "path": path} for code, path in sorted(unique)], "adapter_path": adapter_path or []}
 
 
-def _endpoint(value: object, input_: bool, known: set[tuple[str, str]], envelope_majors: set[tuple[str, int]]) -> tuple[tuple[str, str, int] | None, str | None]:
+def _endpoint(value: object, input_: bool, known: set[tuple[str, str]], envelopes: set[tuple[str, str]]) -> tuple[tuple[str, str, int] | None, str | None]:
     if not isinstance(value, dict): return None, "endpoint"
     if value.get("mode") in {"natural-language", "not-applicable"}: return None, "not-applicable"
     envelope = value.get("envelope")
     if value.get("mode") not in {"structured", "hybrid"} or not isinstance(envelope, dict) or set(envelope) != {"name", "version"}: return None, "endpoint"
-    try: major = parse_semver(envelope["version"])[0]
+    try:
+        version = envelope["version"]
+        major = parse_semver(version)[0]
     except (KeyError, ValueError): return None, "envelope"
-    if (envelope.get("name"), major) not in envelope_majors: return None, "envelope"
+    if (envelope.get("name"), version) not in envelopes: return None, "envelope"
     profile, version = value.get("profile"), value.get("version_range" if input_ else "version")
     if not isinstance(profile, str) or _ID.fullmatch(profile) is None: return None, "profile"
     if input_:
@@ -108,52 +107,68 @@ def _endpoint(value: object, input_: bool, known: set[tuple[str, str]], envelope
     return (profile, version, major), None
 
 
-def _validate_adapters(adapters: object, known: set[tuple[str, str]]) -> list[tuple[dict | None, dict | None]]:
-    if not isinstance(adapters, list): return [(None, {"code": "adapters", "path": "/adapters"})]
-    result, ids, edges = [], set(), set()
-    for index, row in enumerate(sorted(adapters, key=lambda item: str(item.get("id", "")) if isinstance(item, dict) else "")):
-        path = f"/adapters/{index}"
-        if not isinstance(row, dict) or set(row) != _ROW_KEYS or not _ID.fullmatch(row.get("id", "")) or row["id"] in ids:
-            result.append((None, {"code": "adapter", "path": path})); continue
-        ids.add(row["id"])
-        source, target, impl, evidence = row["source"], row["target"], row["implementation"], row["evidence"]
-        edge = (source.get("profile"), source.get("version"), target.get("profile"), target.get("version")) if isinstance(source, dict) and isinstance(target, dict) else None
-        complete = edge is not None and edge not in edges and (edge[0], edge[1]) in known and (edge[2], edge[3]) in known and isinstance(impl, dict) and set(impl) == {"repository", "path"} and impl.get("repository") == "registry" and isinstance(impl.get("path"), str) and isinstance(evidence, dict) and set(evidence) == {"fixture_sha256", "test_command", "validated_at"} and re.fullmatch(r"sha256:[0-9a-f]{64}", evidence.get("fixture_sha256", "")) and isinstance(evidence.get("test_command"), str) and bool(evidence["test_command"]) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", evidence.get("validated_at", "")) and row.get("envelope_major") == 1
-        if edge: edges.add(edge)
-        implementation = _safe(Path(impl["path"])) if complete else None
-        if not complete or implementation is None or not implementation.is_file(): result.append((None, {"code": "adapter", "path": path}))
-        elif row.get("lossless") is True and row.get("validation_status") == "validated": result.append((row, None))
-        elif row.get("lossless") is False: result.append((None, None))
-        else: result.append((None, {"code": "adapter-evidence", "path": path}))
-    return result
+def _adapter_validator() -> Draft202012Validator:
+    schema_path = _safe(Path("schema/adapters/adapter-registry.schema.json"))
+    if schema_path is None:
+        raise OSError("missing adapter schema")
+    return Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8"), object_pairs_hook=_strict_pairs))
+
+
+def _validate_adapters(adapters: object, known: set[tuple[str, str]]) -> tuple[list[dict], list[dict]]:
+    """Validate the closed registry shape before inspecting any row values."""
+    try:
+        validator = _adapter_validator()
+        document = {"schema_version": "1.0.0", "adapters": adapters}
+        if list(validator.iter_errors(document)):
+            return [], [{"code": "adapter-registry", "path": "/adapters"}]
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        return [], [{"code": "adapter-registry", "path": "/adapters"}]
+    assert isinstance(adapters, list)
+    id_groups: dict[str, list[dict]] = {}
+    edge_groups: dict[tuple[str, str, str, str], list[dict]] = {}
+    for row in adapters:
+        id_groups.setdefault(row["id"], []).append(row)
+        edge = (row["source"]["profile"], row["source"]["version"], row["target"]["profile"], row["target"]["version"])
+        edge_groups.setdefault(edge, []).append(row)
+    errors = []
+    if any(len(group) > 1 for group in id_groups.values()): errors.append({"code": "adapter-duplicate-id", "path": "/adapters"})
+    if any(len(group) > 1 for group in edge_groups.values()): errors.append({"code": "adapter-duplicate-edge", "path": "/adapters"})
+    if errors: return [], errors
+    valid = []
+    for row in adapters:
+        source, target = row["source"], row["target"]
+        identities_known = (source["profile"], source["version"]) in known and (target["profile"], target["version"]) in known
+        implementation = _safe(Path(row["implementation"]["path"])) if identities_known else None
+        if not identities_known or implementation is None or not implementation.is_file():
+            errors.append({"code": "adapter", "path": "/adapters"})
+        elif row["lossless"] and row["validation_status"] == "validated":
+            valid.append(row)
+        elif row["lossless"]:
+            errors.append({"code": "adapter-evidence", "path": "/adapters"})
+    return valid, errors
 
 
 def compare_endpoints(output: dict, input_: dict, adapters: list[dict]) -> dict:
     indexes = _indexes()
     if indexes is None: return _result("unknown", [{"code": "canonical-index", "path": "/schema"}])
-    known, majors = indexes
-    out, out_error = _endpoint(output, False, known, majors); inn, in_error = _endpoint(input_, True, known, majors)
+    known, envelopes = indexes
+    out, out_error = _endpoint(output, False, known, envelopes); inn, in_error = _endpoint(input_, True, known, envelopes)
     if out_error == "not-applicable" or in_error == "not-applicable": return _result("not-applicable")
     if out_error or in_error: return _result("unknown", [{"code": "endpoint", "path": "/output" if out_error else "/input"}])
     assert out and inn
     start, wanted = out[:2], inn[:2]
     if out[2] != inn[2]: return _result("incompatible")
-    rows = _validate_adapters(adapters, known); graph, invalid = {}, {}
-    for row, error in rows:
-        if row: graph.setdefault((row["source"]["profile"], row["source"]["version"]), []).append(row)
-        elif error:
-            index = int(error["path"].split("/")[2]) if error["path"].count("/") >= 2 else -1
-            ordered = sorted(adapters, key=lambda item: str(item.get("id", "")) if isinstance(item, dict) else "") if isinstance(adapters, list) else []
-            source = ordered[index].get("source") if 0 <= index < len(ordered) and isinstance(ordered[index], dict) else None
-            if isinstance(source, dict): invalid.setdefault((source.get("profile"), source.get("version")), []).append(error)
+    rows, errors = _validate_adapters(adapters, known)
+    if errors: return _result("unknown", errors)
+    graph = {}
+    for row in rows:
+        graph.setdefault((row["source"]["profile"], row["source"]["version"]), []).append(row)
     queue, visited = [((), start)], set()
     while queue:
         route, node = heappop(queue)
         if node in visited: continue
         visited.add(node)
         if node[0] == wanted[0] and version_satisfies(node[1], wanted[1]): return _result("compatible" if not route else "adapter-required", adapter_path=list(route))
-        relevant = invalid.get(node, [])
-        if relevant: return _result("unknown", relevant)
         for row in sorted(graph.get(node, []), key=lambda item: item["id"]):
             target = (row["target"]["profile"], row["target"]["version"])
             if target not in visited: heappush(queue, (route + (row["id"],), target))

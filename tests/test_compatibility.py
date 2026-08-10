@@ -63,6 +63,38 @@ class CompatibilityTests(unittest.TestCase):
         edges = build_compatibility_edges(list(reversed(assets)), list(reversed(adapters)))
         self.assertEqual(edges, [{"adapter_path": ["a-forward"], "consumer": "consumer", "input": {"profile": "factor-panel", "required": True, "version_range": "1.0.0"}, "producer": "producer", "output": {"profile": "market-bar", "version": "1.0.0"}, "status": "adapter-required"}])
 
+    def test_exact_canonical_envelope_version_required(self):
+        output = endpoint("market-bar", "1.0.0")
+        output["envelope"]["version"] = "1.9.0"
+        result = compare_endpoints(output, endpoint("market-bar", version_range="1.0.0"), [])
+        self.assertEqual(result, {"status": "unknown", "errors": [{"code": "endpoint", "path": "/output"}], "adapter_path": []})
+        self.assertEqual(compare_endpoints(endpoint("market-bar", "1.0.0"), endpoint("market-bar", version_range="1.0.0"), []) ["status"], "compatible")
+
+    def test_closed_registry_and_duplicate_diagnostics_are_global_and_stable(self):
+        source = endpoint("market-bar", "1.0.0")
+        wanted = endpoint("factor-panel", version_range="1.0.0")
+        malformed = adapter("bad-source", "market-bar", "factor-panel")
+        malformed["source"]["extra"] = "rejected"
+        expected = {"status": "unknown", "errors": [{"code": "adapter-registry", "path": "/adapters"}], "adapter_path": []}
+        global_extra = adapter("global-extra", "market-bar", "factor-panel", unexpected=True)
+        for rows in ({}, ["not-a-row"], [malformed], [global_extra]):
+            self.assertEqual(compare_endpoints(source, wanted, rows), expected)
+        first = adapter("first", "market-bar", "factor-panel")
+        duplicate_id = adapter("first", "factor-panel", "market-bar")
+        duplicate_edge = adapter("third", "market-bar", "factor-panel")
+        expected_errors = [{"code": "adapter-duplicate-edge", "path": "/adapters"}, {"code": "adapter-duplicate-id", "path": "/adapters"}]
+        for rows in ([first, duplicate_id, duplicate_edge], [duplicate_edge, duplicate_id, first]):
+            result = compare_endpoints(source, wanted, rows)
+            self.assertEqual(result, {"status": "unknown", "errors": expected_errors, "adapter_path": []})
+
+    def test_committed_cycle_with_unreachable_target_is_finite_and_order_invariant(self):
+        adapters = [adapter("market-factor", "market-bar", "factor-panel"), adapter("factor-market", "factor-panel", "market-bar")]
+        source, unreachable = endpoint("market-bar", "1.0.0"), endpoint("event-record", version_range="1.0.0")
+        first = compare_endpoints(source, unreachable, adapters)
+        second = compare_endpoints(source, unreachable, list(reversed(adapters)))
+        self.assertEqual(first, {"status": "incompatible", "errors": [], "adapter_path": []})
+        self.assertEqual(second, first)
+
 
 if __name__ == "__main__":
     unittest.main()
