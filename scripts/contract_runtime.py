@@ -145,6 +145,36 @@ def profile_semantic_issues(document: object) -> list[dict]:
 
         issues.extend(_finite_profile_issues(record, f"/payload/records/{index}"))
 
+        if profile == "backtest-result":
+            period_start = record.get("period_start")
+            period_end = record.get("period_end")
+            if (
+                _strict_date(period_start)
+                and _strict_date(period_end)
+                and period_start > period_end
+            ):
+                issues.append(
+                    _issue(
+                        "backtest-result-period-order",
+                        f"/payload/records/{index}/period_end",
+                    )
+                )
+
+        if profile == "evaluation-result":
+            sample_start = record.get("sample_start")
+            sample_end = record.get("sample_end")
+            if (
+                _strict_date(sample_start)
+                and _strict_date(sample_end)
+                and sample_start > sample_end
+            ):
+                issues.append(
+                    _issue(
+                        "evaluation-result-sample-order",
+                        f"/payload/records/{index}/sample_end",
+                    )
+                )
+
         if profile == "factor-panel" and "value" in record and record["value"] is None:
             policy = record.get("missing_policy")
             if isinstance(policy, str) and policy != "keep-null":

@@ -226,6 +226,124 @@ class ResultProfileTests(unittest.TestCase):
         errors = list(validator.iter_errors(document))
         self.assertTrue(any(pointer(error) == "/payload/records/0/lineage" and error.validator == "additionalProperties" for error in errors))
 
+    def test_result_lineage_version_syntax_is_exact_for_every_schema(self):
+        invalid_versions = ("01.0.0", "1.0.0-.", "1.0.0-a..b", "1.0.0\n")
+        for profile in RESULT_PROFILES:
+            schema_path = ROOT / "schema" / "profiles" / "result" / profile / "1.0.0.schema.json"
+            validator = Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8")))
+            for version in invalid_versions:
+                with self.subTest(profile=profile, version=repr(version)):
+                    document = fixture(profile)
+                    document["payload"]["records"][0]["lineage"]["sources"][0]["version"] = version
+                    self.assertTrue(
+                        any(
+                            pointer(error) == "/payload/records/0/lineage/sources/0/version"
+                            and error.validator == "pattern"
+                            for error in validator.iter_errors(document)
+                        )
+                    )
+
+    def test_result_schema_fields_are_closed(self):
+        for profile in RESULT_PROFILES:
+            with self.subTest(profile=profile):
+                schema_path = ROOT / "schema" / "profiles" / "result" / profile / "1.0.0.schema.json"
+                validator = Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8")))
+                document = fixture(profile)
+                document["schema"]["fields"]["ghost"] = {"type": "string", "nullable": False}
+                self.assertTrue(
+                    any(
+                        pointer(error) == "/schema/fields" and error.validator == "additionalProperties"
+                        for error in validator.iter_errors(document)
+                    )
+                )
+
+    def test_portfolio_target_weights_and_cash_are_unbounded_numbers(self):
+        schema_path = ROOT / "schema" / "profiles" / "result" / "portfolio-target" / "1.0.0.schema.json"
+        validator = Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8")))
+        document = fixture("portfolio-target")
+        record = document["payload"]["records"][0]
+        record["target_weights"] = {"SYNTH-001": -2.0, "SYNTH-002": 3.0}
+        record["cash_target"] = -0.5
+        self.assertEqual(list(validator.iter_errors(document)), [])
+        record["target_weights"]["SYNTH-003"] = float("nan")
+        self.assertEqual(
+            profile_semantic_issues(document),
+            [{"code": "profile-finite", "path": "/payload/records/0/target_weights/SYNTH-003"}],
+        )
+
+    def test_execution_plan_allows_empty_orders_but_requires_positive_quantity(self):
+        schema_path = ROOT / "schema" / "profiles" / "result" / "execution-plan" / "1.0.0.schema.json"
+        validator = Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8")))
+        document = fixture("execution-plan")
+        document["payload"]["records"][0]["simulated_orders"] = []
+        self.assertEqual(list(validator.iter_errors(document)), [])
+        document = fixture("execution-plan")
+        document["payload"]["records"][0]["simulated_orders"][0]["quantity"] = 0
+        errors = list(validator.iter_errors(document))
+        self.assertTrue(
+            any(
+                pointer(error) == "/payload/records/0/simulated_orders/0/quantity"
+                and error.validator == "exclusiveMinimum"
+                for error in errors
+            ),
+            [(pointer(error), error.validator, error.message) for error in errors],
+        )
+
+    def test_result_meta_currency_is_optional_except_backtest(self):
+        for profile in RESULT_PROFILES:
+            with self.subTest(profile=profile):
+                schema_path = ROOT / "schema" / "profiles" / "result" / profile / "1.0.0.schema.json"
+                validator = Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8")))
+                document = fixture(profile)
+                document["meta"].pop("currency")
+                errors = list(validator.iter_errors(document))
+                if profile == "backtest-result":
+                    self.assertTrue(
+                        any(pointer(error) == "/meta" and error.validator == "required" for error in errors),
+                        [(pointer(error), error.validator, error.message) for error in errors],
+                    )
+                else:
+                    self.assertEqual(errors, [])
+
+    def test_result_periods_are_ordered_after_strict_dates(self):
+        backtest = fixture("backtest-result")
+        backtest["payload"]["records"][0].update({"period_start": "2026-06-30", "period_end": "2026-01-01"})
+        self.assertEqual(
+            profile_semantic_issues(backtest),
+            [{"code": "backtest-result-period-order", "path": "/payload/records/0/period_end"}],
+        )
+        backtest["payload"]["records"][0]["period_end"] = "2026-06-30"
+        self.assertEqual(profile_semantic_issues(backtest), [])
+        backtest["payload"]["records"][0]["period_start"] = []
+        self.assertEqual(profile_semantic_issues(backtest), [])
+
+        evaluation = fixture("evaluation-result")
+        evaluation["payload"]["records"][0].update({"sample_start": "2026-06-30", "sample_end": "2026-01-01"})
+        self.assertEqual(
+            profile_semantic_issues(evaluation),
+            [{"code": "evaluation-result-sample-order", "path": "/payload/records/0/sample_end"}],
+        )
+        evaluation["payload"]["records"][0]["sample_end"] = "2026-06-30"
+        self.assertEqual(profile_semantic_issues(evaluation), [])
+
+    def test_result_lineage_arrays_reject_duplicates_for_every_schema(self):
+        for profile in RESULT_PROFILES:
+            schema_path = ROOT / "schema" / "profiles" / "result" / profile / "1.0.0.schema.json"
+            validator = Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8")))
+            for field, path in (
+                ("sources", "/payload/records/0/lineage/sources"),
+                ("evidence_refs", "/payload/records/0/lineage/evidence_refs"),
+            ):
+                with self.subTest(profile=profile, field=field):
+                    document = fixture(profile)
+                    lineage = document["payload"]["records"][0]["lineage"]
+                    lineage[field].append(json.loads(json.dumps(lineage[field][0])))
+                    errors = list(validator.iter_errors(document))
+                    self.assertTrue(
+                        any(pointer(error) == path and error.validator == "uniqueItems" for error in errors),
+                        [(pointer(error), error.validator, error.message) for error in errors],
+                    )
+
     def test_execution_plan_forbids_live_submission(self):
         schema_path = ROOT / "schema" / "profiles" / "result" / "execution-plan" / "1.0.0.schema.json"
         if not schema_path.is_file():
@@ -276,6 +394,18 @@ class ResultProfileTests(unittest.TestCase):
             {"code": "profile-finite", "path": "/payload/records/0/metrics/a_extra"},
             {"code": "profile-finite", "path": "/payload/records/0/metrics/nested/0"},
             {"code": "profile-finite", "path": "/payload/records/0/metrics/z_extra"},
+        ]
+        self.assertEqual(profile_semantic_issues(left), expected)
+        self.assertEqual(profile_semantic_issues(left), profile_semantic_issues(right))
+
+    def test_result_nested_non_finite_paths_escape_pointer_tokens(self):
+        left = fixture("evaluation-result")
+        left["payload"]["records"][0]["metrics"] = {"x~y": float("inf"), "a/b": float("nan")}
+        right = fixture("evaluation-result")
+        right["payload"]["records"][0]["metrics"] = {"a/b": float("nan"), "x~y": float("inf")}
+        expected = [
+            {"code": "profile-finite", "path": "/payload/records/0/metrics/a~1b"},
+            {"code": "profile-finite", "path": "/payload/records/0/metrics/x~0y"},
         ]
         self.assertEqual(profile_semantic_issues(left), expected)
         self.assertEqual(profile_semantic_issues(left), profile_semantic_issues(right))
