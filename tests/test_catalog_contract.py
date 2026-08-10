@@ -69,6 +69,23 @@ class CatalogContractTests(unittest.TestCase):
                 frontmatter["quantSkills"]["summary_en"] = disclaimer
                 self.assertFalse(any("prohibited" in item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)))
 
+    def test_community_claims_are_rejected_but_explicit_negatives_are_allowed(self):
+        frontmatter = copy.deepcopy(self.valid)
+        prohibited = (
+            "official", "certified", "verified", "endorsed", "production-ready",
+            "guaranteed returns", "risk-free", "safe strategy", "investment advice",
+            "官方", "认证", "已验证", "背书", "生产可用", "保证收益", "稳赚",
+            "无风险", "安全策略", "构成投资建议",
+        )
+        for claim in prohibited:
+            with self.subTest(claim=claim):
+                frontmatter["quantSkills"]["summary_en"] = f"This product is {claim}."
+                self.assertTrue(any("prohibited" in item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)))
+        for disclaimer in ("not investment advice", "not official", "does not guarantee returns", "并非官方", "不构成投资建议"):
+            with self.subTest(disclaimer=disclaimer):
+                frontmatter["quantSkills"]["summary_en"] = disclaimer
+                self.assertFalse(any("prohibited" in item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)))
+
 
 if __name__ == "__main__":
     unittest.main()

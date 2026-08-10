@@ -51,9 +51,13 @@ def github_description(frontmatter: dict) -> str:
 
 _MARKDOWN_LINK = re.compile(r"\[[^\]]+\]\([^)]*\)")
 _SEMVER = re.compile(r"^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$")
-_PROHIBITED = (
-    "保证收益", "稳赚", "无风险", "官方认证", "生产可用",
-    "guaranteed return", "risk-free", "officially certified", "production-ready",
+_EN_PROHIBITED = (
+    "official", "certified", "verified", "endorsed", "production-ready",
+    "guaranteed return", "guaranteed returns", "risk-free", "safe strategy", "investment advice",
+)
+_ZH_PROHIBITED = (
+    "官方", "认证", "已验证", "背书", "生产可用", "保证收益", "稳赚",
+    "无风险", "安全策略", "构成投资建议",
 )
 
 
@@ -67,15 +71,16 @@ def _generic_summary(summary: str, repo_name: str) -> bool:
 
 def _has_prohibited_claim(summary: str) -> bool:
     lower = summary.lower()
-    for phrase in _PROHIBITED:
+    for phrase in _EN_PROHIBITED:
+        for match in re.finditer(rf"\b{re.escape(phrase)}\b", lower):
+            prefix = lower[max(0, match.start() - 48):match.start()]
+            if re.search(r"\b(?:not|no|never|does not|doesn't|is not|are not)(?:[\s-]+[a-z]+){0,3}[\s-]*$", prefix):
+                continue
+            return True
+    for phrase in _ZH_PROHIBITED:
         index = lower.find(phrase)
-        if index < 0:
-            continue
-        if phrase in {"guaranteed return", "risk-free", "officially certified", "production-ready"} and re.search(r"\b(?:not|no)\s+$", lower[:index]):
-            continue
-        if phrase in {"保证收益", "稳赚", "无风险", "官方认证", "生产可用"} and index and lower[max(0, index - 2):index].endswith("不"):
-            continue
-        return True
+        if index >= 0 and not any(marker in lower[max(0, index - 4):index] for marker in ("不", "非")):
+            return True
     return False
 
 

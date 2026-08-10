@@ -13,6 +13,8 @@ from validate_skill import validate
 
 
 class ValidateSkillTests(unittest.TestCase):
+    DISCLOSURE_TEXT = "Data source. Assumption. Parameter. Limitation. Risk. Research only; not investment advice."
+
     def make_repo(self, name="skill-example", risk=False, complete=False, declaration_file="SKILL.md"):
         directory = Path(tempfile.mkdtemp()) / name
         directory.mkdir()
@@ -27,12 +29,14 @@ class ValidateSkillTests(unittest.TestCase):
             frontmatter["quantSkills"]["workflow"]["workflow_stages"] = ["reporting"]
             frontmatter["quantSkills"]["workflow"]["primary_stage"] = "reporting"
             frontmatter["quantSkills"]["tags"] = ["reporting"]
+            frontmatter["quantSkills"]["catalog"] = {"category": "10", "subcategory": "10.skill-template"}
         text = "---\n" + yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False) + "---\nBody\n"
         (directory / declaration_file).write_text(text, encoding="utf-8")
         (directory / "README.md").write_text("Use when validating examples. " * 4, encoding="utf-8")
         (directory / "LICENSE").write_text("GPL", encoding="utf-8")
         if complete:
-            (directory / "README.en.md").write_text("Data source. Assumption. Parameter. Limitation. Risk. Research only; not investment advice.", encoding="utf-8")
+            (directory / "README.md").write_text(self.DISCLOSURE_TEXT, encoding="utf-8")
+            (directory / declaration_file).write_text(text + self.DISCLOSURE_TEXT, encoding="utf-8")
         self.addCleanup(shutil.rmtree, directory.parent)
         return directory
 
@@ -55,6 +59,19 @@ class ValidateSkillTests(unittest.TestCase):
         self.assertTrue(any(item["check"] == "quant-risk-disclosures" and item["level"] == "fail" for item in validate(incomplete, set(), "enforce").items))
         complete = self.make_repo("skill-risk-complete", risk=True, complete=True)
         self.assertFalse(any(item["check"] == "quant-risk-disclosures" for item in validate(complete, set(), "enforce").items))
+
+    def test_factor_evaluation_tag_triggers_separate_readme_and_root_disclosures(self):
+        readme_complete = self.make_repo("skill-factor-readme-complete")
+        self.rewrite_frontmatter(readme_complete, lambda frontmatter: frontmatter["quantSkills"].update({"tags": ["factor-evaluation"]}))
+        (readme_complete / "README.md").write_text(self.DISCLOSURE_TEXT, encoding="utf-8")
+        readme_items = validate(readme_complete, set(), "enforce").items
+        self.assertTrue(any(item["check"] == "quant-risk-disclosures" and "SKILL.md" in item["detail"] for item in readme_items))
+
+        root_complete = self.make_repo("skill-factor-root-complete")
+        self.rewrite_frontmatter(root_complete, lambda frontmatter: frontmatter["quantSkills"].update({"tags": ["factor-evaluation"]}))
+        (root_complete / "SKILL.md").write_text((root_complete / "SKILL.md").read_text(encoding="utf-8") + self.DISCLOSURE_TEXT, encoding="utf-8")
+        root_items = validate(root_complete, set(), "enforce").items
+        self.assertTrue(any(item["check"] == "quant-risk-disclosures" and "README.md" in item["detail"] for item in root_items))
 
     def test_existing_check_families_remain_available(self):
         repo = self.make_repo(risk=True)

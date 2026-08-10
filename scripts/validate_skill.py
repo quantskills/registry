@@ -155,17 +155,23 @@ def check_secrets(repo: Path, rep: Report) -> None:
 def check_quant_risk_disclosures(repo: Path, fm: dict, declaration_file: str | None, rep: Report, contract_mode: str = "audit") -> None:
     qs = (fm or {}).get("quantSkills") or {}
     stages = set((qs.get("workflow") or {}).get("workflow_stages") or [])
-    tags = set(qs.get("tags") or [])
-    if not stages & {"factor-generation", "factor-screening", "portfolio-construction", "backtesting", "execution"} and not tags & {"factor", "strategy", "backtest", "signal", "execution", "trading"}:
+    catalog = qs.get("catalog") or {}
+    risk_tokens = {"factor", "strategy", "backtest", "signal", "trading", "execution"}
+    metadata = [repo.name, catalog.get("category", ""), catalog.get("subcategory", ""), *(qs.get("tags") or [])]
+    metadata_tokens = {token for value in metadata if isinstance(value, str) for token in re.findall(r"[a-z0-9]+", value.lower())}
+    if not stages & {"factor-generation", "factor-screening", "portfolio-construction", "backtesting", "execution"} and not metadata_tokens & risk_tokens:
         return
-    corpus = "".join((repo / name).read_text(encoding="utf-8", errors="replace") for name in ("README.md", "README.en.md", declaration_file) if name and (repo / name).is_file()).lower()
     concepts = {"data source": ("数据来源", "data source"), "assumptions": ("假设", "assumption"), "parameters": ("参数", "parameter"), "limitations": ("限制", "limitation"), "risk boundary": ("风险", "risk")}
     level = _contract_level(contract_mode)
-    for concept, tokens in concepts.items():
-        if not any(token.lower() in corpus for token in tokens):
-            rep.add(level, "quant-risk-disclosures", f"missing {concept} disclosure")
-    if not any(token in corpus for token in ("研究", "教育", "research", "education")) or not any(token in corpus for token in ("不构成任何投资建议", "不构成投资建议", "not investment advice", "does not constitute investment advice")):
-        rep.add(level, "quant-risk-disclosures", "missing research/education and non-advice disclosure")
+    for name in ("README.md", declaration_file):
+        text = (repo / name).read_text(encoding="utf-8", errors="replace").lower() if name and (repo / name).is_file() else ""
+        for concept, tokens in concepts.items():
+            if not any(token.lower() in text for token in tokens):
+                rep.add(level, "quant-risk-disclosures", f"missing {concept} disclosure in {name}")
+        research = any(token in text for token in ("研究", "教育", "research", "education"))
+        non_advice = any(token in text for token in ("不构成任何投资建议", "不构成投资建议", "not investment advice", "does not constitute investment advice"))
+        if not (research and non_advice):
+            rep.add(level, "quant-risk-disclosures", f"missing research/education and non-advice disclosure in {name}")
 
 
 def check_python_syntax(repo: Path, rep: Report) -> None:
