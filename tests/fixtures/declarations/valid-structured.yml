@@ -1,0 +1,53 @@
+name: skill-factor-grouped-wrapper
+description: A structured wrapper that ranks candidate factors from market data and returns evaluation-ready outputs for quantitative research workflows.
+quantSkills:
+  schema_version: 2.0.0
+  organization: quantskills
+  organization_url: https://github.com/quantskills
+  repository: skill-factor-grouped-wrapper
+  repository_url: https://github.com/quantskills/skill-factor-grouped-wrapper
+  project_type: skill
+  license: GPL-3.0-only
+  maintainer: abgyjaguo
+  catalog:
+    category: "02"
+    subcategory: 02.factor-selection
+  workflow:
+    primary_stage: factor-screening
+    workflow_stages:
+      - factor-screening
+      - evaluation
+  summary_zh: 用于因子筛选与评估的结构化工作流
+  summary_en: Structured workflow for factor screening and evaluation.
+  status: active
+  validation_level: listed
+  maintainer_type: community
+  platforms:
+    - cursor
+    - claude-code
+    - codex
+    - hermes
+    - openclaw
+  interface:
+    mode: structured
+    envelope:
+      name: quantskills-envelope
+      version: 1.0.0
+    inputs:
+      - profile: factor-panel
+        version_range: ">=1.0.0 <2.0.0"
+        required: true
+      - profile: market-bar
+        version_range: ">=1.0.0 <2.0.0"
+        required: true
+    outputs:
+      - profile: ranked-factor-set
+        version: 1.0.0
+      - profile: evaluation-result
+        version: 1.0.0
+    adapters:
+      - factor-ranking
+  tags:
+    - factor-selection
+  requires:
+    - skill-factor-evaluation
