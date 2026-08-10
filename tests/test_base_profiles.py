@@ -322,6 +322,39 @@ class BaseProfileTests(unittest.TestCase):
         document["payload"]["records"][0]["open"] = "not-a-number"
         self.assertEqual(profile_semantic_issues(document), [])
 
+        factor = json.loads(
+            (
+                ROOT
+                / "tests"
+                / "fixtures"
+                / "profiles"
+                / "base"
+                / "factor-panel"
+                / "valid.json"
+            ).read_text(encoding="utf-8")
+        )
+        factor["payload"]["records"][0]["value"] = 10**400
+        self.assertEqual(profile_semantic_issues(factor), [])
+
+    def test_factor_missing_or_untrusted_value_is_left_to_schema(self):
+        factor = json.loads(
+            (
+                ROOT
+                / "tests"
+                / "fixtures"
+                / "profiles"
+                / "base"
+                / "factor-panel"
+                / "valid.json"
+            ).read_text(encoding="utf-8")
+        )
+        record = factor["payload"]["records"][0]
+        record.pop("value")
+        self.assertEqual(profile_semantic_issues(factor), [])
+        record["value"] = None
+        record["missing_policy"] = []
+        self.assertEqual(profile_semantic_issues(factor), [])
+
     def test_profile_terminal_newlines_are_rejected_at_exact_paths(self):
         temporal = {
             "event-record": ("event_time", "published_at"),

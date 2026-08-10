@@ -46,6 +46,14 @@ def _strict_date(value: object) -> bool:
     return True
 
 
+def _finite_number(value: object) -> bool:
+    if isinstance(value, bool):
+        return False
+    if isinstance(value, int):
+        return True
+    return isinstance(value, float) and math.isfinite(value)
+
+
 def envelope_semantic_issues(document: object) -> list[dict]:
     """Return stable, value-free Envelope v1 semantic issues."""
     if not isinstance(document, dict):
@@ -102,11 +110,13 @@ def profile_semantic_issues(document: object) -> list[dict]:
                 issues.append(_issue(f"profile-{kind}", f"/payload/records/{index}/{field}"))
 
         for field, value in record.items():
-            if isinstance(value, (int, float)) and not isinstance(value, bool) and not math.isfinite(value):
+            if isinstance(value, float) and not math.isfinite(value):
                 issues.append(_issue("profile-finite", f"/payload/records/{index}/{field}"))
 
-        if profile == "factor-panel" and record.get("value") is None and record.get("missing_policy") != "keep-null":
-            issues.append(_issue("factor-panel-nullability", f"/payload/records/{index}/value"))
+        if profile == "factor-panel" and "value" in record and record["value"] is None:
+            policy = record.get("missing_policy")
+            if isinstance(policy, str) and policy != "keep-null":
+                issues.append(_issue("factor-panel-nullability", f"/payload/records/{index}/value"))
 
         if profile == "macro-series":
             schema = document.get("schema")
@@ -124,9 +134,7 @@ def profile_semantic_issues(document: object) -> list[dict]:
         if profile == "market-bar":
             values = {field: record.get(field) for field in ("low", "open", "close", "high")}
             if all(
-                isinstance(value, (int, float))
-                and not isinstance(value, bool)
-                and math.isfinite(value)
+                _finite_number(value)
                 for value in values.values()
             ):
                 low, open_, close, high = values["low"], values["open"], values["close"], values["high"]
