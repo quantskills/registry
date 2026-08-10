@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from jsonschema import Draft202012Validator, FormatChecker, SchemaError
+from jsonschema import Draft202012Validator, FormatChecker
 
 try:
     from .contract_runtime import envelope_semantic_issues, profile_semantic_issues
@@ -154,27 +154,46 @@ def _identity(document: object) -> tuple[dict | None, dict | None, list[dict]]:
 
 
 def _safe_path(root: Path, relative: Path) -> Path | None:
-    if relative.is_absolute() or ".." in relative.parts:
+    try:
+        if relative.is_absolute() or ".." in relative.parts:
+            return None
+        root_resolved = Path(root).resolve()
+        candidate = (root_resolved / relative).resolve()
+    except (OSError, ValueError, RuntimeError):
         return None
-    root_resolved = Path(root).resolve()
-    candidate = (root_resolved / relative).resolve()
     try:
         candidate.relative_to(root_resolved)
-    except ValueError:
+    except (OSError, ValueError, RuntimeError):
         return None
     return candidate
 
 
+def _has_external_ref(value: object) -> bool:
+    if isinstance(value, dict):
+        for key in ("$ref", "$dynamicRef"):
+            reference = value.get(key)
+            if reference is not None and (
+                not isinstance(reference, str) or not reference.startswith("#")
+            ):
+                return True
+        return any(_has_external_ref(item) for item in value.values())
+    if isinstance(value, list):
+        return any(_has_external_ref(item) for item in value)
+    return False
+
+
 def _read_schema(root: Path, relative: Path, layer: str) -> tuple[dict | None, list[dict]]:
-    path = _safe_path(root, relative)
-    if path is None or not path.is_file():
-        return None, [_diagnostic(layer, f"{layer}-schema", f"/schema/{layer}")]
     try:
+        path = _safe_path(root, relative)
+        if path is None or not path.is_file():
+            return None, [_diagnostic(layer, f"{layer}-schema", f"/schema/{layer}")]
         schema = json.loads(path.read_text(encoding="utf-8"))
         if not isinstance(schema, dict):
             raise ValueError("schema must be an object")
         Draft202012Validator.check_schema(schema)
-    except (OSError, ValueError, json.JSONDecodeError, SchemaError):
+        if _has_external_ref(schema):
+            raise ValueError("external schema reference")
+    except Exception:
         return None, [_diagnostic(layer, f"{layer}-schema", f"/schema/{layer}")]
     return schema, []
 
@@ -220,8 +239,16 @@ def validate_contract(document: dict, root: Path) -> dict:
     if schema_errors:
         return _result("unknown", envelope, profile, schema_errors)
     assert envelope_schema is not None
-    envelope_validator = Draft202012Validator(envelope_schema, format_checker=FormatChecker())
-    envelope_errors = _schema_diagnostics("envelope", envelope_validator, document)
+    try:
+        envelope_validator = Draft202012Validator(envelope_schema, format_checker=FormatChecker())
+        envelope_errors = _schema_diagnostics("envelope", envelope_validator, document)
+    except Exception:
+        return _result(
+            "unknown",
+            envelope,
+            profile,
+            [_diagnostic("envelope", "envelope-schema", "/schema/envelope")],
+        )
     envelope_errors.extend(_semantic_diagnostics("envelope", envelope_semantic_issues(document)))
     if envelope_errors:
         return _result("invalid", envelope, profile, envelope_errors)
@@ -246,8 +273,16 @@ def validate_contract(document: dict, root: Path) -> dict:
     if schema_errors:
         return _result("unknown", envelope, profile, schema_errors)
     assert profile_schema is not None
-    profile_validator = Draft202012Validator(profile_schema, format_checker=FormatChecker())
-    profile_errors = _schema_diagnostics("profile", profile_validator, document)
+    try:
+        profile_validator = Draft202012Validator(profile_schema, format_checker=FormatChecker())
+        profile_errors = _schema_diagnostics("profile", profile_validator, document)
+    except Exception:
+        return _result(
+            "unknown",
+            envelope,
+            profile,
+            [_diagnostic("profile", "profile-schema", "/schema/profile")],
+        )
     profile_errors.extend(_semantic_diagnostics("profile", profile_semantic_issues(document)))
     if profile_errors:
         return _result("invalid", envelope, profile, profile_errors)

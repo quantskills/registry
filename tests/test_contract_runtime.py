@@ -197,6 +197,40 @@ class ContractRuntimeTests(unittest.TestCase):
                 self.assertEqual(result["status"], "unknown")
                 self.assertEqual(result["errors"], [{"layer": "profile", "code": "profile-index", "path": "/schema/profiles/index.json"}])
 
+    def test_unsafe_schema_path_and_unresolved_refs_fail_closed(self):
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        base_row = {
+            "id": "market-bar",
+            "version": "1.0.0",
+            "kind": "base",
+        }
+        cases = (
+            ("nul-path", {**base_row, "schema": "\u0000schema.json"}, None),
+            (
+                "internal-ref",
+                {**base_row, "schema": "base/market-bar/1.0.0.schema.json"},
+                {"$schema": "https://json-schema.org/draft/2020-12/schema", "$ref": "#/$defs/missing"},
+            ),
+            (
+                "external-ref",
+                {**base_row, "schema": "base/market-bar/1.0.0.schema.json"},
+                {"$schema": "https://json-schema.org/draft/2020-12/schema", "$ref": "https://example.invalid/schema"},
+            ),
+        )
+        for label, row, schema in cases:
+            with self.subTest(label=label), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / "schema" / "envelope").mkdir(parents=True)
+                (root / "schema" / "profiles" / "base" / "market-bar").mkdir(parents=True)
+                shutil.copy2(ROOT / "schema" / "envelope" / "index.json", root / "schema" / "envelope" / "index.json")
+                shutil.copy2(ROOT / "schema" / "envelope" / "1.0.0.schema.json", root / "schema" / "envelope" / "1.0.0.schema.json")
+                (root / "schema" / "profiles" / "index.json").write_text(json.dumps({"profiles": [row]}), encoding="utf-8")
+                if schema is not None:
+                    (root / "schema" / "profiles" / row["schema"]).write_text(json.dumps(schema), encoding="utf-8")
+                result = validate_contract(document, root)
+                self.assertEqual(result["status"], "unknown")
+                self.assertEqual(result["errors"], [{"layer": "profile", "code": "profile-schema", "path": "/schema/profile"}])
+
     def test_cli_exit_codes_json_shape_and_relative_absolute_paths(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
