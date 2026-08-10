@@ -370,5 +370,5 @@ def _admit_pandadata_mappings(document: object, root: Path) -> bool:
             if spec["profile"] == "futures-contract" and actual_fields.get("open_interest", {}).get("unit") != row["units"].get("open_interest"):
                 return False
         return True
-    except BaseException:
+    except Exception:
         return False
