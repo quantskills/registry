@@ -355,6 +355,30 @@ class BaseProfileTests(unittest.TestCase):
         record["missing_policy"] = []
         self.assertEqual(profile_semantic_issues(factor), [])
 
+    def test_profile_semantic_diagnostics_are_key_order_invariant(self):
+        source = json.loads(
+            (
+                ROOT
+                / "tests"
+                / "fixtures"
+                / "profiles"
+                / "base"
+                / "factor-panel"
+                / "valid.json"
+            ).read_text(encoding="utf-8")
+        )
+        left = json.loads(json.dumps(source))
+        left_record = left["payload"]["records"][0]
+        left_record["a_extra"] = float("nan")
+        left_record["z_extra"] = float("inf")
+
+        right = json.loads(json.dumps(source))
+        base_record = right["payload"]["records"][0]
+        right["payload"]["records"][0] = {"z_extra": float("inf"), "a_extra": float("nan")}
+        right["payload"]["records"][0].update(base_record)
+
+        self.assertEqual(profile_semantic_issues(left), profile_semantic_issues(right))
+
     def test_profile_terminal_newlines_are_rejected_at_exact_paths(self):
         temporal = {
             "event-record": ("event_time", "published_at"),

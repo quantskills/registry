@@ -109,7 +109,8 @@ def profile_semantic_issues(document: object) -> list[dict]:
             if not valid:
                 issues.append(_issue(f"profile-{kind}", f"/payload/records/{index}/{field}"))
 
-        for field, value in record.items():
+        for field in sorted(record):
+            value = record[field]
             if isinstance(value, float) and not math.isfinite(value):
                 issues.append(_issue("profile-finite", f"/payload/records/{index}/{field}"))
 
