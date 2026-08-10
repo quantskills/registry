@@ -198,6 +198,7 @@ def promote_artifacts(outputs: dict[Path, bytes]) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--contract-mode", choices=("audit", "enforce"), default="audit")
+    parser.add_argument("--full", action="store_true", help="Compatibility switch; catalog scans are always full-inventory.")
     args = parser.parse_args()
     previous_path = ROOT / "registry.json"
     previous = {row["name"]: row for row in json.loads(previous_path.read_text(encoding="utf-8"))} if previous_path.exists() else {}

@@ -13,7 +13,7 @@ node scripts/validate-registry.mjs --contract-mode audit registry.json
 GITHUB_TOKEN=xxx python scripts/build_registry.py --contract-mode audit
 ```
 
-Audit retains legacy visibility and emits structured warnings/pending migration state. Its rendered files are diagnostic-only: do not commit them. Unknown data is never silently mapped to category 07, category 08, or `uncategorized`.
+Audit retains legacy visibility and emits structured warnings/pending migration state. Its rendered files are diagnostic-only: do not commit them. Unknown data is never silently mapped to category 07, category 08, or `uncategorized`. The optional `--full` switch is retained for dispatch compatibility only: every scan already reads the complete closed inventory, so omitting it does not make a partial scan.
 
 Use enforce only for controlled declarations and an enforce-clean inventory:
 

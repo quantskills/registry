@@ -49,7 +49,7 @@ flowchart LR
     style H fill:#e8f5e9,stroke:#388e3c
 ```
 
-The pipeline is driven by [`.github/workflows/nightly-scan.yml`](.github/workflows/nightly-scan.yml) (UTC 16:30 = 00:30 Beijing time, manual `--full` dispatch supported); artifacts are committed back to this repository as `qs-registry-auditor` — the **only write operation** in the entire pipeline.
+The pipeline is driven by [`.github/workflows/nightly-scan.yml`](.github/workflows/nightly-scan.yml) (UTC 16:30 = 00:30 Beijing time; the manual `--full` switch is compatibility-only because every scan already reads the complete inventory); artifacts are committed back to this repository as `qs-registry-auditor` — the **only write operation** in the entire pipeline.
 
 ---
 
@@ -140,7 +140,7 @@ Local full build for maintainers:
 ```bash
 pip install pyyaml requests
 python scripts/validate_skill.py /path/to/skill-or-agent-repo   # single-repo pre-check
-GITHUB_TOKEN=xxx python scripts/build_registry.py --full        # full org scan, rebuild all artifacts
+GITHUB_TOKEN=xxx python scripts/build_registry.py --full        # compatibility switch; every scan is already full-inventory
 # add --audit-dir reports to generate local scan-YYYYMMDD.json and human-review-YYYYMMDD.md (never committed publicly)
 ```
 

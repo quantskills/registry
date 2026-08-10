@@ -50,7 +50,7 @@ flowchart LR
     style H fill:#e8f5e9,stroke:#388e3c
 ```
 
-流水线由 [`.github/workflows/nightly-scan.yml`](.github/workflows/nightly-scan.yml) 驱动（UTC 16:30 = 北京时间 00:30，支持手动触发 `--full` 全量），产物以 `qs-registry-auditor` 身份提交回本仓库 —— 这是整条流水线**唯一的写操作**。
+流水线由 [`.github/workflows/nightly-scan.yml`](.github/workflows/nightly-scan.yml) 驱动（UTC 16:30 = 北京时间 00:30；手动 `--full` 仅为兼容开关，每次扫描本来都读取完整库存），产物以 `qs-registry-auditor` 身份提交回本仓库 —— 这是整条流水线**唯一的写操作**。
 
 ---
 
@@ -141,7 +141,7 @@ flowchart LR
 ```bash
 pip install pyyaml requests
 python scripts/validate_skill.py /path/to/skill-or-agent-repo   # 单仓库预检
-GITHUB_TOKEN=xxx python scripts/build_registry.py --full        # 全量扫描组织并重建产物
+GITHUB_TOKEN=xxx python scripts/build_registry.py --full        # 兼容开关；每次扫描本来都是完整库存
 # 加 --audit-dir reports 可在本地生成 scan-YYYYMMDD.json 与 human-review-YYYYMMDD.md（不入公开仓库）
 ```
 

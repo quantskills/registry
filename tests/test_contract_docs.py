@@ -1,5 +1,7 @@
 import unittest
 from pathlib import Path
+import subprocess
+import sys
 
 import yaml
 
@@ -44,10 +46,22 @@ class ContractDocumentationTests(unittest.TestCase):
         publish = next(step for step in steps if step.get("name") == "Commit artifacts")
         final_validation = next(step for step in steps if step.get("name") == "Final enforce validation")
         self.assertIn("--contract-mode", build["run"])
+        self.assertIn("--full", build["run"])
+        self.assertIn("inputs.full", build["run"])
         self.assertIn("github.event_name == 'workflow_dispatch'", publish["if"])
         self.assertIn("inputs.contract_mode == 'enforce'", publish["if"])
         self.assertEqual(final_validation["if"], publish["if"])
         self.assertIn("--contract-mode enforce", final_validation["run"])
+
+    def test_builder_retains_full_flag_as_a_compatible_cli_switch(self):
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "build_registry.py"), "--help"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("--full", result.stdout)
 
 
 if __name__ == "__main__":

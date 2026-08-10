@@ -40,7 +40,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.QS_READ_TOKEN }}
           QS_ORG: quantskills
         run: |
-          python scripts/build_registry.py --contract-mode "$CONTRACT_MODE"
+          build_args=(--contract-mode "$CONTRACT_MODE")
+          if [[ "${{ github.event_name == 'workflow_dispatch' && inputs.full || false }}" == "true" ]]; then
+            build_args+=(--full)
+          fi
+          python scripts/build_registry.py "${build_args[@]}"
 
       - name: Final enforce validation
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.contract_mode == 'enforce' }}
