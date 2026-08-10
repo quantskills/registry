@@ -10,7 +10,10 @@ from typing import Any
 
 from jsonschema import Draft202012Validator, FormatChecker, SchemaError
 
-from contract_runtime import envelope_semantic_issues, profile_semantic_issues
+try:
+    from .contract_runtime import envelope_semantic_issues, profile_semantic_issues
+except ImportError:
+    from contract_runtime import envelope_semantic_issues, profile_semantic_issues
 
 
 _LAYER_ORDER = {"envelope": 0, "profile": 1}
@@ -70,6 +73,8 @@ def _pointer(path: object) -> str:
     if isinstance(path, str):
         return path
     tokens = [str(token).replace("~", "~0").replace("/", "~1") for token in path]
+    if not tokens:
+        return ""
     return "/" + "/".join(tokens)
 
 
@@ -126,7 +131,7 @@ def _result(status: str, envelope: dict | None, profile: dict | None, errors: li
 
 def _identity(document: object) -> tuple[dict | None, dict | None, list[dict]]:
     if not isinstance(document, dict):
-        return None, None, [_diagnostic("envelope", "contract-identity", "/")]
+        return None, None, [_diagnostic("envelope", "contract-identity", "")]
     contract = document.get("$contract")
     if not isinstance(contract, dict):
         return None, None, [_diagnostic("envelope", "contract-identity", "/$contract")]
@@ -263,7 +268,7 @@ def _reject_constant(value: str) -> None:
 
 
 def _unknown_input(code: str) -> dict:
-    return _result("unknown", None, None, [_diagnostic("envelope", code, "/")])
+    return _result("unknown", None, None, [_diagnostic("envelope", code, "")])
 
 
 def _load_document(path: Path) -> dict:

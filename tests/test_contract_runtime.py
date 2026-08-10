@@ -26,6 +26,15 @@ def run_cli(path, *args, cwd=ROOT):
 
 
 class ContractRuntimeTests(unittest.TestCase):
+    def test_package_import_is_supported(self):
+        completed = subprocess.run(
+            [sys.executable, "-B", "-c", "from scripts.validate_contract import validate_contract"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+
     def test_library_api_and_exact_profile_resolution(self):
         index = load_profile_index(ROOT)
         self.assertEqual(
@@ -67,6 +76,15 @@ class ContractRuntimeTests(unittest.TestCase):
         document["schema"]["fields"]["volume"]["unit"] = "bad-unit"
         result = validate_contract(document, ROOT)
         self.assertEqual(result["errors"], [{"layer": "profile", "code": "enum", "path": "/schema/fields/volume/unit"}])
+
+    def test_root_schema_diagnostic_uses_empty_rfc6901_pointer(self):
+        document = read_fixture("profiles/base/market-bar/valid.json")
+        document["extra"] = True
+        result = validate_contract(document, ROOT)
+        self.assertEqual(
+            result["errors"],
+            [{"layer": "envelope", "code": "additionalProperties", "path": ""}],
+        )
 
     def test_semantic_diagnostics_are_value_free_and_profile_scoped(self):
         market = read_fixture("profiles/base/market-bar/valid.json")
