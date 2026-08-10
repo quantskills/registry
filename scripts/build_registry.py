@@ -214,6 +214,31 @@ def _interface_diagnostics(entry: dict, envelope: dict, profiles: dict) -> list[
     return diagnostics
 
 
+def _core_chain_bound(entries: list[dict], lineage: dict, envelope: dict, provider_mappings: dict) -> bool:
+    """Bind the trusted manifest's source artifact to its validated declaration."""
+    try:
+        artifacts = lineage["artifacts"]
+        first = artifacts[0]
+        mapping_id = first["source_mapping_id"]
+        mapping = next(item for item in provider_mappings["items"] if item["id"] == mapping_id)
+        asset = next(entry for entry in entries if entry.get("name") == first["producer"])
+        interface = asset["interface"]
+        return (
+            mapping_id == "pandadata-market-bar-v1"
+            and first["producer"] == "skill-pandadata-warehouse"
+            and first["profile"] == "market-bar"
+            and first["version"] == "1.0.0"
+            and asset.get("name") == first["producer"]
+            and interface.get("mode") in {"structured", "hybrid"}
+            and interface.get("envelope") == {"name": envelope["name"], "version": "1.0.0"}
+            and interface.get("outputs") == [{"profile": first["profile"], "version": first["version"]}]
+            and mapping.get("target", {}).get("envelope") == interface.get("envelope")
+            and mapping.get("target", {}).get("profile") == {"id": first["profile"], "version": first["version"]}
+        )
+    except (AttributeError, IndexError, KeyError, TypeError, StopIteration):
+        return False
+
+
 def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, profiles: dict | None = None, adapters: dict | None = None, envelope: dict | None = None, provider_mappings: dict | None = None, *, contract_mode: str = "audit", core_lineage: dict | None = None) -> dict:
     if contract_mode not in {"audit", "enforce"}:
         raise ValueError("contract_mode must be 'audit' or 'enforce'")
@@ -227,20 +252,16 @@ def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, p
     canonical_lineage = load_core_lineage()
     if core_lineage is not None and canonical_json(core_lineage) != canonical_json(canonical_lineage):
         raise ValueError("untrusted core lineage")
-    mapping_by_id = {item["id"]: item for item in provider_mappings["items"]}
     diagnostics = [diagnostic for entry in entries for diagnostic in _interface_diagnostics(entry, envelope, profiles)]
     valid_entries = [entry for entry in entries if not _interface_diagnostics(entry, envelope, profiles)]
-    for entry in entries:
-        lineage = entry.get("lineage")
-        if lineage is None:
-            continue
-        mapping = mapping_by_id.get(lineage.get("source_mapping_id")) if isinstance(lineage, dict) else None
-        outputs = entry.get("interface", {}).get("outputs", [])
-        if not mapping or not outputs or mapping["target"]["profile"] != {"id": outputs[0].get("profile"), "version": outputs[0].get("version")}:
-            raise ValueError("invalid declaration lineage mapping")
     edges = build_compatibility_edges(valid_entries, adapters["items"])
     actual_edges = {(edge["producer"], edge["consumer"], edge["output"]["profile"], edge["input"]["profile"]) for edge in edges}
-    closed_chain = not diagnostics and set(names) == _ENFORCE_ASSETS and actual_edges == _ENFORCE_EDGES
+    closed_chain = (
+        not diagnostics
+        and set(names) == _ENFORCE_ASSETS
+        and actual_edges == _ENFORCE_EDGES
+        and _core_chain_bound(entries, canonical_lineage, envelope, provider_mappings)
+    )
     if contract_mode == "enforce":
         if not closed_chain:
             raise ValueError("enforce requires the approved closed core chain")

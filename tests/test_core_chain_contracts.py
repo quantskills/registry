@@ -21,6 +21,10 @@ class CoreChainContractsTests(unittest.TestCase):
         self.assertEqual([item["id"] for item in lineage], ["market-bar", "factor-panel", "ranking", "portfolio", "backtest", "evaluation", "execution"])
         self.assertEqual([item["producer"] for item in lineage], ["skill-pandadata-warehouse", "skill-factor-mining-pandaai", "skill-factor-grouped-wrapper", "skill-portfolio-optimize", "skill-backtest", "skill-backtest", "skill-ssquant-ai-trader"])
         self.assertEqual(lineage[0]["source_mapping_id"], "pandadata-market-bar-v1")
+        self.assertEqual(lineage[0]["inputs"], [])
+        self.assertEqual(lineage[0]["provenance"], {"provider": "pandadata", "dataset": "bars-daily", "raw_ref": "fixture://pandadata/market-bar/001", "raw_sha256": "sha256:4522f0923640a466e91ec61e1e7a988b384511e82637f6b54cd6febae154087f"})
+        first_document = json.loads((root / lineage[0]["file"]).read_text(encoding="utf-8"))
+        self.assertEqual(first_document["meta"]["provenance"], [lineage[0]["provenance"]])
         known = {}
         for index, item in enumerate(lineage):
             raw = (root / item["file"]).read_bytes()
@@ -34,7 +38,7 @@ class CoreChainContractsTests(unittest.TestCase):
                 predecessor = lineage[index - 1]
                 predecessor_sha = "sha256:" + hashlib.sha256((root / predecessor["file"]).read_bytes()).hexdigest()
                 self.assertEqual(item["inputs"], [{"id": predecessor["id"], "artifact_sha256": predecessor_sha}])
-                self.assertEqual(document["meta"]["provenance"][0]["raw_sha256"], predecessor_sha)
+                self.assertEqual(document["meta"]["provenance"][0], {"provider": predecessor["producer"], "dataset": predecessor["id"], "raw_ref": f"artifact://core-chain/{predecessor['id']}", "raw_sha256": predecessor_sha})
                 if index >= 2:
                     source = document["payload"]["records"][0]["lineage"]["sources"][0]
                     self.assertEqual(source, {"profile": predecessor["profile"], "version": "1.0.0", "artifact_ref": f"artifact://core-chain/{predecessor['id']}", "sha256": predecessor_sha})

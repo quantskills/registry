@@ -201,6 +201,7 @@ _CORE_PRODUCERS = (
     "skill-portfolio-optimize", "skill-backtest", "skill-backtest", "skill-ssquant-ai-trader",
 )
 _CORE_PROFILES = ("market-bar", "factor-panel", "ranked-factor-set", "portfolio-target", "backtest-result", "evaluation-result", "execution-plan")
+_CORE_SOURCE_MAPPING_ID = "pandadata-market-bar-v1"
 
 
 def load_core_lineage(root: Path = ROOT) -> dict:
@@ -233,34 +234,65 @@ def load_core_lineage(root: Path = ROOT) -> dict:
             from scripts.validate_contract import validate_contract
         if validate_contract(document, base).get("status") != "valid" or document["$contract"]["profile"] != row["profile"] or document["meta"]["producer"] != row["producer"]:
             raise ValueError("invalid core lineage")
+        contract = document.get("$contract")
+        if (not isinstance(contract, dict)
+                or contract.get("envelope") != envelope["name"]
+                or contract.get("envelope_version") != _VERSION
+                or contract.get("profile") != row["profile"]
+                or contract.get("profile_version") != row["version"]):
+            raise ValueError("invalid core lineage")
         if (row["profile"], row["version"]) not in profile_rows:
             raise ValueError("invalid core lineage")
+        meta = document.get("meta")
+        provenance_rows = meta.get("provenance") if isinstance(meta, dict) else None
+        if (not isinstance(provenance_rows, list) or len(provenance_rows) != 1
+                or not isinstance(provenance_rows[0], dict)):
+            raise ValueError("invalid core lineage")
+        meta_source = provenance_rows[0]
         if index == 0:
+            if row["inputs"] != [] or row.get("source_mapping_id") != _CORE_SOURCE_MAPPING_ID:
+                raise ValueError("invalid core lineage")
             provenance = row["provenance"]
             source_id = row["source_mapping_id"]
-            target = mapping.get(source_id, {}).get("target", {})
-            meta_source = document.get("meta", {}).get("provenance", [None])[0]
-            if (type(provenance) is not dict or set(provenance) != {"provider", "dataset", "raw_sha256"}
+            source_mapping = mapping.get(source_id)
+            target = source_mapping.get("target", {}) if isinstance(source_mapping, dict) else {}
+            source = source_mapping.get("source", {}) if isinstance(source_mapping, dict) else {}
+            evidence = source_mapping.get("evidence", {}) if isinstance(source_mapping, dict) else {}
+            expected_raw_ref = f"fixture://{source.get('provider')}/{row['profile']}/001"
+            expected_provenance = {
+                "provider": source.get("provider"),
+                "dataset": source.get("dataset"),
+                "raw_ref": expected_raw_ref,
+                "raw_sha256": evidence.get("raw_sha256"),
+            }
+            if (not isinstance(provenance, dict) or set(provenance) != set(expected_provenance)
+                    or any(not isinstance(value, str) or not value for value in expected_provenance.values())
+                    or provenance != expected_provenance
+                    or meta_source != expected_provenance
                     or target.get("envelope") != {"name": envelope["name"], "version": _VERSION}
                     or target.get("profile") != {"id": row["profile"], "version": _VERSION}
-                    or not isinstance(meta_source, dict) or meta_source.get("raw_sha256") != provenance.get("raw_sha256")
-                    or meta_source.get("raw_ref") != f"fixture://{mapping[source_id]['source']['provider']}/{row['profile']}/001"
-                    or provenance.get("provider") != mapping[source_id]["source"]["provider"]
-                    or provenance.get("dataset") != mapping[source_id]["source"]["dataset"]
-                    or mapping[source_id]["evidence"]["raw_sha256"] != provenance.get("raw_sha256")):
+                    or not isinstance(source_mapping, dict)
+                    or evidence.get("raw_sha256") != provenance.get("raw_sha256")):
                 raise ValueError("invalid core lineage")
         else:
-            assert previous is not None
+            if previous is None:
+                raise ValueError("invalid core lineage")
             inputs = row["inputs"]
             records = document.get("payload", {}).get("records")
             sources = [record.get("lineage", {}).get("sources") for record in records] if index >= 2 and isinstance(records, list) else []
             evidence = [record.get("lineage", {}).get("evidence_refs") for record in records] if index >= 2 and isinstance(records, list) else []
-            meta_source = document.get("meta", {}).get("provenance", [None])[0]
             expected_input = {"id": previous["id"], "artifact_sha256": previous["artifact_sha256"]}
             expected_source = {"profile": previous["profile"], "version": _VERSION, "artifact_ref": f"artifact://core-chain/{previous['id']}", "sha256": previous["artifact_sha256"]}
-            if (inputs != [expected_input] or (index >= 2 and (not records or any(source != [expected_source] for source in sources)
+            expected_provenance = {
+                "provider": previous["producer"],
+                "dataset": previous["id"],
+                "raw_ref": expected_source["artifact_ref"],
+                "raw_sha256": previous["artifact_sha256"],
+            }
+            if (inputs != [expected_input] or meta_source != expected_provenance
+                    or (index >= 2 and (not records or any(source != [expected_source] for source in sources)
                     or any(refs != [f"evidence://core-chain/{previous['id']}"] for refs in evidence)))
-                    or not isinstance(meta_source, dict) or meta_source.get("raw_sha256") != previous["artifact_sha256"]):
+                    ):
                 raise ValueError("invalid core lineage")
         previous = row
     return manifest

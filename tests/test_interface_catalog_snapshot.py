@@ -20,15 +20,13 @@ class InterfaceCatalogSnapshotTests(unittest.TestCase):
         self.resources = [{"name": name, "url": f"https://github.com/quantskills/{name}"} for name in (".github", "join", "quantskills", "registry")]
         self.envelope, self.profiles, self.adapters, self.mappings = load_contract_catalogs()
 
-    def asset(self, name, outputs=(), inputs=(), lineage=None):
+    def asset(self, name, outputs=(), inputs=()):
         value = {"name": name, "url": f"https://github.com/quantskills/{name}", "description": "Synthetic closed-chain declaration for deterministic offline contract verification.", "project_type": "skill", "declaration_file": "SKILL.md", "tags": ["fixture"], "platforms": ["codex"], "status": "active", "requires": [], "summary_zh": "合成核心链契约夹具", "summary_en": "Synthetic core-chain contract fixture.", "license": "GPL-3.0-only", "validation_level": "verified", "maintainer_type": "community", "commit_sha": "fixture", "catalog": {"category": "02", "subcategory": "02.factor-evaluation"}, "workflow": {"primary_stage": "evaluation", "workflow_stages": ["evaluation"]}, "last_validated": "2026-08-10", "interface": {"mode": "structured", "envelope": {"name": "quantskills-envelope", "version": "1.0.0"}, "inputs": [{"profile": p, "version_range": ">=1.0.0 <2.0.0", "required": True} for p in inputs], "outputs": [{"profile": p, "version": "1.0.0"} for p in outputs], "adapters": []}}
-        if lineage:
-            value["lineage"] = {"source_mapping_id": lineage}
         return value
 
     def chain(self):
         return [
-            self.asset("skill-pandadata-warehouse", ("market-bar",), lineage="pandadata-market-bar-v1"),
+            self.asset("skill-pandadata-warehouse", ("market-bar",)),
             self.asset("skill-factor-mining-pandaai", ("factor-panel",), ("market-bar",)),
             self.asset("skill-factor-grouped-wrapper", ("ranked-factor-set",), ("factor-panel",)),
             self.asset("skill-portfolio-optimize", ("portfolio-target",), ("ranked-factor-set",)),
@@ -46,9 +44,12 @@ class InterfaceCatalogSnapshotTests(unittest.TestCase):
 
     def test_red_invalid_mapping_or_chain_link_rejects_before_render(self):
         before = build_snapshot(self.chain(), self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
-        broken = self.chain(); broken[0]["lineage"]["source_mapping_id"] = "missing"
-        with self.assertRaisesRegex(ValueError, "lineage"):
-            build_snapshot(broken, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
+        self.assertEqual(len(before["core_lineage"]["artifacts"]), 7)
+        broken = self.chain(); broken[0]["interface"]["outputs"][0]["profile"] = "factor-panel"
+        snapshot = build_snapshot(broken, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
+        self.assertEqual(snapshot["core_lineage"]["artifacts"], [])
+        with self.assertRaisesRegex(ValueError, "approved closed core chain"):
+            build_snapshot(broken, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings, contract_mode="enforce")
         incomplete = self.chain(); incomplete.pop(2)
         snapshot = build_snapshot(incomplete, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
         self.assertTrue(snapshot["interface_diagnostics"] == [])
