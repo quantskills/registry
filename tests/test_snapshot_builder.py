@@ -113,6 +113,24 @@ class SnapshotBuilderTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             collect_entries(repos, {}, "enforce", inventory=inventory)
 
+    def test_audit_normalizes_each_invalid_public_value_without_leaking_it(self):
+        base = yaml.safe_load((ROOT / "tests" / "fixtures" / "declarations" / "valid-structured.yml").read_text(encoding="utf-8"))
+        base["name"] = "skill-alpha"; base["quantSkills"]["repository"] = "skill-alpha"; base["quantSkills"]["repository_url"] = "https://github.com/quantskills/skill-alpha"
+        mutations = [
+            lambda d: d["quantSkills"].update(project_type="bogus"), lambda d: d.update(description=1), lambda d: d["quantSkills"].update(status="bogus", validation_level="bogus", maintainer_type="bogus", license=1, tags="bogus", requires="bogus", platforms="bogus", summary_zh=1, summary_en=1),
+            lambda d: d["quantSkills"]["catalog"].update(category="bogus", subcategory="bogus"), lambda d: d["quantSkills"]["workflow"].update(primary_stage="bogus", workflow_stages="bogus"), lambda d: d["quantSkills"].update(interface={"mode":"bogus"}),
+        ]
+        inventory = {"assets": ["skill-alpha"], "resources": [".github", "join", "quantskills", "registry"]}
+        for mutate in mutations:
+            with self.subTest(mutate=mutate):
+                declaration = copy.deepcopy(base); mutate(declaration)
+                repos = [{"name": "skill-alpha", "frontmatter": declaration}, *self.repos[3:]]
+                entries, resources = collect_entries(repos, {}, "audit", inventory=inventory)
+                snapshot = build_snapshot(entries, resources, self.taxonomy, {"items": []}, {"items": []})
+                self.assertNotIn("bogus", json.dumps(snapshot))
+                self.assertTrue(entries[0]["migration_issues"])
+                with self.assertRaises(ValueError): collect_entries(repos, {}, "enforce", inventory=inventory)
+
     def test_builder_fixture_declarations_have_no_contract_issues(self):
         from catalog_contract import validate_asset_semantics, validate_frontmatter_schema
         schema = ROOT / "schema" / "frontmatter.schema.json"
