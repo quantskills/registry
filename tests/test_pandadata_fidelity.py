@@ -52,8 +52,10 @@ class PandaDataFidelityTests(unittest.TestCase):
                 self.assertEqual(envelope, self.load(name, expected=True))
                 self.assertEqual(validate_contract(envelope, ROOT)["status"], "valid")
                 self.assertEqual(validate_contract(envelope, ROOT)["errors"], [])
-                self.assertEqual(envelope["payload"]["native"]["raw_records"], native["records"])
-                self.assertEqual(envelope["meta"]["provenance"][0]["raw_sha256"], "sha256:" + hashlib.sha256(native_bytes(native)).hexdigest())
+                self.assertEqual(envelope["payload"]["native"]["raw_records"], [native])
+                self.assertIsNot(envelope["payload"]["native"]["raw_records"][0], native)
+                self.assertIsNot(envelope["payload"]["native"]["raw_records"][0]["records"], native["records"])
+                self.assertEqual(envelope["meta"]["provenance"][0]["raw_sha256"], "sha256:" + hashlib.sha256((FIXTURES / f"{name}-native.json").read_bytes()).hexdigest())
                 self.assertEqual(len(envelope["payload"]["records"]), len(native["records"]))
                 self.assertEqual(set(envelope["schema"]["primary_key"]), set(envelope["payload"]["records"][0]).intersection(envelope["schema"]["primary_key"]))
 
@@ -82,16 +84,65 @@ class PandaDataFidelityTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, r"^pandadata-nonfinite$"):
                     adapter(native)
 
+    def test_preflight_rejects_non_json_and_invalid_profile_values(self):
+        for name, adapter in self.cases:
+            with self.subTest(name=name, kind="tuple"):
+                native = self.load(name)
+                native["records"] = tuple(native["records"])
+                with self.assertRaisesRegex(ValueError, r"^pandadata-native-json$"):
+                    adapter(native)
+            with self.subTest(name=name, kind="huge-integer"):
+                native = self.load(name)
+                native["unknown"] = 2 ** 60
+                with self.assertRaisesRegex(ValueError, r"^pandadata-integer-range$"):
+                    adapter(native)
+            with self.subTest(name=name, kind="generated-at"):
+                native = self.load(name)
+                native["generated_at"] += "\n"
+                with self.assertRaisesRegex(ValueError, r"^pandadata-native-shape$"):
+                    adapter(native)
+            with self.subTest(name=name, kind="missing"):
+                native = self.load(name)
+                native["records"][0].pop(next(iter(native["records"][0])))
+                with self.assertRaisesRegex(ValueError, r"^pandadata-native-shape$"):
+                    adapter(native)
+            with self.subTest(name=name, kind="boolean"):
+                native = self.load(name)
+                native["records"][0]["value" if name == "fundamental-pit" else "volume" if name == "market-bar" else "settlement"] = True
+                with self.assertRaisesRegex(ValueError, r"^pandadata-native-shape$"):
+                    adapter(native)
+
+    def test_market_rejects_mixed_or_missing_volume_units(self):
+        native = self.load("market-bar")
+        native["records"].append(copy.deepcopy(native["records"][0]))
+        native["records"][1]["source_timestamp"] = "2026-08-10T09:31:00+08:00"
+        native["records"][1]["volume_unit"] = "lots"
+        with self.assertRaisesRegex(ValueError, r"^pandadata-volume-unit$"):
+            market_bar_envelope(native)
+        native["records"][1].pop("volume_unit")
+        with self.assertRaisesRegex(ValueError, r"^pandadata-native-shape$"):
+            market_bar_envelope(native)
+
     def test_mappings_are_provider_only_and_lossy_is_excluded(self):
         mappings = json.loads((ROOT / "schema" / "adapters" / "pandadata-mappings.v1.json").read_text(encoding="utf-8"))
         registry = json.loads((ROOT / "schema" / "adapters" / "registry.v1.json").read_text(encoding="utf-8"))
         ids = [row["id"] for row in mappings["mappings"]]
         self.assertEqual(ids, sorted(ids))
-        self.assertTrue(all(row["lossless"] and row["validation_status"] == "validated" for row in mappings["mappings"]))
+        from adapters.pandadata import _admit_pandadata_mappings
+        self.assertTrue(_admit_pandadata_mappings(mappings, ROOT))
         self.assertTrue(all(identifier not in json.dumps(registry, sort_keys=True) for identifier in ids + ["pandadata-lossy-example"]))
         self.assertEqual(compare_endpoints(endpoint("market-bar"), endpoint("market-bar", version_range="1.0.0"), registry["adapters"]), {"status": "compatible", "errors": [], "adapter_path": []})
         lossy = {"id": "pandadata-lossy-example", "lossless": False, "validation_status": "rejected"}
         self.assertFalse(lossy["lossless"] and lossy["validation_status"] == "validated")
+        for mutate in (
+            lambda document: document["mappings"][0].update({"lossless": False}),
+            lambda document: document["mappings"][0]["evidence"].update({"raw_sha256": "sha256:" + "0" * 64}),
+            lambda document: document["mappings"][0]["implementation"].update({"callable": "missing"}),
+            lambda document: document["mappings"][0].update({"unknown": True}),
+        ):
+            candidate = copy.deepcopy(mappings)
+            mutate(candidate)
+            self.assertFalse(_admit_pandadata_mappings(candidate, ROOT))
 
 
 if __name__ == "__main__":
