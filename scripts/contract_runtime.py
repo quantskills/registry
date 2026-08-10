@@ -29,6 +29,8 @@ def envelope_semantic_issues(document: object) -> list[dict]:
     meta = document.get("meta")
     if isinstance(meta, dict) and not _strict_rfc3339(meta.get("generated_at")):
         issues.append(_issue("envelope-rfc3339", "/meta/generated_at"))
+    if isinstance(meta, dict) and "as_of" in meta and not _strict_rfc3339(meta.get("as_of")):
+        issues.append(_issue("envelope-rfc3339", "/meta/as_of"))
     schema = document.get("schema")
     if isinstance(schema, dict):
         fields = schema.get("fields")
