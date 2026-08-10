@@ -35,12 +35,15 @@ class FrontmatterSchemaTests(unittest.TestCase):
         errors = list(self.validator.iter_errors(load_yaml(fixture)))
         self.assertEqual(errors, [], [error.message for error in errors])
 
-    def assert_invalid_at(self, fixture, path, message=None):
+    def assert_invalid_at(self, fixture, path, validator=None, message=None):
         errors = list(self.validator.iter_errors(load_yaml(fixture)))
         leaves = [error for error in errors for error in leaf_errors(error)]
         paths = {tuple(error.absolute_path) for error in leaves}
         self.assertTrue(errors, "fixture unexpectedly passed schema validation")
         self.assertIn(path, paths, [error.message for error in leaves])
+        matching_errors = [error for error in leaves if tuple(error.absolute_path) == path]
+        if validator:
+            self.assertIn(validator, [error.validator for error in matching_errors])
         if message:
             self.assertIn(message, [error.message for error in leaves])
 
@@ -52,23 +55,32 @@ class FrontmatterSchemaTests(unittest.TestCase):
 
     def test_invalid_subcategory_syntax(self):
         self.assert_invalid_at(
-            "invalid-subcategory.yml", ("quantSkills", "catalog", "subcategory")
+            "invalid-subcategory.yml",
+            ("quantSkills", "catalog", "subcategory"),
+            validator="pattern",
         )
 
     def test_invalid_primary_stage_value(self):
         self.assert_invalid_at(
-            "invalid-primary-stage.yml", ("quantSkills", "workflow", "primary_stage")
+            "invalid-primary-stage.yml",
+            ("quantSkills", "workflow", "primary_stage"),
+            validator="enum",
         )
 
     def test_invalid_interface_branch(self):
         self.assert_invalid_at(
             "invalid-interface.yml",
             ("quantSkills", "interface"),
-            "'adapters' is a required property",
+            validator="required",
+            message="'adapters' is a required property",
         )
 
     def test_invalid_summary_format(self):
-        self.assert_invalid_at("invalid-summary.yml", ("quantSkills", "summary_zh"))
+        self.assert_invalid_at(
+            "invalid-summary.yml",
+            ("quantSkills", "summary_zh"),
+            validator="pattern",
+        )
 
 
 if __name__ == "__main__":
