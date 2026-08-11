@@ -6,1034 +6,1584 @@
   },
   "plugins": [
     {
+      "category": "09",
+      "description": "Uses Pandadata price-series correlation changes to identify style shifts, diversification stress, and structural market moves.",
       "name": "correlation-break-research",
       "source": {
-        "source": "github",
-        "repo": "quantskills/agent-correlation-break-research"
+        "repo": "quantskills/agent-correlation-break-research",
+        "source": "github"
       },
-      "description": "Detect correlation breaks, style shifts, and diversification stress from Pandadata return evidence.",
-      "type": "agent",
-      "category": "research-agent"
+      "type": "agent"
     },
     {
+      "category": "09",
+      "description": "Monitors crowded-trade risk from Pandadata price, turnover, margin, and Dragon-Tiger heat evidence.",
       "name": "crowding-risk-monitor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/agent-crowding-risk-monitor"
+        "repo": "quantskills/agent-crowding-risk-monitor",
+        "source": "github"
       },
-      "description": "Monitor crowded-trade risk from Pandadata price, turnover, margin, and LHB heat evidence.",
-      "type": "agent",
-      "category": "risk-agent"
+      "type": "agent"
     },
     {
+      "category": "09",
+      "description": "Monitors derivatives sentiment from option implied volatility and underlying historical volatility.",
       "name": "derivatives-skew-sentiment-monitor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/agent-derivatives-skew-sentiment-monitor"
+        "repo": "quantskills/agent-derivatives-skew-sentiment-monitor",
+        "source": "github"
       },
-      "description": "Monitor derivatives sentiment from option implied volatility and underlying historical volatility.",
-      "type": "agent",
-      "category": "monitor-agent"
+      "type": "agent"
     },
     {
+      "category": "09",
+      "description": "Multi-agent collaboration framework for Liangshuyuan tasks, organizing quantitative tools, build workflows, and task roles.",
       "name": "for-liangshuyuan-tasks",
       "source": {
-        "source": "github",
-        "repo": "quantskills/agent-for-liangshuyuan-tasks"
+        "repo": "quantskills/agent-for-liangshuyuan-tasks",
+        "source": "github"
       },
-      "description": "量枢学院多 Agent 协作框架——基于 Claude Code 的量化交易工具开发平台，将任务需求自动分析、路由、开发、测试、发布全流程自动化。内置 6 个专业 Agent，支持 BUILD 工具与 Alpha 因子的 Skill 架构开发。",
-      "type": "agent",
-      "category": "uncategorized"
+      "type": "agent"
     },
     {
+      "category": "09",
+      "description": "Generates macro-driven industry-rotation research materials from clock phases, nowcasts, and valuation filters.",
+      "name": "macro-driven-rotation",
+      "source": {
+        "repo": "quantskills/agent-macro-driven-rotation",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
+      "description": "Monitors market regimes from Pandadata index breadth, volatility, and funding evidence.",
       "name": "market-regime-monitor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/agent-market-regime-monitor"
+        "repo": "quantskills/agent-market-regime-monitor",
+        "source": "github"
       },
-      "description": "Monitor market regime from Pandadata index, breadth, volatility, and funding evidence.",
-      "type": "agent",
-      "category": "monitor-agent"
+      "type": "agent"
     },
     {
+      "category": "09",
+      "description": "AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.",
+      "name": "quantspace",
+      "source": {
+        "repo": "quantskills/agent-quantspace",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
+      "description": "SSQuant Agent workflow for futures strategies, data services, CTP gates, and Chinese backtest reports.",
       "name": "ssquant",
       "source": {
-        "source": "github",
-        "repo": "quantskills/agent-ssquant"
+        "repo": "quantskills/agent-ssquant",
+        "source": "github"
       },
-      "description": "SSQuant Agent workflow for futures strategies, data services, CTP gates, and Chinese reports.",
-      "type": "agent",
-      "category": "workflow-agent"
+      "type": "agent"
     },
     {
+      "category": "10",
+      "description": "Canonical template for portable QuantSkills agent projects.",
+      "name": "template",
+      "source": {
+        "repo": "quantskills/agent-template",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "04",
+      "description": "Scans A-share macro, funding, valuation, trend, sector-rotation, and event evidence into risk levels.",
+      "name": "a-share-market-risk-radar",
+      "source": {
+        "repo": "quantskills/skill-a-share-market-risk-radar",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "01",
+      "description": "Builds and audits point-in-time A-share financial data without later restatements.",
+      "name": "a-share-pit-fundamental-vintage-builder",
+      "source": {
+        "repo": "quantskills/skill-a-share-pit-fundamental-vintage-builder",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Uses Pandadata to produce a sourced A-share dossier covering fundamentals, corporate actions, holders, event risks, and market funds.",
       "name": "a-share-stock-dossier",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-a-share-stock-dossier"
+        "repo": "quantskills/skill-a-share-stock-dossier",
+        "source": "github"
       },
-      "description": "A-share stock dossier skill that uses Pandadata to produce company, financial, dividend, shareholder, and risk analysis.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Generates an event-ranking factor from Dragon-Tiger seat history, win rate, payoff, and next-session premium.",
       "name": "a1-lhb-tracking",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-a1-lhb-tracking"
+        "repo": "quantskills/skill-a1-lhb-tracking",
+        "source": "github"
       },
-      "description": "A-share LHB event-ranking factor using seat win rate, payoff, premium, and buy-size evidence from Pandadata.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Computes monthly agricultural-futures seasonality from daily prices and overlays crop-calendar context.",
+      "name": "ag-futures-seasonality",
+      "source": {
+        "repo": "quantskills/skill-ag-futures-seasonality",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Computes a hot-money seat cooling and reversal factor from Dragon-Tiger and market data with validation artifacts.",
       "name": "alpha-a06-hotmoney-reversal",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-alpha-a06-hotmoney-reversal"
+        "repo": "quantskills/skill-alpha-a06-hotmoney-reversal",
+        "source": "github"
       },
-      "description": "Use this skill to calculate, validate, backtest, and publish the A06 hot-money seat cooling-reversal and collaborative-breakout Alpha factor for A-share Dragon-Tiger List data.",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Computes a futures top-20-seat position-change factor and signal from net-position data.",
       "name": "alpha-f1-position-change",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-alpha-f1-position-change"
+        "repo": "quantskills/skill-alpha-f1-position-change",
+        "source": "github"
       },
-      "description": "当需要开发、计算、验证期货前20席位持仓突变因子时，使用此 skill。支持多空持仓优势分析、主力调仓方向判断。",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Computes member-position concentration signals from institutional, hot-money, and northbound net positions.",
       "name": "alpha-f5-member-position-concentration",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-alpha-f5-member-position-concentration"
+        "repo": "quantskills/skill-alpha-f5-member-position-concentration",
+        "source": "github"
       },
-      "description": "Use when researching or validating the F5 commodity futures member-position concentration factor in a local Panda data environment.",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Computes a futures family-position reversal signal from seat-position relationships.",
       "name": "alpha-f6-family-position-reverse",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-alpha-f6-family-position-reverse"
+        "repo": "quantskills/skill-alpha-f6-family-position-reverse",
+        "source": "github"
       },
-      "description": "Use when researching or validating the F6 commodity futures family-position reverse factor in a local Panda data environment.",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Computes a futures family-versus-main-seat position-divergence factor signal.",
       "name": "alpha-f8-family-main-divergence",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-alpha-f8-family-main-divergence"
+        "repo": "quantskills/skill-alpha-f8-family-main-divergence",
+        "source": "github"
       },
-      "description": "Use when researching or validating the F8 commodity futures broker-position divergence factor in a local Panda data environment.",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Computes a Graham NCAV discount factor for A-share deep-value screening and buy-sell-hold signals.",
+      "name": "alpha-ncav-graham",
+      "source": {
+        "repo": "quantskills/skill-alpha-ncav-graham",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Assesses A-share financial health from audit opinions, statements, and industry benchmarks with risk checks.",
+      "name": "audit-opinion-scanner",
+      "source": {
+        "repo": "quantskills/skill-audit-opinion-scanner",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "Applies entry-date and open-price rules for take-profit, stop-loss, forced exits, and single-name position caps.",
       "name": "b11-auto-stop-loss-take-profit",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-b11-auto-stop-loss-take-profit"
+        "repo": "quantskills/skill-b11-auto-stop-loss-take-profit",
+        "source": "github"
       },
-      "description": "当需要对 A 股和期货持仓做自动止盈止损与仓位管理时，使用此 skill。支持次日高开止盈、次日低开止损、持仓满2交易日强平、单票名义仓位上限控制。交易日历唯一来源 = panda_data.get_trade_cal（硬依赖）。",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Manages intraday multi-instrument positions using sellable and locked quantity, price, and cash inputs.",
       "name": "b12-intraday-position-manager",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-b12-intraday-position-manager"
+        "repo": "quantskills/skill-b12-intraday-position-manager",
+        "source": "github"
       },
-      "description": "当需要对日内多品种持仓做动态仓位管理时，使用此 skill。支持 A股/A股ETF/股指期货/商品期货/港股+ETF；区分 T+1/T+0、昨仓/今仓、保证金/现金，输出标准 8 字段调仓指令。",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Maintains a daily limit-up pool with board, break, reseal, theme, sentiment, and dashboard outputs.",
       "name": "b6-limitup-pool",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-b6-limitup-pool"
+        "repo": "quantskills/skill-b6-limitup-pool",
+        "source": "github"
       },
-      "description": "",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Monitors Dragon-Tiger entries and seat labels to produce next-session watchlists and searchable views.",
       "name": "b7-lhb-monitor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-b7-lhb-monitor"
+        "repo": "quantskills/skill-b7-lhb-monitor",
+        "source": "github"
       },
-      "description": "",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Provides a cross-sectional long-only backtest protocol with T+1 execution, fees, limit filters, and diagnostics.",
       "name": "backtest",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-backtest"
+        "repo": "quantskills/skill-backtest",
+        "source": "github"
       },
-      "description": "Standard cross-sectional long-only backtest protocol with T+1 execution, fees, limit filters, NAV curves, IC, drawdown, and diagnostic charts.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Evaluates backtest overfitting and multiple-testing risk with DSR, PBO, purged cross-validation, and Harvey-Liu haircut.",
       "name": "backtest-overfit",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-backtest-overfit"
+        "repo": "quantskills/skill-backtest-overfit",
+        "source": "github"
       },
-      "description": "Detect backtest overfitting and selection bias from multiple testing. Use when a user has a backtest / factor result and asks whether the Sharpe is real, whether a strategy is overfit, or wants to validate results...",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Builds look-ahead-safe backtests and audits leakage, survivorship, overfitting, costs, and out-of-sample checks.",
+      "name": "backtesting-bias-avoidance",
+      "source": {
+        "repo": "quantskills/skill-backtesting-bias-avoidance",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Builds an A-share block-trade radar from discount or premium, volume, and price evidence.",
       "name": "block-trade-radar",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-block-trade-radar"
+        "repo": "quantskills/skill-block-trade-radar",
+        "source": "github"
       },
-      "description": "A-share block-trade radar that joins each block trade to the same-day close to compute discount/premium, reads institutional (机构专用) buy/sell direction, flags repeated discounted takeovers and same-branch wash-like prints, and ranks names by amount and premium/discount, for the whole market or a single name.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Runs Brinson-Fachler or BHB attribution with HHI, contributor ranking, and Carino multi-period linking.",
+      "name": "brinson-performance-attribution",
+      "source": {
+        "repo": "quantskills/skill-brinson-performance-attribution",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Screens A-share and US companies using moat, valuation, and point-in-time data for research records.",
+      "name": "buffett-moat-screener",
+      "source": {
+        "repo": "quantskills/skill-buffett-moat-screener",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Evaluates quantitative factors with IC, IR, stratified backtests, monotonicity, turnover, and decay diagnostics.",
+      "name": "build-b10-factor-evaluation",
+      "source": {
+        "repo": "quantskills/skill-build-b10-factor-evaluation",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Monitors A-share buyback lifecycles, purposes, price ranges, and intensity for research.",
       "name": "buyback-monitor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-buyback-monitor"
+        "repo": "quantskills/skill-buyback-monitor",
+        "source": "github"
       },
-      "description": "A-share share-buyback monitor tracking repurchase events through their procedure stages, classifying purpose, measuring intensity vs total share capital, and comparing price band to market price, for the whole market or a single name.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Scans dated price changes for calendar anomalies using robust tests, bootstrap checks, and multiple-testing control.",
+      "name": "calendar-anomaly-scanner",
+      "source": {
+        "repo": "quantskills/skill-calendar-anomaly-scanner",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Aggregates margin, northbound-holding, and block-trade data into consensus, divergence, and crowding-percentile signals.",
+      "name": "capital-flow-crowding-monitor",
+      "source": {
+        "repo": "quantskills/skill-capital-flow-crowding-monitor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Analyzes A-share convertible bonds with double-low screening, terms, equity linkage, Greeks, and volatility.",
+      "name": "cb-analyzer",
+      "source": {
+        "repo": "quantskills/skill-cb-analyzer",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Builds commodity-futures carry, time-series momentum, cross-sectional momentum, basis, and inventory factors for rotation backtests.",
+      "name": "commodity-carry-cta",
+      "source": {
+        "repo": "quantskills/skill-commodity-carry-cta",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Monitors A-share concept and theme momentum, breadth, and rotation for research reports.",
       "name": "concept-rotation-monitor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-concept-rotation-monitor"
+        "repo": "quantskills/skill-concept-rotation-monitor",
+        "source": "github"
       },
-      "description": "A-share concept/theme rotation monitor that aggregates each concept's constituent daily returns into concept-level momentum and breadth rankings, detects newly-formed concepts, and compares short-vs-long-window momentum to see which themes are heating up or cooling down.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "01",
+      "description": "Audits split and cash-dividend consistency between raw and adjusted equity prices before research.",
       "name": "corporate-action-adjustment-auditor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-corporate-action-adjustment-auditor"
+        "repo": "quantskills/skill-corporate-action-adjustment-auditor",
+        "source": "github"
       },
-      "description": "Check raw and adjusted prices for cash-dividend and split consistency before research or backtesting.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Monitors A/H and China ADR cross-listing parity using prices, FX, and share ratios.",
       "name": "cross-listing-parity",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-cross-listing-parity"
+        "repo": "quantskills/skill-cross-listing-parity",
+        "source": "github"
       },
-      "description": "A/H and China ADR cross-listing parity monitoring with explicit market dates, FX rates, and share ratios.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "08",
+      "description": "Aggregates cross-market prices, sectors, flows, and news into a daily Markdown review.",
+      "name": "daily-report",
+      "source": {
+        "repo": "quantskills/skill-daily-report",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "Provides an all-weather allocation and backtest workflow for A-share assets, bonds, gold, and commodities.",
       "name": "dalio-all-weather",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-dalio-all-weather"
+        "repo": "quantskills/skill-dalio-all-weather",
+        "source": "github"
       },
-      "description": "Build and audit reproducible, research-only A-share All Weather allocations with PandaData, growth-inflation regimes, inverse-volatility risk budgets, quarterly backtests, and risk-contribution diagnostics.",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Calculates A-share rolling dividend yield, dividend continuity, and ex-dividend calendars.",
       "name": "dividend-yield-scan",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-dividend-yield-scan"
+        "repo": "quantskills/skill-dividend-yield-scan",
+        "source": "github"
       },
-      "description": "A-share high-dividend / dividend-quality cross-section from Pandadata dividend interfaces, computing trailing dividend yield, ranking it, measuring payout continuity, separating cash return from stock dividends, listing upcoming ex-dividend dates, and rolling up by industry, for the whole market or a basket.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Builds A-share heterogeneous graphs for GNN stock selection and backtesting.",
+      "name": "dl-gnn-stock-graph",
+      "source": {
+        "repo": "quantskills/skill-dl-gnn-stock-graph",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Defines OHLCV alpha-expression formats and validation rules for document-derived factors.",
       "name": "doc-to-alphas",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-doc-to-alphas"
+        "repo": "quantskills/skill-doc-to-alphas",
+        "source": "github"
       },
-      "description": "Generate OHLCV alpha factor expressions from document text, with a formula contract and automatic toy-data validation.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "08",
+      "description": "Scans earnings guidance, industry distributions, and qualified audit items during earnings seasons.",
       "name": "earnings-season-tracker",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-earnings-season-tracker"
+        "repo": "quantskills/skill-earnings-season-tracker",
+        "source": "github"
       },
-      "description": "Whole-market A-share earnings-season scanner covering forecast-type distribution, beat/miss leaders, industry earnings prosperity, and audit-opinion watchlists.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Monitors A-share ETF primary/secondary-market premiums and redemption-basket feasibility.",
+      "name": "etf-arbitrage-monitor",
+      "source": {
+        "repo": "quantskills/skill-etf-arbitrage-monitor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Evaluates domestic non-QDII passive equity-index ETFs and comparable-index peers.",
+      "name": "etf-fund-evaluator",
+      "source": {
+        "repo": "quantskills/skill-etf-fund-evaluator",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Scans watchlists or holdings for unlock, pledge, ownership-change, and earnings-event risks.",
       "name": "event-risk-alert",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-event-risk-alert"
+        "repo": "quantskills/skill-event-risk-alert",
+        "source": "github"
       },
-      "description": "A-share event-risk alert skill for watchlists, holdings, unlocks, pledges, reductions, ST changes, forecasts, audit opinions, and traceable reports.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Computes Alpha101 and Alpha191 factors from long-form OHLCV CSV and outputs wide CSV.",
       "name": "factor-alpha191-alpha101",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-alpha191-alpha101"
+        "repo": "quantskills/skill-factor-alpha191-alpha101",
+        "source": "github"
       },
-      "description": "Compute Alpha101 and Alpha191 factor values based on JoinQuant formulas with full or selected factor runs.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Runs long-only cross-sectional factor backtests on supplied factors and market data with diagnostics.",
+      "name": "factor-backtest",
+      "source": {
+        "repo": "quantskills/skill-factor-backtest",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "De-redundantly weights and combines multiple factor signals into a composite signal.",
       "name": "factor-blend",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-blend"
+        "repo": "quantskills/skill-factor-blend",
+        "source": "github"
       },
-      "description": "Multi-factor signal-level blending: redundancy removal via correlation matrix and top-bucket overlap, three weighting schemes (equal/ICIR/score), daily cross-sectional z-score synthesis, and composite re-evaluation. Signal-level only — outputs composite_signal, not portfolio weights.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Provides a symptom, cause, and verification playbook for factor failures.",
       "name": "factor-debug",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-debug"
+        "repo": "quantskills/skill-factor-debug",
+        "source": "github"
       },
-      "description": "Factor debugging playbook for NaNs, signal validation failures, look-ahead bias, horizon mismatch, checksum drift, and correlation violations.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Analyzes decay in Rank IC, turnover, and bucket returns and estimates half-life.",
       "name": "factor-decay",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-decay"
+        "repo": "quantskills/skill-factor-decay",
+        "source": "github"
       },
-      "description": "Factor decay analysis with multi-horizon Rank IC curves, exponential/power-law/bi-exponential fitting, bootstrap half-life CIs, turnover decay, and Q5-Q1 group-return decay. Recommends optimal rebalancing frequency. Integrated with Pandadata for 5-horizon forward returns.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Scores a cross-sectional factor using IC, Sharpe, drawdown, monotonicity, and turnover.",
       "name": "factor-evaluate",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-evaluate"
+        "repo": "quantskills/skill-factor-evaluate",
+        "source": "github"
       },
-      "description": "Single-factor evaluation skill covering rank IC, Pearson IC, Sharpe, drawdown, monotonicity, turnover, and composite scoring.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Wraps grouped factor-processing workflows and their pipeline diagrams.",
+      "name": "factor-grouped-wrapper",
+      "source": {
+        "repo": "quantskills/skill-factor-grouped-wrapper",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Generates candidate factor ideas with economic rationale and risk notes from the default data scope.",
       "name": "factor-idea-generation",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-idea-generation"
+        "repo": "quantskills/skill-factor-idea-generation",
+        "source": "github"
       },
-      "description": "Generate initial stock alpha ideas with economic rationale and concrete factor shapes, defaulting to daily OHLCV when no fields are specified.",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Checks timing, IC/IR, costs, and neutralization quality in single-factor research.",
+      "name": "factor-mason",
+      "source": {
+        "repo": "quantskills/skill-factor-mason",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Provides a factor-mining SOP from hypothesis and experiment notes through scoring and accept/rollback.",
       "name": "factor-mine",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-mine"
+        "repo": "quantskills/skill-factor-mine",
+        "source": "github"
       },
-      "description": "Disciplined factor-mining workflow for hypothesis design, implementation, validation, iteration notes, acceptance, and rollback decisions.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Mines factors with PandaAI data and feedback or extracts them from public documents.",
+      "name": "factor-mining-pandaai",
+      "source": {
+        "repo": "quantskills/skill-factor-mining-pandaai",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Runs parameter sweeps, ablations, and version refinements for existing equity or futures factors.",
       "name": "factor-optimize",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-optimize"
+        "repo": "quantskills/skill-factor-optimize",
+        "source": "github"
       },
-      "description": "Optimize an existing stock or futures factor with period sweeps, ablations, refinements, and a final keep-or-replace decision.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Orthogonalizes cross-sectional factors with daily OLS and outputs residual factors and exposure diagnostics.",
       "name": "factor-orthogonalize",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-orthogonalize"
+        "repo": "quantskills/skill-factor-orthogonalize",
+        "source": "github"
       },
-      "description": "Daily cross-sectional OLS orthogonalization against industry one-hot dummies, size (log dollar volume), style (beta, volatility), and legacy factor exposures. Outputs residual signal with exposure-zeroing diagnostics. Integrated with Pandadata for sector classification and style controls.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Generates mutation, crossover, and recommendations from evaluated seed factor pools.",
       "name": "factor-pool-evolution",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-pool-evolution"
+        "repo": "quantskills/skill-factor-pool-evolution",
+        "source": "github"
       },
-      "description": "Run one round of factor-pool recommendation from an existing stock alpha set. Use when an agent needs to start from user-provided seed factors, prepare mutation and crossover prompt packs for the current model to reason...",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Runs mRMR or Marginal-SAGE on local factor and label data to produce Top-K rankings.",
       "name": "factor-ranking-sage",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-ranking-sage"
+        "repo": "quantskills/skill-factor-ranking-sage",
+        "source": "github"
       },
-      "description": "Rank and select quantitative model factors from local factor and label CSV files with regression mRMR using F-statistic relevance and Pearson redundancy, or fixed-model Marginal-SAGE MSE contribution for LGBM and MLP.",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Scans a factor library and experiment logs for inventory, structural analysis, and research recommendations.",
       "name": "factor-review",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factor-review"
+        "repo": "quantskills/skill-factor-review",
+        "source": "github"
       },
-      "description": "Factor-library review skill for experiment logs, acceptance rates, score dynamics, factor-family structure, correlations, and research recommendations.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Uses a FactorMAD-style multi-agent debate framework for interpretable stock-alpha mining.",
       "name": "factormad-debate-factor-mining",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-factormad-debate-factor-mining"
+        "repo": "quantskills/skill-factormad-debate-factor-mining",
+        "source": "github"
       },
-      "description": "Mine interpretable code-based stock alpha factors from OHLCV market data with a FactorMAD-style LLM debate workflow.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "08",
+      "description": "Aggregates financial headlines and market data to select headlines and draft analysis articles.",
       "name": "fin-news",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-fin-news"
+        "repo": "quantskills/skill-fin-news",
+        "source": "github"
       },
-      "description": "实时财经头条生成器。采集东方财富财经要闻 + Pandadata 市场数据，由 AI 精选 5 条并撰写深度文章（含事实描述、数据解读、大V点评）。",
-      "type": "skill",
-      "category": "finance-news"
+      "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Audits probability-forecast calibration rather than sample ranking alone.",
+      "name": "forecast-calibration-audit",
+      "source": {
+        "repo": "quantskills/skill-forecast-calibration-audit",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Computes and validates A-share valuation, quality, and growth factors from quarterly financial reports.",
       "name": "fundamental-factor-analysis",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-fundamental-factor-analysis"
+        "repo": "quantskills/skill-fundamental-factor-analysis",
+        "source": "github"
       },
-      "description": "Compute, validate, and analyze A-share fundamental factors. Covers value (EP/BP/SP/CP/FCFP/GP/A), quality (ROE/ROA/gross margin/accruals/leverage), growth (earnings growth/revenue growth/analyst revision) and composite factors. Uses Pandadata financial APIs with IC analysis, grouped returns, and Fama-MacBeth regression for validation.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Turns futures DeepView natural-language requests into data-call plans and fact/inference-separated reports.",
       "name": "futures-deepview-analyst",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-futures-deepview-analyst"
+        "repo": "quantskills/skill-futures-deepview-analyst",
+        "source": "github"
       },
-      "description": "Futures DeepView analyst skill for position seats, basis, inventory, term structure, and calendar-spread signals from Pandadata.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "01",
+      "description": "Audits continuous-contract selection, roll gaps, and adjustment factors and produces a roll ledger.",
       "name": "futures-roll-auditor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-futures-roll-auditor"
+        "repo": "quantskills/skill-futures-roll-auditor",
+        "source": "github"
       },
-      "description": "Audit futures contract selection, roll events, price gaps, and difference or ratio adjustment ledgers.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Uses public sources to structure research evidence and risks for photonics, optical-network, and AI-infrastructure companies.",
       "name": "gaetano-crux-capital-research-model",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-gaetano-crux-capital-research-model"
+        "repo": "quantskills/skill-gaetano-crux-capital-research-model",
+        "source": "github"
       },
-      "description": "Research-model skill for public-material analysis of photonics, optical networking, Physical AI, and AI infrastructure themes.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Organizes, retrieves, and studies Gao Shanwen's public writings and articles.",
       "name": "gao-shanwen-research-model",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-gao-shanwen-research-model"
+        "repo": "quantskills/skill-gao-shanwen-research-model",
+        "source": "github"
       },
-      "description": "Build and apply a Gao Shanwen-style China macro and capital-market research workflow from his books, public articles, and archived materials.",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Uses public data to study global commodity-futures term structure, roll yield, and spreads.",
       "name": "global-commodity-term-structure",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-global-commodity-term-structure"
+        "repo": "quantskills/skill-global-commodity-term-structure",
+        "source": "github"
       },
-      "description": "Research overseas commodity futures term structure, roll yield, and cross-commodity spreads from public data.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Produces sourced global macro briefs from public rates, central-bank, and FX data.",
       "name": "global-macro-rates-fx-lab",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-global-macro-rates-fx-lab"
+        "repo": "quantskills/skill-global-macro-rates-fx-lab",
+        "source": "github"
       },
-      "description": "Study global rates, FX, and macro regime from public FRED/central-bank data and Pandadata international macro.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Turns global signals and public daily prices into backtestable research strategies, positions, and risk rules.",
       "name": "global-macro-trend-strategy",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-global-macro-trend-strategy"
+        "repo": "quantskills/skill-global-macro-trend-strategy",
+        "source": "github"
       },
-      "description": "Turn an overseas commodity/macro/FX signal into a framework-neutral, backtestable research strategy.",
-      "type": "skill",
-      "category": "trader-research"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Generates nine-dimension Hong Kong equity due-diligence reports from Pandadata interfaces.",
+      "name": "hk-stock-dossier",
+      "source": {
+        "repo": "quantskills/skill-hk-stock-dossier",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Summarizes HK/US sell-side ratings, target prices, growth expectations, and changes.",
       "name": "hk-us-consensus-radar",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-hk-us-consensus-radar"
+        "repo": "quantskills/skill-hk-us-consensus-radar",
+        "source": "github"
       },
-      "description": "Sell-side consensus radar for HK/US equities — rating diffusion, target-price upside vs current price, long-term growth expectations, and week/month revisions, each traced to a Pandadata interface.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Organizes cross-period HK/US target-price and rating revisions into a research report.",
+      "name": "hk-us-consensus-revision-radar",
+      "source": {
+        "repo": "quantskills/skill-hk-us-consensus-revision-radar",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Generates HK and US equity dividend-event reports using Pandadata overseas-market interfaces.",
       "name": "hk-us-dividend-events",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-hk-us-dividend-events"
+        "repo": "quantskills/skill-hk-us-dividend-events",
+        "source": "github"
       },
-      "description": "HK and US ex-dividend calendars, recent payouts, currency-bucketed TTM yields, and simplified DRIP illustrations.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Scans HK and US insider transactions, net direction, trading clusters, and holding changes.",
       "name": "hk-us-insider-radar",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-hk-us-insider-radar"
+        "repo": "quantskills/skill-hk-us-insider-radar",
+        "source": "github"
       },
-      "description": "An HK/US insider-trading radar that reads get_stock_insider_trade (HK) and get_stock_insider_transaction (US), separates open-market buys from sales and option/gift dispositions, weights by insider role and is_main_role, nets shares and value over a window, flags cluster buying/selling and holding changes, and ranks names by net insider direction.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Builds HK and US equity snapshots covering quotes, liquidity, valuation, and industry-relative position.",
       "name": "hk-us-quote-scan",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-hk-us-quote-scan"
+        "repo": "quantskills/skill-hk-us-quote-scan",
+        "source": "github"
       },
-      "description": "Hong Kong and US equity cross-market snapshot covering quotes, adjusted returns, liquidity, price-volume valuation, and industry-relative position, each figure traced to a Pandadata interface.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Tracks A-share holder counts, top-holder concentration, and free float to assess ownership concentration.",
       "name": "holder-structure-scan",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-holder-structure-scan"
+        "repo": "quantskills/skill-holder-structure-scan",
+        "source": "github"
       },
-      "description": "A-share shareholder-structure and chip-concentration scan tracking holder-count trend and average holding per account, top-holder concentration (flow vs total), and free-float share, to see whether chips are concentrating or dispersing across disclosure periods, for a single name or a small watchlist.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Evaluates quantitative factors through IC, grouped performance, and predictive effectiveness.",
       "name": "ic-analysis",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-ic-analysis"
+        "repo": "quantskills/skill-ic-analysis",
+        "source": "github"
       },
-      "description": "Multidimensional IC diagnostics for rank versus Pearson IC, IC decay, subsample IC, top-basket stability, and cumulative IC timelines.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Runs reproducible event studies for index additions, deletions, and weight changes.",
       "name": "index-rebalance-event-study",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-index-rebalance-event-study"
+        "repo": "quantskills/skill-index-rebalance-event-study",
+        "source": "github"
       },
-      "description": "Study index-rebalance abnormal returns, volume, and optional weight changes by announcement or effective-date anchor.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Analyzes A-share index valuation percentiles, relative industry valuation, and rotation signals.",
       "name": "index-valuation-rotation",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-index-valuation-rotation"
+        "repo": "quantskills/skill-index-valuation-rotation",
+        "source": "github"
       },
-      "description": "Index valuation and A-share industry rotation skill for PE/PB percentiles, valuation temperature, broad-index references, momentum ranks, and rotation summaries.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "08",
+      "description": "Monitors A-share institutional research activity, attention, and changes over time.",
       "name": "institutional-research-tracker",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-institutional-research-tracker"
+        "repo": "quantskills/skill-institutional-research-tracker",
+        "source": "github"
       },
-      "description": "A-share institutional-research (investor-relations) activity monitor that ranks the most-visited companies, measures distinct-institution breadth, classifies participant institution types from source text, rolls up by industry, and builds a single-name research timeline, for the whole market or one company.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "01",
+      "description": "Audits normalized intraday OHLCV data for timestamp, gap, price, volume, and trading-date defects.",
       "name": "intraday-data-quality-auditor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-intraday-data-quality-auditor"
+        "repo": "quantskills/skill-intraday-data-quality-auditor",
+        "source": "github"
       },
-      "description": "Audit normalized intraday OHLCV bars for timestamp, gap, price-invariant, volume, and trading-date defects.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Combines research evidence, valuation, and risk information into an auditable investment decision report.",
       "name": "investment-decision",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-investment-decision"
+        "repo": "quantskills/skill-investment-decision",
+        "source": "github"
       },
-      "description": "Given a company name or ticker, generate a long-term (6-18 month) BUY/NEUTRAL/SELL investment decision report with confidence, charts, and sources in .docx format — self-contained, uses public data.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "10",
+      "description": "Converts JoinQuant strategy code into PandaAI JSON configurations runnable in backtests.",
       "name": "jq-to-panda-converter",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-jq-to-panda-converter"
+        "repo": "quantskills/skill-jq-to-panda-converter",
+        "source": "github"
       },
-      "description": "Batch convert JoinQuant platform strategies to PandaAI-compatible code. Understands strategy intent rather than line-by-line translation, supports single file and batch directory conversion, produces runnable backtest configs with a summary report.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Uses long-term expectations and contrarian analysis to identify optimism, pessimism, and value traps.",
+      "name": "keynes-contrarian-investment",
+      "source": {
+        "repo": "quantskills/skill-keynes-contrarian-investment",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Researches private placements, restructurings, spin-offs, and distressed turnarounds as special situations.",
+      "name": "klarman-special-situations",
+      "source": {
+        "repo": "quantskills/skill-klarman-special-situations",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "Computes moving-average crossover signals and reports trend state, latest cross, MA gap, and price bias.",
+      "name": "ma-crossover-signal",
+      "source": {
+        "repo": "quantskills/skill-ma-crossover-signal",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Uses high-frequency alternative macro data for industry nowcasts and trend monitoring.",
       "name": "macro-altdata-nowcast",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-macro-altdata-nowcast"
+        "repo": "quantskills/skill-macro-altdata-nowcast",
+        "source": "github"
       },
-      "description": "Alternative-data high-frequency industry nowcasting that first resolves opaque indicator codes via get_macro_detail, then pulls e-commerce/pharma/energy-chemical/auto/ appliance/offline-retail/hiring/real-estate/electronics/new-energy series, computes YoY/MoM and trend, and reads lead/lag against official stats, for a single-sector nowcast or a cross-sector prosperity dashboard.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Monitors macro data, industry conditions, economic calendars, and recurring macro changes.",
       "name": "macro-monitor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-macro-monitor"
+        "repo": "quantskills/skill-macro-monitor",
+        "source": "github"
       },
-      "description": "Macro monitoring skill for Pandadata macro data, economic calendars, industry prosperity, and high-frequency signals.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "08",
+      "description": "Generates Pandadata-based A-share after-close daily market review reports.",
       "name": "market-daily-review",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-market-daily-review"
+        "repo": "quantskills/skill-market-daily-review",
+        "source": "github"
       },
-      "description": "A-share end-of-day review skill covering indexes, valuation, breadth, sentiment, sectors, themes, and capital-flow clues.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Classifies A-share market regimes using index, macro, futures term-structure, and volatility features.",
       "name": "market-regime-analysis",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-market-regime-analysis"
+        "repo": "quantskills/skill-market-regime-analysis",
+        "source": "github"
       },
-      "description": "Chinese A-share market regime analysis toolkit — classify market states (bull/bear/sideways/high-vol/low-vol) using HMMs or threshold rules on index data, macro indicators, and futures term structure; evaluate conditional factor performance; generate regime-aware risk forecasts; and build regime-switching strategies.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Ensembles machine-learning models into factor meta-signals with leakage-aware rolling validation.",
+      "name": "ml-factor-ensemble",
+      "source": {
+        "repo": "quantskills/skill-ml-factor-ensemble",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Optimizes quantitative multi-factor model hyperparameters with fixed validation and trial-level evidence.",
       "name": "model-hpo-evidence-driven",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-model-hpo-evidence-driven"
+        "repo": "quantskills/skill-model-hpo-evidence-driven",
+        "source": "github"
       },
-      "description": "Run evidence-driven or deterministic grid hyperparameter search for quantitative multi-factor models. Use when an agent needs legacy-compatible RankIC-IR LGBM/MLP results, or explicitly opts into robust block RankIC,...",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Applies a multidisciplinary mental-model framework to company investment research and judgment reports.",
       "name": "munger-mental-model",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-munger-mental-model"
+        "repo": "quantskills/skill-munger-mental-model",
+        "source": "github"
       },
-      "description": "Munger 5-维模型与一票否决的多角度cross-validation分析工具，面向 A 股。支持单票和行业批筛。",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "08",
+      "description": "Collects, verifies, and analyzes A-share financial-news sentiment for research reports.",
+      "name": "news-sentiment-analyst",
+      "source": {
+        "repo": "quantskills/skill-news-sentiment-analyst",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Monitors northbound flows, margin trading, and futures conditions with multiple risk signals.",
+      "name": "northbound-margin-monitor",
+      "source": {
+        "repo": "quantskills/skill-northbound-margin-monitor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "07",
+      "description": "Detects lookahead and data leakage in quantitative research workflows through numerical checks.",
       "name": "numerical-leak-check",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-numerical-leak-check"
+        "repo": "quantskills/skill-numerical-leak-check",
+        "source": "github"
       },
-      "description": "当 agent 需要检查时间序列计算、量化因子、特征工程、标签生成、回测信号或研究管线是否存在未来信息泄露时使用。Use this skill for numerical causality checks, lookahead/future-leakage detection, prefix replay, future mutation, batch checking many factors or cases, and...",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Combines futures, EIA, OPEC, and market data into Chinese crude-oil briefs.",
+      "name": "oil-brief",
+      "source": {
+        "repo": "quantskills/skill-oil-brief",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Builds option strategies with legs, payoff charts, breakevens, Greeks, and margin analysis.",
+      "name": "option-strategy-builder",
+      "source": {
+        "repo": "quantskills/skill-option-strategy-builder",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Analyzes option chains, implied and historical volatility, term structure, skew, and volatility premium.",
       "name": "options-vol-analyst",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-options-vol-analyst"
+        "repo": "quantskills/skill-options-vol-analyst",
+        "source": "github"
       },
-      "description": "Options volatility analyst skill for option chains, implied volatility, realized volatility, IV percentiles, term structure, skew, and volatility-premium reports.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Discovers and validates HK and US cross-sectional alpha factors by IC, decay, and turnover.",
       "name": "overseas-equity-factor-miner",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-overseas-equity-factor-miner"
+        "repo": "quantskills/skill-overseas-equity-factor-miner",
+        "source": "github"
       },
-      "description": "Discover and validate cross-sectional alpha factors for HK/US equities by IC, decay, and turnover.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Identifies A-share oversold-rebound conditions and screens candidate stocks.",
+      "name": "oversold-rebound",
+      "source": {
+        "repo": "quantskills/skill-oversold-rebound",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Computes and interprets asset-pair correlations, rolling relationships, and research uses.",
+      "name": "pair-correlation",
+      "source": {
+        "repo": "quantskills/skill-pair-correlation",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Supports PandaAI factor onboarding, online mining, batch backtests, and cost review.",
+      "name": "pandaai-factor-online",
+      "source": {
+        "repo": "quantskills/skill-pandaai-factor-online",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "07",
+      "description": "Audits PandaAI workflow graphs, code, timing, parameters, and backtest-validation evidence.",
       "name": "pandaai-workflow-audit",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-pandaai-workflow-audit"
+        "repo": "quantskills/skill-pandaai-workflow-audit",
+        "source": "github"
       },
-      "description": "Review PandaAI workflow files like code review by checking graph structure, strategy and factor code, data timing, research flexibility, backtest assumptions, and validation evidence, with severity-ranked defects and actionable fixes.",
-      "type": "skill",
-      "category": "trader-research"
+      "type": "skill"
     },
     {
+      "category": "10",
+      "description": "Generates importable PandaAI workflow JSON and embedded strategy or factor code from quant ideas.",
       "name": "pandaai-workflow-generator",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-pandaai-workflow-generator"
+        "repo": "quantskills/skill-pandaai-workflow-generator",
+        "source": "github"
       },
-      "description": "Generate ready-to-import PandaAI workflow JSON files containing Python strategy/factor code and complete graph links based on user's natural language trading ideas.",
-      "type": "skill",
-      "category": "trader-research"
+      "type": "skill"
     },
     {
+      "category": "01",
+      "description": "Provides Pandadata market and research API calls and contract lookup across agent runtimes.",
       "name": "pandadata-api",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-pandadata-api"
+        "repo": "quantskills/skill-pandadata-api",
+        "source": "github"
       },
-      "description": "Pandadata and panda_data Python SDK reference skill for selecting, calling, and troubleshooting quant data APIs.",
-      "type": "skill",
-      "category": "data-api"
+      "type": "skill"
     },
     {
+      "category": "01",
+      "description": "Manages local Pandadata DuckDB and Parquet quantitative data warehouses, caches, and queries.",
       "name": "pandadata-warehouse",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-pandadata-warehouse"
+        "repo": "quantskills/skill-pandadata-warehouse",
+        "source": "github"
       },
-      "description": "Pandadata warehouse skill for caching, refreshing, querying, and validating local DuckDB and Parquet market-data stores.",
-      "type": "skill",
-      "category": "data-api"
+      "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Supports paper search, data extraction, experiment reproduction, and research-result reporting.",
       "name": "paper-replication",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-paper-replication"
+        "repo": "quantskills/skill-paper-replication",
+        "source": "github"
       },
-      "description": "Framework-neutral quantitative paper replication skill for research scripts, backtests, charts, and auditable outputs.",
-      "type": "skill",
-      "category": "replication"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Attributes active portfolio returns to industry allocation, stock selection, interaction, and factor contributions.",
+      "name": "portfolio-attribution",
+      "source": {
+        "repo": "quantskills/skill-portfolio-attribution",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Aggregates concentration, benchmark deviation, valuation, quality, and risk exposures into a portfolio health report.",
       "name": "portfolio-checkup",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-portfolio-checkup"
+        "repo": "quantskills/skill-portfolio-checkup",
+        "source": "github"
       },
-      "description": "Portfolio-level checkup skill that uses Pandadata to aggregate single-stock signals into portfolio structure, concentration, weighted valuation/quality, risk exposure, and benchmark deviation.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Estimates portfolio liquidation days, horizon cash, redemption shortfalls, and impact costs under volume stress.",
       "name": "portfolio-liquidity-stress-test",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-portfolio-liquidity-stress-test"
+        "repo": "quantskills/skill-portfolio-liquidity-stress-test",
+        "source": "github"
       },
-      "description": "Estimate portfolio liquidation days, horizon cash, redemption shortfall, and impact costs under volume stress.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Turns alpha signals into optimized weights under weight, sector, exposure, and turnover constraints.",
       "name": "portfolio-optimize",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-portfolio-optimize"
+        "repo": "quantskills/skill-portfolio-optimize",
+        "source": "github"
       },
-      "description": "Turn an alpha signal into optimal portfolio weights under real constraints. Use when a user has factor scores / expected returns and wants portfolio weights, or asks about mean-variance / risk-parity / minimum-variance...",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Attributes realized portfolio returns by security and sector while reconciling fees, benchmarks, and input quality.",
+      "name": "portfolio-pnl-attribution",
+      "source": {
+        "repo": "quantskills/skill-portfolio-pnl-attribution",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Screens A-share stocks after market close using technical patterns and capital-flow evidence.",
+      "name": "post-market-screener",
+      "source": {
+        "repo": "quantskills/skill-post-market-screener",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "Translates a five-part user questionnaire into factor directions and strategy parameters.",
       "name": "qbti",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-qbti"
+        "repo": "quantskills/skill-qbti",
+        "source": "github"
       },
-      "description": "QBTI (Quant Behavior Type Indicator): a personality-style quiz that translates a retail user's investing preferences into factor directions and strategy parameters via a fixed rule table, then hands off to the QuantSkills backtest pipeline.",
-      "type": "skill",
-      "category": "trader-research"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Converts approved trade targets into observable, cost-aware execution plans.",
+      "name": "quant-execution-microstructure",
+      "source": {
+        "repo": "quantskills/skill-quant-execution-microstructure",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Provides an OHLCV directional-factor library for trend, breakout, and reversal research.",
       "name": "quant-factor-directional-alpha",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-quant-factor-directional-alpha"
+        "repo": "quantskills/skill-quant-factor-directional-alpha",
+        "source": "github"
       },
-      "description": "Directional OHLCV alpha factor library with 296 trend, breakout, reversal, and channel-position factor Skills validated on real market data.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Provides an OHLCV factor library for volatility, chart-pattern, and drawdown-pressure research.",
       "name": "quant-factor-risk-pattern-alpha",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-quant-factor-risk-pattern-alpha"
+        "repo": "quantskills/skill-quant-factor-risk-pattern-alpha",
+        "source": "github"
       },
-      "description": "Risk-state and chart-pattern OHLCV alpha factor library with 288 factor Skills for volatility, K-line shape, shock, drawdown, and pressure analysis.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "10",
+      "description": "Batch-generates, validates, and packages framework-neutral OHLCV factor skills.",
       "name": "quant-factor-skill-factory",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-quant-factor-skill-factory"
+        "repo": "quantskills/skill-quant-factor-skill-factory",
+        "source": "github"
       },
-      "description": "Factory skill for turning OHLCV alpha ideas into QuantSkills factor skills with real-market validation and packaging.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Provides an OHLCV factor library for volume and price-volume statistical research.",
       "name": "quant-factor-volume-stat-alpha",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-quant-factor-volume-stat-alpha"
+        "repo": "quantskills/skill-quant-factor-volume-stat-alpha",
+        "source": "github"
       },
-      "description": "Volume, volume-price, ranking, and statistical OHLCV alpha factor library with 216 factor Skills validated on real market data.",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Analyzes portfolio risk exposures, constraints, and stress scenarios.",
+      "name": "quant-portfolio-risk",
+      "source": {
+        "repo": "quantskills/skill-quant-portfolio-risk",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Guides quantitative research, backtest design, and statistical validation workflows.",
+      "name": "quant-research",
+      "source": {
+        "repo": "quantskills/skill-quant-research",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Registers quantitative experiments and audits their reproducibility evidence.",
+      "name": "quant-research-experiment-registry",
+      "source": {
+        "repo": "quantskills/skill-quant-research-experiment-registry",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Guides auditable quantitative-research replication workflows.",
       "name": "quant-research-replication",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-quant-research-replication"
+        "repo": "quantskills/skill-quant-research-replication",
+        "source": "github"
       },
-      "description": "Quant research replication skill for source discovery, formula reconstruction, Chinese summaries, validation, and deliverables.",
-      "type": "skill",
-      "category": "replication"
+      "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Tracks A-share refinancing lifecycles, pricing, and dilution risk.",
       "name": "refinancing-monitor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-refinancing-monitor"
+        "repo": "quantskills/skill-refinancing-monitor",
+        "source": "github"
       },
-      "description": "A-share equity-refinancing monitor tracking private placements and rights issues through their approval stages, measuring dilution vs total share capital, comparing issue/allotment price to market price (discount and break-issue), and rolling up by industry, for the whole market or a single name.",
-      "type": "skill",
-      "category": "monitor"
+      "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Aggregates and grades A-share regulatory and compliance risk events.",
+      "name": "regulatory-risk-radar",
+      "source": {
+        "repo": "quantskills/skill-regulatory-risk-radar",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Guides conversion of research reports into reproducible analysis workflows.",
       "name": "report-replication",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-report-replication"
+        "repo": "quantskills/skill-report-replication",
+        "source": "github"
       },
-      "description": "Quant report replication skill that turns papers or reports into Chinese translations, factor formulas, Pandadata-backed validation reports, and strategy assets.",
-      "type": "skill",
-      "category": "replication"
+      "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Selects factor combinations using residual IC and out-of-sample evaluation.",
       "name": "residual-guided-factor-selection",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-residual-guided-factor-selection"
+        "repo": "quantskills/skill-residual-guided-factor-selection",
+        "source": "github"
       },
-      "description": "Select complementary quantitative factors by fitting fixed-parameter Ridge models on a base factor set, ranking candidates against in-sample training residuals, and accepting factors only after add-one retraining...",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Builds a multifactor risk model and performs risk attribution.",
       "name": "risk-model",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-risk-model"
+        "repo": "quantskills/skill-risk-model",
+        "source": "github"
       },
-      "description": "Build a Barra-style structural multi-factor risk model and attribute portfolio risk. Use when a user wants a covariance matrix for optimisation, asks how risky a portfolio is, where its risk comes from (which factors /...",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Calculates risk-return metrics for portfolios or strategies.",
+      "name": "risk-return-metrics",
+      "source": {
+        "repo": "quantskills/skill-risk-return-metrics",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Estimates rolling beta exposure of assets or portfolios relative to a benchmark.",
+      "name": "rolling-beta-exposure",
+      "source": {
+        "repo": "quantskills/skill-rolling-beta-exposure",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Reconstructs Serenity-style research logic from public X/Twitter evidence.",
       "name": "serenity-research-model",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-serenity-research-model"
+        "repo": "quantskills/skill-serenity-research-model",
+        "source": "github"
       },
-      "description": "Research-model skill for reconstructing Serenity-style AI, semiconductor, and supply-chain theses from public posts and datasets.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Audits quantitative-signal stability across time and samples.",
+      "name": "signal-stability-audit",
+      "source": {
+        "repo": "quantskills/skill-signal-stability-audit",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Studies A-share pairs trading with cointegration, spreads, and execution constraints.",
       "name": "simons-pairs-trading",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-simons-pairs-trading"
+        "repo": "quantskills/skill-simons-pairs-trading",
+        "source": "github"
       },
-      "description": "Screen and audit reproducible, research-only A-share pairs with adjusted PandaData prices, same-industry Engle-Granger tests, Benjamini-Hochberg FDR, formation-only clustering, rolling backtests, conservative gates, and...",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Analyzes LHB seats, northbound activity, and capital-flow consensus or divergence.",
       "name": "smart-money-profiler",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-smart-money-profiler"
+        "repo": "quantskills/skill-smart-money-profiler",
+        "source": "github"
       },
-      "description": "Identify the capital actors behind A-share trades and profile their cross-period behavior using Pandadata seat, northbound, margin, and block-trade data.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Orchestrates SSQuant strategy research, paper trading, and runtime checks.",
       "name": "ssquant-ai-trader",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-ssquant-ai-trader"
+        "repo": "quantskills/skill-ssquant-ai-trader",
+        "source": "github"
       },
-      "description": "SSQuant AI Trader skill for converting natural-language trading descriptions into automated or semi-automated strategy workflows.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "10",
+      "description": "Turns natural-language trading ideas into a reusable Trader Skill and delegates simulated deployment.",
       "name": "ssquant-trader-generator",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-ssquant-trader-generator"
+        "repo": "quantskills/skill-ssquant-trader-generator",
+        "source": "github"
       },
-      "description": "Trader-generator skill that turns natural-language trading ideas into deployable AI Trader rules, code, and operating plans.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Builds statistical-arbitrage time-series research and produces traceable reports.",
+      "name": "statistical-arbitrage-time-series",
+      "source": {
+        "repo": "quantskills/skill-statistical-arbitrage-time-series",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Performs multidimensional research analysis of US memory-chip stocks.",
       "name": "stock-memory-analyzer-usa",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-stock-memory-analyzer-usa"
+        "repo": "quantskills/skill-stock-memory-analyzer-usa",
+        "source": "github"
       },
-      "description": "对 MU、SNDK、WDC、STX 等美股存储公司开展基于 panda_data 的可追溯研究分析，结合行情、财务、估值、DRAM/NAND/HBM 供需、库存、CapEx、技术节点和同业对标，生成交互式 HTML 研究报告。当用户提到存储芯片、内存、NAND、DRAM、HBM、存储周期，或要求研究这些美股公司时使用。首次响应列出可分析标的并要求用户明确选择一只；",
-      "type": "skill",
-      "category": "uncategorized"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Screens A-share stocks from natural-language criteria and Pandadata evidence.",
       "name": "stock-screener",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-stock-screener"
+        "repo": "quantskills/skill-stock-screener",
+        "source": "github"
       },
-      "description": "Natural-language A-share stock screener skill that maps fundamentals, dividends, valuation, pledges, northbound flows, sectors, holders, and risk filters to Pandadata calls.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Generates strategy-performance tearsheets with risk-adjusted metrics.",
+      "name": "strategy-tearsheet-report",
+      "source": {
+        "repo": "quantskills/skill-strategy-tearsheet-report",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "07",
+      "description": "Audits point-in-time universe membership, identities, and delisting returns before backtests.",
       "name": "survivorship-universe-auditor",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-survivorship-universe-auditor"
+        "repo": "quantskills/skill-survivorship-universe-auditor",
+        "source": "github"
       },
-      "description": "Audit lifecycle and membership rows, rebuild supplied point-in-time universes, and flag missing delisting returns.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
-      "name": "templeton-global-contrarian",
+      "category": "10",
+      "description": "Provides a template structure and instructions for QuantSkills skill projects.",
+      "name": "template",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-templeton-global-contrarian"
+        "repo": "quantskills/skill-template",
+        "source": "github"
       },
-      "description": "John Templeton contrarian global value factor for cross-market valuation deviation screening",
-      "type": "skill",
-      "category": "factor"
+      "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Diagnoses financial time series and produces analysis reports.",
       "name": "time-series-analysis",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-time-series-analysis"
+        "repo": "quantskills/skill-time-series-analysis",
+        "source": "github"
       },
-      "description": "Conclusion-first time-series diagnostics for original series, Log diff, distributions, stationarity, cointegration, and half-life.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Decomposes fills against VWAP/TWAP into transaction-cost components.",
+      "name": "transaction-cost-analysis",
+      "source": {
+        "repo": "quantskills/skill-transaction-cost-analysis",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "Calibrates commission, spread, slippage, and market-impact assumptions from execution and market data.",
+      "name": "transaction-cost-calibration",
+      "source": {
+        "repo": "quantskills/skill-transaction-cost-calibration",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "01",
+      "description": "Harvests and structures public US SEC EDGAR filings.",
       "name": "us-sec-edgar-harvester",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-us-sec-edgar-harvester"
+        "repo": "quantskills/skill-us-sec-edgar-harvester",
+        "source": "github"
       },
-      "description": "Harvest and structure US SEC EDGAR public filings into a deduplicated, sourced, time-lined dataset.",
-      "type": "skill",
-      "category": "data-api"
+      "type": "skill"
     },
     {
+      "category": "03",
+      "description": "Generates factual reports on US sector performance, valuation, and rotation.",
       "name": "us-sector-rotation",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-us-sector-rotation"
+        "repo": "quantskills/skill-us-sector-rotation",
+        "source": "github"
       },
-      "description": "US equity sector rotation reports covering constituent returns, valuation snapshots, and ranking changes from Pandadata.",
-      "type": "skill",
-      "category": "analyst"
+      "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Validates cross-sectional signals out of sample with purged and embargoed rolling windows.",
+      "name": "walk-forward-validator",
+      "source": {
+        "repo": "quantskills/skill-walk-forward-validator",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Builds trader-specific research-model skills from public X/Twitter post data.",
       "name": "x-trader-builder",
       "source": {
-        "source": "github",
-        "repo": "quantskills/skill-x-trader-builder"
+        "repo": "quantskills/skill-x-trader-builder",
+        "source": "github"
       },
-      "description": "Skill-builder workflow for turning public X/Twitter data and user materials into trader-specific research-model skills.",
-      "type": "skill",
-      "category": "tooling"
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Retrieves similar A-share and futures K-line patterns from text or image descriptions.",
+      "name": "xingtai-catcher",
+      "source": {
+        "repo": "quantskills/skill-xingtai-catcher",
+        "source": "github"
+      },
+      "type": "skill"
     }
   ]
 }

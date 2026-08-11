@@ -1246,11 +1246,11 @@
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-pandadata-warehouse/blob/416b7d1361895b56fafab94bf481a3bd6583d54a/SKILL.md"
+        "url": "https://github.com/quantskills/skill-pandadata-warehouse/blob/12711fefbf7607d23ea55f621cd2af4139166cf9/SKILL.md"
       },
       "default_branch": "main",
       "description": "QuantSkills agent skill for local Pandadata DuckDB/Parquet warehouses",
-      "head_sha": "416b7d1361895b56fafab94bf481a3bd6583d54a",
+      "head_sha": "12711fefbf7607d23ea55f621cd2af4139166cf9",
       "name": "skill-pandadata-warehouse",
       "topics": []
     },
@@ -1765,11 +1765,11 @@
     {
       "default_branch": "main",
       "description": "Public display registry for QUANTSKILLS skill-* and agent-* assets.",
-      "head_sha": "cde4cc97f84e9ef3f7f3150f73604cc581be7d0f",
+      "head_sha": "e2d1de2e857297db503e531bda1a580c6de4d9fa",
       "name": "registry",
       "topics": []
     }
   ],
   "schema_version": "1.0.0",
-  "sha256": "sha256:cf04ee524bafeac9b04839f43699e53fc11d15f92330ad5d232dee2a1ec9715c"
+  "sha256": "sha256:918bb8128a9145ee4f40b3828d42c463cec97d0e6676805faccb6776d36e1fe1"
 }

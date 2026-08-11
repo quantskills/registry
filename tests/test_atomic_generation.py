@@ -27,6 +27,11 @@ class AtomicGenerationTests(unittest.TestCase):
         def asset(name, outputs, inputs):
             return {"name": name, "url": f"https://github.com/quantskills/{name}", "description": "fixture", "project_type": "skill", "declaration_file": "SKILL.md", "tags": [], "platforms": [], "status": "active", "requires": [], "summary_zh": "fixture", "summary_en": "fixture", "license": "GPL-3.0-only", "validation_level": "verified", "maintainer_type": "community", "commit_sha": "fixture", "catalog": {"category": "02", "subcategory": "02.factor-evaluation"}, "category": "02", "subcategory": "02.factor-evaluation", "workflow": {"primary_stage": "evaluation", "workflow_stages": ["evaluation"]}, "stage": "evaluation", "last_validated": "2026-08-10", "interface": {"mode": "structured", "envelope": {"name": "quantskills-envelope", "version": "1.0.0"}, "inputs": [{"profile": item, "version_range": ">=1.0.0 <2.0.0", "required": True} for item in inputs], "outputs": [{"profile": item, "version": "1.0.0"} for item in outputs], "adapters": []}}
         baseline = build_registry.build_snapshot([asset(*row) for row in names], [{"name": name, "url": f"https://github.com/quantskills/{name}"} for name in (".github", "join", "quantskills", "registry")], taxonomy, profiles, adapters, envelope, mappings, contract_mode="enforce")
+        for item in baseline["assets"]:
+            item.update(catalog_status="approved", declaration_status="contract-valid", interface_status="published", default_branch="main", commit_sha="a" * 40)
+        publication = {"inventory_sha256": "sha256:" + "0" * 64, "assignments_sha256": "sha256:" + "1" * 64, "published_interfaces": [{"name": item["name"], "default_branch": "main", "head_sha": item["commit_sha"], "interface": item["interface"]} for item in baseline["assets"]]}
+        publication["manifest_sha256"] = "sha256:" + hashlib.sha256(build_registry.canonical_json(publication)).hexdigest()
+        baseline["publication"] = publication; baseline["core_lineage"] = {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}; baseline["compatibility_edges"] = build_registry.build_compatibility_edges(baseline["assets"], adapters["items"]); self._sealed(baseline)
         fake = {"id": "fake-adapter", "source": {"profile": "market-bar", "version": "1.0.0"}, "target": {"profile": "factor-panel", "version": "1.0.0"}, "implementation": {"repository": "registry", "path": "scripts/compatibility.py"}, "lossless": True, "validation_status": "validated", "evidence": {"fixture_sha256": "sha256:" + "0" * 64, "test_command": "fixture", "validated_at": "2026-08-10"}, "envelope_major": 1}
         mutations = (
             lambda value: (value.pop("envelope"), value.pop("provider_mappings")),
@@ -34,7 +39,7 @@ class AtomicGenerationTests(unittest.TestCase):
             lambda value: value["profiles"]["items"][0].update(schema="wrong.schema.json"),
             lambda value: value["provider_mappings"]["items"][0]["evidence"].update(raw_sha256="sha256:" + "0" * 64),
             lambda value: value["adapters"]["items"].append(copy.deepcopy(fake)),
-            lambda value: value["core_lineage"]["artifacts"][0].update(artifact_sha256="sha256:" + "0" * 64),
+            lambda value: value["publication"]["published_interfaces"][0].update(head_sha="0" * 40),
             lambda value: value["assets"].append(copy.deepcopy(value["assets"][0])),
             lambda value: value["resources"].append(copy.deepcopy(value["resources"][0])),
             lambda value: value["resources"][0].update(url="https://evil.example/.github"),
@@ -123,8 +128,11 @@ class AtomicGenerationTests(unittest.TestCase):
         snapshot["taxonomy"] = build_registry.load_taxonomy(ROOT)
         snapshot["assets"][0].update({"category": "02", "subcategory": "02.factor-evaluation", "stage": "evaluation"})
         snapshot.update({"contract_mode": "audit", "interface_diagnostics": [], "envelope": envelope, "profiles": profiles, "adapters": adapters, "provider_mappings": mappings, "core_lineage": {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}})
+        snapshot["assets"][0].update(catalog_status="approved", declaration_status="legacy", interface_status="pending-maintainer", default_branch="main", interface=None, commit_sha="a" * 40)
+        publication = {"inventory_sha256":"sha256:"+"0"*64,"assignments_sha256":"sha256:"+"1"*64,"published_interfaces":[{"name":"skill-a","default_branch":"main","head_sha":"a"*40,"interface":{"mode":"natural-language"}}]}
+        publication["manifest_sha256"] = "sha256:" + hashlib.sha256(build_registry.canonical_json(publication)).hexdigest(); snapshot["publication"] = publication
         snapshot["snapshot_id"] = "sha256:" + build_registry.hashlib.sha256(build_registry.canonical_json(build_registry._stable_snapshot(snapshot))).hexdigest()
-        row = {"name": "skill-a", "url": "https://github.com/quantskills/skill-a", "description": "x", "project_type": "skill", "declaration_file": "SKILL.md", "category": "02", "subcategory": "02.factor-evaluation", "stage": "evaluation", "tags": [], "platforms": [], "status": "active", "requires": [], "summary_zh": "中文说明", "summary_en": "Natural language asset", "license": "GPL-3.0-only", "last_validated": "2026-08-10", "validation_level": "listed", "maintainer_type": "community", "commit_sha": "", "catalog": snapshot["assets"][0]["catalog"], "workflow": snapshot["assets"][0]["workflow"], "interface": {"mode": "natural-language"}, "snapshot_id": snapshot["snapshot_id"]}
+        row = build_registry.public_registry_projection(snapshot)[0]
         with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
             root = Path(tmp); sp, rp, readme = root / "catalog.snapshot.json", root / "registry.json", root / "README.md"
             sp.write_text(json.dumps(snapshot), encoding="utf-8"); rp.write_text(json.dumps([row]), encoding="utf-8")
