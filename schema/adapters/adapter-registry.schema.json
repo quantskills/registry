@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "adapters"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "adapters": {"type": "array", "items": {"$ref": "#/$defs/adapter"}}
+  },
+  "$defs": {
+    "identity": {"type": "object", "additionalProperties": false, "required": ["profile", "version"], "properties": {"profile": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}, "version": {"type": "string", "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"}}},
+    "adapter": {"type": "object", "additionalProperties": false, "required": ["id", "source", "target", "implementation", "lossless", "validation_status", "evidence", "envelope_major"], "properties": {"id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}, "source": {"$ref": "#/$defs/identity"}, "target": {"$ref": "#/$defs/identity"}, "implementation": {"type": "object", "additionalProperties": false, "required": ["repository", "path"], "properties": {"repository": {"const": "registry"}, "path": {"type": "string", "minLength": 1}}}, "lossless": {"type": "boolean"}, "validation_status": {"type": "string"}, "evidence": {"type": "object", "additionalProperties": false, "required": ["fixture_sha256", "test_command", "validated_at"], "properties": {"fixture_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}, "test_command": {"type": "string", "minLength": 1}, "validated_at": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}}}, "envelope_major": {"const": 1}}}
+  }
+}

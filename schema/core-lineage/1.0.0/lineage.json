@@ -1,0 +1,106 @@
+{
+  "version": "1.0.0",
+  "scope": "schema-smoke-only",
+  "artifacts": [
+    {
+      "id": "market-bar",
+      "file": "01-market-bar.json",
+      "artifact_sha256": "sha256:aa6cad54a01e748193d80219af0a0230d4d9c27cd16db9770e359aec23dfded0",
+      "producer": "skill-pandadata-warehouse",
+      "profile": "market-bar",
+      "version": "1.0.0",
+      "inputs": [],
+      "source_mapping_id": "pandadata-market-bar-v1",
+      "provenance": {
+        "provider": "pandadata",
+        "dataset": "bars-daily",
+        "raw_ref": "fixture://pandadata/market-bar/001",
+        "raw_sha256": "sha256:4522f0923640a466e91ec61e1e7a988b384511e82637f6b54cd6febae154087f"
+      }
+    },
+    {
+      "id": "factor-panel",
+      "file": "02-factor-panel.json",
+      "artifact_sha256": "sha256:4dad2ccfda2d46b859792bf688a89a6775b45ff581aea1821a03746cc4166e85",
+      "producer": "skill-factor-mining-pandaai",
+      "profile": "factor-panel",
+      "version": "1.0.0",
+      "inputs": [
+        {
+          "id": "market-bar",
+          "artifact_sha256": "sha256:aa6cad54a01e748193d80219af0a0230d4d9c27cd16db9770e359aec23dfded0"
+        }
+      ]
+    },
+    {
+      "id": "ranking",
+      "file": "03-ranked-factor-set.json",
+      "artifact_sha256": "sha256:2deb5d6ba8af39441cb73e42ec44ae34fa453b2085bbc8623f9d4b8aaa489a08",
+      "producer": "skill-factor-grouped-wrapper",
+      "profile": "ranked-factor-set",
+      "version": "1.0.0",
+      "inputs": [
+        {
+          "id": "factor-panel",
+          "artifact_sha256": "sha256:4dad2ccfda2d46b859792bf688a89a6775b45ff581aea1821a03746cc4166e85"
+        }
+      ]
+    },
+    {
+      "id": "portfolio",
+      "file": "04-portfolio-target.json",
+      "artifact_sha256": "sha256:5067848904764bda5cb3ecaef10cf3ae528e94d9f3da9a0c97ca0963603981e7",
+      "producer": "skill-portfolio-optimize",
+      "profile": "portfolio-target",
+      "version": "1.0.0",
+      "inputs": [
+        {
+          "id": "ranking",
+          "artifact_sha256": "sha256:2deb5d6ba8af39441cb73e42ec44ae34fa453b2085bbc8623f9d4b8aaa489a08"
+        }
+      ]
+    },
+    {
+      "id": "backtest",
+      "file": "05-backtest-result.json",
+      "artifact_sha256": "sha256:647c8ac07245dff99b30e476054c7471cff51b11ae782616e1de0b90f1321cbd",
+      "producer": "skill-backtest",
+      "profile": "backtest-result",
+      "version": "1.0.0",
+      "inputs": [
+        {
+          "id": "portfolio",
+          "artifact_sha256": "sha256:5067848904764bda5cb3ecaef10cf3ae528e94d9f3da9a0c97ca0963603981e7"
+        }
+      ]
+    },
+    {
+      "id": "evaluation",
+      "file": "06-evaluation-result.json",
+      "artifact_sha256": "sha256:a5e00610e698e8c6de133170f5a771376694ffa30bccf110d70b2b79cb568383",
+      "producer": "skill-backtest",
+      "profile": "evaluation-result",
+      "version": "1.0.0",
+      "inputs": [
+        {
+          "id": "backtest",
+          "artifact_sha256": "sha256:647c8ac07245dff99b30e476054c7471cff51b11ae782616e1de0b90f1321cbd"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "file": "07-execution-plan.json",
+      "artifact_sha256": "sha256:fa89c0f5e2ef6da1f7e5eb852398d918bc837200439f10413e71893500899ddb",
+      "producer": "skill-ssquant-ai-trader",
+      "profile": "execution-plan",
+      "version": "1.0.0",
+      "inputs": [
+        {
+          "id": "evaluation",
+          "artifact_sha256": "sha256:a5e00610e698e8c6de133170f5a771376694ffa30bccf110d70b2b79cb568383"
+        }
+      ]
+    }
+  ]
+}

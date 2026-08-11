@@ -26,7 +26,7 @@ class SnapshotBuilderTests(unittest.TestCase):
         repos = repos or self.repos
         inventory = {"assets": sorted(repo["name"] for repo in repos if repo["name"] not in {".github", "join", "quantskills", "registry"}), "resources": [".github", "join", "quantskills", "registry"]}
         entries, resources = collect_entries(repos, {}, "enforce", inventory=inventory, validation_date="2026-08-10")
-        return build_snapshot(entries, resources, self.taxonomy, {"version": "1.0.0", "items": []}, {"version": "1.0.0", "items": []})
+        return build_snapshot(entries, resources, self.taxonomy)
 
     def test_snapshot_is_order_independent_and_canonical(self):
         first, second = self.snapshot(), self.snapshot(list(reversed(self.repos)))
@@ -44,13 +44,16 @@ class SnapshotBuilderTests(unittest.TestCase):
         one, resources = collect_entries(first_repos, {}, "enforce", inventory=inventory, validation_date="2026-08-10")
         two, _ = collect_entries(second_repos, {}, "enforce", inventory=inventory, validation_date="2026-08-11")
         self.assertTrue(all(entry["last_validated"] == "2026-08-10" for entry in one))
-        self.assertEqual(build_snapshot(one, resources, self.taxonomy, {"items": []}, {"items": []})["snapshot_id"], build_snapshot(two, resources, self.taxonomy, {"items": []}, {"items": []})["snapshot_id"])
+        self.assertEqual(build_snapshot(one, resources, self.taxonomy)["snapshot_id"], build_snapshot(two, resources, self.taxonomy)["snapshot_id"])
 
     def test_snapshot_and_projection_have_required_boundaries(self):
         snapshot = self.snapshot()
         self.assertEqual(snapshot["taxonomy_version"], "1.0.0")
-        self.assertEqual(snapshot["profiles"], {"version": "1.0.0", "items": []})
+        self.assertEqual(snapshot["profiles"]["version"], "1.0.0")
         self.assertEqual(snapshot["adapters"], {"version": "1.0.0", "items": []})
+        self.assertEqual(snapshot["provider_mappings"]["version"], "1.0.0")
+        self.assertEqual(snapshot["core_lineage"]["version"], "1.0.0")
+        self.assertEqual(snapshot["core_lineage"]["scope"], "schema-smoke-only")
         self.assertEqual(snapshot["compatibility_edges"], [])
         self.assertEqual([item["name"] for item in snapshot["resources"]], [".github", "join", "quantskills", "registry"])
         self.assertEqual({item["name"] for item in snapshot["assets"] if item["catalog"]["category"] == "10"}, {"skill-template", "agent-template"})
@@ -126,7 +129,7 @@ class SnapshotBuilderTests(unittest.TestCase):
                 declaration = copy.deepcopy(base); mutate(declaration)
                 repos = [{"name": "skill-alpha", "frontmatter": declaration}, *self.repos[3:]]
                 entries, resources = collect_entries(repos, {}, "audit", inventory=inventory)
-                snapshot = build_snapshot(entries, resources, self.taxonomy, {"items": []}, {"items": []})
+                snapshot = build_snapshot(entries, resources, self.taxonomy)
                 self.assertNotIn("bogus", json.dumps(snapshot))
                 self.assertTrue(entries[0]["migration_issues"])
                 with self.assertRaises(ValueError): collect_entries(repos, {}, "enforce", inventory=inventory)
@@ -146,7 +149,7 @@ class SnapshotBuilderTests(unittest.TestCase):
                 declaration = copy.deepcopy(base); mutate(declaration)
                 repos = [{"name": "skill-alpha", "frontmatter": declaration}, *self.repos[3:]]
                 entries, resources = collect_entries(repos, {}, "audit", inventory=inventory)
-                snapshot = build_snapshot(entries, resources, self.taxonomy, {"items": []}, {"items": []})
+                snapshot = build_snapshot(entries, resources, self.taxonomy)
                 self.assertNotIn(forbidden, json.dumps(snapshot))
                 self.assertTrue(entries[0]["migration_issues"])
                 with self.assertRaises(ValueError): collect_entries(repos, {}, "enforce", inventory=inventory)

@@ -1,0 +1,119 @@
+import json
+import sys
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from compatibility import build_compatibility_edges, compare_endpoints, parse_semver, version_satisfies
+
+
+def endpoint(profile, version=None, version_range=None, major=1, mode="structured"):
+    result = {"mode": mode, "envelope": {"name": "quantskills-envelope", "version": f"{major}.0.0"}, "profile": profile}
+    if version is not None:
+        result["version"] = version
+    if version_range is not None:
+        result["version_range"] = version_range
+    return result
+
+
+def adapter(identifier, source, target, **changes):
+    value = {"id": identifier, "source": {"profile": source, "version": "1.0.0"}, "target": {"profile": target, "version": "1.0.0"}, "implementation": {"repository": "registry", "path": "scripts/compatibility.py"}, "lossless": True, "validation_status": "validated", "evidence": {"fixture_sha256": "sha256:" + "0" * 64, "test_command": "python -m unittest", "validated_at": "2026-08-10"}, "envelope_major": 1}
+    value.update(changes)
+    return value
+
+
+class CompatibilityTests(unittest.TestCase):
+    def test_strict_semver_and_ranges(self):
+        matrix = json.loads((ROOT / "tests/fixtures/compatibility/matrix.json").read_text(encoding="utf-8"))
+        self.assertEqual(parse_semver("1.2.3"), (1, 2, 3))
+        for value in (1, "1.2", "01.2.3", "1.2.3 ", "v1.2.3", "1.2.3-beta"):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError): parse_semver(value)
+        for value in matrix["accepted_ranges"]:
+            self.assertTrue(version_satisfies("1.0.0", value))
+        for value in ("", "1.0", "1.0.0, <2.0.0", "=1.0.0", *matrix["rejected_ranges"]):
+            self.assertFalse(version_satisfies("1.2.3", value))
+
+    def test_status_matrix_and_value_free_errors(self):
+        cases = (
+            (endpoint("market-bar", "1.0.0"), endpoint("market-bar", version_range=">=1.0.0 <2.0.0"), [], "compatible", []),
+            (endpoint("market-bar", "1.0.0"), endpoint("market-bar", version_range=">1.0.0"), [], "incompatible", []),
+            (endpoint("market-bar", "1.0.0"), endpoint("factor-panel", version_range="1.0.0"), [adapter("market-factor", "market-bar", "factor-panel")], "adapter-required", ["market-factor"]),
+            (endpoint("market-bar", "1.0.0"), endpoint("factor-panel", version_range="1.0.0"), [adapter("pending", "market-bar", "factor-panel", validation_status="pending")], "unknown", []),
+            (endpoint("market-bar", "1.0.0"), endpoint("factor-panel", version_range="1.0.0"), [adapter("lossy", "market-bar", "factor-panel", lossless=False)], "incompatible", []),
+            (endpoint("market-bar", "1.0.0", major=1), endpoint("market-bar", version_range="1.0.0", major=2), [], "unknown", []),
+            (endpoint("missing", "1.0.0"), endpoint("market-bar", version_range="1.0.0"), [], "unknown", []),
+            (endpoint("market-bar", "1.0.0", mode="natural-language"), endpoint("market-bar", version_range="1.0.0"), [], "not-applicable", []),
+        )
+        for output, input_, adapters, status, path in cases:
+            with self.subTest(status=status):
+                result = compare_endpoints(output, input_, adapters)
+                self.assertEqual(set(result), {"status", "errors", "adapter_path"})
+                self.assertEqual(result["status"], status)
+                self.assertEqual(result["adapter_path"], path)
+                if result["errors"]:
+                    self.assertTrue(all(set(item) == {"code", "path"} for item in result["errors"]))
+
+    def test_cycle_and_deterministic_edges(self):
+        adapters = [adapter("z-back", "factor-panel", "market-bar"), adapter("a-forward", "market-bar", "factor-panel")]
+        result = compare_endpoints(endpoint("market-bar", "1.0.0"), endpoint("factor-panel", version_range="1.0.0"), adapters)
+        self.assertEqual(result["adapter_path"], ["a-forward"])
+        assets = [{"name": "producer", "interface": {"mode": "structured", "envelope": {"name": "quantskills-envelope", "version": "1.0.0"}, "outputs": [{"profile": "market-bar", "version": "1.0.0"}]}}, {"name": "consumer", "interface": {"mode": "hybrid", "envelope": {"name": "quantskills-envelope", "version": "1.0.0"}, "inputs": [{"profile": "factor-panel", "version_range": "1.0.0", "required": True}]}}]
+        edges = build_compatibility_edges(list(reversed(assets)), list(reversed(adapters)))
+        self.assertEqual(edges, [{"adapter_path": ["a-forward"], "consumer": "consumer", "input": {"profile": "factor-panel", "required": True, "version_range": "1.0.0"}, "producer": "producer", "output": {"profile": "market-bar", "version": "1.0.0"}, "status": "adapter-required"}])
+
+    def test_exact_canonical_envelope_version_required(self):
+        output = endpoint("market-bar", "1.0.0")
+        output["envelope"]["version"] = "1.9.0"
+        result = compare_endpoints(output, endpoint("market-bar", version_range="1.0.0"), [])
+        self.assertEqual(result, {"status": "unknown", "errors": [{"code": "endpoint", "path": "/output"}], "adapter_path": []})
+        self.assertEqual(compare_endpoints(endpoint("market-bar", "1.0.0"), endpoint("market-bar", version_range="1.0.0"), []) ["status"], "compatible")
+
+    def test_closed_registry_and_duplicate_diagnostics_are_global_and_stable(self):
+        source = endpoint("market-bar", "1.0.0")
+        wanted = endpoint("factor-panel", version_range="1.0.0")
+        malformed = adapter("bad-source", "market-bar", "factor-panel")
+        malformed["source"]["extra"] = "rejected"
+        expected = {"status": "unknown", "errors": [{"code": "adapter-registry", "path": "/adapters"}], "adapter_path": []}
+        global_extra = adapter("global-extra", "market-bar", "factor-panel", unexpected=True)
+        for rows in ({}, ["not-a-row"], [malformed], [global_extra]):
+            self.assertEqual(compare_endpoints(source, wanted, rows), expected)
+        first = adapter("first", "market-bar", "factor-panel")
+        duplicate_id = adapter("first", "factor-panel", "market-bar")
+        duplicate_edge = adapter("third", "market-bar", "factor-panel")
+        expected_errors = [{"code": "adapter-duplicate-edge", "path": "/adapters"}, {"code": "adapter-duplicate-id", "path": "/adapters"}]
+        for rows in ([first, duplicate_id, duplicate_edge], [duplicate_edge, duplicate_id, first]):
+            result = compare_endpoints(source, wanted, rows)
+            self.assertEqual(result, {"status": "unknown", "errors": expected_errors, "adapter_path": []})
+
+    def test_committed_cycle_with_unreachable_target_is_finite_and_order_invariant(self):
+        adapters = [adapter("market-factor", "market-bar", "factor-panel"), adapter("factor-market", "factor-panel", "market-bar")]
+        source, unreachable = endpoint("market-bar", "1.0.0"), endpoint("event-record", version_range="1.0.0")
+        first = compare_endpoints(source, unreachable, adapters)
+        second = compare_endpoints(source, unreachable, list(reversed(adapters)))
+        self.assertEqual(first, {"status": "incompatible", "errors": [], "adapter_path": []})
+        self.assertEqual(second, first)
+
+    def test_pending_evidence_is_scoped_to_a_reached_source_node(self):
+        source = endpoint("market-bar", "1.0.0")
+        same = endpoint("market-bar", version_range="1.0.0")
+        wanted = endpoint("factor-panel", version_range="1.0.0")
+        irrelevant = adapter("holdings-factor-pending", "holdings", "factor-panel", validation_status="pending")
+        self.assertEqual(compare_endpoints(source, same, [irrelevant]), {"status": "compatible", "errors": [], "adapter_path": []})
+        direct_pending = adapter("market-factor-pending", "market-bar", "factor-panel", validation_status="pending")
+        self.assertEqual(compare_endpoints(source, wanted, [direct_pending]), {"status": "unknown", "errors": [{"code": "adapter-evidence", "path": "/adapters"}], "adapter_path": []})
+        first_hop = adapter("market-holdings", "market-bar", "holdings")
+        self.assertEqual(compare_endpoints(source, wanted, [first_hop, irrelevant]), {"status": "unknown", "errors": [{"code": "adapter-evidence", "path": "/adapters"}], "adapter_path": []})
+
+    def test_lossy_adapters_remain_non_traversable(self):
+        source = endpoint("market-bar", "1.0.0")
+        wanted = endpoint("factor-panel", version_range="1.0.0")
+        direct_lossy = adapter("market-factor-lossy", "market-bar", "factor-panel", lossless=False)
+        irrelevant_lossy = adapter("holdings-factor-lossy", "holdings", "factor-panel", lossless=False)
+        self.assertEqual(compare_endpoints(source, wanted, [direct_lossy]), {"status": "incompatible", "errors": [], "adapter_path": []})
+        self.assertEqual(compare_endpoints(source, wanted, [irrelevant_lossy]), {"status": "incompatible", "errors": [], "adapter_path": []})
+
+
+if __name__ == "__main__":
+    unittest.main()

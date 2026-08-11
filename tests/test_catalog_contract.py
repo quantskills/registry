@@ -86,6 +86,22 @@ class CatalogContractTests(unittest.TestCase):
                 frontmatter["quantSkills"]["summary_en"] = disclaimer
                 self.assertFalse(any("prohibited" in item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)))
 
+    def test_2_1_native_license_runtime_and_invocation_semantics(self):
+        frontmatter = copy.deepcopy(self.valid)
+        frontmatter["quantSkills"]["schema_version"] = "2.1.0"
+        frontmatter["license"] = "GPL-3.0-only"
+        frontmatter["supported-runtimes"] = list(frontmatter["quantSkills"]["platforms"])
+        self.assertFalse(validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy))
+        frontmatter["license"] = "MIT"
+        self.assertTrue(any("root license" in item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)))
+        frontmatter["license"] = "GPL-3.0-only"
+        frontmatter["supported-runtimes"] = ["codex"]
+        frontmatter["user-invocable"] = False
+        frontmatter["disable-model-invocation"] = True
+        details = [item["detail"] for item in validate_asset_semantics(frontmatter, "skill-factor-grouped-wrapper", "SKILL.md", self.taxonomy)]
+        self.assertTrue(any("exactly match" in item for item in details))
+        self.assertTrue(any("unreachable" in item for item in details))
+
 
 if __name__ == "__main__":
     unittest.main()

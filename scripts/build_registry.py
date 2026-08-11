@@ -17,6 +17,8 @@ from catalog_contract import canonical_json, load_taxonomy, validate_asset_seman
 from validate_skill import declaration_info, parse_frontmatter, validate
 from verify_catalog_artifacts import verify
 from catalog_projection import public_registry_projection
+from compatibility import _parse_range, build_compatibility_edges
+from interface_catalog import load_contract_catalogs, load_core_lineage
 
 ROOT = Path(__file__).resolve().parent.parent
 ORG = os.environ.get("QS_ORG", "quantskills")
@@ -164,20 +166,79 @@ def _stable_snapshot(snapshot: dict) -> dict:
     return snapshot
 
 
-def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, profiles: dict, adapters: dict) -> dict:
+_ENFORCE_ASSETS = {
+    "skill-pandadata-warehouse", "skill-factor-mining-pandaai", "skill-factor-grouped-wrapper",
+    "skill-portfolio-optimize", "skill-backtest", "skill-ssquant-ai-trader",
+}
+
+
+def _catalogs(profiles: dict | None, adapters: dict | None, envelope: dict | None, provider_mappings: dict | None) -> tuple[dict, dict, dict, dict]:
+    canonical_envelope, canonical_profiles, canonical_adapters, canonical_mappings = load_contract_catalogs()
+    supplied = (profiles, adapters, envelope, provider_mappings)
+    canonical = (canonical_profiles, canonical_adapters, canonical_envelope, canonical_mappings)
+    if any(value is not None for value in supplied) and any(value is None for value in supplied):
+        raise ValueError("all interface catalogs must be supplied together")
+    if any(value is not None and canonical_json(value) != canonical_json(expected) for value, expected in zip(supplied, canonical)):
+        raise ValueError("untrusted interface catalog")
+    return canonical_envelope, canonical_profiles, canonical_adapters, canonical_mappings
+
+
+def _interface_diagnostics(entry: dict, envelope: dict, profiles: dict) -> list[dict]:
+    interface = entry.get("interface")
+    if not isinstance(interface, dict) or interface.get("mode") not in {"structured", "hybrid"}:
+        return []
+    known = {(item["id"], item["version"]) for item in profiles["items"]}
+    if interface.get("envelope") != {"name": envelope["name"], "version": "1.0.0"}:
+        return [{"code": "interface-envelope", "path": "$.interface.envelope"}]
+    diagnostics: list[dict] = []
+    outputs, inputs = interface.get("outputs", []), interface.get("inputs", [])
+    if not isinstance(outputs, list):
+        diagnostics.append({"code": "interface-output", "path": "$.interface.outputs"}); outputs = []
+    if not isinstance(inputs, list):
+        diagnostics.append({"code": "interface-input", "path": "$.interface.inputs"}); inputs = []
+    for index, item in enumerate(outputs):
+        if not isinstance(item, dict) or set(item) != {"profile", "version"} or (item.get("profile"), item.get("version")) not in known:
+            diagnostics.append({"code": "interface-output", "path": f"$.interface.outputs[{index}]"})
+    for index, item in enumerate(inputs):
+        if (not isinstance(item, dict) or set(item) != {"profile", "version_range", "required"}
+                or not isinstance(item.get("required"), bool) or item.get("profile") not in {profile for profile, _ in known}
+                or _parse_range(item.get("version_range")) is None):
+            diagnostics.append({"code": "interface-input", "path": f"$.interface.inputs[{index}]"})
+    return diagnostics
+
+
+
+def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, profiles: dict | None = None, adapters: dict | None = None, envelope: dict | None = None, provider_mappings: dict | None = None, *, contract_mode: str = "audit", core_lineage: dict | None = None) -> dict:
+    if contract_mode not in {"audit", "enforce"}:
+        raise ValueError("contract_mode must be 'audit' or 'enforce'")
     names = [entry.get("name") for entry in entries]
     if not entries or len(names) != len(set(names)) or any(not name for name in names):
         raise ValueError("assets must be nonempty and unique")
     resource_names = sorted(resource.get("name") for resource in resources)
     if resource_names != sorted(RESOURCE_NAMES):
         raise ValueError("closed organization resource inventory is incomplete")
+    envelope, profiles, adapters, provider_mappings = _catalogs(profiles, adapters, envelope, provider_mappings)
+    canonical_lineage = load_core_lineage()
+    if core_lineage is not None and canonical_json(core_lineage) != canonical_json(canonical_lineage):
+        raise ValueError("untrusted core lineage")
+    diagnostics = [diagnostic for entry in entries for diagnostic in _interface_diagnostics(entry, envelope, profiles)]
+    valid_entries = [entry for entry in entries if not _interface_diagnostics(entry, envelope, profiles)]
+    edges = build_compatibility_edges(valid_entries, adapters["items"])
+    # Asset-set gating only controls smoke-fixture projection; compatibility edges remain declaration-derived.
+    closed_chain = not diagnostics and set(names) == _ENFORCE_ASSETS
+    if contract_mode == "enforce":
+        if not closed_chain:
+            raise ValueError("enforce requires the approved core asset set")
     snapshot = {
-        "schema_version": "1.0.0", "taxonomy_version": taxonomy.get("schema_version"),
+        "schema_version": "1.0.0", "taxonomy_version": taxonomy.get("schema_version"), "contract_mode": contract_mode,
         "taxonomy": taxonomy, "assets": sorted(entries, key=lambda entry: entry["name"]),
         "resources": sorted(resources, key=lambda resource: resource["name"]),
-        "profiles": {"version": profiles.get("version", "1.0.0"), "items": sorted(profiles.get("items", []), key=canonical_json)},
-        "adapters": {"version": adapters.get("version", "1.0.0"), "items": sorted(adapters.get("items", []), key=canonical_json)},
-        "compatibility_edges": [],
+        "envelope": {"version": envelope["version"], "name": envelope["name"], "items": sorted(envelope["items"], key=canonical_json)},
+        "profiles": {"version": profiles["version"], "items": sorted(profiles["items"], key=canonical_json)},
+        "adapters": {"version": adapters["version"], "items": sorted(adapters["items"], key=canonical_json)},
+        "provider_mappings": {"version": provider_mappings["version"], "items": sorted(provider_mappings["items"], key=canonical_json)},
+        "core_lineage": canonical_lineage if closed_chain else {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}, "interface_diagnostics": sorted(diagnostics, key=canonical_json),
+        "compatibility_edges": edges,
     }
     snapshot["snapshot_id"] = "sha256:" + hashlib.sha256(canonical_json(_stable_snapshot(snapshot))).hexdigest()
     return snapshot
@@ -255,7 +316,8 @@ def main() -> None:
     previous_path = ROOT / "registry.json"
     previous = {row["name"]: row for row in json.loads(previous_path.read_text(encoding="utf-8"))} if previous_path.exists() else {}
     entries, resources = collect_entries(list_asset_repos(), previous, args.contract_mode, validation_date=dt.date.today().isoformat())
-    snapshot = build_snapshot(entries, resources, load_taxonomy(ROOT), {"version": "1.0.0", "items": []}, {"version": "1.0.0", "items": []})
+    envelope, profiles, adapters, mappings = load_contract_catalogs()
+    snapshot = build_snapshot(entries, resources, load_taxonomy(ROOT), profiles, adapters, envelope, mappings, contract_mode=args.contract_mode)
     promote_artifacts(render_artifacts(snapshot))
     print(f"published snapshot {snapshot['snapshot_id']} ({len(entries)} assets)")
 

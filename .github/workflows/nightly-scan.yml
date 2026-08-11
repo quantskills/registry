@@ -55,7 +55,7 @@ jobs:
       - name: Final enforce validation
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.contract_mode == 'enforce' }}
         run: |
-          python scripts/verify_catalog_artifacts.py catalog.snapshot.json registry.json --readme README.md --readme README.en.md
+          python scripts/verify_catalog_artifacts.py catalog.snapshot.json registry.json --readme README.md --readme README.en.md --expected-contract-mode enforce
           node scripts/validate-registry.mjs --contract-mode enforce registry.json
 
       # Audit output is ephemeral. It must not replace the last enforce-clean snapshot.
