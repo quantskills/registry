@@ -33,13 +33,14 @@ class CoreChainContractsTests(unittest.TestCase):
             raw = (root / item["file"]).read_bytes()
             self.assertEqual(raw, (ROOT / "schema/core-lineage/1.0.0" / item["file"]).read_bytes())
             document = json.loads(raw)
-            self.assertEqual("sha256:" + hashlib.sha256(raw).hexdigest(), item["artifact_sha256"])
+            normalized = raw.replace(b"\r\n", b"\n")
+            self.assertEqual("sha256:" + hashlib.sha256(normalized).hexdigest(), item["artifact_sha256"])
             self.assertEqual(validate_contract(document, ROOT)["status"], "valid")
             self.assertEqual(document["$contract"]["profile"], item["profile"])
             self.assertEqual(document["meta"]["producer"], item["producer"])
             if index:
                 predecessor = lineage[index - 1]
-                predecessor_sha = "sha256:" + hashlib.sha256((root / predecessor["file"]).read_bytes()).hexdigest()
+                predecessor_sha = "sha256:" + hashlib.sha256((root / predecessor["file"]).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
                 self.assertEqual(item["inputs"], [{"id": predecessor["id"], "artifact_sha256": predecessor_sha}])
                 self.assertEqual(document["meta"]["provenance"][0], {"provider": predecessor["producer"], "dataset": predecessor["id"], "raw_ref": f"artifact://core-chain/{predecessor['id']}", "raw_sha256": predecessor_sha})
                 if index >= 2:

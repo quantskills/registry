@@ -57,7 +57,8 @@ class PandaDataFidelityTests(unittest.TestCase):
                 self.assertEqual(envelope["payload"]["native"]["raw_records"], [native])
                 self.assertIsNot(envelope["payload"]["native"]["raw_records"][0], native)
                 self.assertIsNot(envelope["payload"]["native"]["raw_records"][0]["records"], native["records"])
-                self.assertEqual(envelope["meta"]["provenance"][0]["raw_sha256"], "sha256:" + hashlib.sha256((FIXTURES / f"{name}-native.json").read_bytes()).hexdigest())
+                fixture_bytes = (FIXTURES / f"{name}-native.json").read_bytes().replace(b"\r\n", b"\n")
+                self.assertEqual(envelope["meta"]["provenance"][0]["raw_sha256"], "sha256:" + hashlib.sha256(fixture_bytes).hexdigest())
                 self.assertEqual(len(envelope["payload"]["records"]), len(native["records"]))
                 self.assertEqual(set(envelope["schema"]["primary_key"]), set(envelope["payload"]["records"][0]).intersection(envelope["schema"]["primary_key"]))
 
@@ -160,6 +161,30 @@ class PandaDataFidelityTests(unittest.TestCase):
             candidate = copy.deepcopy(mappings)
             mutate(candidate)
             self.assertFalse(_admit_pandadata_mappings(candidate, ROOT))
+
+    def test_mapping_admission_accepts_crlf_equivalent_but_rejects_content_tamper(self):
+        mappings = json.loads((ROOT / "schema" / "adapters" / "pandadata-mappings.v1.json").read_text(encoding="utf-8"))
+        fixture = (FIXTURES / "market-bar-native.json").resolve()
+        canonical_bytes = fixture.read_bytes().replace(b"\r\n", b"\n")
+        crlf_bytes = canonical_bytes.replace(b"\n", b"\r\n")
+        original_read_bytes = Path.read_bytes
+
+        def read_bytes(path, *args, **kwargs):
+            return crlf_bytes if Path(path).resolve() == fixture else original_read_bytes(path, *args, **kwargs)
+
+        with mock.patch.object(Path, "read_bytes", read_bytes):
+            self.assertTrue(_admit_pandadata_mappings(mappings, ROOT))
+
+        tampered = json.loads(canonical_bytes.decode("utf-8"))
+        tampered["records"][0]["close"] += 0.01
+        tampered_bytes = (json.dumps(tampered, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+        tampered_crlf = tampered_bytes.replace(b"\n", b"\r\n")
+
+        def read_tampered_bytes(path, *args, **kwargs):
+            return tampered_crlf if Path(path).resolve() == fixture else original_read_bytes(path, *args, **kwargs)
+
+        with mock.patch.object(Path, "read_bytes", read_tampered_bytes):
+            self.assertFalse(_admit_pandadata_mappings(mappings, ROOT))
 
     def test_mapping_admission_rejects_closed_world_mutations(self):
         mappings = json.loads((ROOT / "schema" / "adapters" / "pandadata-mappings.v1.json").read_text(encoding="utf-8"))

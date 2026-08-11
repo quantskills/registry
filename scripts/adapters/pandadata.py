@@ -290,7 +290,10 @@ def _admit_pandadata_mappings(document: object, root: Path) -> bool:
                 return False
             fixture_bytes = fixture.read_bytes()
             native = _strict_json_load(fixture_bytes)
-            if type(native) is not dict or fixture_bytes != _canonical_bytes(native):
+            if type(native) is not dict:
+                return False
+            canonical_fixture_bytes = _canonical_bytes(native)
+            if fixture_bytes.replace(b"\r\n", b"\n") != canonical_fixture_bytes:
                 return False
             expected_bytes = expected_path.read_bytes()
             expected = _strict_json_load(expected_bytes)
@@ -299,7 +302,7 @@ def _admit_pandadata_mappings(document: object, root: Path) -> bool:
 
             if native.get("provider") != source["provider"] or native.get("dataset") != source["dataset"]:
                 return False
-            fixture_sha = "sha256:" + hashlib.sha256(fixture_bytes).hexdigest()
+            fixture_sha = "sha256:" + hashlib.sha256(canonical_fixture_bytes).hexdigest()
             if evidence["raw_sha256"] != fixture_sha:
                 return False
             provenance = expected.get("meta", {}).get("provenance") if type(expected.get("meta")) is dict else None

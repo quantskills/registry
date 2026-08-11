@@ -228,7 +228,7 @@ def load_core_lineage(root: Path = ROOT) -> dict:
         if type(row) is not dict or set(row) != required or row.get("id") != _CORE_IDS[index] or row.get("file") != _CORE_FILES[index] or row.get("producer") != _CORE_PRODUCERS[index] or row.get("profile") != _CORE_PROFILES[index] or row.get("version") != _VERSION:
             raise ValueError("invalid core lineage")
         raw = _path(base, "schema/core-lineage/1.0.0/" + row["file"]).read_bytes()
-        actual = "sha256:" + hashlib.sha256(raw).hexdigest()
+        actual = "sha256:" + hashlib.sha256(raw.replace(b"\r\n", b"\n")).hexdigest()
         if row.get("artifact_sha256") != actual:
             raise ValueError("invalid core lineage")
         document = _load(base, "schema/core-lineage/1.0.0/" + row["file"])
