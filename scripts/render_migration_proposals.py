@@ -56,20 +56,26 @@ def _frontmatter(path: Path) -> tuple[dict, str, str, str | None]:
 def _proposal(current: dict, row: dict, iface: dict, name: str) -> dict:
     mode = row.get("interface_candidate") or iface.get("candidate_mode", "unknown")
     interface = {"mode": mode}
-    if mode == "not-applicable": interface["reason"] = iface.get("notes", "maintainer review required")
-    elif mode == "natural-language": interface["reason"] = "natural-language interface; maintainer review required"
-    else: interface["profile_review_required"] = True
-    result = dict(current)
-    result["quantSkills"] = {
+    if mode == "not-applicable":
+        reason = iface.get("notes")
+        interface["reason"] = reason if reason in {"natural-language-only", "report-only", "orchestration-only"} else "natural-language-only"
+    description = current.get("description")
+    if not isinstance(description, str) or len(description) < 60:
+        description = f"{row['summary_en']} This declaration records catalog metadata and interface review status."
+    return redact({
+        "name": name,
+        "description": description,
+        "quantSkills": {
         "schema_version": "2.0.0", "organization": "quantskills", "organization_url": "https://github.com/quantskills",
         "repository": name, "repository_url": f"https://github.com/quantskills/{name}", "project_type": row["project_type"],
         "license": "GPL-3.0-only", "maintainer": "abgyjaguo",
-        "catalog": {k: row[k] for k in ("category", "subcategory", "primary_stage", "summary_zh", "summary_en")},
-        "workflow": row["workflow_stages"].split("|"),
-        "platforms": ["Cursor", "Claude Code", "Codex", "Hermes", "OpenClaw"],
-        "status": "proposal", "validation": "maintainer-review-required", "maintainer_type": "human", "interface": interface,
-    }
-    return redact(result)
+        "catalog": {k: row[k] for k in ("category", "subcategory")},
+        "workflow": {"primary_stage": row["primary_stage"], "workflow_stages": row["workflow_stages"].split("|")},
+        "summary_zh": row["summary_zh"], "summary_en": row["summary_en"],
+        "platforms": ["cursor", "claude-code", "codex", "hermes", "openclaw"],
+        "status": "draft", "validation_level": "listed", "maintainer_type": "community", "interface": interface,
+        },
+    })
 
 
 def _target(output: Path, name: str) -> Path:
@@ -104,6 +110,10 @@ def generate(inventory_path: Path, assignments_path: Path, interfaces_path: Path
         if error: review.append(error + "; no patch proposed")
         if not row: review.append("assignment missing; no patch proposed")
         elif row.get("review_status") != "approved": review.append("assignment not approved; no patch proposed")
+        elif (row.get("interface_candidate") or (iface or {}).get("candidate_mode")) in {"structured", "hybrid"}:
+            review.append("structured/hybrid candidate lacks approved Profile endpoints; no patch proposed")
+        elif (row.get("interface_candidate") or (iface or {}).get("candidate_mode")) not in {"natural-language", "not-applicable"}:
+            review.append("interface candidate is not declaration-valid; no patch proposed")
         if not iface: review.append("interface audit missing; no patch proposed")
         expected = asset.get("head_sha")
         actual = _git(repo, "rev-parse", "HEAD")
