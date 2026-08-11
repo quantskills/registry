@@ -1,6 +1,8 @@
 import hashlib
 import json
+import shutil
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -14,8 +16,9 @@ class CoreChainContractsTests(unittest.TestCase):
     def test_closed_core_chain_artifacts_are_valid_and_safe(self):
         root = ROOT / "tests/fixtures/e2e/core-chain"
         manifest = load_core_lineage(ROOT)
-        self.assertEqual(set(manifest), {"version", "artifacts"})
+        self.assertEqual(set(manifest), {"version", "scope", "artifacts"})
         self.assertEqual(manifest["version"], "1.0.0")
+        self.assertEqual(manifest["scope"], "schema-smoke-only")
         lineage = manifest["artifacts"]
         self.assertEqual([item["file"] for item in lineage], ["01-market-bar.json", "02-factor-panel.json", "03-ranked-factor-set.json", "04-portfolio-target.json", "05-backtest-result.json", "06-evaluation-result.json", "07-execution-plan.json"])
         self.assertEqual([item["id"] for item in lineage], ["market-bar", "factor-panel", "ranking", "portfolio", "backtest", "evaluation", "execution"])
@@ -47,6 +50,22 @@ class CoreChainContractsTests(unittest.TestCase):
         execution = json.loads((root / "07-execution-plan.json").read_text(encoding="utf-8"))
         self.assertFalse(execution["payload"]["records"][0]["live_submission_allowed"])
         self.assertEqual((root / "lineage.json").read_bytes(), (ROOT / "schema/core-lineage/1.0.0/lineage.json").read_bytes())
+
+    def test_scope_tampering_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "registry"
+            shutil.copytree(ROOT, root, ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache", ".superpowers"))
+            path = root / "schema/core-lineage/1.0.0/lineage.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest.pop("scope")
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_core_lineage(root)
+
+            manifest["scope"] = "business-closed"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_core_lineage(root)
 
 
 if __name__ == "__main__":

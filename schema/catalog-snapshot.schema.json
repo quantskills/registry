@@ -650,11 +650,15 @@
       "additionalProperties": false,
       "required": [
         "version",
+        "scope",
         "artifacts"
       ],
       "properties": {
         "version": {
           "const": "1.0.0"
+        },
+        "scope": {
+          "const": "schema-smoke-only"
         },
         "artifacts": {
           "type": "array",

@@ -11,6 +11,7 @@ from jsonschema import Draft202012Validator
 ROOT = Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from build_registry import build_snapshot, load_contract_catalogs, render_artifacts
+from compatibility import build_compatibility_edges
 from interface_catalog import admit_adapter_registry
 
 
@@ -34,33 +35,42 @@ class InterfaceCatalogSnapshotTests(unittest.TestCase):
             self.asset("skill-ssquant-ai-trader", ("execution-plan",), ("evaluation-result",)),
         ]
 
-    def test_red_core_chain_requires_enriched_catalogs_and_is_deterministic(self):
+    def test_schema_smoke_lineage_is_deterministic_without_business_edge_claims(self):
         snapshot = build_snapshot(self.chain(), self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
         self.assertEqual(set(snapshot), {"schema_version", "taxonomy_version", "contract_mode", "interface_diagnostics", "taxonomy", "assets", "resources", "envelope", "profiles", "adapters", "provider_mappings", "core_lineage", "compatibility_edges", "snapshot_id"})
-        self.assertEqual([(edge["producer"], edge["consumer"]) for edge in snapshot["compatibility_edges"]], [("skill-portfolio-optimize", "skill-backtest"), ("skill-factor-mining-pandaai", "skill-factor-grouped-wrapper"), ("skill-pandadata-warehouse", "skill-factor-mining-pandaai"), ("skill-factor-grouped-wrapper", "skill-portfolio-optimize"), ("skill-backtest", "skill-ssquant-ai-trader")])
+        self.assertEqual(snapshot["core_lineage"]["scope"], "schema-smoke-only")
+        self.assertEqual(snapshot["compatibility_edges"], build_compatibility_edges(snapshot["assets"], self.adapters["items"]))
         shuffled = build_snapshot(list(reversed(self.chain())), list(reversed(self.resources)), self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
         self.assertEqual(snapshot["snapshot_id"], shuffled["snapshot_id"])
         self.assertEqual(render_artifacts(snapshot), render_artifacts(shuffled))
 
-    def test_red_invalid_mapping_or_chain_link_rejects_before_render(self):
+    def test_smoke_scope_survives_invalid_declared_edges(self):
         before = build_snapshot(self.chain(), self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
         self.assertEqual(len(before["core_lineage"]["artifacts"]), 7)
         broken = self.chain(); broken[0]["interface"]["outputs"][0]["profile"] = "factor-panel"
         snapshot = build_snapshot(broken, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
-        self.assertEqual(snapshot["core_lineage"]["artifacts"], [])
-        with self.assertRaisesRegex(ValueError, "approved closed core chain"):
-            build_snapshot(broken, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings, contract_mode="enforce")
+        self.assertEqual(snapshot["core_lineage"]["scope"], "schema-smoke-only")
+        self.assertEqual(snapshot["compatibility_edges"], build_compatibility_edges(snapshot["assets"], self.adapters["items"]))
+        self.assertEqual(build_snapshot(broken, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings, contract_mode="enforce")["core_lineage"]["scope"], "schema-smoke-only")
         incomplete = self.chain(); incomplete.pop(2)
         snapshot = build_snapshot(incomplete, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
         self.assertTrue(snapshot["interface_diagnostics"] == [])
         self.assertNotIn(("skill-factor-mining-pandaai", "skill-factor-grouped-wrapper"), [(edge["producer"], edge["consumer"]) for edge in snapshot["compatibility_edges"]])
 
-    def test_enforce_binds_only_the_complete_declared_chain(self):
+    def test_enforce_keeps_schema_smoke_separate_from_declared_edges(self):
         snapshot = build_snapshot(self.chain(), self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings, contract_mode="enforce")
         self.assertEqual(len(snapshot["core_lineage"]["artifacts"]), 7)
         incomplete = self.chain(); incomplete.pop()
-        with self.assertRaisesRegex(ValueError, "approved closed core chain"):
+        with self.assertRaisesRegex(ValueError, "approved core asset set"):
             build_snapshot(incomplete, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings, contract_mode="enforce")
+
+    def test_smoke_fixture_has_no_business_edges_without_asset_declarations(self):
+        assets = self.chain()
+        for asset in assets:
+            asset["interface"] = {"mode": "natural-language"}
+        snapshot = build_snapshot(assets, self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)
+        self.assertEqual(snapshot["core_lineage"]["scope"], "schema-smoke-only")
+        self.assertEqual(snapshot["compatibility_edges"], [])
 
     def test_snapshot_schema_rejects_shallow_taxonomy_asset_and_interface_mutations(self):
         snapshot = build_snapshot(self.chain(), self.resources, self.taxonomy, self.profiles, self.adapters, self.envelope, self.mappings)

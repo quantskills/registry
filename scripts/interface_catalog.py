@@ -202,14 +202,18 @@ _CORE_PRODUCERS = (
 )
 _CORE_PROFILES = ("market-bar", "factor-panel", "ranked-factor-set", "portfolio-target", "backtest-result", "evaluation-result", "execution-plan")
 _CORE_SOURCE_MAPPING_ID = "pandadata-market-bar-v1"
+_CORE_LINEAGE_SCOPE = "schema-smoke-only"
 
 
 def load_core_lineage(root: Path = ROOT) -> dict:
-    """Load the committed closed core chain without importing the builder."""
+    """Load the committed schema/hash smoke fixture without importing the builder."""
     base = _root(root)
     envelope, profiles, _, mappings = load_contract_catalogs(base)
     manifest = _load(base, "schema/core-lineage/1.0.0/lineage.json")
-    if type(manifest) is not dict or set(manifest) != {"version", "artifacts"} or manifest.get("version") != _VERSION:
+    if (type(manifest) is not dict
+            or set(manifest) != {"version", "scope", "artifacts"}
+            or manifest.get("version") != _VERSION
+            or manifest.get("scope") != _CORE_LINEAGE_SCOPE):
         raise ValueError("invalid core lineage")
     rows = manifest.get("artifacts")
     if type(rows) is not list or len(rows) != len(_CORE_FILES):

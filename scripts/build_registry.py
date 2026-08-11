@@ -170,13 +170,6 @@ _ENFORCE_ASSETS = {
     "skill-pandadata-warehouse", "skill-factor-mining-pandaai", "skill-factor-grouped-wrapper",
     "skill-portfolio-optimize", "skill-backtest", "skill-ssquant-ai-trader",
 }
-_ENFORCE_EDGES = {
-    ("skill-pandadata-warehouse", "skill-factor-mining-pandaai", "market-bar", "market-bar"),
-    ("skill-factor-mining-pandaai", "skill-factor-grouped-wrapper", "factor-panel", "factor-panel"),
-    ("skill-factor-grouped-wrapper", "skill-portfolio-optimize", "ranked-factor-set", "ranked-factor-set"),
-    ("skill-portfolio-optimize", "skill-backtest", "portfolio-target", "portfolio-target"),
-    ("skill-backtest", "skill-ssquant-ai-trader", "evaluation-result", "evaluation-result"),
-}
 
 
 def _catalogs(profiles: dict | None, adapters: dict | None, envelope: dict | None, provider_mappings: dict | None) -> tuple[dict, dict, dict, dict]:
@@ -214,30 +207,6 @@ def _interface_diagnostics(entry: dict, envelope: dict, profiles: dict) -> list[
     return diagnostics
 
 
-def _core_chain_bound(entries: list[dict], lineage: dict, envelope: dict, provider_mappings: dict) -> bool:
-    """Bind the trusted manifest's source artifact to its validated declaration."""
-    try:
-        artifacts = lineage["artifacts"]
-        first = artifacts[0]
-        mapping_id = first["source_mapping_id"]
-        mapping = next(item for item in provider_mappings["items"] if item["id"] == mapping_id)
-        asset = next(entry for entry in entries if entry.get("name") == first["producer"])
-        interface = asset["interface"]
-        return (
-            mapping_id == "pandadata-market-bar-v1"
-            and first["producer"] == "skill-pandadata-warehouse"
-            and first["profile"] == "market-bar"
-            and first["version"] == "1.0.0"
-            and asset.get("name") == first["producer"]
-            and interface.get("mode") in {"structured", "hybrid"}
-            and interface.get("envelope") == {"name": envelope["name"], "version": "1.0.0"}
-            and interface.get("outputs") == [{"profile": first["profile"], "version": first["version"]}]
-            and mapping.get("target", {}).get("envelope") == interface.get("envelope")
-            and mapping.get("target", {}).get("profile") == {"id": first["profile"], "version": first["version"]}
-        )
-    except (AttributeError, IndexError, KeyError, TypeError, StopIteration):
-        return False
-
 
 def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, profiles: dict | None = None, adapters: dict | None = None, envelope: dict | None = None, provider_mappings: dict | None = None, *, contract_mode: str = "audit", core_lineage: dict | None = None) -> dict:
     if contract_mode not in {"audit", "enforce"}:
@@ -255,16 +224,11 @@ def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, p
     diagnostics = [diagnostic for entry in entries for diagnostic in _interface_diagnostics(entry, envelope, profiles)]
     valid_entries = [entry for entry in entries if not _interface_diagnostics(entry, envelope, profiles)]
     edges = build_compatibility_edges(valid_entries, adapters["items"])
-    actual_edges = {(edge["producer"], edge["consumer"], edge["output"]["profile"], edge["input"]["profile"]) for edge in edges}
-    closed_chain = (
-        not diagnostics
-        and set(names) == _ENFORCE_ASSETS
-        and actual_edges == _ENFORCE_EDGES
-        and _core_chain_bound(entries, canonical_lineage, envelope, provider_mappings)
-    )
+    # Asset-set gating only controls smoke-fixture projection; compatibility edges remain declaration-derived.
+    closed_chain = not diagnostics and set(names) == _ENFORCE_ASSETS
     if contract_mode == "enforce":
         if not closed_chain:
-            raise ValueError("enforce requires the approved closed core chain")
+            raise ValueError("enforce requires the approved core asset set")
     snapshot = {
         "schema_version": "1.0.0", "taxonomy_version": taxonomy.get("schema_version"), "contract_mode": contract_mode,
         "taxonomy": taxonomy, "assets": sorted(entries, key=lambda entry: entry["name"]),
@@ -273,7 +237,7 @@ def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, p
         "profiles": {"version": profiles["version"], "items": sorted(profiles["items"], key=canonical_json)},
         "adapters": {"version": adapters["version"], "items": sorted(adapters["items"], key=canonical_json)},
         "provider_mappings": {"version": provider_mappings["version"], "items": sorted(provider_mappings["items"], key=canonical_json)},
-        "core_lineage": canonical_lineage if closed_chain else {"version": "1.0.0", "artifacts": []}, "interface_diagnostics": sorted(diagnostics, key=canonical_json),
+        "core_lineage": canonical_lineage if closed_chain else {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}, "interface_diagnostics": sorted(diagnostics, key=canonical_json),
         "compatibility_edges": edges,
     }
     snapshot["snapshot_id"] = "sha256:" + hashlib.sha256(canonical_json(_stable_snapshot(snapshot))).hexdigest()

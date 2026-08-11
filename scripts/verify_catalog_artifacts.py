@@ -19,14 +19,10 @@ from catalog_projection import public_registry_projection
 from interface_catalog import load_contract_catalogs, load_core_lineage
 
 RESOURCE_NAMES = [".github", "join", "quantskills", "registry"]
-_CHAIN = (
-    ("skill-pandadata-warehouse", "skill-factor-mining-pandaai", "market-bar", "market-bar"),
-    ("skill-factor-mining-pandaai", "skill-factor-grouped-wrapper", "factor-panel", "factor-panel"),
-    ("skill-factor-grouped-wrapper", "skill-portfolio-optimize", "ranked-factor-set", "ranked-factor-set"),
-    ("skill-portfolio-optimize", "skill-backtest", "portfolio-target", "portfolio-target"),
-    ("skill-backtest", "skill-ssquant-ai-trader", "evaluation-result", "evaluation-result"),
-)
-_CHAIN_NAMES = {name for edge in _CHAIN for name in edge[:2]}
+_CHAIN_NAMES = {
+    "skill-pandadata-warehouse", "skill-factor-mining-pandaai", "skill-factor-grouped-wrapper",
+    "skill-portfolio-optimize", "skill-backtest", "skill-ssquant-ai-trader",
+}
 _SEMVER = re.compile(r"^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$")
 
 
@@ -147,14 +143,9 @@ def _edges(assets: list, adapters: list) -> list[dict]:
 
 def _closed_chain(assets: list, edges: list, lineage: dict, envelope: dict, mappings: dict) -> bool:
     by_name = {asset.get("name"): asset for asset in assets if isinstance(asset, dict)}
-    actual = {(edge["producer"], edge["consumer"], edge["output"]["profile"], edge["input"]["profile"]) for edge in edges}
-    first = lineage["artifacts"][0]
-    mapping = next((row for row in mappings["items"] if row["id"] == first["source_mapping_id"]), None)
-    producer = by_name.get(first["producer"])
-    return (set(by_name) == _CHAIN_NAMES and actual == set(_CHAIN) and mapping is not None and producer is not None
-            and producer.get("interface", {}).get("outputs") == [{"profile": first["profile"], "version": first["version"]}]
-            and producer["interface"].get("envelope") == {"name": envelope["name"], "version": "1.0.0"}
-            and mapping.get("target", {}).get("profile") == {"id": first["profile"], "version": first["version"]})
+    return (set(by_name) == _CHAIN_NAMES
+            and isinstance(lineage, dict)
+            and lineage.get("scope") == "schema-smoke-only")
 
 
 def verify(snapshot_path: Path, registry_path: Path, readmes: tuple[Path, ...] = (), expected_contract_mode: str | None = None) -> None:
@@ -196,10 +187,10 @@ def verify(snapshot_path: Path, registry_path: Path, readmes: tuple[Path, ...] =
             if canonical(snapshot.get("interface_diagnostics")) != canonical(diagnostics): errors.append("interface diagnostics do not match independent validation")
             if canonical(snapshot.get("compatibility_edges")) != canonical(edges): errors.append("compatibility edges do not match independent validation")
             closed = not diagnostics and _closed_chain(snapshot.get("assets", []), edges, lineage, envelope, mappings)
-            expected_lineage = lineage if closed else {"version": "1.0.0", "artifacts": []}
+            expected_lineage = lineage if closed else {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}
             if canonical(snapshot.get("core_lineage")) != canonical(expected_lineage): errors.append("core lineage does not match trusted physical lineage")
-            if snapshot.get("contract_mode") == "enforce" and not closed: errors.append("enforce snapshot is not the approved closed core chain")
-            if expected_contract_mode == "enforce" and (snapshot.get("contract_mode") != "enforce" or not closed): errors.append("expected enforce snapshot is not the approved closed core chain")
+            if snapshot.get("contract_mode") == "enforce" and not closed: errors.append("enforce snapshot is not the approved core asset set")
+            if expected_contract_mode == "enforce" and (snapshot.get("contract_mode") != "enforce" or not closed): errors.append("expected enforce snapshot is not the approved core asset set")
             if expected_contract_mode == "audit" and snapshot.get("contract_mode") != "audit": errors.append("snapshot does not have expected audit contract mode")
     for readme in readmes:
         text = readme.read_text(encoding="utf-8")

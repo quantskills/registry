@@ -122,7 +122,7 @@ class AtomicGenerationTests(unittest.TestCase):
         envelope, profiles, adapters, mappings = build_registry.load_contract_catalogs()
         snapshot["taxonomy"] = build_registry.load_taxonomy(ROOT)
         snapshot["assets"][0].update({"category": "02", "subcategory": "02.factor-evaluation", "stage": "evaluation"})
-        snapshot.update({"contract_mode": "audit", "interface_diagnostics": [], "envelope": envelope, "profiles": profiles, "adapters": adapters, "provider_mappings": mappings, "core_lineage": {"version": "1.0.0", "artifacts": []}})
+        snapshot.update({"contract_mode": "audit", "interface_diagnostics": [], "envelope": envelope, "profiles": profiles, "adapters": adapters, "provider_mappings": mappings, "core_lineage": {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}})
         snapshot["snapshot_id"] = "sha256:" + build_registry.hashlib.sha256(build_registry.canonical_json(build_registry._stable_snapshot(snapshot))).hexdigest()
         row = {"name": "skill-a", "url": "https://github.com/quantskills/skill-a", "description": "x", "project_type": "skill", "declaration_file": "SKILL.md", "category": "02", "subcategory": "02.factor-evaluation", "stage": "evaluation", "tags": [], "platforms": [], "status": "active", "requires": [], "summary_zh": "中文说明", "summary_en": "Natural language asset", "license": "GPL-3.0-only", "last_validated": "2026-08-10", "validation_level": "listed", "maintainer_type": "community", "commit_sha": "", "catalog": snapshot["assets"][0]["catalog"], "workflow": snapshot["assets"][0]["workflow"], "interface": {"mode": "natural-language"}, "snapshot_id": snapshot["snapshot_id"]}
         with tempfile.TemporaryDirectory(dir=ROOT) as tmp:

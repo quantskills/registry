@@ -53,6 +53,7 @@ class SnapshotBuilderTests(unittest.TestCase):
         self.assertEqual(snapshot["adapters"], {"version": "1.0.0", "items": []})
         self.assertEqual(snapshot["provider_mappings"]["version"], "1.0.0")
         self.assertEqual(snapshot["core_lineage"]["version"], "1.0.0")
+        self.assertEqual(snapshot["core_lineage"]["scope"], "schema-smoke-only")
         self.assertEqual(snapshot["compatibility_edges"], [])
         self.assertEqual([item["name"] for item in snapshot["resources"]], [".github", "join", "quantskills", "registry"])
         self.assertEqual({item["name"] for item in snapshot["assets"] if item["catalog"]["category"] == "10"}, {"skill-template", "agent-template"})
