@@ -1,0 +1,3681 @@
+{
+  "schema_version": "1.0.0",
+  "inventory_sha256": "sha256:cf04ee524bafeac9b04839f43699e53fc11d15f92330ad5d232dee2a1ec9715c",
+  "items": [
+    {
+      "name": "agent-correlation-break-research",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "HTML",
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "correlation",
+        "index_a",
+        "index_b",
+        "risk_state",
+        "style_shift"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "agent-runtime"
+      ],
+      "notes": "The qsh form names index inputs and the declaration names CSV, JSON, HTML, and Markdown outputs; a versioned contract remains for maintainer review."
+    },
+    {
+      "name": "agent-crowding-risk-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "HTML",
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "crowding_level",
+        "index",
+        "lhb",
+        "margin",
+        "risk_state"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "agent-runtime"
+      ],
+      "notes": "The qsh form and Pandadata methods identify index and crowding evidence, while the declaration names machine-readable and report artifacts."
+    },
+    {
+      "name": "agent-derivatives-skew-sentiment-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "HTML",
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "historical_volatility",
+        "implied_volatility",
+        "iv_hv_spread",
+        "risk_state",
+        "underlying"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "agent-runtime"
+      ],
+      "notes": "The qsh form names an option underlying and the declaration names IV/HV evidence plus JSON/report artifacts."
+    },
+    {
+      "name": "agent-for-liangshuyuan-tasks",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "acceptance",
+        "artifact_path",
+        "task",
+        "task_type"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "agent-runtime"
+      ],
+      "notes": "The qsh form captures a free-form task and the framework emits varied build artifacts rather than one closed root I/O contract."
+    },
+    {
+      "name": "agent-macro-driven-rotation",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "HTML",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "macro_phase",
+        "nowcast",
+        "sector_rank",
+        "valuation_filter"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "agent-runtime"
+      ],
+      "notes": "The declaration describes macro and valuation research artifacts, but does not close a machine-readable root input/output schema."
+    },
+    {
+      "name": "agent-market-regime-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "HTML",
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "breadth",
+        "funding",
+        "index",
+        "regime",
+        "volatility"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "agent-runtime"
+      ],
+      "notes": "The qsh form names an index and the declaration names breadth, volatility, funding evidence and report artifacts."
+    },
+    {
+      "name": "agent-quantspace",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "detected_formats": [
+        "HTML",
+        "MARKDOWN",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "data_root",
+        "report_path",
+        "strategy",
+        "task"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "agent-runtime"
+      ],
+      "notes": "The framework documents task text, Parquet data roots, and report paths, but its reusable modules do not define one closed root interface."
+    },
+    {
+      "name": "agent-ssquant",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "detected_formats": [
+        "HTML",
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "data_service",
+        "report_path",
+        "runtime_mode",
+        "strategy",
+        "task"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "agent-runtime"
+      ],
+      "notes": "The agent form accepts a task description and evidence gates name varied reports and diagnostics without one closed root schema."
+    },
+    {
+      "name": "agent-template",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "not-applicable",
+      "evidence_paths": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "detected_formats": [
+        "YAML"
+      ],
+      "detected_fields": [
+        "collection",
+        "description",
+        "name",
+        "project_type"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "agent-runtime"
+      ],
+      "notes": "orchestration-only"
+    },
+    {
+      "name": "skill-a-share-market-risk-radar",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON"
+      ],
+      "detected_fields": [
+        "date",
+        "output_path",
+        "risk_level",
+        "symbols"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The declaration names a JSON output path, but does not state a closed structured input and output contract."
+    },
+    {
+      "name": "skill-a-share-pit-fundamental-vintage-builder",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "as_of_date",
+        "available_date",
+        "disclosure_date",
+        "quarter",
+        "rebalance_date",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration explicitly names PIT panel and rebalance-date CSV inputs plus CSV, JSON metadata, and Markdown outputs."
+    },
+    {
+      "name": "skill-a-share-stock-dossier",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "data_date",
+        "report_period",
+        "risk_rule",
+        "source_method",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The qsh form names a symbol and the guide defines report evidence, but the primary output is a prose dossier rather than a closed structured result."
+    },
+    {
+      "name": "skill-a1-lhb-tracking",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "end_date",
+        "factor_id",
+        "lookback_days",
+        "mode",
+        "start_date",
+        "trade_date",
+        "ts_code"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration closes qsh parameters and names factor and report artifacts with date, symbol, and factor identifiers."
+    },
+    {
+      "name": "skill-ag-futures-seasonality",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "HTML",
+        "JSON",
+        "TEXT"
+      ],
+      "detected_fields": [
+        "close",
+        "date",
+        "month",
+        "sample_years",
+        "significance",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration explicitly accepts daily price CSV input and emits seasonality text, JSON, and HTML reports."
+    },
+    {
+      "name": "skill-alpha-a06-hotmoney-reversal",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "date",
+        "factor_value",
+        "mode",
+        "score",
+        "symbol",
+        "trade_date"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration names validation input modes, market and seat fields, and Parquet/JSON factor artifacts."
+    },
+    {
+      "name": "skill-alpha-f1-position-change",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "HTML",
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "broker_name",
+        "date",
+        "factor_value",
+        "net_position",
+        "signal",
+        "underlying_symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration fixes the four input fields and names Parquet fixtures plus JSON and HTML report outputs."
+    },
+    {
+      "name": "skill-alpha-f5-member-position-concentration",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "factor_value",
+        "hotmoney_net",
+        "inst_net",
+        "north_net",
+        "symbol",
+        "trade_date"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The repository describes a Parquet factor output and member-position fields, but no closed root input contract."
+    },
+    {
+      "name": "skill-alpha-f6-family-position-reverse",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "factor_id",
+        "family_net",
+        "main_net",
+        "symbol",
+        "trade_date"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The repository describes family-position Parquet results and factor identifiers, but does not close root input fields."
+    },
+    {
+      "name": "skill-alpha-f8-family-main-divergence",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "divergence",
+        "factor_id",
+        "family_net",
+        "main_net",
+        "symbol",
+        "trade_date"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The repository describes family-versus-main Parquet results and factor identifiers, but does not close root input fields."
+    },
+    {
+      "name": "skill-alpha-ncav-graham",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "as_of_date",
+        "factor_value",
+        "signal",
+        "symbol",
+        "trade_date",
+        "update_time"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The declaration shows a Parquet factor example and signal fields without a closed root input/output declaration."
+    },
+    {
+      "name": "skill-audit-opinion-scanner",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "audit_opinion",
+        "date",
+        "health_score",
+        "quarter",
+        "risk_level",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The declaration names fixed CSV, Parquet, and model artifacts, but the source-input contract is not closed at the root."
+    },
+    {
+      "name": "skill-b11-auto-stop-loss-take-profit",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "entry_date",
+        "open",
+        "position",
+        "quantity",
+        "symbol",
+        "today"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The qsh form and declaration fix entry and market-date inputs and name Parquet trade outputs."
+    },
+    {
+      "name": "skill-b12-intraday-position-manager",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "available_cash",
+        "locked_qty",
+        "market",
+        "price",
+        "sellable_qty",
+        "time"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The qsh form and contract specification define position, price, cash, and time inputs with Parquet results."
+    },
+    {
+      "name": "skill-b6-limitup-pool",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "HTML",
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "board_count",
+        "build_id",
+        "reseal_time",
+        "result_type",
+        "target_id",
+        "trade_date"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The declaration documents a Parquet pool and dashboard fields, but does not state a closed root input contract."
+    },
+    {
+      "name": "skill-b7-lhb-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "HTML",
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "build_id",
+        "lhb_stock",
+        "result_json",
+        "target_id",
+        "trade_date",
+        "watchlist_rank"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The declaration documents CSV seat mappings and Parquet watchlist outputs, but not a single closed root I/O contract."
+    },
+    {
+      "name": "skill-backtest",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "HTML",
+        "JSON"
+      ],
+      "detected_fields": [
+        "date",
+        "expr",
+        "factor",
+        "horizon",
+        "nav",
+        "signal",
+        "symbol",
+        "universe"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "core-chain",
+        "structured-existing"
+      ],
+      "notes": "The qsh form and protocol specify factor, universe, horizon, market-panel fields, signals, and NAV/diagnostic outputs; this is a core-chain member."
+    },
+    {
+      "name": "skill-backtest-overfit",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "TEXT"
+      ],
+      "detected_fields": [
+        "cv_score",
+        "dsr",
+        "haircut_method",
+        "n_trials",
+        "pbo",
+        "periods_per_year"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The qsh parameters and declaration name JSON, CSV, and text overfit reports with DSR/PBO diagnostics."
+    },
+    {
+      "name": "skill-backtesting-bias-avoidance",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "bias_check",
+        "market_data",
+        "signal",
+        "transaction_cost",
+        "walk_forward"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The declaration describes backtest inputs and audit sections but does not close a machine-readable root output."
+    },
+    {
+      "name": "skill-block-trade-radar",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "amount",
+        "date",
+        "price",
+        "sequence_id",
+        "symbol",
+        "volume"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The qsh form and row fields identify block-trade inputs, but the documented Markdown radar is not a closed structured output."
+    },
+    {
+      "name": "skill-brinson-performance-attribution",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON"
+      ],
+      "detected_fields": [
+        "allocation",
+        "benchmark_weight",
+        "contribution",
+        "portfolio_weight",
+        "sector_return",
+        "selection"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration specifies attribution CSV inputs, method selection, and JSON contribution outputs."
+    },
+    {
+      "name": "skill-buffett-moat-screener",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "HTML",
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "as_of_date",
+        "index_symbol",
+        "result_type",
+        "result_value",
+        "symbols",
+        "universe"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The qsh form defines date and universe inputs and the declaration names JSON, HTML, and Parquet screening outputs."
+    },
+    {
+      "name": "skill-build-b10-factor-evaluation",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "HTML",
+        "JSON",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "factor_value",
+        "forward_return",
+        "group_mode",
+        "target_id",
+        "trade_date",
+        "ts_code"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration explicitly requires factor-panel fields and names HTML, JSON, and Parquet evaluation outputs."
+    },
+    {
+      "name": "skill-buyback-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "announcement_date",
+        "buyback_end_date",
+        "buyback_start_date",
+        "price_ceiling",
+        "price_floor",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The declaration describes a buyback lifecycle monitor and Markdown research output without a closed machine-readable interface."
+    },
+    {
+      "name": "skill-calendar-anomaly-scanner",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON"
+      ],
+      "detected_fields": [
+        "date",
+        "date_col",
+        "fdr_adjustment",
+        "return_col",
+        "return_value",
+        "window"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The qsh form fixes date and price-change columns and the declaration names CSV input plus JSON anomaly results."
+    },
+    {
+      "name": "skill-capital-flow-crowding-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "block_flow",
+        "crowding_lookback",
+        "crowding_pct",
+        "dimensions",
+        "margin_flow",
+        "northbound_flow",
+        "signal",
+        "window_days"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The qsh parameters and declaration define three source flows, crowding fields, and JSON report results."
+    },
+    {
+      "name": "skill-cb-analyzer",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "MARKDOWN",
+        "PARQUET"
+      ],
+      "detected_fields": [
+        "date",
+        "delta",
+        "gamma",
+        "iv",
+        "signal",
+        "top_n",
+        "use_llm",
+        "vega"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration fixes analyzer options and dual Markdown/JSON report artifacts with cached Parquet inputs."
+    },
+    {
+      "name": "skill-commodity-carry-cta",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "basis_momentum",
+        "carry",
+        "composite",
+        "date",
+        "inventory",
+        "ts_momentum",
+        "variety",
+        "xs_momentum"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration names futures inputs and a CSV factor table with Markdown research output."
+    },
+    {
+      "name": "skill-concept-rotation-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "breadth",
+        "concept",
+        "concept_stock",
+        "date",
+        "momentum",
+        "rotation"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The declaration describes concept and theme monitoring with Markdown reports, without a closed root I/O contract."
+    },
+    {
+      "name": "skill-corporate-action-adjustment-auditor",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "adj_close",
+        "cash_dividend",
+        "close",
+        "date",
+        "split_factor",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The declaration fixes adjustment-audit CSV input fields and JSON/Markdown audit outputs."
+    },
+    {
+      "name": "skill-cross-listing-parity",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "MARKDOWN"
+      ],
+      "detected_fields": [
+        "a_symbol",
+        "currency_base",
+        "date",
+        "fx",
+        "h_symbol",
+        "pair_id",
+        "ratio",
+        "us_symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "The declaration fixes pair-mapping CSV fields but the documented parity result is a Markdown monitor rather than a closed structured output."
+    },
+    {
+      "name": "skill-daily-report",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "README describes a Markdown report but no closed input/output declaration."
+    },
+    {
+      "name": "skill-dalio-all-weather",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Workflow is documented, without a closed interface declaration."
+    },
+    {
+      "name": "skill-dividend-yield-scan",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "README describes scans and reports, not a closed I/O schema."
+    },
+    {
+      "name": "skill-dl-gnn-stock-graph",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Model and backtest features are narrative only."
+    },
+    {
+      "name": "skill-doc-to-alphas",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/alpha_ops.md"
+      ],
+      "detected_formats": [
+        "Markdown",
+        "alpha expression"
+      ],
+      "detected_fields": [
+        "OHLCV fields",
+        "alpha operators"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Reference explicitly defines accepted fields and expression output constraints."
+    },
+    {
+      "name": "skill-earnings-season-tracker",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Report sections are described without a closed I/O schema."
+    },
+    {
+      "name": "skill-etf-arbitrage-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Monitoring outputs are narrative."
+    },
+    {
+      "name": "skill-etf-fund-evaluator",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Evaluation scope is documented without explicit structured I/O."
+    },
+    {
+      "name": "skill-event-risk-alert",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Alert workflow lacks a closed input/output declaration."
+    },
+    {
+      "name": "skill-factor-alpha191-alpha101",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV"
+      ],
+      "detected_fields": [
+        "long-form OHLCV",
+        "wide factor table"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "README explicitly states long-form OHLCV CSV input and wide CSV output."
+    },
+    {
+      "name": "skill-factor-backtest",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "quant-skill.yaml"
+      ],
+      "detected_formats": [
+        "Markdown",
+        "PDF",
+        "factor data",
+        "market data"
+      ],
+      "detected_fields": [
+        "IC",
+        "bucket returns",
+        "factor signal",
+        "market data"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "README explicitly supplies factor and market-data inputs and named diagnostics."
+    },
+    {
+      "name": "skill-factor-blend",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "signal matrix"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "README names outputs or workflow artifacts but does not state both machine-readable input and output schemas."
+    },
+    {
+      "name": "skill-factor-debug",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Diagnostic playbook is narrative."
+    },
+    {
+      "name": "skill-factor-decay",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Metrics are named but an input/output schema is not closed."
+    },
+    {
+      "name": "skill-factor-evaluate",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "report",
+        "signal matrix"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "README names outputs or workflow artifacts but does not state both machine-readable input and output schemas."
+    },
+    {
+      "name": "skill-factor-grouped-wrapper",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "skill.yml"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "core-chain",
+        "non-structured-review"
+      ],
+      "notes": "Candidate core-chain grouped stage; no closed I/O declaration."
+    },
+    {
+      "name": "skill-factor-idea-generation",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "skill.yml"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Ideas are produced from requests without a closed schema."
+    },
+    {
+      "name": "skill-factor-mason",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Quality-control workflow is narrative."
+    },
+    {
+      "name": "skill-factor-mine",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "SOP does not declare closed I/O."
+    },
+    {
+      "name": "skill-factor-mining-pandaai",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "factor-mining-pandaai.skill"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "core-chain",
+        "non-structured-review"
+      ],
+      "notes": "Candidate core-chain factor-mining stage; mode is not a closed I/O declaration."
+    },
+    {
+      "name": "skill-factor-optimize",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Optimization workflow is narrative."
+    },
+    {
+      "name": "skill-factor-orthogonalize",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "report",
+        "signal matrix"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "README names outputs or workflow artifacts but does not state both machine-readable input and output schemas."
+    },
+    {
+      "name": "skill-factor-pool-evolution",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "skill.yml"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Mermaid workflow is not a closed interface declaration."
+    },
+    {
+      "name": "skill-factor-ranking-sage",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "factor data",
+        "label data",
+        "ranking"
+      ],
+      "detected_fields": [
+        "Top-K factors"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "README explicitly identifies local factor/label inputs and Top-K output."
+    },
+    {
+      "name": "skill-factor-review",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Review reports have no closed I/O declaration."
+    },
+    {
+      "name": "skill-factormad-debate-factor-mining",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Debate workflow is narrative."
+    },
+    {
+      "name": "skill-fin-news",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Article output is narrative."
+    },
+    {
+      "name": "skill-forecast-calibration-audit",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Calibration audit does not declare closed I/O."
+    },
+    {
+      "name": "skill-fundamental-factor-analysis",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "factor data",
+        "financial reports"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "README names outputs or workflow artifacts but does not state both machine-readable input and output schemas."
+    },
+    {
+      "name": "skill-futures-deepview-analyst",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Natural-language request conversion is explicit; data-call plan is not closed I/O."
+    },
+    {
+      "name": "skill-futures-roll-auditor",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON"
+      ],
+      "detected_fields": [
+        "back",
+        "back_price",
+        "date",
+        "difference adjustment",
+        "front",
+        "front_price",
+        "ratio adjustment",
+        "roll events",
+        "roll gap",
+        "selected",
+        "warnings"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Roll ledger is described, without a closed input schema."
+    },
+    {
+      "name": "skill-gaetano-crux-capital-research-model",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Research model is narrative."
+    },
+    {
+      "name": "skill-gao-shanwen-research-model",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Public-writing study skill is narrative."
+    },
+    {
+      "name": "skill-global-commodity-term-structure",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Research brief workflow lacks a closed I/O declaration."
+    },
+    {
+      "name": "skill-global-macro-rates-fx-lab",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Macro brief workflow lacks a closed I/O declaration."
+    },
+    {
+      "name": "skill-global-macro-trend-strategy",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "README names CSV data but does not declare a complete closed interface."
+    },
+    {
+      "name": "skill-hk-stock-dossier",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Due-diligence report workflow lacks closed I/O."
+    },
+    {
+      "name": "skill-hk-us-consensus-radar",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Radar report workflow lacks closed I/O."
+    },
+    {
+      "name": "skill-hk-us-consensus-revision-radar",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "HTML",
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "HTML research report is described without a closed input schema."
+    },
+    {
+      "name": "skill-hk-us-dividend-events",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Dividend-event report workflow lacks closed I/O."
+    },
+    {
+      "name": "skill-hk-us-insider-radar",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents a sourced Markdown radar report, not a closed I/O schema."
+    },
+    {
+      "name": "skill-hk-us-quote-scan",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents a sourced quote-and-valuation report, not a closed I/O schema."
+    },
+    {
+      "name": "skill-holder-structure-scan",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents a shareholder-structure scan and report, not a closed I/O schema."
+    },
+    {
+      "name": "skill-ic-analysis",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "The skill declaration describes analysis but no closed machine-readable interface."
+    },
+    {
+      "name": "skill-index-rebalance-event-study",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/output-contract.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "anchor_date",
+        "event_type",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The documented event-study inputs and output contract provide explicit machine-readable artifacts."
+    },
+    {
+      "name": "skill-index-valuation-rotation",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "The workflow produces an analyst report without a closed I/O declaration."
+    },
+    {
+      "name": "skill-institutional-research-tracker",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "The tracker documents report content, not a closed I/O schema."
+    },
+    {
+      "name": "skill-intraday-data-quality-auditor",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/output-contract.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "close",
+        "high",
+        "low",
+        "open",
+        "timestamp",
+        "volume"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The input bar fields and JSON output contract are explicitly documented."
+    },
+    {
+      "name": "skill-investment-decision",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/decision-contract.md"
+      ],
+      "detected_formats": [
+        "DOCX",
+        "JSON"
+      ],
+      "detected_fields": [
+        "evidence",
+        "risk",
+        "valuation"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The decision contract explicitly defines machine-readable input and output artifacts."
+    },
+    {
+      "name": "skill-jq-to-panda-converter",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "examples/ma_crossover_panda.json"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Python"
+      ],
+      "detected_fields": [
+        "strategy"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The skill explicitly transforms strategy source code into PandaAI JSON strategy configuration."
+    },
+    {
+      "name": "skill-keynes-contrarian-investment",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/pandadata_contract.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "valuation"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Frozen documentation explicitly provides machine-readable research artifacts."
+    },
+    {
+      "name": "skill-klarman-special-situations",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/evidence_templates/distress_turnaround.json"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Parquet"
+      ],
+      "detected_fields": [
+        "evidence"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Frozen documentation explicitly provides machine-readable research artifacts."
+    },
+    {
+      "name": "skill-ma-crossover-signal",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "examples/output/ma_crossover_signal.json"
+      ],
+      "detected_formats": [
+        "JSON"
+      ],
+      "detected_fields": [
+        "signal",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The documented signal workflow emits a machine-readable JSON signal artifact."
+    },
+    {
+      "name": "skill-macro-altdata-nowcast",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents a nowcast report rather than a closed I/O schema."
+    },
+    {
+      "name": "skill-macro-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents monitoring reports without a closed interface declaration."
+    },
+    {
+      "name": "skill-market-daily-review",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents an after-close report, not a closed I/O schema."
+    },
+    {
+      "name": "skill-market-regime-analysis",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents regime analysis and strategy construction without a closed interface."
+    },
+    {
+      "name": "skill-ml-factor-ensemble",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "scripts/ml_ensemble.py"
+      ],
+      "detected_formats": [
+        "CSV"
+      ],
+      "detected_fields": [
+        "factor",
+        "label"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Frozen documentation explicitly defines machine-readable CSV input and output artifacts."
+    },
+    {
+      "name": "skill-model-hpo-evidence-driven",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/output_contract.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON"
+      ],
+      "detected_fields": [
+        "factor",
+        "label",
+        "trial"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The documented data artifacts and output contract provide explicit machine-readable I/O."
+    },
+    {
+      "name": "skill-munger-mental-model",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "munger-mental-model/scripts/analyze.py",
+        "skill.json"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "PNG"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Frozen analysis documentation explicitly provides machine-readable input and output artifacts."
+    },
+    {
+      "name": "skill-news-sentiment-analyst",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "scripts/reporter.py"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Parquet"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Frozen collector and reporter documentation explicitly provides machine-readable artifacts."
+    },
+    {
+      "name": "skill-northbound-margin-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents monitoring reports rather than a closed interface declaration."
+    },
+    {
+      "name": "skill-numerical-leak-check",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/adapter-contract.md"
+      ],
+      "detected_formats": [
+        "JSON"
+      ],
+      "detected_fields": [
+        "adapter",
+        "case"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The adapter contract explicitly defines machine-readable numerical-check artifacts."
+    },
+    {
+      "name": "skill-oil-brief",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents a sourced oil brief without a closed I/O schema."
+    },
+    {
+      "name": "skill-option-strategy-builder",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "examples/sample_data/get_option_daily.json"
+      ],
+      "detected_formats": [
+        "JSON"
+      ],
+      "detected_fields": [
+        "option_code"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Frozen documentation explicitly provides JSON input and output artifacts."
+    },
+    {
+      "name": "skill-options-vol-analyst",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents volatility reports without a closed interface declaration."
+    },
+    {
+      "name": "skill-overseas-equity-factor-miner",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Documents factor discovery and reports, not a closed I/O schema."
+    },
+    {
+      "name": "skill-oversold-rebound",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/pandadata_contract.md",
+        "scripts/oversold_rebound.py"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Frozen signal workflow explicitly provides JSON and Markdown input/output artifacts."
+    },
+    {
+      "name": "skill-pair-correlation",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "examples/output/pair_correlation.json"
+      ],
+      "detected_formats": [
+        "JSON"
+      ],
+      "detected_fields": [
+        "correlation",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The documented calculation produces a machine-readable correlation output artifact."
+    },
+    {
+      "name": "skill-pandaai-factor-online",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "scripts/validate-qsh-form.mjs"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Frozen online-mining workflow explicitly provides CSV and JSON artifacts."
+    },
+    {
+      "name": "skill-pandaai-workflow-audit",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "scripts/audit_workflow.py"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "links",
+        "nodes"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The audit consumes PandaAI JSON workflow artifacts and emits a documented audit result."
+    },
+    {
+      "name": "skill-pandaai-workflow-generator",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/templates/simple_backtest.json"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Python"
+      ],
+      "detected_fields": [
+        "nodes"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Frozen generator documentation explicitly provides JSON workflow and Python code artifacts."
+    },
+    {
+      "name": "skill-pandadata-api",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/api_catalog.json"
+      ],
+      "detected_formats": [
+        "JSON"
+      ],
+      "detected_fields": [
+        "method",
+        "params"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The API catalog explicitly documents machine-readable request parameters and response contracts."
+    },
+    {
+      "name": "skill-pandadata-warehouse",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "DuckDB",
+        "JSON",
+        "Parquet",
+        "SQL"
+      ],
+      "detected_fields": [],
+      "required_maintainer_decision": true,
+      "waves": [
+        "core-chain",
+        "structured-existing"
+      ],
+      "notes": "Frozen warehouse documentation explicitly defines DuckDB, Parquet, SQL, and JSON artifacts."
+    },
+    {
+      "name": "skill-paper-replication",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "templates/reproduce_config.json"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "paper"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The reproduction configuration and documented outputs provide machine-readable research artifacts."
+    },
+    {
+      "name": "skill-portfolio-attribution",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "examples/output/attribution_report.json"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON"
+      ],
+      "detected_fields": [
+        "contribution",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The examples document machine-readable portfolio inputs and attribution output."
+    },
+    {
+      "name": "skill-portfolio-checkup",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "portfolio.json"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "holdings"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "A portfolio JSON artifact is supported, but the full checkup workflow is not a closed schema."
+    },
+    {
+      "name": "skill-portfolio-liquidity-stress-test",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/output-contract.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON"
+      ],
+      "detected_fields": [
+        "adv",
+        "position_value",
+        "spread_bps",
+        "symbol",
+        "volatility"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The documented CSV input contract and JSON output contract are explicit."
+    },
+    {
+      "name": "skill-portfolio-optimize",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "scripts/optimize_report.py"
+      ],
+      "detected_formats": [
+        "CSV"
+      ],
+      "detected_fields": [
+        "alpha",
+        "date",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "core-chain",
+        "structured-existing"
+      ],
+      "notes": "The documented CLI accepts CSV return and alpha inputs and writes optimized weights as CSV."
+    },
+    {
+      "name": "skill-portfolio-pnl-attribution",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/input_contract.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON"
+      ],
+      "detected_fields": [
+        "asset_return",
+        "date",
+        "symbol",
+        "weight"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "The input contract defines CSV inputs and the documented command produces CSV and JSON outputs."
+    },
+    {
+      "name": "skill-post-market-screener",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "capital flow",
+        "screening report",
+        "technical patterns"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "README identifies Markdown and JSON outputs."
+    },
+    {
+      "name": "skill-qbti",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON"
+      ],
+      "detected_fields": [
+        "profile.json",
+        "quiz answers",
+        "strategy_brief.json"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "SKILL.md names downstream JSON artifacts."
+    },
+    {
+      "name": "skill-quant-execution-microstructure",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON"
+      ],
+      "detected_fields": [
+        "execution plan",
+        "fills",
+        "orders",
+        "target-position delta"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "Root instructions describe frozen target inputs and execution-plan results."
+    },
+    {
+      "name": "skill-quant-factor-directional-alpha",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "OHLCV factors"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Root declaration documents a factor library but no single root I/O contract."
+    },
+    {
+      "name": "skill-quant-factor-risk-pattern-alpha",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "OHLCV factors"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Root declaration documents a factor library but no single root I/O contract."
+    },
+    {
+      "name": "skill-quant-factor-skill-factory",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "skill package"
+      ],
+      "detected_fields": [
+        "OHLCV factor",
+        "validation"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Package-generation workflow needs a maintainer-owned artifact contract."
+    },
+    {
+      "name": "skill-quant-factor-volume-stat-alpha",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "OHLCV factors"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Root declaration documents a factor library but no single root I/O contract."
+    },
+    {
+      "name": "skill-quant-portfolio-risk",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "constraints",
+        "portfolio",
+        "risk exposures"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "Portfolio-risk workflow documents inputs and risk outputs."
+    },
+    {
+      "name": "skill-quant-research",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "research workflow"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Root material is workflow guidance rather than a fixed data contract."
+    },
+    {
+      "name": "skill-quant-research-experiment-registry",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "evidence",
+        "experiment",
+        "reproducibility audit"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Root documentation describes registered experiment evidence and audit results."
+    },
+    {
+      "name": "skill-quant-research-replication",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "replication workflow"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "No root-level explicit input and output schema was found."
+    },
+    {
+      "name": "skill-refinancing-monitor",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "dilution",
+        "pricing",
+        "refinancing events"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "Monitor purpose is documented; maintainers must confirm the artifact contract."
+    },
+    {
+      "name": "skill-regulatory-risk-radar",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "regulatory events",
+        "risk grades"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Radar purpose is documented; maintainers must confirm the artifact contract."
+    },
+    {
+      "name": "skill-report-replication",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "report replication"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "No root-level explicit input and output schema was found."
+    },
+    {
+      "name": "skill-residual-guided-factor-selection",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "OOS evaluation",
+        "factors",
+        "residual IC"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "Documentation describes factor inputs and evaluation outputs."
+    },
+    {
+      "name": "skill-risk-model",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "covariance",
+        "factor returns",
+        "risk attribution"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Documentation describes market inputs and risk-model outputs."
+    },
+    {
+      "name": "skill-risk-return-metrics",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "returns",
+        "risk metrics"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "Root materials document metric inputs and results."
+    },
+    {
+      "name": "skill-rolling-beta-exposure",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "asset returns",
+        "benchmark returns",
+        "rolling beta"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Root materials document return-series inputs and beta outputs."
+    },
+    {
+      "name": "skill-serenity-research-model",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "natural-language",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "public posts",
+        "research logic"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "Research reconstruction is described without a fixed root schema."
+    },
+    {
+      "name": "skill-signal-stability-audit",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "signal",
+        "stability diagnostics"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Documentation describes audit inputs and diagnostics."
+    },
+    {
+      "name": "skill-simons-pairs-trading",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "hedge ratio",
+        "pair prices",
+        "signals",
+        "spread"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "Documentation describes price-series inputs and pair-research outputs."
+    },
+    {
+      "name": "skill-smart-money-profiler",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/profiling-playbook.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "LHB seats",
+        "capital consensus",
+        "northbound activity"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Monitoring purpose is documented; maintainers must confirm the artifact contract."
+    },
+    {
+      "name": "skill-ssquant-ai-trader",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "configuration",
+        "report"
+      ],
+      "detected_fields": [
+        "paper trading",
+        "runtime checks",
+        "strategy"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "core-chain",
+        "structured-remaining"
+      ],
+      "notes": "Operational workflow combines instructions and runtime assets."
+    },
+    {
+      "name": "skill-ssquant-trader-generator",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "configuration"
+      ],
+      "detected_fields": [
+        "configuration",
+        "trader agent"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Generator output needs a maintainer-owned contract."
+    },
+    {
+      "name": "skill-statistical-arbitrage-time-series",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "cointegration",
+        "price series",
+        "research report",
+        "spread"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "Documentation describes data preparation and report outputs."
+    },
+    {
+      "name": "skill-stock-memory-analyzer-usa",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "US memory stocks",
+        "analysis"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "Analysis scope is documented but no root-level I/O schema was found."
+    },
+    {
+      "name": "skill-stock-screener",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md",
+        "references/screener-guide.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "Pandadata evidence",
+        "screening criteria",
+        "stocks"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Natural-language request handling is documented; maintainers must confirm a structured contract."
+    },
+    {
+      "name": "skill-strategy-tearsheet-report",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "HTML",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "risk-adjusted metrics",
+        "strategy returns",
+        "tearsheet"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Root documentation describes performance input and report artifacts."
+    },
+    {
+      "name": "skill-survivorship-universe-auditor",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "audit",
+        "delisting returns",
+        "security identities",
+        "universe membership"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Documentation describes audit inputs and findings."
+    },
+    {
+      "name": "skill-template",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "not-applicable",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [],
+      "detected_fields": [
+        "template"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "non-structured-review"
+      ],
+      "notes": "orchestration-only"
+    },
+    {
+      "name": "skill-time-series-analysis",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "diagnostics",
+        "report",
+        "time series"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "Documentation identifies input series and generated reports."
+    },
+    {
+      "name": "skill-transaction-cost-analysis",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "cost report",
+        "datetime",
+        "price",
+        "qty",
+        "side",
+        "symbol"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "README gives a fills.csv schema and JSON/Markdown outputs."
+    },
+    {
+      "name": "skill-transaction-cost-calibration",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "OHLCV",
+        "cost assumptions",
+        "fills",
+        "quotes"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "Root documentation describes calibration data and model artifacts."
+    },
+    {
+      "name": "skill-us-sec-edgar-harvester",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "accession number",
+        "filing timeline",
+        "insider",
+        "manager",
+        "ticker"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "README documents query subjects and structured filing outputs."
+    },
+    {
+      "name": "skill-us-sector-rotation",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "PB",
+        "PE",
+        "returns",
+        "rotation report",
+        "sector"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "README documents Pandadata sources and report measures."
+    },
+    {
+      "name": "skill-walk-forward-validator",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown"
+      ],
+      "detected_fields": [
+        "ICIR",
+        "Q5-Q1",
+        "returns",
+        "scorecard",
+        "signal"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "README documents an input contract and validation scorecard."
+    },
+    {
+      "name": "skill-x-trader-builder",
+      "declaration_readable": true,
+      "structured_io_explicit": true,
+      "candidate_mode": "structured",
+      "evidence_paths": [
+        "README.en.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "CSV",
+        "JSON",
+        "Markdown",
+        "skill package"
+      ],
+      "detected_fields": [
+        "generated skill",
+        "posts",
+        "signals",
+        "thesis template",
+        "timeline"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-existing"
+      ],
+      "notes": "README documents staged inputs and a skill-package output contract."
+    },
+    {
+      "name": "skill-xingtai-catcher",
+      "declaration_readable": true,
+      "structured_io_explicit": false,
+      "candidate_mode": "hybrid",
+      "evidence_paths": [
+        "README.md",
+        "SKILL.md"
+      ],
+      "detected_formats": [
+        "MCP response",
+        "image"
+      ],
+      "detected_fields": [
+        "BAR window",
+        "K-line screenshot",
+        "candidates",
+        "text description",
+        "timeframe"
+      ],
+      "required_maintainer_decision": true,
+      "waves": [
+        "structured-remaining"
+      ],
+      "notes": "MCP and image routing are documented, but no root-level explicit I/O schema was found."
+    }
+  ]
+}
