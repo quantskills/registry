@@ -117,7 +117,7 @@ These generated outputs are owned by `build_registry.py` — **do not edit by ha
 ## 📊 Current Snapshot
 
 <!-- registry-snapshot:start -->
-Catalog snapshot: `sha256:be075623a9ce693f79ce6c593f11be834bf555d954c5189f3083dae3e0e49274`; public assets: 158.
+Catalog snapshot: `sha256:ecb9a3d03c6df06f3d5ca7961766ad2927ab3d370ee64e80343c0dd6946567a7`; public assets: 158.
 <!-- registry-snapshot:end -->
 
 > This snapshot changes with every nightly scan — [INDEX.md](INDEX.md) / [registry.json](registry.json) are the live sources of truth.

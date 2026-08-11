@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const URL_PREFIX = "https://github.com/quantskills/";
 const LEGACY_REQUIRED = ["name", "url", "project_type", "declaration_file", "status"];
-const V2_REQUIRED = ["snapshot_id", "catalog", "workflow", "summary_zh", "summary_en", "interface", "category", "subcategory", "stage"];
+const V2_REQUIRED = ["snapshot_id", "catalog", "workflow", "summary_zh", "summary_en", "interface", "category", "subcategory", "stage", "catalog_status", "declaration_status", "interface_status", "default_branch"];
 
 function isObject(value) { return value !== null && typeof value === "object" && !Array.isArray(value); }
 function fallback(value) { return value === "uncategorized" || value === "unknown" || value === "fallback"; }
@@ -35,7 +35,7 @@ async function main() {
     for (const field of LEGACY_REQUIRED) if (typeof entry[field] !== "string" || !entry[field].trim()) errors.push(`entry[${index}].${field} must be a nonempty string`);
     if (!names.add(entry.name)) errors.push(`duplicate asset name: ${entry.name}`);
     if (typeof entry.url === "string" && entry.url !== `${URL_PREFIX}${entry.name}`) errors.push(`entry[${index}].url must exactly match asset name`);
-    const missing = V2_REQUIRED.filter(field => entry[field] === undefined || entry[field] === null || entry[field] === "");
+    const missing = V2_REQUIRED.filter(field => entry[field] === undefined || (field !== "interface" && (entry[field] === null || entry[field] === "")));
     if (missing.length) (contractMode === "enforce" ? errors : warnings).push(`entry[${index}] missing v2 fields: ${missing.join(", ")}`);
     if (entry.snapshot_id !== undefined) {
       if (!/^sha256:[0-9a-f]{64}$/.test(entry.snapshot_id)) errors.push(`entry[${index}].snapshot_id is invalid`);
@@ -47,7 +47,9 @@ async function main() {
     if (entry.stage !== undefined && !stages.has(entry.stage)) v2Issues.push("unknown stage");
     if (entry.catalog && (entry.catalog.category !== entry.category || entry.catalog.subcategory !== entry.subcategory)) v2Issues.push("catalog summary mismatch");
     if (entry.workflow && (entry.workflow.primary_stage !== entry.stage || !Array.isArray(entry.workflow.workflow_stages) || !entry.workflow.workflow_stages.every(stage => stages.has(stage)))) v2Issues.push("invalid workflow");
-    if (entry.interface && !interfaceModes.has(entry.interface.mode)) v2Issues.push("unknown interface mode");
+    if (entry.interface !== null && entry.interface && !interfaceModes.has(entry.interface.mode)) v2Issues.push("unknown interface mode");
+    if (entry.interface_status === "pending-maintainer" && entry.interface !== null) v2Issues.push("pending interface must be null");
+    if (entry.interface_status === "published" && (!entry.interface || !["structured", "hybrid"].includes(entry.interface.mode))) v2Issues.push("published interface invalid");
     if ([entry.summary_zh, entry.summary_en].some(value => fallback(value) || value === "待迁移")) v2Issues.push("fallback summary");
     if (entry.interface?.fallback || entry.workflow?.fallback || entry.catalog?.fallback) v2Issues.push("fallback marker");
     if (v2Issues.length) (contractMode === "enforce" ? errors : warnings).push(`entry[${index}] ${v2Issues.join(", ")}`);

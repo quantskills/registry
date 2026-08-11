@@ -17,7 +17,8 @@
     "adapters",
     "provider_mappings",
     "core_lineage",
-    "compatibility_edges"
+    "compatibility_edges",
+    "publication"
   ],
   "properties": {
     "schema_version": {
@@ -80,9 +81,11 @@
       "items": {
         "$ref": "#/$defs/edge"
       }
-    }
+    },
+    "publication": {"$ref": "#/$defs/publication"}
   },
   "$defs": {
+    "publication": {"type":"object","additionalProperties":false,"required":["inventory_sha256","assignments_sha256","published_interfaces","manifest_sha256"],"properties":{"inventory_sha256":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},"assignments_sha256":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},"manifest_sha256":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},"published_interfaces":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["name","default_branch","head_sha","interface"],"properties":{"name":{"type":"string"},"default_branch":{"type":"string"},"head_sha":{"type":"string","pattern":"^[0-9a-f]{40}$"},"interface":{"$ref":"#/$defs/interface"}}}}}},
     "sha": {
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"
@@ -148,7 +151,7 @@
         "validation_level",
         "maintainer_type",
         "last_validated",
-        "commit_sha"
+        "commit_sha", "catalog_status", "declaration_status", "interface_status", "default_branch"
       ],
       "properties": {
         "name": {
@@ -180,9 +183,11 @@
         "workflow": {
           "$ref": "#/$defs/workflow"
         },
-        "interface": {
-          "$ref": "#/$defs/interface"
-        },
+        "interface": {"anyOf": [{"$ref": "#/$defs/interface"}, {"type": "null"}]},
+        "catalog_status": {"const": "approved"},
+        "declaration_status": {"enum": ["legacy", "contract-valid"]},
+        "interface_status": {"enum": ["pending-maintainer", "published"]},
+        "default_branch": {"type": "string", "minLength": 1},
         "category": {
           "type": "string"
         },

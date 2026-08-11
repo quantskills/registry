@@ -125,7 +125,7 @@ def _edges(assets: list, adapters: list) -> list[dict]:
         pi = producer.get("interface", {})
         for consumer in assets:
             ci = consumer.get("interface", {})
-            if producer is consumer or pi.get("mode") not in {"structured", "hybrid"} or ci.get("mode") not in {"structured", "hybrid"}:
+            if producer is consumer or producer.get("interface_status") != "published" or consumer.get("interface_status") != "published" or pi.get("mode") not in {"structured", "hybrid"} or ci.get("mode") not in {"structured", "hybrid"}:
                 continue
             for output in pi.get("outputs", []):
                 for input_ in ci.get("inputs", []):
@@ -141,11 +141,11 @@ def _edges(assets: list, adapters: list) -> list[dict]:
     return [json.loads(value) for value in sorted({json.dumps(edge, sort_keys=True, separators=(",", ":")) for edge in result})]
 
 
-def _closed_chain(assets: list, edges: list, lineage: dict, envelope: dict, mappings: dict) -> bool:
-    by_name = {asset.get("name"): asset for asset in assets if isinstance(asset, dict)}
-    return (set(by_name) == _CHAIN_NAMES
-            and isinstance(lineage, dict)
-            and lineage.get("scope") == "schema-smoke-only")
+def _closed_chain(assets: list, publication: object) -> bool:
+    if not isinstance(publication, dict): return False
+    base = {key: publication.get(key) for key in ("inventory_sha256", "assignments_sha256", "published_interfaces")}
+    if publication.get("manifest_sha256") != "sha256:" + hashlib.sha256(canonical(base)).hexdigest(): return False
+    return bool(assets) and all(asset.get("catalog_status") == "approved" and asset.get("default_branch") and asset.get("interface_status") in {"pending-maintainer", "published"} and (asset.get("interface") is None) == (asset.get("interface_status") == "pending-maintainer") for asset in assets)
 
 
 def verify(snapshot_path: Path, registry_path: Path, readmes: tuple[Path, ...] = (), expected_contract_mode: str | None = None) -> None:
@@ -186,8 +186,8 @@ def verify(snapshot_path: Path, registry_path: Path, readmes: tuple[Path, ...] =
             edges = _edges(snapshot.get("assets", []), adapters["items"])
             if canonical(snapshot.get("interface_diagnostics")) != canonical(diagnostics): errors.append("interface diagnostics do not match independent validation")
             if canonical(snapshot.get("compatibility_edges")) != canonical(edges): errors.append("compatibility edges do not match independent validation")
-            closed = not diagnostics and _closed_chain(snapshot.get("assets", []), edges, lineage, envelope, mappings)
-            expected_lineage = lineage if closed else {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}
+            closed = not diagnostics and _closed_chain(snapshot.get("assets", []), snapshot.get("publication"))
+            expected_lineage = {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}
             if canonical(snapshot.get("core_lineage")) != canonical(expected_lineage): errors.append("core lineage does not match trusted physical lineage")
             if snapshot.get("contract_mode") == "enforce" and not closed: errors.append("enforce snapshot is not the approved core asset set")
             if expected_contract_mode == "enforce" and (snapshot.get("contract_mode") != "enforce" or not closed): errors.append("expected enforce snapshot is not the approved core asset set")

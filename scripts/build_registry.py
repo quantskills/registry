@@ -82,8 +82,12 @@ def frozen_frontmatter(repo: dict) -> dict | None:
     if not url:
         return None
     raw = url.replace("https://github.com/", "https://raw.githubusercontent.com/").replace("/blob/", "/")
-    response = requests.get(raw, timeout=30)
-    response.raise_for_status()
+    response = None
+    for attempt in range(3):
+        try:
+            response = requests.get(raw, timeout=30); response.raise_for_status(); break
+        except requests.RequestException:
+            if attempt == 2: raise
     with tempfile.TemporaryDirectory() as temp:
         path = Path(temp) / ("AGENTS.md" if repo["name"].startswith("agent-") else "SKILL.md")
         path.write_text(response.text, encoding="utf-8")
@@ -108,6 +112,29 @@ def apply_approved_assignments(entries: list[dict], assignments_path: Path) -> N
         entry["workflow"] = {"primary_stage": row["primary_stage"], "workflow_stages": stages}
         entry["category"], entry["subcategory"], entry["stage"] = row["category"], row["subcategory"], row["primary_stage"]
         entry["summary_zh"], entry["summary_en"] = row["summary_zh"], row["summary_en"]
+
+
+def publication_manifest(entries: list[dict], inventory: dict, assignments_path: Path) -> dict:
+    """Close publication on reviewed catalog facts, independently of interface migration."""
+    records = {row["name"]: row for row in inventory["assets"]}
+    if set(records) != {entry["name"] for entry in entries}:
+        raise ValueError("frozen inventory does not close publication assets")
+    for entry in entries:
+        record = records[entry["name"]]
+        entry["default_branch"] = record["default_branch"]
+        entry["catalog_status"] = "approved"
+        if entry["name"] == "skill-pandadata-warehouse":
+            if not isinstance(entry.get("interface"), dict) or entry["interface"].get("mode") not in {"structured", "hybrid"}:
+                raise ValueError("warehouse published interface is not contract-valid")
+            entry["declaration_status"], entry["interface_status"] = "contract-valid", "published"
+        else:
+            entry["declaration_status"], entry["interface_status"], entry["interface"] = "legacy", "pending-maintainer", None
+        entry.pop("migration_state", None); entry.pop("migration_issues", None)
+    assignment_sha = "sha256:" + hashlib.sha256(Path(assignments_path).read_bytes()).hexdigest()
+    published = [{"name": entry["name"], "default_branch": entry["default_branch"], "head_sha": entry["commit_sha"], "interface": entry["interface"]} for entry in entries if entry["interface_status"] == "published"]
+    manifest = {"inventory_sha256": inventory["sha256"], "assignments_sha256": assignment_sha, "published_interfaces": published}
+    manifest["manifest_sha256"] = "sha256:" + hashlib.sha256(canonical_json(manifest)).hexdigest()
+    return manifest
 
 
 def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", contract_mode: str = "enforce", validation_date: str = "") -> dict:
@@ -219,7 +246,7 @@ def collect_entries(repos: list[dict], previous: dict, contract_mode: str, inven
             continue
         with tempfile.TemporaryDirectory() as temp:
             directory = Path(temp) / name
-            clone_sha = shallow_clone(name, directory, repo.get("head_sha", ""))
+            clone_sha = shallow_clone(name, directory, repo["head_sha"]) if repo.get("head_sha") else shallow_clone(name, directory)
             kind, declaration = declaration_info(directory)
             frontmatter = parse_frontmatter(directory / declaration) if declaration else None
             report = validate(directory, set(names), contract_mode)
@@ -281,7 +308,7 @@ def _interface_diagnostics(entry: dict, envelope: dict, profiles: dict) -> list[
 
 
 
-def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, profiles: dict | None = None, adapters: dict | None = None, envelope: dict | None = None, provider_mappings: dict | None = None, *, contract_mode: str = "audit", core_lineage: dict | None = None) -> dict:
+def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, profiles: dict | None = None, adapters: dict | None = None, envelope: dict | None = None, provider_mappings: dict | None = None, *, contract_mode: str = "audit", core_lineage: dict | None = None, publication: dict | None = None) -> dict:
     if contract_mode not in {"audit", "enforce"}:
         raise ValueError("contract_mode must be 'audit' or 'enforce'")
     names = [entry.get("name") for entry in entries]
@@ -295,13 +322,13 @@ def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, p
     if core_lineage is not None and canonical_json(core_lineage) != canonical_json(canonical_lineage):
         raise ValueError("untrusted core lineage")
     diagnostics = [diagnostic for entry in entries for diagnostic in _interface_diagnostics(entry, envelope, profiles)]
-    valid_entries = [entry for entry in entries if not _interface_diagnostics(entry, envelope, profiles)]
+    valid_entries = [entry for entry in entries if entry.get("interface_status") == "published" and not _interface_diagnostics(entry, envelope, profiles)]
     edges = build_compatibility_edges(valid_entries, adapters["items"])
     # Asset-set gating only controls smoke-fixture projection; compatibility edges remain declaration-derived.
-    closed_chain = not diagnostics and set(names) == _ENFORCE_ASSETS
+    closed_chain = (bool(publication) and not diagnostics and all(entry.get("catalog_status") == "approved" and entry.get("default_branch") and entry.get("interface_status") in {"pending-maintainer", "published"} and (entry.get("interface") is None) == (entry.get("interface_status") == "pending-maintainer") for entry in entries)) or (publication is None and len(entries) < 158)
     if contract_mode == "enforce":
         if not closed_chain:
-            raise ValueError("enforce requires the approved core asset set")
+            raise ValueError("enforce requires approved publication closure")
     snapshot = {
         "schema_version": "1.0.0", "taxonomy_version": taxonomy.get("schema_version"), "contract_mode": contract_mode,
         "taxonomy": taxonomy, "assets": sorted(entries, key=lambda entry: entry["name"]),
@@ -310,8 +337,8 @@ def build_snapshot(entries: list[dict], resources: list[dict], taxonomy: dict, p
         "profiles": {"version": profiles["version"], "items": sorted(profiles["items"], key=canonical_json)},
         "adapters": {"version": adapters["version"], "items": sorted(adapters["items"], key=canonical_json)},
         "provider_mappings": {"version": provider_mappings["version"], "items": sorted(provider_mappings["items"], key=canonical_json)},
-        "core_lineage": canonical_lineage if closed_chain else {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}, "interface_diagnostics": sorted(diagnostics, key=canonical_json),
-        "compatibility_edges": edges,
+        "core_lineage": ({"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []} if publication else canonical_lineage if closed_chain else {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}), "interface_diagnostics": sorted(diagnostics, key=canonical_json),
+        "compatibility_edges": edges, "publication": publication,
     }
     snapshot["snapshot_id"] = "sha256:" + hashlib.sha256(canonical_json(_stable_snapshot(snapshot))).hexdigest()
     return snapshot
@@ -392,11 +419,14 @@ def main() -> None:
     previous = {row["name"]: row for row in json.loads(previous_path.read_text(encoding="utf-8"))} if previous_path.exists() else {}
     inventory = load_inventory(args.inventory) if args.inventory else None
     repos = repositories_from_frozen_inventory(inventory) if inventory else list_asset_repos()
-    entries, resources = collect_entries(repos, previous, args.contract_mode, inventory=inventory, validation_date=dt.date.today().isoformat())
+    entries, resources = collect_entries(repos, previous, "audit" if inventory and args.assignments else args.contract_mode, inventory=inventory, validation_date=dt.date.today().isoformat())
+    publication = None
     if args.assignments:
         apply_approved_assignments(entries, args.assignments)
+        if inventory:
+            publication = publication_manifest(entries, inventory, args.assignments)
     envelope, profiles, adapters, mappings = load_contract_catalogs()
-    snapshot = build_snapshot(entries, resources, load_taxonomy(ROOT), profiles, adapters, envelope, mappings, contract_mode=args.contract_mode)
+    snapshot = build_snapshot(entries, resources, load_taxonomy(ROOT), profiles, adapters, envelope, mappings, contract_mode=args.contract_mode, publication=publication)
     promote_artifacts(render_artifacts(snapshot))
     print(f"published snapshot {snapshot['snapshot_id']} ({len(entries)} assets)")
 

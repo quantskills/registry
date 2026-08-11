@@ -118,7 +118,7 @@ flowchart LR
 ## 📊 当前收录快照
 
 <!-- registry-snapshot:start -->
-Catalog snapshot: `sha256:be075623a9ce693f79ce6c593f11be834bf555d954c5189f3083dae3e0e49274`; public assets: 158.
+Catalog snapshot: `sha256:ecb9a3d03c6df06f3d5ca7961766ad2927ab3d370ee64e80343c0dd6946567a7`; public assets: 158.
 <!-- registry-snapshot:end -->
 
 > 此快照会随每夜扫描变化，实时清单以 [INDEX.md](INDEX.md) / [registry.json](registry.json) 为准。

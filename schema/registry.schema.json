@@ -4,7 +4,7 @@
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["name", "url", "description", "project_type", "declaration_file", "category", "subcategory", "stage", "tags", "platforms", "status", "requires", "summary_zh", "summary_en", "license", "last_validated", "validation_level", "maintainer_type", "catalog", "workflow", "interface", "snapshot_id"],
+    "required": ["name", "url", "description", "project_type", "declaration_file", "category", "subcategory", "stage", "tags", "platforms", "status", "requires", "summary_zh", "summary_en", "license", "last_validated", "validation_level", "maintainer_type", "catalog", "workflow", "interface", "snapshot_id", "catalog_status", "declaration_status", "interface_status", "default_branch"],
     "properties": {
       "name": {"type": "string", "minLength": 1},
       "url": {"type": "string", "format": "uri"},
@@ -16,7 +16,8 @@
       "stage": {"type": "string", "minLength": 1},
       "catalog": {"type": "object", "required": ["category", "subcategory"]},
       "workflow": {"type": "object", "required": ["primary_stage", "workflow_stages"]},
-      "interface": {"type": "object", "required": ["mode"]},
+      "interface": {"type": ["object", "null"]},
+      "catalog_status": {"const":"approved"}, "declaration_status":{"enum":["legacy","contract-valid"]}, "interface_status":{"enum":["pending-maintainer","published"]}, "default_branch":{"type":"string","minLength":1},
       "summary_zh": {"type": "string"}, "summary_en": {"type": "string"},
       "tags": {"type": "array", "items": {"type": "string"}},
       "platforms": {"type": "array", "items": {"type": "string"}},
