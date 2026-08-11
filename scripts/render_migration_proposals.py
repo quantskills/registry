@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import csv
 import difflib
 import json
@@ -19,7 +20,7 @@ except ImportError:
 
 OUTPUT_FILES = ("frontmatter.proposed.yml", "declaration.diff", "readme-review.md", "runtime-gaps.json", "interface-review.json")
 NAME = re.compile(r"^(?:skill|agent)-[a-z0-9]+(?:-[a-z0-9]+)*$")
-ROOT_FIELDS = frozenset(("name", "description", "quantSkills"))
+ROOT_FIELDS = frozenset(("name", "description", "license", "allowed-tools", "user-invocable", "disable-model-invocation", "supported-runtimes", "compatibility", "version", "author", "metadata", "quantSkills"))
 SECRET = re.compile(
     r"(?i)(?:"
     r"ghp_[a-z0-9]{20,}"
@@ -39,7 +40,7 @@ def redact(value: object) -> object:
         result = {}
         for key, item in value.items():
             key_text = str(key)
-            if key_text in {"name", "repository"} and isinstance(item, str) and NAME.fullmatch(item):
+            if key_text in {"name", "repository"} and isinstance(item, str):
                 result[key_text] = item
             else:
                 result[key_text] = redact(item)
@@ -119,20 +120,23 @@ def _proposal(current: dict, row: dict, iface: dict, name: str) -> dict:
             description = summary
         if len(description) < 60:
             description += " This declaration records catalog metadata and interface review status."
-    proposed = redact({
-        "name": name,
-        "description": description,
-        "quantSkills": {
-        "schema_version": "2.0.0", "organization": "quantskills", "organization_url": "https://github.com/quantskills",
+    proposed = copy.deepcopy(current)
+    proposed["name"] = name
+    proposed["description"] = description
+    proposed["license"] = "GPL-3.0-only"
+    qs = proposed.get("quantSkills") if isinstance(proposed.get("quantSkills"), dict) else {}
+    qs.update({
+        "schema_version": "2.1.0", "organization": "quantskills", "organization_url": "https://github.com/quantskills",
         "repository": name, "repository_url": f"https://github.com/quantskills/{name}", "project_type": row["project_type"],
-        "license": "GPL-3.0-only", "maintainer": "abgyjaguo",
+        "license": "GPL-3.0-only", "maintainer": qs.get("maintainer", "abgyjaguo"),
         "catalog": {k: row[k] for k in ("category", "subcategory")},
         "workflow": {"primary_stage": row["primary_stage"], "workflow_stages": row["workflow_stages"].split("|")},
         "summary_zh": row["summary_zh"], "summary_en": row["summary_en"],
         "platforms": ["cursor", "claude-code", "codex", "hermes", "openclaw"],
         "status": "draft", "validation_level": "listed", "maintainer_type": "community", "interface": interface,
-        },
     })
+    proposed["quantSkills"] = qs
+    proposed = redact(proposed)
     proposed["name"] = name
     proposed["quantSkills"]["repository"] = name
     proposed["quantSkills"]["repository_url"] = f"https://github.com/quantskills/{name}"
@@ -172,6 +176,16 @@ def generate(inventory_path: Path, assignments_path: Path, interfaces_path: Path
         if error: review.append(error + "; no patch proposed")
         extra = sorted((str(key) for key in current if key not in ROOT_FIELDS), key=str)
         if extra: review.append("unsupported frontmatter root fields (manual migration required): " + ", ".join(f"$.{key}" for key in extra) + "; no patch proposed")
+        if isinstance(current.get("metadata"), dict): review.append("legacy metadata has no approved lossless 2.1 mapping; no patch proposed")
+        for field in ("maintainer", "license"):
+            value = current.get(field)
+            if value is not None and value != ("abgyjaguo" if field == "maintainer" else "GPL-3.0-only"):
+                review.append(f"existing {field} differs from approved value; no patch proposed")
+        current_qs = current.get("quantSkills") if isinstance(current.get("quantSkills"), dict) else {}
+        if current_qs.get("maintainer") not in (None, "abgyjaguo"):
+            review.append("existing quantSkills.maintainer differs from approved value; no patch proposed")
+        if current_qs.get("license") not in (None, "GPL-3.0-only"):
+            review.append("existing quantSkills.license differs from approved value; no patch proposed")
         if old and SECRET.search(old): review.append("potential secret detected in declaration; no patch proposed")
         if not row: review.append("assignment missing; no patch proposed")
         elif row.get("review_status") != "approved": review.append("assignment not approved; no patch proposed")

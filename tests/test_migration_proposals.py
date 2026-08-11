@@ -78,7 +78,7 @@ def test_clean_declaration_has_actionable_diff_and_preserves_body(tmp_path: Path
     generate(inventory, assignments, interfaces, waves, workspace, tmp_path / "report")
     proposal = (tmp_path / "report" / "skill-demo" / "frontmatter.proposed.yml").read_text(encoding="utf-8")
     diff = (tmp_path / "report" / "skill-demo" / "declaration.diff").read_text(encoding="utf-8")
-    assert "quantSkills:" in proposal and "schema_version: 2.0.0" in proposal
+    assert "quantSkills:" in proposal and "schema_version: 2.1.0" in proposal
     assert "GPL-3.0-only" in proposal and "abgyjaguo" in proposal
     assert "@@" in diff and "Body stays unchanged." in diff
 
@@ -214,3 +214,24 @@ def test_short_description_keeps_original_trigger_as_prefix(tmp_path: Path):
     proposed = yaml.safe_load((tmp_path / "report" / "skill-demo" / "frontmatter.proposed.yml").read_text(encoding="utf-8"))
     assert proposed["description"].startswith(original)
     assert assignments.read_text(encoding="utf-8").split("\n", 1)[1].split(",")[7] in proposed["description"]
+
+
+def test_daily_report_style_tools_are_preserved_and_maintainers_are_not_overwritten(tmp_path: Path):
+    inventory, assignments, interfaces, waves, workspace = _inputs(tmp_path, mode="natural-language")
+    repo = workspace / "skill-demo"
+    repo.joinpath("SKILL.md").write_text(
+        "---\nname: skill-demo\ndescription: Use when creating a reviewed market report from approved sources.\nallowed-tools: [Bash, Read, Write, WebSearch, WebFetch]\nuser-invocable: true\n---\nBody\n",
+        encoding="utf-8",
+    )
+    subprocess.run(["git", "-C", str(repo), "add", "SKILL.md"], check=True)
+    subprocess.run(["git", "-C", str(repo), "commit", "-m", "native-tools"], check=True, capture_output=True)
+    inventory.write_text(json.dumps({"assets": [{"name": "skill-demo", "head_sha": subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip(), "declaration": {"file": "SKILL.md"}}]}), encoding="utf-8")
+    generate(inventory, assignments, interfaces, waves, workspace, tmp_path / "report")
+    proposal = yaml.safe_load((tmp_path / "report" / "skill-demo" / "frontmatter.proposed.yml").read_text(encoding="utf-8"))
+    assert proposal["allowed-tools"] == ["Bash", "Read", "Write", "WebSearch", "WebFetch"]
+    repo.joinpath("SKILL.md").write_text("---\nmaintainer: someone-else\ndescription: Use when creating a reviewed market report from approved sources.\n---\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(repo), "add", "SKILL.md"], check=True)
+    subprocess.run(["git", "-C", str(repo), "commit", "-m", "other-maintainer"], check=True, capture_output=True)
+    inventory.write_text(json.dumps({"assets": [{"name": "skill-demo", "head_sha": subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip(), "declaration": {"file": "SKILL.md"}}]}), encoding="utf-8")
+    generate(inventory, assignments, interfaces, waves, workspace, tmp_path / "blocked")
+    assert "existing maintainer differs" in (tmp_path / "blocked" / "skill-demo" / "readme-review.md").read_text(encoding="utf-8")

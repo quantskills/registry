@@ -31,15 +31,15 @@ def _link_issues(root: Path, files: list[str]) -> list[str]:
 def evaluate_runtime_policy(root: Path, project_type: str) -> list[dict[str, object]]:
     canonical = "SKILL.md" if project_type == "skill" else "AGENTS.md"
     canonical_files = _files(root, (canonical,))
-    cursor = _files(root, ("agents/cursor-rule.mdc",))
+    cursor = []
     if (root / ".cursor/rules").is_dir():
-        cursor += [p.relative_to(root).as_posix() for p in sorted((root / ".cursor/rules").glob("*.mdc"))]
+        cursor = [p.relative_to(root).as_posix() for p in sorted((root / ".cursor/rules").glob("*.mdc"))]
     loaders = {
         "Cursor": cursor,
         "Claude Code": _files(root, ("CLAUDE.md",)),
-        "Codex": _files(root, ("agents/openai",)),
-        "Hermes": _files(root, ("agents/portable-loader.md", "HERMES.md")),
-        "OpenClaw": _files(root, ("agents/portable-loader.md", "OPENCLAW.md")),
+        "Codex": _files(root, ("agents/openai.yaml",)),
+        "Hermes": _files(root, ("HERMES.md",)),
+        "OpenClaw": _files(root, ("OPENCLAW.md",)),
     }
     rows = []
     for runtime in RUNTIMES:
@@ -55,7 +55,7 @@ def evaluate_runtime_policy(root: Path, project_type: str) -> list[dict[str, obj
         elif runtime == "Codex":
             status, detail = "pass", "canonical entrypoint present"
         else:
-            status, detail = ("pass", "portable or native loader present") if loaders[runtime] else ("needs-review", "runtime-specific loader not found")
+            status, detail = ("pass", "native runtime entrypoint present") if loaders[runtime] else ("needs-review", "runtime-specific loader not found")
         if issues:
             status, detail = ("fail" if status == "pass" else status), "; ".join(issues)
         rows.append({"runtime": runtime, "status": status, "evidence": evidence, "detail": detail})

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantskills.github.io/registry/schema/frontmatter.v2.0.schema.json",
+  "title": "QuantSkills asset declaration v2.0 compatibility schema",
+  "type": "object",
+  "required": ["quantSkills"],
+  "properties": {"quantSkills": {"type": "object", "required": ["schema_version"], "properties": {"schema_version": {"const": "2.0.0"}}}}
+}

@@ -1,13 +1,36 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://quantskills.github.io/registry/schema/frontmatter.schema.json",
-  "title": "QuantSkills asset declaration v2",
+  "title": "QuantSkills asset declaration v2.1",
   "type": "object",
   "additionalProperties": false,
   "required": ["name", "description", "quantSkills"],
   "properties": {
     "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$"},
     "description": {"type": "string", "minLength": 60},
+    "license": {"const": "GPL-3.0-only"},
+    "allowed-tools": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "user-invocable": {"type": "boolean"},
+    "disable-model-invocation": {"type": "boolean"},
+    "supported-runtimes": {"type": "array", "uniqueItems": true, "items": {"enum": ["cursor", "claude-code", "codex", "hermes", "openclaw"]}},
+    "compatibility": {"type": "string", "maxLength": 500},
+    "version": {"type": "string", "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"},
+    "author": {"type": "string", "minLength": 1},
+    "metadata": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "organization": {"type": "string", "minLength": 1},
+        "organization_url": {"type": "string", "minLength": 1},
+        "repository": {"type": "string", "minLength": 1},
+        "repository_url": {"type": "string", "minLength": 1},
+        "project_type": {"enum": ["skill", "agent"]},
+        "collection": {"type": "string", "minLength": 1},
+        "creator": {"type": "string", "minLength": 1},
+        "maintainer": {"type": "string", "minLength": 1},
+        "tags": {"type": "array", "items": {"type": "string"}},
+        "compatible_agents": {"type": "array", "items": {"type": "string"}}
+      }
+    },
     "quantSkills": {
       "type": "object",
       "additionalProperties": false,
@@ -18,7 +41,7 @@
         "maintainer_type", "platforms", "interface"
       ],
       "properties": {
-        "schema_version": {"const": "2.0.0"},
+        "schema_version": {"enum": ["2.0.0", "2.1.0"]},
         "organization": {"const": "quantskills"},
         "organization_url": {"const": "https://github.com/quantskills"},
         "repository": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$"},
@@ -64,6 +87,12 @@
       }
     }
   },
+  "allOf": [
+    {
+      "if": {"properties": {"quantSkills": {"properties": {"project_type": {"const": "agent"}}, "required": ["project_type"]}}, "required": ["quantSkills"]},
+      "then": {"not": {"anyOf": [{"required": ["allowed-tools"]}, {"required": ["user-invocable"]}, {"required": ["disable-model-invocation"]}]}}
+    }
+  ],
   "$defs": {
     "exactSemver": {
       "type": "string",

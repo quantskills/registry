@@ -31,7 +31,12 @@ def validate_frontmatter_schema(frontmatter: dict, schema_path: Path) -> list[di
     """Return schema errors in a stable order without raising on invalid input."""
     try:
         schema = json.loads(schema_path.read_text(encoding="utf-8"))
-        errors = Draft202012Validator(schema).iter_errors(frontmatter)
+        errors = list(Draft202012Validator(schema).iter_errors(frontmatter))
+        version = ((frontmatter.get("quantSkills") or {}).get("schema_version")
+                   if isinstance(frontmatter, dict) else None)
+        if schema_path.name == "frontmatter.schema.json" and version in {"2.0.0", "2.1.0"}:
+            version_schema = json.loads(schema_path.with_name(f"frontmatter.v{version[:3]}.schema.json").read_text(encoding="utf-8"))
+            errors.extend(Draft202012Validator(version_schema).iter_errors(frontmatter))
         return [
             _issue("contract-schema", _json_path(error.absolute_path), error.message)
             for error in sorted(errors, key=lambda error: (_json_path(error.absolute_path), error.message))
@@ -109,6 +114,17 @@ def validate_asset_semantics(frontmatter: dict, repo_name: str, declaration_file
         issues.append(_issue("contract-semantic", "$.quantSkills.repository", "repository must equal filesystem repository name"))
     if qs.get("repository_url") != f"https://github.com/quantskills/{qs.get('repository', '')}":
         issues.append(_issue("contract-semantic", "$.quantSkills.repository_url", "repository_url must be the canonical quantskills GitHub URL"))
+    if "license" in frontmatter and frontmatter.get("license") != qs.get("license"):
+        issues.append(_issue("contract-semantic", "$.license", "root license must equal quantSkills.license"))
+    native_runtimes = frontmatter.get("supported-runtimes")
+    if native_runtimes is not None and set(native_runtimes) != set(qs.get("platforms") or []):
+        issues.append(_issue("contract-semantic", "$.supported-runtimes", "supported-runtimes must exactly match quantSkills.platforms"))
+    if qs.get("project_type") == "agent":
+        for field in ("allowed-tools", "user-invocable", "disable-model-invocation"):
+            if field in frontmatter:
+                issues.append(_issue("contract-semantic", f"$.{field}", "Skill permission key is not allowed for agents"))
+    if frontmatter.get("user-invocable") is False and frontmatter.get("disable-model-invocation") is True:
+        issues.append(_issue("contract-semantic", "$", "invocation is unreachable when user and model invocation are both disabled"))
     if len(github_description(frontmatter)) > 350:
         issues.append(_issue("contract-semantic", "$.quantSkills", "generated GitHub description exceeds 350 Unicode code points"))
     for field in ("summary_zh", "summary_en"):

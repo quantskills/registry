@@ -95,6 +95,26 @@ class FrontmatterSchemaTests(unittest.TestCase):
         declaration["quantSkills"]["interface"]["outputs"] = []
         self.assertTrue(list(self.validator.iter_errors(declaration)))
 
+    def test_2_1_skill_native_permissions_are_closed_and_2_0_rejects_2_1(self):
+        declaration = load_yaml("valid-structured.yml")
+        declaration["quantSkills"]["schema_version"] = "2.1.0"
+        declaration["license"] = "GPL-3.0-only"
+        declaration["allowed-tools"] = ["Bash", "Read", "Write", "WebSearch", "WebFetch"]
+        declaration["user-invocable"] = True
+        self.assertEqual(list(self.validator.iter_errors(declaration)), [])
+        old = Draft202012Validator(json.loads((ROOT / "schema" / "frontmatter.v2.0.schema.json").read_text(encoding="utf-8")))
+        self.assertTrue(list(old.iter_errors(declaration)))
+
+    def test_2_1_rejects_unknown_root_and_agent_permission_keys(self):
+        declaration = load_yaml("valid-not-applicable.yml")
+        declaration["quantSkills"]["schema_version"] = "2.1.0"
+        declaration["unknown"] = True
+        self.assertTrue(list(self.validator.iter_errors(declaration)))
+        declaration.pop("unknown")
+        declaration["quantSkills"]["project_type"] = "agent"
+        declaration["allowed-tools"] = ["Read"]
+        self.assertTrue(list(self.validator.iter_errors(declaration)))
+
 
 if __name__ == "__main__":
     unittest.main()
