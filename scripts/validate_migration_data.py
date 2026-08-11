@@ -35,7 +35,8 @@ COLUMNS = [
 ]
 SCHEMA_VERSION = "1.0.0"
 STATUSES = {"approved", "needs-maintainer", "blocked"}
-MODES = {"structured", "hybrid", "natural-language", "unknown"}
+MODES = {"structured", "hybrid", "natural-language", "not-applicable", "unknown"}
+NOT_APPLICABLE_REASONS = {"natural-language-only", "report-only", "orchestration-only"}
 WAVES = {
     "structured-existing",
     "core-chain",
@@ -275,6 +276,10 @@ def validate(
             fail("invalid interface review fields")
         if not isinstance(item["candidate_mode"], str) or item["candidate_mode"] not in MODES:
             fail("invalid interface candidate")
+        if item["candidate_mode"] == "not-applicable" and (
+            item["structured_io_explicit"] or item["notes"] not in NOT_APPLICABLE_REASONS
+        ):
+            fail("invalid not-applicable interface")
         if not _sorted_unique_strings(item["evidence_paths"]) or not item["evidence_paths"]:
             fail("invalid interface evidence")
         if not _sorted_unique_strings(item["detected_formats"]) or not _sorted_unique_strings(item["detected_fields"]):
@@ -307,6 +312,8 @@ def validate(
             fail("invalid base wave")
         if project_type[name] == "agent":
             expected_base = "agent-runtime"
+        elif item["candidate_mode"] == "not-applicable":
+            expected_base = "non-structured-review"
         elif item["structured_io_explicit"]:
             if item["candidate_mode"] not in {"structured", "hybrid"}:
                 fail("structured wave failed")

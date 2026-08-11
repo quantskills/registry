@@ -30,11 +30,12 @@ class MigrationDataTests(unittest.TestCase):
         ("orchestration", "09", "09.workflow-orchestration-agent"),
     ]
 
-    def write(self, root, mutate=lambda rows, audit, waves: None, *, core=False):
-        if core:
-            names = sorted(CORE) + [f"skill-extra-{i}" for i in range(7)] + ["agent-a"]
-        else:
-            names = [f"skill-{i}" for i in range(13)] + ["agent-a"]
+    def write(self, root, mutate=lambda rows, audit, waves: None, *, core=False, names=None):
+        if names is None:
+            if core:
+                names = sorted(CORE) + [f"skill-extra-{i}" for i in range(7)] + ["agent-a"]
+            else:
+                names = [f"skill-{i}" for i in range(13)] + ["agent-a"]
         # Frozen inventory assets intentionally omit project_type; the
         # validator derives it from the repository prefix.
         unsigned_inventory = {"schema_version": "1.0.0", "assets": [{"name": name} for name in names]}
@@ -110,7 +111,7 @@ class MigrationDataTests(unittest.TestCase):
         return root / "i.json", root / "a.csv", root / "x.json", root / "w.json"
 
     @staticmethod
-    def candidate_mutator(name, mode, explicit, base):
+    def candidate_mutator(name, mode, explicit, base, notes=None):
         def mutate(rows, audit, waves):
             row = next(row for row in rows if row["name"] == name)
             item = next(item for item in audit["items"] if item["name"] == name)
@@ -119,6 +120,8 @@ class MigrationDataTests(unittest.TestCase):
             waves["waves"][base].append(name)
             row["interface_candidate"] = item["candidate_mode"] = mode
             item["structured_io_explicit"] = explicit
+            if notes is not None:
+                item["notes"] = notes
             item_waves = [wave for wave in item["waves"] if wave != old_base]
             item_waves.append(base)
             item["waves"] = sorted(set(item_waves))
@@ -281,6 +284,22 @@ class MigrationDataTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 validate(*paths)
 
+    def test_interface_candidate_cross_link(self):
+        cases = [
+            ("natural-language", "unknown"),
+            ("not-applicable", "natural-language"),
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for row_mode, item_mode in cases:
+                def mutate(rows, audit, waves, row_mode=row_mode, item_mode=item_mode):
+                    rows[0]["interface_candidate"] = row_mode
+                    audit["items"][0]["candidate_mode"] = item_mode
+
+                paths = self.write(root, mutate)
+                with self.subTest(row_mode=row_mode, item_mode=item_mode), self.assertRaises(ValueError):
+                    validate(*paths)
+
     def test_candidate_modes_select_skill_base_waves(self):
         valid_cases = [
             ("structured", True, "structured-existing"),
@@ -306,6 +325,38 @@ class MigrationDataTests(unittest.TestCase):
                 paths = self.write(root, self.candidate_mutator("skill-0", mode, explicit, base))
                 with self.subTest(mode=mode, explicit=explicit, base=base), self.assertRaises(ValueError):
                     validate(*paths)
+
+    def test_not_applicable_mode_uses_reason_and_non_structured_bases(self):
+        template_names = ["skill-template", *[f"skill-{i}" for i in range(1, 13)], "agent-template"]
+        valid_cases = [
+            ("skill-template", "natural-language-only", "non-structured-review"),
+            ("agent-template", "orchestration-only", "agent-runtime"),
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name, reason, base in valid_cases:
+                paths = self.write(
+                    root,
+                    self.candidate_mutator(name, "not-applicable", False, base, notes=reason),
+                    names=template_names,
+                )
+                with self.subTest(name=name, reason=reason, base=base):
+                    self.assertEqual(validate(*paths, expected_structured=0)["structured"], 0)
+
+            invalid_cases = [
+                ("skill-template", "", False, "non-structured-review"),
+                ("skill-template", "not-a-reason", False, "non-structured-review"),
+                ("skill-template", "report-only", True, "non-structured-review"),
+                ("skill-template", "report-only", False, "structured-remaining"),
+            ]
+            for name, reason, explicit, base in invalid_cases:
+                paths = self.write(
+                    root,
+                    self.candidate_mutator(name, "not-applicable", explicit, base, notes=reason),
+                    names=template_names,
+                )
+                with self.subTest(name=name, reason=reason, explicit=explicit, base=base), self.assertRaises(ValueError):
+                    validate(*paths, expected_structured=0)
 
     def test_enforce_and_expected_structured(self):
         with tempfile.TemporaryDirectory() as directory:
