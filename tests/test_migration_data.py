@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import subprocess
 import sys
@@ -12,7 +13,6 @@ from validate_migration_data import COLUMNS, CORE, WAVES, validate
 
 
 class MigrationDataTests(unittest.TestCase):
-    digest = "sha256:" + "a" * 64
     stages = [
         ("data-ingestion", "01", "01.data-source-connectors"),
         ("data-quality", "01", "01.warehouse-cache"),
@@ -37,7 +37,11 @@ class MigrationDataTests(unittest.TestCase):
             names = [f"skill-{i}" for i in range(13)] + ["agent-a"]
         # Frozen inventory assets intentionally omit project_type; the
         # validator derives it from the repository prefix.
-        inventory = {"schema_version": "1.0.0", "sha256": self.digest, "assets": [{"name": name} for name in names]}
+        unsigned_inventory = {"schema_version": "1.0.0", "assets": [{"name": name} for name in names]}
+        digest = "sha256:" + hashlib.sha256(
+            json.dumps(unsigned_inventory, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
+        inventory = {**unsigned_inventory, "sha256": digest}
         rows = []
         for name, (stage, category, subcategory) in zip(names, self.stages):
             project_type = "agent" if name.startswith("agent-") else "skill"
@@ -64,12 +68,12 @@ class MigrationDataTests(unittest.TestCase):
             )
         audit = {
             "schema_version": "1.0.0",
-            "inventory_sha256": self.digest,
+            "inventory_sha256": digest,
             "items": [],
         }
         waves = {
             "schema_version": "1.0.0",
-            "inventory_sha256": self.digest,
+            "inventory_sha256": digest,
             "waves": {wave: [] for wave in sorted(WAVES)},
         }
         for name in names:
@@ -105,6 +109,24 @@ class MigrationDataTests(unittest.TestCase):
         (root / "w.json").write_text(json.dumps(waves), encoding="utf-8")
         return root / "i.json", root / "a.csv", root / "x.json", root / "w.json"
 
+    @staticmethod
+    def candidate_mutator(name, mode, explicit, base):
+        def mutate(rows, audit, waves):
+            row = next(row for row in rows if row["name"] == name)
+            item = next(item for item in audit["items"] if item["name"] == name)
+            old_base = next(wave for wave in item["waves"] if wave != "core-chain")
+            waves["waves"][old_base].remove(name)
+            waves["waves"][base].append(name)
+            row["interface_candidate"] = item["candidate_mode"] = mode
+            item["structured_io_explicit"] = explicit
+            item_waves = [wave for wave in item["waves"] if wave != old_base]
+            item_waves.append(base)
+            item["waves"] = sorted(set(item_waves))
+            for members in waves["waves"].values():
+                members.sort()
+
+        return mutate
+
     def test_valid_complete_taxonomy_and_expected_structured(self):
         with tempfile.TemporaryDirectory() as directory:
             paths = self.write(Path(directory))
@@ -127,6 +149,12 @@ class MigrationDataTests(unittest.TestCase):
             paths[0].write_text(json.dumps(inventory))
             with self.assertRaises(ValueError):
                 validate(*paths)
+            paths = self.write(root)
+            inventory = json.loads(paths[0].read_text())
+            inventory["assets"][0]["description"] = "tampered without digest update"
+            paths[0].write_text(json.dumps(inventory))
+            with self.assertRaises(ValueError):
+                validate(*paths)
             for mutate in cases:
                 paths = self.write(root, mutate)
                 with self.assertRaises(ValueError):
@@ -137,6 +165,27 @@ class MigrationDataTests(unittest.TestCase):
             paths[0].write_text(json.dumps(inventory))
             with self.assertRaises(ValueError):
                 validate(*paths)
+
+    def test_taxonomy_order_allows_multi_stage_pipelines(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            valid = self.write(
+                root,
+                lambda rows, audit, waves: rows[3].update(
+                    primary_stage="factor-generation",
+                    workflow_stages="factor-generation|backtesting|evaluation",
+                ),
+            )
+            validate(*valid)
+            reversed_stages = self.write(
+                root,
+                lambda rows, audit, waves: rows[3].update(
+                    primary_stage="factor-generation",
+                    workflow_stages="evaluation|backtesting|factor-generation",
+                ),
+            )
+            with self.assertRaises(ValueError):
+                validate(*reversed_stages)
 
     def test_rejects_wave_root_and_schema_errors(self):
         cases = [
@@ -231,6 +280,32 @@ class MigrationDataTests(unittest.TestCase):
             paths = self.write(root, lambda rows, audit, waves: waves["waves"]["core-chain"].pop(), core=True)
             with self.assertRaises(ValueError):
                 validate(*paths)
+
+    def test_candidate_modes_select_skill_base_waves(self):
+        valid_cases = [
+            ("structured", True, "structured-existing"),
+            ("hybrid", False, "structured-remaining"),
+            ("natural-language", False, "non-structured-review"),
+            ("unknown", False, "non-structured-review"),
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for mode, explicit, base in valid_cases:
+                paths = self.write(root, self.candidate_mutator("skill-0", mode, explicit, base))
+                with self.subTest(mode=mode, explicit=explicit, base=base):
+                    result = validate(*paths, expected_structured=1 if explicit else 0)
+                    self.assertEqual(result["structured"], int(explicit))
+            agent = self.write(root, self.candidate_mutator("agent-a", "structured", True, "agent-runtime"))
+            self.assertEqual(validate(*agent, expected_structured=0)["structured"], 0)
+            invalid_cases = [
+                ("natural-language", True, "structured-existing"),
+                ("structured", False, "non-structured-review"),
+                ("natural-language", False, "structured-remaining"),
+            ]
+            for mode, explicit, base in invalid_cases:
+                paths = self.write(root, self.candidate_mutator("skill-0", mode, explicit, base))
+                with self.subTest(mode=mode, explicit=explicit, base=base), self.assertRaises(ValueError):
+                    validate(*paths)
 
     def test_enforce_and_expected_structured(self):
         with tempfile.TemporaryDirectory() as directory:

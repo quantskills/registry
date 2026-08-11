@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -79,6 +80,13 @@ def _sorted_unique_strings(value: object) -> bool:
     return value == sorted(set(value))
 
 
+def _unique_nonempty_strings(value: object) -> bool:
+    """Return whether value is a list of unique, non-empty strings."""
+    if not isinstance(value, list):
+        return False
+    return all(isinstance(item, str) and item == item.strip() and item for item in value) and len(value) == len(set(value))
+
+
 def _pipe_list(value: object) -> bool:
     if not isinstance(value, str) or not value:
         return False
@@ -132,6 +140,12 @@ def _validate_inventory(inventory: object) -> tuple[list[dict], str, dict[str, s
     assets = inventory.get("assets")
     if not isinstance(digest, str) or not HASH_RE.fullmatch(digest) or not isinstance(assets, list):
         fail("invalid inventory")
+    unsigned = {key: value for key, value in inventory.items() if key != "sha256"}
+    expected_digest = "sha256:" + hashlib.sha256(
+        json.dumps(unsigned, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if digest != expected_digest:
+        fail("inventory hash mismatch")
 
     rows: list[dict] = []
     project_type: dict[str, str] = {}
@@ -196,7 +210,7 @@ def validate(
     covered: set[str] = set()
     for row in rows:
         stage_values = row["workflow_stages"].split("|")
-        if not _sorted_unique_strings(stage_values):
+        if not _unique_nonempty_strings(stage_values):
             fail("workflow stages are not taxonomy ordered")
         if any(stage not in stages for stage in stage_values) or stage_values != sorted(stage_values, key=stages.index):
             fail("workflow stages are not taxonomy ordered")
@@ -291,14 +305,24 @@ def validate(
         base = [wave for wave in memberships[name] if wave != "core-chain"]
         if len(base) != 1:
             fail("invalid base wave")
-        if project_type[name] == "agent" and base != ["agent-runtime"]:
-            fail("agent wave failed")
-        if project_type[name] == "skill" and item["structured_io_explicit"] and base != ["structured-existing"]:
-            fail("structured wave failed")
-        if project_type[name] == "skill" and not item["structured_io_explicit"] and base == ["structured-existing"]:
-            fail("unstructured wave failed")
+        if project_type[name] == "agent":
+            expected_base = "agent-runtime"
+        elif item["structured_io_explicit"]:
+            if item["candidate_mode"] not in {"structured", "hybrid"}:
+                fail("structured wave failed")
+            expected_base = "structured-existing"
+        elif item["candidate_mode"] in {"structured", "hybrid"}:
+            expected_base = "structured-remaining"
+        else:
+            expected_base = "non-structured-review"
+        if base != [expected_base]:
+            fail("candidate wave failed")
 
-    structured = sum(item["structured_io_explicit"] for item in audit_by_name.values())
+    structured = sum(
+        item["structured_io_explicit"]
+        for name, item in audit_by_name.items()
+        if project_type[name] == "skill"
+    )
     if expected_structured is not None and structured != expected_structured:
         fail("unexpected structured count")
     return {"assets": len(names), "approved": sum(row["review_status"] == "approved" for row in rows), "structured": structured}
