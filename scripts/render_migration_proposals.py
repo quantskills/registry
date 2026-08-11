@@ -19,13 +19,31 @@ except ImportError:
 
 OUTPUT_FILES = ("frontmatter.proposed.yml", "declaration.diff", "readme-review.md", "runtime-gaps.json", "interface-review.json")
 NAME = re.compile(r"^(?:skill|agent)-[a-z0-9]+(?:-[a-z0-9]+)*$")
-SECRET = re.compile(r"(?i)(?:ghp_[a-z0-9]{20,}|sk-[a-z0-9_-]{12,}|akia[0-9a-z]{16}|xox[baprs]-[a-z0-9-]{10,}|(?:api[_-]?key|token|secret|password)\s*[:=]\s*[^\s]+)")
+ROOT_FIELDS = frozenset(("name", "description", "quantSkills"))
+SECRET = re.compile(
+    r"(?i)(?:"
+    r"ghp_[a-z0-9]{20,}"
+    r"|(?<![a-z0-9_-])sk_(?:live|test)_[a-z0-9]{10,}"
+    r"|(?<![a-z0-9_-])sk-[a-z0-9_-]{12,}"
+    r"|akia[0-9a-z]{16}"
+    r"|xox[baprs]-[a-z0-9-]{10,}"
+    r"|(?:api[_-]?key|token|secret|password)\s*[:=]\s*[^\s]+"
+    r")"
+)
 
 
 def redact(value: object) -> object:
     if isinstance(value, str): return SECRET.sub("[REDACTED]", value)
     if isinstance(value, list): return [redact(x) for x in value]
-    if isinstance(value, dict): return {str(k): redact(v) for k, v in value.items()}
+    if isinstance(value, dict):
+        result = {}
+        for key, item in value.items():
+            key_text = str(key)
+            if key_text in {"name", "repository"} and isinstance(item, str) and NAME.fullmatch(item):
+                result[key_text] = item
+            else:
+                result[key_text] = redact(item)
+        return result
     return value
 
 
@@ -34,7 +52,8 @@ def _json(path: Path) -> object: return json.loads(path.read_text(encoding="utf-
 
 def _git(repo: Path, *args: str) -> str:
     if not (repo / ".git").exists(): return ""
-    return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True, check=False).stdout.strip()
+    result = subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True, check=False)
+    return result.stdout.strip() if result.returncode == 0 else ""
 
 
 def _dirty(repo: Path) -> bool: return bool(_git(repo, "status", "--porcelain"))
@@ -42,15 +61,44 @@ def _dirty(repo: Path) -> bool: return bool(_git(repo, "status", "--porcelain"))
 
 def _frontmatter(path: Path) -> tuple[dict, str, str, str | None]:
     if not path.is_file(): return {}, "", "", "declaration missing"
-    text = path.read_text(encoding="utf-8", errors="replace")
-    if not text.startswith("---\n"): return {}, "", text, "declaration has no YAML frontmatter"
-    end = text.find("\n---", 4)
-    if end < 0: return {}, "", text, "unterminated YAML frontmatter"
-    yaml_text, body = text[4:end], text[end + 4:]
+    text = path.read_bytes().decode("utf-8", errors="surrogateescape")
+    content = text[1:] if text.startswith("\ufeff") else text
+    opening = "\r\n" if content.startswith("---\r\n") else "\n" if content.startswith("---\n") else ""
+    if not opening: return {}, "", text, "declaration has no YAML frontmatter"
+    start = len("---") + len(opening)
+    match = re.search(r"(?:\r\n|\n)---(?=(?:\r\n|\n|$))", content[start:])
+    if not match: return {}, "", text, "unterminated YAML frontmatter"
+    end = start + match.start()
+    yaml_text, body = content[start:end], content[start + match.end():]
     try: value = yaml.safe_load(yaml_text) or {}
     except yaml.YAMLError as exc: return {}, "", body, f"malformed YAML frontmatter: {exc.__class__.__name__}"
     if not isinstance(value, dict): return {}, "", body, "YAML frontmatter must be a mapping"
     return value, text, body, None
+
+
+def _line_ending(text: str) -> str:
+    position = text.find("\n")
+    return "\r\n" if position > 0 and text[position - 1] == "\r" else "\n"
+
+
+def _declaration_text(proposed_yaml: str, old: str, body: str) -> str:
+    newline = _line_ending(old)
+    bom = "\ufeff" if old.startswith("\ufeff") else ""
+    yaml_text = proposed_yaml.replace("\n", newline)
+    return f"{bom}---{newline}{yaml_text}---" + body
+
+
+def _unified_diff(old: str, proposed: str, declaration: str) -> str:
+    newline = _line_ending(old)
+    return "".join(
+        difflib.unified_diff(
+            old.splitlines(keepends=True),
+            proposed.splitlines(keepends=True),
+            fromfile=f"a/{declaration}",
+            tofile=f"b/{declaration}",
+            lineterm=newline,
+        )
+    )
 
 
 def _proposal(current: dict, row: dict, iface: dict, name: str) -> dict:
@@ -59,10 +107,19 @@ def _proposal(current: dict, row: dict, iface: dict, name: str) -> dict:
     if mode == "not-applicable":
         reason = iface.get("notes")
         interface["reason"] = reason if reason in {"natural-language-only", "report-only", "orchestration-only"} else "natural-language-only"
-    description = current.get("description")
-    if not isinstance(description, str) or len(description) < 60:
-        description = f"{row['summary_en']} This declaration records catalog metadata and interface review status."
-    return redact({
+    original = current.get("description")
+    if isinstance(original, str) and len(original) >= 60:
+        description = original
+    else:
+        summary = str(row["summary_en"]).strip()
+        if isinstance(original, str):
+            separator = "" if not original or original.endswith((" ", "\t")) else " "
+            description = original + separator + summary
+        else:
+            description = summary
+        if len(description) < 60:
+            description += " This declaration records catalog metadata and interface review status."
+    proposed = redact({
         "name": name,
         "description": description,
         "quantSkills": {
@@ -76,6 +133,10 @@ def _proposal(current: dict, row: dict, iface: dict, name: str) -> dict:
         "status": "draft", "validation_level": "listed", "maintainer_type": "community", "interface": interface,
         },
     })
+    proposed["name"] = name
+    proposed["quantSkills"]["repository"] = name
+    proposed["quantSkills"]["repository_url"] = f"https://github.com/quantskills/{name}"
+    return proposed
 
 
 def _target(output: Path, name: str) -> Path:
@@ -106,8 +167,12 @@ def generate(inventory_path: Path, assignments_path: Path, interfaces_path: Path
         declaration = asset.get("declaration", {}).get("file") or ("AGENTS.md" if name.startswith("agent-") else "SKILL.md")
         current, old, body, error = _frontmatter(repo / declaration); review = []
         if not repo.is_dir(): review.append("repository missing")
+        if repo.is_dir() and not (repo / ".git").exists(): review.append("repository has no .git metadata; no patch proposed")
         if _dirty(repo): review.append("repository dirty; no patch proposed")
         if error: review.append(error + "; no patch proposed")
+        extra = sorted((str(key) for key in current if key not in ROOT_FIELDS), key=str)
+        if extra: review.append("unsupported frontmatter root fields (manual migration required): " + ", ".join(f"$.{key}" for key in extra) + "; no patch proposed")
+        if old and SECRET.search(old): review.append("potential secret detected in declaration; no patch proposed")
         if not row: review.append("assignment missing; no patch proposed")
         elif row.get("review_status") != "approved": review.append("assignment not approved; no patch proposed")
         elif (row.get("interface_candidate") or (iface or {}).get("candidate_mode")) in {"structured", "hybrid"}:
@@ -116,16 +181,21 @@ def generate(inventory_path: Path, assignments_path: Path, interfaces_path: Path
             review.append("interface candidate is not declaration-valid; no patch proposed")
         if not iface: review.append("interface audit missing; no patch proposed")
         expected = asset.get("head_sha")
-        actual = _git(repo, "rev-parse", "HEAD")
-        if expected and actual and expected != actual: review.append("frozen HEAD mismatch; no patch proposed")
+        actual = _git(repo, "rev-parse", "--verify", "HEAD")
+        if not expected: review.append("inventory head_sha missing; no patch proposed")
+        if not actual: review.append("repository HEAD cannot be resolved; no patch proposed")
+        elif expected != actual: review.append("frozen HEAD mismatch; no patch proposed")
         target = _target(output, name)
         clean = not review
         proposed = _proposal(current, row, iface, name) if clean else {}
         proposed_yaml = yaml.safe_dump(proposed, allow_unicode=True, sort_keys=False)
-        proposed_text = "---\n" + proposed_yaml + "---" + body if clean else "# No proposal generated\n"
-        diff = "".join(difflib.unified_diff(redact(old).splitlines(True), redact(proposed_text).splitlines(True), fromfile=declaration, tofile=declaration)) if clean else "# No patch: " + "; ".join(review) + "\n"
-        target.joinpath("frontmatter.proposed.yml").write_text(proposed_yaml, encoding="utf-8")
-        target.joinpath("declaration.diff").write_text(diff, encoding="utf-8")
+        proposed_text = _declaration_text(proposed_yaml, old, body) if clean else "# No proposal generated\n"
+        diff = _unified_diff(old, proposed_text, declaration) if clean else "# No patch: " + "; ".join(review) + "\n"
+        newline = _line_ending(old) if old else "\n"
+        proposed_bytes = proposed_yaml.replace("\n", newline).encode("utf-8", "surrogateescape")
+        if old.startswith("\ufeff"): proposed_bytes = b"\xef\xbb\xbf" + proposed_bytes
+        target.joinpath("frontmatter.proposed.yml").write_bytes(proposed_bytes)
+        target.joinpath("declaration.diff").write_bytes(diff.encode("utf-8", "surrogateescape"))
         target.joinpath("readme-review.md").write_text("# Review\n\n" + ("\n".join(f"- {redact(x)}" for x in review) or "- Actionable proposal generated; apply manually.") + "\n", encoding="utf-8")
         runtime = evaluate_runtime_policy(repo, row["project_type"] if row else ("agent" if name.startswith("agent-") else "skill")) if repo.is_dir() else []
         target.joinpath("runtime-gaps.json").write_text(json.dumps(redact(runtime), ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
