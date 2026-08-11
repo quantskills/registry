@@ -1,0 +1,1775 @@
+{
+  "assets": [
+    {
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-correlation-break-research/blob/30584d4bc2c071e20d478f949eab7dfc0e51981e/AGENTS.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills Pandadata agent for detecting correlation breaks, style shifts, and diversification stress.",
+      "head_sha": "30584d4bc2c071e20d478f949eab7dfc0e51981e",
+      "name": "agent-correlation-break-research",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-crowding-risk-monitor/blob/ce24e9db80865995b8ac1fab6dda41558e539194/AGENTS.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills Pandadata agent for monitoring crowded-trade risk and funding heat.",
+      "head_sha": "ce24e9db80865995b8ac1fab6dda41558e539194",
+      "name": "agent-crowding-risk-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-derivatives-skew-sentiment-monitor/blob/266b0239b19f88b1f65393d769ae857a662aab26/AGENTS.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills Pandadata agent for monitoring derivatives sentiment from IV and HV evidence.",
+      "head_sha": "266b0239b19f88b1f65393d769ae857a662aab26",
+      "name": "agent-derivatives-skew-sentiment-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-for-liangshuyuan-tasks/blob/606d818c32a52732a0a3573c0445e1da2500480f/AGENTS.md"
+      },
+      "default_branch": "master",
+      "description": "基于 Claude Code 多 Agent 协作框架的量化交易工具库，为完成量枢院任务而创建",
+      "head_sha": "606d818c32a52732a0a3573c0445e1da2500480f",
+      "name": "agent-for-liangshuyuan-tasks",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-macro-driven-rotation/blob/b9c2a88228034bdd7ec4b7b908b923fc0f68d2d2/AGENTS.md"
+      },
+      "default_branch": "main",
+      "description": "宏观驱动行业轮动 Agent",
+      "head_sha": "b9c2a88228034bdd7ec4b7b908b923fc0f68d2d2",
+      "name": "agent-macro-driven-rotation",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-market-regime-monitor/blob/276ad227c8a24f572fbb733a1284dcc0ce9872a2/AGENTS.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills Pandadata agent for market regime monitoring using funding, event heat, and volatility evidence.",
+      "head_sha": "276ad227c8a24f572fbb733a1284dcc0ce9872a2",
+      "name": "agent-market-regime-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-quantspace/blob/73ce0a0ef8851c28f4b6bb78caa2794a52bd74df/AGENTS.md"
+      },
+      "default_branch": "main",
+      "description": "AI-native quantitative research framework",
+      "head_sha": "73ce0a0ef8851c28f4b6bb78caa2794a52bd74df",
+      "name": "agent-quantspace",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-ssquant/blob/ac4ff3c0e41cb41d8738779f80d23793e982cee5/AGENTS.md"
+      },
+      "default_branch": "main",
+      "description": "SSQuant Agent workflow for futures strategies, data_server diagnostics, CTP/SIMNOW runtime checks, and Chinese backtest reporting.",
+      "head_sha": "ac4ff3c0e41cb41d8738779f80d23793e982cee5",
+      "name": "agent-ssquant",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-template/blob/3f6fcc2fc35db1b5b9de9e9e690e79e7eb7a57b5/AGENTS.md"
+      },
+      "default_branch": "main",
+      "description": "Template repository for QUANTSKILLS agent-* projects.",
+      "head_sha": "3f6fcc2fc35db1b5b9de9e9e690e79e7eb7a57b5",
+      "name": "agent-template",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-a-share-market-risk-radar/blob/b860c02de08baba7a2f36da64a01434d6382a792/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A股市场风险雷达：监测技术面、资金流、宏观环境、解禁与行业轮动等市场风险",
+      "head_sha": "b860c02de08baba7a2f36da64a01434d6382a792",
+      "name": "skill-a-share-market-risk-radar",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-a-share-pit-fundamental-vintage-builder/blob/04d8ac946b0fc9256fa3514dcc9e05b06b981458/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A 股 PIT 财务数据审计：**还原历史可见财报，而非使用今天的最新版。",
+      "head_sha": "04d8ac946b0fc9256fa3514dcc9e05b06b981458",
+      "name": "skill-a-share-pit-fundamental-vintage-builder",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-a-share-stock-dossier/blob/213a9cb6b36ccc3ae4c72606ff72211de7b67199/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "GPL-3.0 A-share stock dossier Agent Skill powered by Pandadata.",
+      "head_sha": "213a9cb6b36ccc3ae4c72606ff72211de7b67199",
+      "name": "skill-a-share-stock-dossier",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-a1-lhb-tracking/blob/55142304b4b2dd40f436e5736e6285b8a8e90c99/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A1 Longhubang event ranking skill",
+      "head_sha": "55142304b4b2dd40f436e5736e6285b8a8e90c99",
+      "name": "skill-a1-lhb-tracking",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-ag-futures-seasonality/blob/a94710758f5ef0bb870e0d8fc14ad43d07e19412/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "农产品期货月度季节性分析工具:算清各月历史涨跌规律与显著性,叠加作物日历,出可视化报告。",
+      "head_sha": "a94710758f5ef0bb870e0d8fc14ad43d07e19412",
+      "name": "skill-ag-futures-seasonality",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-alpha-a06-hotmoney-reversal/blob/495a22d02b34c0b5d6c567ebe1e21c1b4c0986b2/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "The SKILLS supports IC/IR calculation, stratified backtesting, monotonicity testing, turnover rate analysis and decay curve plotting for quantitative factor research.",
+      "head_sha": "495a22d02b34c0b5d6c567ebe1e21c1b4c0986b2",
+      "name": "skill-alpha-a06-hotmoney-reversal",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-alpha-f1-position-change/blob/e1265597f5d59e7cb6aa0c6f31275928cfa87eb8/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "e1265597f5d59e7cb6aa0c6f31275928cfa87eb8",
+      "name": "skill-alpha-f1-position-change",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-alpha-f5-member-position-concentration/blob/8cc50fc78833036648df6f1d9fd543466aacba78/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "alpha-f5-member-position-concentration",
+      "head_sha": "8cc50fc78833036648df6f1d9fd543466aacba78",
+      "name": "skill-alpha-f5-member-position-concentration",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-alpha-f6-family-position-reverse/blob/9a09a59d6cfec241ca9589f8a72553fc67475c8a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "alpha-f6-family-position-reverse",
+      "head_sha": "9a09a59d6cfec241ca9589f8a72553fc67475c8a",
+      "name": "skill-alpha-f6-family-position-reverse",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-alpha-f8-family-main-divergence/blob/3ccd5923eee4a0519f56047abf3971c2287d2083/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "alpha-f8-family-main-divergence",
+      "head_sha": "3ccd5923eee4a0519f56047abf3971c2287d2083",
+      "name": "skill-alpha-f8-family-main-divergence",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-alpha-ncav-graham/blob/066eb0f86eb03f40a4ee639bdb651d928d89f262/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Graham NCAV 净流动资产折价因子技能。A股深度价值筛选，排除金融股，计算 NCAV 折价并生成 buy/sell/hold 信号。",
+      "head_sha": "066eb0f86eb03f40a4ee639bdb651d928d89f262",
+      "name": "skill-alpha-ncav-graham",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-audit-opinion-scanner/blob/58b250453ac6d2390bf7ee352153b34a14241aa3/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "从审计意见、财务报表、行业对标三个维度对 A 股做全面财务健康评估。涵盖审计意见扫描、25项财务科目缓存、15项比率计算、行业分类对标、5维快速评分、8段深度分析、综合风险检测。",
+      "head_sha": "58b250453ac6d2390bf7ee352153b34a14241aa3",
+      "name": "skill-audit-opinion-scanner",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-b11-auto-stop-loss-take-profit/blob/bb7ba0deee3d2a8be2ab1d027792fa981dc6e8ed/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "按入场日期和开盘价自动判断止盈、止损、强平，以及单票仓位上限控制。",
+      "head_sha": "bb7ba0deee3d2a8be2ab1d027792fa981dc6e8ed",
+      "name": "skill-b11-auto-stop-loss-take-profit",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-b12-intraday-position-manager/blob/d61d0ff1dece71ab457fdbf3e0e48ee3415817d3/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "日内仓位动态管理 — panda-trading BUILD 技能",
+      "head_sha": "d61d0ff1dece71ab457fdbf3e0e48ee3415817d3",
+      "name": "skill-b12-intraday-position-manager",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-b6-limitup-pool/blob/447cae786ee53b5e0e914344323dcb9490faae3e/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "涨停池动态管理 — panda-data BUILD 技能(B6)。每日维护涨停池，标记首板/连板数/炸板次数/回封时间，含题材分组/特殊形态/情绪面量化(分层晋级率·赚钱效应)，输出多维表格+HTML看板。",
+      "head_sha": "447cae786ee53b5e0e914344323dcb9490faae3e",
+      "name": "skill-b6-limitup-pool",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-b7-lhb-monitor/blob/8072d39bc3b68f274dfb1d8972f28d20229f1f9e/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "龙虎榜监控+席位标签库 — panda-data BUILD 技能(B7)。收盘后抓取龙虎榜，席位标签匹配(北向/机构/游资/量化)，生成次日关注清单；个股详情页按上榜原因拆买卖营业部，支持区间统计与交互式HTML看板(搜索/筛选/排序/展开详情)。",
+      "head_sha": "8072d39bc3b68f274dfb1d8972f28d20229f1f9e",
+      "name": "skill-b7-lhb-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-backtest/blob/cf9154603263e2a4e2151f39e2708923d8d776a7/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "cf9154603263e2a4e2151f39e2708923d8d776a7",
+      "name": "skill-backtest",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-backtest-overfit/blob/c6c01622193d85340e156bd6fc5c16f1808f8a01/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Detect backtest overfitting & multiple testing: Deflated Sharpe Ratio, PBO (CSCV), purged/embargoed CV, Harvey-Liu haircut. Research/education only, not investment advice.",
+      "head_sha": "c6c01622193d85340e156bd6fc5c16f1808f8a01",
+      "name": "skill-backtest-overfit",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-backtesting-bias-avoidance/blob/affafd2537671e5df6a9a44a137d82a9c95504bf/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "回测引擎构建与偏差规避Build a correct, look-ahead-free backtest and audit a strategy for the   biases that make backtests lie — look-ahead bias, survivorship bias, overfitting   and data-snooping — while modeling realistic transaction costs and validating with   out-of-sample and walk-forward testing and a full set of performance metrics.",
+      "head_sha": "affafd2537671e5df6a9a44a137d82a9c95504bf",
+      "name": "skill-backtesting-bias-avoidance",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-block-trade-radar/blob/a87a3bef85e6bad56c619ec9351fd24515ef6995/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A-share block-trade discount/premium radar skill",
+      "head_sha": "a87a3bef85e6bad56c619ec9351fd24515ef6995",
+      "name": "skill-block-trade-radar",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-brinson-performance-attribution/blob/08b2be7386c49c640d974ef41dc4c5478288f201/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Brinson-Fachler / BHB 归因 + Carino 多期链接",
+      "head_sha": "08b2be7386c49c640d974ef41dc4c5478288f201",
+      "name": "skill-brinson-performance-attribution",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-buffett-moat-screener/blob/ce00fee720fad6eeb8e1f655fe75474b8b257d6d/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "面向 A 股与美股的巴菲特式研究 Skill：研究建议、持仓复核、年度记录与点时回测。",
+      "head_sha": "ce00fee720fad6eeb8e1f655fe75474b8b257d6d",
+      "name": "skill-buffett-moat-screener",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-build-b10-factor-evaluation/blob/c736385444649aa88858d56f89b483b51fc4e14d/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "The system supports IC/IR calculation, stratified backtesting, monotonicity testing, turnover rate analysis and decay curve plotting for quantitative factor research.",
+      "head_sha": "c736385444649aa88858d56f89b483b51fc4e14d",
+      "name": "skill-build-b10-factor-evaluation",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-buyback-monitor/blob/2e02b4bf51a4968010fdc9fad97b6748254d86a2/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: A-share buyback lifecycle, purpose, and intensity research monitor.",
+      "head_sha": "2e02b4bf51a4968010fdc9fad97b6748254d86a2",
+      "name": "skill-buyback-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-calendar-anomaly-scanner/blob/61f3e76640ca3c5b0e9e3d6051de9c87381da3b7/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "61f3e76640ca3c5b0e9e3d6051de9c87381da3b7",
+      "name": "skill-calendar-anomaly-scanner",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-capital-flow-crowding-monitor/blob/84141c9b0ce7a6727b0c69ba616b7a8a8b9d7b88/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "跨市场资金面/拥挤监测：融资融券+北向持股+大宗交易三源聚合，一致性/背离信号 + 拥挤度历史分位",
+      "head_sha": "84141c9b0ce7a6727b0c69ba616b7a8a8b9d7b88",
+      "name": "skill-capital-flow-crowding-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-cb-analyzer/blob/3e092f3828fb154755bc60503416066f5c8c9583/SKILL.md"
+      },
+      "default_branch": "master",
+      "description": "A-share convertible bond daily analyzer: double-low strategy + Black-Scholes Greeks + IC backtest",
+      "head_sha": "3e092f3828fb154755bc60503416066f5c8c9583",
+      "name": "skill-cb-analyzer",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-commodity-carry-cta/blob/1fa821acca994403bca4c9fc85db989e7d99e59a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "商品期货横截面 CTA 因子库：carry/时序动量/横截面动量/基差动量/库存，主连接续 + 多空品种轮动回测",
+      "head_sha": "1fa821acca994403bca4c9fc85db989e7d99e59a",
+      "name": "skill-commodity-carry-cta",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-concept-rotation-monitor/blob/1b65851a4473eebbc711eeecad22f58d0278ef1b/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: A-share concept and theme momentum, breadth, and rotation monitor.",
+      "head_sha": "1b65851a4473eebbc711eeecad22f58d0278ef1b",
+      "name": "skill-concept-rotation-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-corporate-action-adjustment-auditor/blob/c4a8a124b1deb79cc579e8a791795a3bc48b7b25/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Audit split and cash-dividend consistency across raw and adjusted equity prices before research or backtesting.",
+      "head_sha": "c4a8a124b1deb79cc579e8a791795a3bc48b7b25",
+      "name": "skill-corporate-action-adjustment-auditor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-cross-listing-parity/blob/ca2230f229a39003ff3340a4941705e2bb751d37/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: A/H and China ADR cross-listing parity research monitor.",
+      "head_sha": "ca2230f229a39003ff3340a4941705e2bb751d37",
+      "name": "skill-cross-listing-parity",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-daily-report/blob/9a209052cf6d31077541bf865379cbd13e7a29d2/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "是一个跨市场每日复盘技能，用于汇总 A 股、港股、美股、日经、韩国市场以及黄金、原油等公开行情数据，并结合板块表现、资金流向和重要新闻，生成结构化的 Markdown 市场复盘报告和次日情景分析。",
+      "head_sha": "9a209052cf6d31077541bf865379cbd13e7a29d2",
+      "name": "skill-daily-report",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-dalio-all-weather/blob/66767ac5e4dda46d88fe9be9e5ae1dc62c705ecd/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "面向 A 股市场的全天候资产配置研究工具，支持宏观象限识别、风险平价、波动率控制与季度再平衡。",
+      "head_sha": "66767ac5e4dda46d88fe9be9e5ae1dc62c705ecd",
+      "name": "skill-dalio-all-weather",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-dividend-yield-scan/blob/64a0471f466cd22096860b401c5f0b806fcec7b2/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: A-share dividend yield, continuity, and payout-quality research scan.",
+      "head_sha": "64a0471f466cd22096860b401c5f0b806fcec7b2",
+      "name": "skill-dividend-yield-scan",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-dl-gnn-stock-graph/blob/2ecd99ae31d2d2bc3d57149818781615fbfbfb41/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": " 当需要对 A 股市场进行 GNN 量化选股时，使用此 skill。支持多层异构图（申万 L1/L2/L3 行业 + 概念板块 + 机构持仓 + DTW 形态相似 + Pearson 相关性）构建、GATs_ts 与 MF-IAMGCN 双模型架构、五维特征工程（量价/基本面/情绪/宏观/关系）、TopK 选股策略、完整 A 股回测引擎（含 T+1/涨跌停/佣金+印花税+滑点模拟）。",
+      "head_sha": "2ecd99ae31d2d2bc3d57149818781615fbfbfb41",
+      "name": "skill-dl-gnn-stock-graph",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-doc-to-alphas/blob/b79bb29c051dc504fe5d0b01c1d65af90c20f4ef/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "b79bb29c051dc504fe5d0b01c1d65af90c20f4ef",
+      "name": "skill-doc-to-alphas",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-earnings-season-tracker/blob/203f4f69b029468f50d1b9aa08f71814d472a945/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A-share earnings-season scanner for forecast distributions, beat and miss watchlists, industry prosperity, and audit-opinion checks.",
+      "head_sha": "203f4f69b029468f50d1b9aa08f71814d472a945",
+      "name": "skill-earnings-season-tracker",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-etf-arbitrage-monitor/blob/56f93ef87ba7acfe928efb0fab19b8d6f8fdadcb/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "ETF 一二级套利/折溢价监控：IOPV vs 二级价折溢价、申赎篮子可行性、套利方向与扣费毛收益",
+      "head_sha": "56f93ef87ba7acfe928efb0fab19b8d6f8fdadcb",
+      "name": "skill-etf-arbitrage-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-etf-fund-evaluator/blob/229573025be800675ce6ecc01b5a766715f3eda8/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "境内股票指数ETF评价与同类比较：分析跟踪质量、风险收益、流动性、规模和资金流",
+      "head_sha": "229573025be800675ce6ecc01b5a766715f3eda8",
+      "name": "skill-etf-fund-evaluator",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-event-risk-alert/blob/7a7cbf1d4f94c0b02486a3102c3fab65d35b64a2/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A-share event-risk monitoring and alerting skill for Pandadata-based watchlist scans.",
+      "head_sha": "7a7cbf1d4f94c0b02486a3102c3fab65d35b64a2",
+      "name": "skill-event-risk-alert",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-alpha191-alpha101/blob/8512f6cdb391d13cd28fa4d207f8d9f3c6de9d2c/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Alpha101/Alpha191 经典公式因子库 Skill，参考 JoinQuant 公式与 API 数据复现，支持批量或指定计算每日因子值。",
+      "head_sha": "8512f6cdb391d13cd28fa4d207f8d9f3c6de9d2c",
+      "name": "skill-factor-alpha191-alpha101",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-backtest/blob/0deaf6f576a92637ba3511aa44f857cdd90b6af7/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "0deaf6f576a92637ba3511aa44f857cdd90b6af7",
+      "name": "skill-factor-backtest",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-blend/blob/5eb2d0b7b8f8abd957af7540f7d4c11761ae49d1/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills: factor pipeline skill",
+      "head_sha": "5eb2d0b7b8f8abd957af7540f7d4c11761ae49d1",
+      "name": "skill-factor-blend",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-debug/blob/1d3e881c4d4fb4afdcc65aae572f8d9add554dd1/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "1d3e881c4d4fb4afdcc65aae572f8d9add554dd1",
+      "name": "skill-factor-debug",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-decay/blob/e049c2bdfca2e630fd5f22c03d596732ef9d884a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills: factor pipeline skill",
+      "head_sha": "e049c2bdfca2e630fd5f22c03d596732ef9d884a",
+      "name": "skill-factor-decay",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-evaluate/blob/3b335ec4814dcea49ba6005524157b09c555a225/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "3b335ec4814dcea49ba6005524157b09c555a225",
+      "name": "skill-factor-evaluate",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-grouped-wrapper/blob/f57884fa08f5dd6c8477a5fb8fab23dccbdf45ae/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "通过分组贪心wrapper，迭代删除或加入因子，并以模型训练和回测表现筛选最优因子池。",
+      "head_sha": "f57884fa08f5dd6c8477a5fb8fab23dccbdf45ae",
+      "name": "skill-factor-grouped-wrapper",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-idea-generation/blob/4fda44d27bc80efe60284da6b03bc56a2bf4e82f/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "4fda44d27bc80efe60284da6b03bc56a2bf4e82f",
+      "name": "skill-factor-idea-generation",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-mason/blob/0f3496c6d9b2cb510f76222780e3ac92375d5d2a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "单因子权益研究的质量控制技能：从股票池、时点对齐、IC/IR、换手、成本和中性化出发，判断一个因子到底是 alpha、行业暴露、数据泄漏，还是样本幻觉。",
+      "head_sha": "0f3496c6d9b2cb510f76222780e3ac92375d5d2a",
+      "name": "skill-factor-mason",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-mine/blob/57c6e0ccd03a96186894122f36fc1da5e6ee0665/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "57c6e0ccd03a96186894122f36fc1da5e6ee0665",
+      "name": "skill-factor-mine",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-mining-pandaai/blob/281f8c7af7403a76462fc43fb473f8c893472c5a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community skill for extracting paper-derived quant factors and analyzing them with PandaAI",
+      "head_sha": "281f8c7af7403a76462fc43fb473f8c893472c5a",
+      "name": "skill-factor-mining-pandaai",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-optimize/blob/020b406c13f4c06accc55d307ed99b69d76dcd75/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "对已有股票或期货因子做参数扫描、组件消融和核心版本增强，最后尝试给出优化版的因子",
+      "head_sha": "020b406c13f4c06accc55d307ed99b69d76dcd75",
+      "name": "skill-factor-optimize",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-orthogonalize/blob/36972acf62e37f9f5dd40504422d57ec561dee21/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills: factor pipeline skill",
+      "head_sha": "36972acf62e37f9f5dd40504422d57ec561dee21",
+      "name": "skill-factor-orthogonalize",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-pool-evolution/blob/6731bfa8bf1da6fb3f3ecc6e7eb730005002342e/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "One-round CogAlpha-style factor-pool recommendation workflow that prepares mutation and crossover prompt packs for the current model, then evaluates generated candidate factors by RankIC and RankICIR to recommend next-round seeds.",
+      "head_sha": "6731bfa8bf1da6fb3f3ecc6e7eb730005002342e",
+      "name": "skill-factor-pool-evolution",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-ranking-sage/blob/d2b331504ee1a2a6fbde5e7119f5aa5c96a9b221/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "面向量化投资的因子排名工具，支持SAGE与mRMR方法，评估因子贡献和冗余度，筛选高价值因子并输出可复现结果。",
+      "head_sha": "d2b331504ee1a2a6fbde5e7119f5aa5c96a9b221",
+      "name": "skill-factor-ranking-sage",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-review/blob/8d8cc17a592ad6f706028661f834a47d58c45d12/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "8d8cc17a592ad6f706028661f834a47d58c45d12",
+      "name": "skill-factor-review",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factormad-debate-factor-mining/blob/538949edc27c1d6ab2dfc73ba0a91808ad9e0174/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "参考自论文的面向因子挖掘的多智能体辩论skill(FactorMAD)，支持从行情数据生成、调试、评估并归档代码型 Alpha 因子。",
+      "head_sha": "538949edc27c1d6ab2dfc73ba0a91808ad9e0174",
+      "name": "skill-factormad-debate-factor-mining",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-fin-news/blob/329370ad25fb56dbf548fdc9c65e9556d3b0d3cd/SKILL.md"
+      },
+      "default_branch": "master",
+      "description": "实时财经资讯聚合 + AI 深度撰稿工具。",
+      "head_sha": "329370ad25fb56dbf548fdc9c65e9556d3b0d3cd",
+      "name": "skill-fin-news",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-forecast-calibration-audit/blob/9fd588982c060ff2b0356616405034b6a7ac2837/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "skill评估概率预测的可靠性、Brier Score、Log Loss、ECE/MCE、校准斜率和时间漂移，区别于已有的因子 IC 评估和盈利预告扫描",
+      "head_sha": "9fd588982c060ff2b0356616405034b6a7ac2837",
+      "name": "skill-forecast-calibration-audit",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-fundamental-factor-analysis/blob/6e34aa7bee6bbbe534b40a21ce1fe537187eac8a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "计算、验证和分析 A 股基本面因子。从季度财报中提取估值、质量、成长因子，并通过 IC 分析、分组收益和 Fama-MacBeth 回归进行系统性验证。",
+      "head_sha": "6e34aa7bee6bbbe534b40a21ce1fe537187eac8a",
+      "name": "skill-fundamental-factor-analysis",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-futures-deepview-analyst/blob/757bba6f690d9318acfa7704da3d5cbab8a1ff0d/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Pandadata futures DeepView analyst skill for broker positions, basis, term structure, inventory, and arbitrage reports.",
+      "head_sha": "757bba6f690d9318acfa7704da3d5cbab8a1ff0d",
+      "name": "skill-futures-deepview-analyst",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-futures-roll-auditor/blob/646f6a6fd0d49bd930c854c7b54e0a91d1d033b8/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Audit continuous futures contract selection, roll events, same-day price gaps, and adjustment ledgers before research or backtesting.",
+      "head_sha": "646f6a6fd0d49bd930c854c7b54e0a91d1d033b8",
+      "name": "skill-futures-roll-auditor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-gaetano-crux-capital-research-model/blob/fdfa6eee1a1ea68047e44b9c90f2052b9a325121/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Portable agent skill for Gaetano / Crux Capital-style photonics, optical networking, Physical AI, and AI infrastructure research.",
+      "head_sha": "fdfa6eee1a1ea68047e44b9c90f2052b9a325121",
+      "name": "skill-gaetano-crux-capital-research-model",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-gao-shanwen-research-model/blob/a7d082678ae472c99863eedad6368945769287f7/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Codex skill for Gao Shanwen bibliography and public article research workflow",
+      "head_sha": "a7d082678ae472c99863eedad6368945769287f7",
+      "name": "skill-gao-shanwen-research-model",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-global-commodity-term-structure/blob/b458381b9b5e23b8ec3159ab0e4515955cd63689/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Research overseas commodity futures term structure, roll yield, and cross-commodity spreads from public data.",
+      "head_sha": "b458381b9b5e23b8ec3159ab0e4515955cd63689",
+      "name": "skill-global-commodity-term-structure",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-global-macro-rates-fx-lab/blob/b1f79c7282f3ceaad1c7fbef0ca38010b1959521/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Study global rates, FX, and macro regime from public FRED/central-bank data and Pandadata international macro.",
+      "head_sha": "b1f79c7282f3ceaad1c7fbef0ca38010b1959521",
+      "name": "skill-global-macro-rates-fx-lab",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-global-macro-trend-strategy/blob/2eb638f8da966e51e5d0c026a7bc66a6f408d0c7/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Turn an overseas commodity/macro/FX signal into a framework-neutral, backtestable research strategy.",
+      "head_sha": "2eb638f8da966e51e5d0c026a7bc66a6f408d0c7",
+      "name": "skill-global-macro-trend-strategy",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-hk-stock-dossier/blob/5acf1a8131cbb67aeea59eba08e56681522c10f2/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "生成结构化港股尽职调查研报，输出为中文 Markdown 研报。",
+      "head_sha": "5acf1a8131cbb67aeea59eba08e56681522c10f2",
+      "name": "skill-hk-stock-dossier",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-hk-us-consensus-radar/blob/94bcddefd232863fa3a259b1556a4222c890a77a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: HK/US sell-side consensus ratings, targets, and revision research.",
+      "head_sha": "94bcddefd232863fa3a259b1556a4222c890a77a",
+      "name": "skill-hk-us-consensus-radar",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-hk-us-consensus-revision-radar/blob/6b699d27c4abc9e5ca8a21cca1b8c5aef5d3c663/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Hong Kong & US Consensus Revision Radar: Uses PandaData to analyze target prices, ratings, price divergence, analyst coverage, and revision trajectories, generating auditable offline HTML research reports.",
+      "head_sha": "6b699d27c4abc9e5ca8a21cca1b8c5aef5d3c663",
+      "name": "skill-hk-us-consensus-revision-radar",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-hk-us-dividend-events/blob/50678c69d5b7d4bc10707aeea108e88823cad5d1/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: HK/US dividend event calendar, yield, and DRIP research workflow.",
+      "head_sha": "50678c69d5b7d4bc10707aeea108e88823cad5d1",
+      "name": "skill-hk-us-dividend-events",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-hk-us-insider-radar/blob/9f3e040594a9c0b9b1ffa96cd24551ad76fc69dd/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "HK/US insider trading signal radar skill",
+      "head_sha": "9f3e040594a9c0b9b1ffa96cd24551ad76fc69dd",
+      "name": "skill-hk-us-insider-radar",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-hk-us-quote-scan/blob/acdba50911d47556f2af7bdbeca39c9e9083ba80/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: HK/US quote, liquidity, return, and valuation research snapshots.",
+      "head_sha": "acdba50911d47556f2af7bdbeca39c9e9083ba80",
+      "name": "skill-hk-us-quote-scan",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-holder-structure-scan/blob/b985fb82eefc457f685a75ee6a419f3dc4de3585/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: A-share holder structure and ownership-concentration research scan.",
+      "head_sha": "b985fb82eefc457f685a75ee6a419f3dc4de3585",
+      "name": "skill-holder-structure-scan",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-ic-analysis/blob/a2a864852ed53145a2cf833f0dde84b10a93916f/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "a2a864852ed53145a2cf833f0dde84b10a93916f",
+      "name": "skill-ic-analysis",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-index-rebalance-event-study/blob/518bd5b4f165441c4765d1800dda0262947e6766/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Run reproducible index addition, deletion, and weight-change event studies around announcement or effective-date anchors.",
+      "head_sha": "518bd5b4f165441c4765d1800dda0262947e6766",
+      "name": "skill-index-rebalance-event-study",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-index-valuation-rotation/blob/0f4d3c16d4bc19e33afb857172438b171a688c2d/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Pandadata index valuation percentiles and A-share industry rotation analysis skill.",
+      "head_sha": "0f4d3c16d4bc19e33afb857172438b171a688c2d",
+      "name": "skill-index-valuation-rotation",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-institutional-research-tracker/blob/32792b58baae3584aa82bab10fa91439bcce6034/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: A-share institutional research activity and attention monitor.",
+      "head_sha": "32792b58baae3584aa82bab10fa91439bcce6034",
+      "name": "skill-institutional-research-tracker",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-intraday-data-quality-auditor/blob/b9f633480a7c77c9595251f67018d4d37cc3241d/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Audit normalized intraday OHLCV data for timestamp, gap, price, volume, and trading-date defects before research or backtesting.",
+      "head_sha": "b9f633480a7c77c9595251f67018d4d37cc3241d",
+      "name": "skill-intraday-data-quality-auditor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-investment-decision/blob/cfd664bc868cd82682301c4a4c66fb41252e5202/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "cfd664bc868cd82682301c4a4c66fb41252e5202",
+      "name": "skill-investment-decision",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-jq-to-panda-converter/blob/c6e23481f05246828b5d944623c35afb08fb3987/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "将聚宽(JoinQuant)平台的量化策略代码转换为PandaAI(盘达)平台的策略代码。理解策略思想，而非逐行翻译，输出可直接运行回测的PandaAI JSON策略配置文件。",
+      "head_sha": "c6e23481f05246828b5d944623c35afb08fb3987",
+      "name": "skill-jq-to-panda-converter",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-keynes-contrarian-investment/blob/0c4bc57cf767979491bab26f4af6a9e55763e4ca/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "凯恩斯长期预期与反共识投资研究：识别过度乐观、过度悲观、预期差及价值陷阱",
+      "head_sha": "0c4bc57cf767979491bab26f4af6a9e55763e4ca",
+      "name": "skill-keynes-contrarian-investment",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-klarman-special-situations/blob/281f99f57074a95db8ede34b26f731d3e05cc058/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "基于克拉曼特殊情况投资框架的 A 股事件驱动研究 Skill，覆盖定增解禁、重组借壳、分拆上市与困境反转；强调证据核验、失败价值与风险边界。",
+      "head_sha": "281f99f57074a95db8ede34b26f731d3e05cc058",
+      "name": "skill-klarman-special-situations",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-ma-crossover-signal/blob/7b5380e3e0a2ba75decc1d542e8afd8415e02b05/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "7b5380e3e0a2ba75decc1d542e8afd8415e02b05",
+      "name": "skill-ma-crossover-signal",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-macro-altdata-nowcast/blob/2ebe86bee65ea48b7e3305d76f0c31ef2a31f724/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Pandadata 宏观特色数据另类高频行业景气 nowcast skill：指标解码、同比环比、趋势、跨行业景气与官方数据领先观察。",
+      "head_sha": "2ebe86bee65ea48b7e3305d76f0c31ef2a31f724",
+      "name": "skill-macro-altdata-nowcast",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-macro-monitor/blob/cf1f76aaf7be751988343c73363199a0b422bf15/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Pandadata macro data, industry prosperity, economic calendar, and recurring macro monitoring skill.",
+      "head_sha": "cf1f76aaf7be751988343c73363199a0b422bf15",
+      "name": "skill-macro-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-market-daily-review/blob/510e35a56ddadfd0d3899ba69015c9d0d3f2be5f/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Agent skill for Pandadata-based A-share after-close daily market review reports.",
+      "head_sha": "510e35a56ddadfd0d3899ba69015c9d0d3f2be5f",
+      "name": "skill-market-daily-review",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-market-regime-analysis/blob/ce1301568000a7ed4972ec5b305867d59cfba0c7/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": " 结合指数数据、宏观指标、期货期限结构和波动率聚集特征，对 A 股市场进行状态划分与状态感知的策略构建。",
+      "head_sha": "ce1301568000a7ed4972ec5b305867d59cfba0c7",
+      "name": "skill-market-regime-analysis",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-ml-factor-ensemble/blob/51bc5513cc950b21ceb8dd755082922ffc49bae0/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "ML 因子集成：LightGBM/ElasticNet/Ridge + Purged & Embargoed 滚动 walk-forward 防泄漏，OOS 元信号",
+      "head_sha": "51bc5513cc950b21ceb8dd755082922ffc49bae0",
+      "name": "skill-ml-factor-ensemble",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-model-hpo-evidence-driven/blob/1096589d3e64a71b82b60275aa094eca9ac522ee/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "面向量化多因子模型的 evidence-driven 超参数优化 Skill，通过固定训练验证流程、记录 trial 级别实验证据，并引入 LLM 对搜索空间进行自适应调整，用于提升 LGBM、MLP 等模型超参数搜索的系统性、可解释性和可复现性。",
+      "head_sha": "1096589d3e64a71b82b60275aa094eca9ac522ee",
+      "name": "skill-model-hpo-evidence-driven",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-munger-mental-model/blob/391d7bf621d954139835fea7703c34094fab201a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "391d7bf621d954139835fea7703c34094fab201a",
+      "name": "skill-munger-mental-model",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-news-sentiment-analyst/blob/fbd38b6a5f412fea7ff7d7b42380978179193666/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A-share financial news sentiment analyst - Claude Code Skill",
+      "head_sha": "fbd38b6a5f412fea7ff7d7b42380978179193666",
+      "name": "skill-news-sentiment-analyst",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-northbound-margin-monitor/blob/f14453375fd7bcb6fce8b84dd20f3cde7b78d013/SKILL.md"
+      },
+      "default_branch": "master",
+      "description": "A-share northbound capital + margin trading + futures panorama monitor with 25 signal detectors",
+      "head_sha": "f14453375fd7bcb6fce8b84dd20f3cde7b78d013",
+      "name": "skill-northbound-margin-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-numerical-leak-check/blob/00126750b52aae8ecb5bc8c3916ee9b033e1a96c/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "00126750b52aae8ecb5bc8c3916ee9b033e1a96c",
+      "name": "skill-numerical-leak-check",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-oil-brief/blob/31da0f18c7f9ff04bbf2af95bc514e5e894f9d03/SKILL.md"
+      },
+      "default_branch": "master",
+      "description": "生成原油简报，数据来源为 Pandadata 期货接口、美国能源信息署（EIA）开放 API、OPEC 月度报告、雅虎财经等，输出为中文 Markdown 简报。",
+      "head_sha": "31da0f18c7f9ff04bbf2af95bc514e5e894f9d03",
+      "name": "skill-oil-brief",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-option-strategy-builder/blob/b646fa750a6716863543425405acb649e18b5e0a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "期权策略构建器：7 种结构（垂直价差/跨式/宽跨式/领口/日历/备兑/自定义）选腿+损益图+盈亏平衡+净希腊字母+保证金，BS 用 math.erf 纯标准库补算",
+      "head_sha": "b646fa750a6716863543425405acb649e18b5e0a",
+      "name": "skill-option-strategy-builder",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-options-vol-analyst/blob/575d0c9d50a5e65dd0b0f6eeb36870c5ddc94563/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Pandadata options volatility analysis skill for option-chain, IV/HV, term-structure, skew, and volatility-premium reports.",
+      "head_sha": "575d0c9d50a5e65dd0b0f6eeb36870c5ddc94563",
+      "name": "skill-options-vol-analyst",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-overseas-equity-factor-miner/blob/b8327fb2a1fc69e39fbab9a1c570f1cb87ad074f/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Discover and validate cross-sectional alpha factors for HK/US equities by IC, decay, and turnover.",
+      "head_sha": "b8327fb2a1fc69e39fbab9a1c570f1cb87ad074f",
+      "name": "skill-overseas-equity-factor-miner",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-oversold-rebound/blob/9dfe98242a6eb21ddb6b5e1ba9ca3d304750ecfc/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A股超跌反弹择时与选股：判断短期反弹环境并筛选候选股票",
+      "head_sha": "9dfe98242a6eb21ddb6b5e1ba9ca3d304750ecfc",
+      "name": "skill-oversold-rebound",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-pair-correlation/blob/a15ca0adcc644c73154cc34e94a700c69531d42f/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "a15ca0adcc644c73154cc34e94a700c69531d42f",
+      "name": "skill-pair-correlation",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-pandaai-factor-online/blob/315aced3142ed59790987dfae3a899bbc3a497bb/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "PandaAI 因子大赛上手与在线挖掘技能：环境体检、登录、字段算子速查、可续跑批量回测与成本折算复盘 · Onboarding and online factor mining for PandaAI",
+      "head_sha": "315aced3142ed59790987dfae3a899bbc3a497bb",
+      "name": "skill-pandaai-factor-online",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-pandaai-workflow-audit/blob/7aae77befdb7a7c54f8d7b83807a6a46392b6210/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "像代码评审一样审计 PandaAI 工作流文件：图结构、策略与因子代码、数据时序、参数自由度、回测假设与验证证据，逐条给出缺陷与优化方案",
+      "head_sha": "7aae77befdb7a7c54f8d7b83807a6a46392b6210",
+      "name": "skill-pandaai-workflow-audit",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-pandaai-workflow-generator/blob/7ac2be859c558773a73fdd1d9a3930cfe2a6e4fa/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "根据自然语言量化想法生成可一键导入 PandaAI 的工作流 JSON：LiteGraph 节点连线、内嵌 Python 策略/因子代码、成本与回测参数注入",
+      "head_sha": "7ac2be859c558773a73fdd1d9a3930cfe2a6e4fa",
+      "name": "skill-pandaai-workflow-generator",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-pandadata-api/blob/810e61ef475ff0d1a247c847bf4b3e34ba318aa4/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Pandadata API skill for Codex, Claude Code, Hermes, OpenClaw, Cursor, and WorkBuddy",
+      "head_sha": "810e61ef475ff0d1a247c847bf4b3e34ba318aa4",
+      "name": "skill-pandadata-api",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-pandadata-warehouse/blob/416b7d1361895b56fafab94bf481a3bd6583d54a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills agent skill for local Pandadata DuckDB/Parquet warehouses",
+      "head_sha": "416b7d1361895b56fafab94bf481a3bd6583d54a",
+      "name": "skill-pandadata-warehouse",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-paper-replication/blob/29c05985a4b7f29a5f2039bc39672176542e623b/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Codex skill for paper replication workflows.",
+      "head_sha": "29c05985a4b7f29a5f2039bc39672176542e623b",
+      "name": "skill-paper-replication",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-portfolio-attribution/blob/9dab935e38f123340b87424b7cefd00de57cc5ba/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "把主动收益分解为行业配置、个股选择、交互效应（Brinson-Fachler + Carino 多期链接）与因子贡献",
+      "head_sha": "9dab935e38f123340b87424b7cefd00de57cc5ba",
+      "name": "skill-portfolio-attribution",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-portfolio-checkup/blob/3c2550a80b6e93d8b1c2198bdd687da0cf595ff2/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A-share portfolio health report skill for concentration, benchmark deviation, weighted valuation, quality, and risk exposure aggregation.",
+      "head_sha": "3c2550a80b6e93d8b1c2198bdd687da0cf595ff2",
+      "name": "skill-portfolio-checkup",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-portfolio-liquidity-stress-test/blob/fe7a958611aa7ed8f05a49d7f63fa8afd036acf8/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Stress portfolio liquidation capacity, pro-rata redemption shortfalls, and spread plus square-root impact costs.",
+      "head_sha": "fe7a958611aa7ed8f05a49d7f63fa8afd036acf8",
+      "name": "skill-portfolio-liquidity-stress-test",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-portfolio-optimize/blob/f12de77b6194b735b1cb812b608fea71022da227/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Convex portfolio optimizer: mean-variance / min-variance / max-Sharpe / risk-parity / max-diversification with weight caps, sector & exposure neutrality and turnover limits. Research/education only, not investment advice.",
+      "head_sha": "f12de77b6194b735b1cb812b608fea71022da227",
+      "name": "skill-portfolio-optimize",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-portfolio-pnl-attribution/blob/4d259f87b204da037feb6b4e3914eae412dcb18f/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "skill 收益归因：证券贡献、行业贡献、费用、基准和主动收益，并做日度 P&L 对账",
+      "head_sha": "4d259f87b204da037feb6b4e3914eae412dcb18f",
+      "name": "skill-portfolio-pnl-attribution",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-post-market-screener/blob/b0b519117f203b97048cb5eb3460a1b8bd41bd2a/SKILL.md"
+      },
+      "default_branch": "master",
+      "description": "Daily A-share post-market screener: 8 technical pattern detectors x capital inflow filter with LLM analysis",
+      "head_sha": "b0b519117f203b97048cb5eb3460a1b8bd41bd2a",
+      "name": "skill-post-market-screener",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-qbti/blob/55e65e52ce485641ba09717cb3c9e9a044facd13/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "QBTI（平凡人策略）：五组问答把投资性格翻译成因子方向与策略参数，交给 QuantSkills 因子库与回测流水线",
+      "head_sha": "55e65e52ce485641ba09717cb3c9e9a044facd13",
+      "name": "skill-qbti",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-quant-execution-microstructure/blob/7cb78840483dc50fe078de130bddc69fdc55df94/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "7cb78840483dc50fe078de130bddc69fdc55df94",
+      "name": "skill-quant-execution-microstructure",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-quant-factor-directional-alpha/blob/2cc3fb473624a1179c290c3715de72e3d40791ab/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills factor Skill repository",
+      "head_sha": "2cc3fb473624a1179c290c3715de72e3d40791ab",
+      "name": "skill-quant-factor-directional-alpha",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-quant-factor-risk-pattern-alpha/blob/fc49e43f98ee304b34b01ec965563b96d7001aff/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills factor Skill repository",
+      "head_sha": "fc49e43f98ee304b34b01ec965563b96d7001aff",
+      "name": "skill-quant-factor-risk-pattern-alpha",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-quant-factor-skill-factory/blob/d0fae3882bdf4b141ee56a939a3ce6f4e59700aa/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills factor Skill repository",
+      "head_sha": "d0fae3882bdf4b141ee56a939a3ce6f4e59700aa",
+      "name": "skill-quant-factor-skill-factory",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-quant-factor-volume-stat-alpha/blob/b169f31106f748b8746c4c1028c162e95f7277f4/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "QuantSkills factor Skill repository",
+      "head_sha": "b169f31106f748b8746c4c1028c162e95f7277f4",
+      "name": "skill-quant-factor-volume-stat-alpha",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-quant-portfolio-risk/blob/c89d92b7a6b03e8ec8df729978e73d56aadf3cd4/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "c89d92b7a6b03e8ec8df729978e73d56aadf3cd4",
+      "name": "skill-quant-portfolio-risk",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-quant-research/blob/457cc945d3f9ec587bae637c05e3b9c1e59b5428/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "457cc945d3f9ec587bae637c05e3b9c1e59b5428",
+      "name": "skill-quant-research",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-quant-research-experiment-registry/blob/394ab9fc70de5f8af595e9e66671c446ae367515/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Quantitative research experiment registry and reproducibility audit skill.",
+      "head_sha": "394ab9fc70de5f8af595e9e66671c446ae367515",
+      "name": "skill-quant-research-experiment-registry",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-quant-research-replication/blob/0e41cf070091de7117bdb5be3b571e5571243641/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Codex skill for quantitative research replication workflows.",
+      "head_sha": "0e41cf070091de7117bdb5be3b571e5571243641",
+      "name": "skill-quant-research-replication",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-refinancing-monitor/blob/2e4831c9c4e1b3c039b8022f852eaee21fec1ee9/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: A-share refinancing lifecycle, pricing, dilution, and break-issue monitor.",
+      "head_sha": "2e4831c9c4e1b3c039b8022f852eaee21fec1ee9",
+      "name": "skill-refinancing-monitor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-regulatory-risk-radar/blob/1df9843dfdad891e20897da754c8d1425119c36a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A股合规/监管风险雷达：解禁·减持·质押·举牌·冻结·停牌·ST 七类风险聚合分级",
+      "head_sha": "1df9843dfdad891e20897da754c8d1425119c36a",
+      "name": "skill-regulatory-risk-radar",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-report-replication/blob/caed18abbeffb4b08e0f26950f79b9900f9f32dc/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Codex skill for report replication workflows.",
+      "head_sha": "caed18abbeffb4b08e0f26950f79b9900f9f32dc",
+      "name": "skill-report-replication",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-residual-guided-factor-selection/blob/2aff39b0993a30f8276d986cfc45a712a8063142/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "基于残差 IC 的多路径因子筛选 Skill，支持 Ridge 训练残差、LightGBM 时序 OOF 残差、Beam Search、联合时序 CV、冻结 OOS 评估与回测交接。",
+      "head_sha": "2aff39b0993a30f8276d986cfc45a712a8063142",
+      "name": "skill-residual-guided-factor-selection",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-risk-model/blob/685cb3e5a975d01001487ef3b86ecfb407e18341/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Barra-style multi-factor risk model & risk attribution: cross-sectional WLS factor returns, Ledoit-Wolf shrinkage covariance, factor vs specific risk decomposition. Offline via a panda_data adapter. Research/education only, not investment advice.",
+      "head_sha": "685cb3e5a975d01001487ef3b86ecfb407e18341",
+      "name": "skill-risk-model",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-risk-return-metrics/blob/7e14135829c4927050cf4257e48386da18ec42d1/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "7e14135829c4927050cf4257e48386da18ec42d1",
+      "name": "skill-risk-return-metrics",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-rolling-beta-exposure/blob/bad5efa88a04d9d83f8b196fab08625c08f7afed/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "bad5efa88a04d9d83f8b196fab08625c08f7afed",
+      "name": "skill-rolling-beta-exposure",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-serenity-research-model/blob/97896616e3704e374ae4f0dbda7a93cc349b11cb/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Portable agent skill for reconstructing Serenity-style public investment research logic from X/Twitter evidence.",
+      "head_sha": "97896616e3704e374ae4f0dbda7a93cc349b11cb",
+      "name": "skill-serenity-research-model",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-signal-stability-audit/blob/3591038081e6156fea935804682cdfabffde014f/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "3591038081e6156fea935804682cdfabffde014f",
+      "name": "skill-signal-stability-audit",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-simons-pairs-trading/blob/e6fcece53e67b0aa1e701144a1f5ccb75053c1d4/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "面向 A 股市场的统计套利配对交易研究工具，支持同行业配对、协整筛选、滚动检验、PCA 去共线与执行约束。",
+      "head_sha": "e6fcece53e67b0aa1e701144a1f5ccb75053c1d4",
+      "name": "skill-simons-pairs-trading",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-smart-money-profiler/blob/d606d88e726f11dbd00fe705ba7f6a2d17d19d01/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "A-share smart-money profiling skill for LHB seat identity, northbound behavior, and multi-source capital consensus or divergence.",
+      "head_sha": "d606d88e726f11dbd00fe705ba7f6a2d17d19d01",
+      "name": "skill-smart-money-profiler",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-ssquant-ai-trader/blob/b270dbd5408267884a97ccb723af6bb67b99b4ca/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "b270dbd5408267884a97ccb723af6bb67b99b4ca",
+      "name": "skill-ssquant-ai-trader",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-ssquant-trader-generator/blob/4538ad0133a558ae838bd2a95ba7c871b95fcb74/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "4538ad0133a558ae838bd2a95ba7c871b95fcb74",
+      "name": "skill-ssquant-trader-generator",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-statistical-arbitrage-time-series/blob/de01a3e9d570901414025ebe99ff37521dd8119b/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "统计套利与时间序列建模 Generate a sourced, reproducible statistical-arbitrage research dossier   from a candidate pair, basket, or asset universe, covering data preparation, pair   selection, cointegration and stationarity testing (train-window ADF + KPSS), spread   modeling with hedge-ratio stability, mean-reversion estimation, z-score signal   construction",
+      "head_sha": "de01a3e9d570901414025ebe99ff37521dd8119b",
+      "name": "skill-statistical-arbitrage-time-series",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-stock-memory-analyzer-usa/blob/ae8dcf34ec482f72e20fa62d611c9cb74dbdadf5/SKILL.md"
+      },
+      "default_branch": "master",
+      "description": "Multi-dimensional deep analysis platform for US semiconductor memory stocks. 美股存储芯片多维度深度分析",
+      "head_sha": "ae8dcf34ec482f72e20fa62d611c9cb74dbdadf5",
+      "name": "skill-stock-memory-analyzer-usa",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-stock-screener/blob/8234c3fd2d2ba49ef505e249b572eac2fd008926/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Natural-language A-share stock screening skill backed by Pandadata evidence.",
+      "head_sha": "8234c3fd2d2ba49ef505e249b572eac2fd008926",
+      "name": "skill-stock-screener",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-strategy-tearsheet-report/blob/18c0f68769e423ce73d229fbacf4b3cc8e8c7c89/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "策略绩效 tearsheet：全套风险调整指标 + 自包含 HTML 看板",
+      "head_sha": "18c0f68769e423ce73d229fbacf4b3cc8e8c7c89",
+      "name": "skill-strategy-tearsheet-report",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-survivorship-universe-auditor/blob/2485c1494ecc9d8c66fded992e8438d8b59d7a2d/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Audit point-in-time universe membership, security lifecycles, stable identities, and missing delisting returns before backtesting.",
+      "head_sha": "2485c1494ecc9d8c66fded992e8438d8b59d7a2d",
+      "name": "skill-survivorship-universe-auditor",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-template/blob/ead1dafc1b80fa327b7f243348178ebbc3709676/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Template repository for QUANTSKILLS skill-* projects.",
+      "head_sha": "ead1dafc1b80fa327b7f243348178ebbc3709676",
+      "name": "skill-template",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-time-series-analysis/blob/814489121130da25f538bedc3447584f25df5763/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "814489121130da25f538bedc3447584f25df5763",
+      "name": "skill-time-series-analysis",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-transaction-cost-analysis/blob/08946cb243831343bdd65338159ad14afd37f7f8/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "交易成本分析(TCA)：implementation shortfall 五项分解 + VWAP/TWAP/arrival 对标",
+      "head_sha": "08946cb243831343bdd65338159ad14afd37f7f8",
+      "name": "skill-transaction-cost-analysis",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-transaction-cost-calibration/blob/c443a182c84f50629c77073c7a4a8f77c55ea4e2/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "skill基于成交、历史盘口或 OHLCV 校准手续费、点差、滑点和参与率冲击成本，区别于已有的组合流动性压力测试",
+      "head_sha": "c443a182c84f50629c77073c7a4a8f77c55ea4e2",
+      "name": "skill-transaction-cost-calibration",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-us-sec-edgar-harvester/blob/24f1765b3b8fac4c000ae229122db68ee5a0edca/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Harvest and structure US SEC EDGAR public filings into a deduplicated, sourced, time-lined dataset.",
+      "head_sha": "24f1765b3b8fac4c000ae229122db68ee5a0edca",
+      "name": "skill-us-sec-edgar-harvester",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-us-sector-rotation/blob/0a56f0d95c5a9902a7a6fd6f49279c5e2927d05a/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Community Draft: US equity sector return, valuation, and rotation research monitor.",
+      "head_sha": "0a56f0d95c5a9902a7a6fd6f49279c5e2927d05a",
+      "name": "skill-us-sector-rotation",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-walk-forward-validator/blob/bfa1a166a622fbc84487ad37d46738aa9778b1d6/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "bfa1a166a622fbc84487ad37d46738aa9778b1d6",
+      "name": "skill-walk-forward-validator",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-x-trader-builder/blob/702fa730de0ae548a888f74cac6a3c59a0ebe0a6/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Build trader-specific research-model skills from public X/Twitter datasets, semantic review rules, and validation workflows.",
+      "head_sha": "702fa730de0ae548a888f74cac6a3c59a0ebe0a6",
+      "name": "skill-x-trader-builder",
+      "topics": []
+    },
+    {
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-xingtai-catcher/blob/2efc3be1eb9681fbea0ce4a25acf7af15fccb8b7/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "PatternCatcher MCP skill for similar K-line stock and futures search",
+      "head_sha": "2efc3be1eb9681fbea0ce4a25acf7af15fccb8b7",
+      "name": "skill-xingtai-catcher",
+      "topics": []
+    }
+  ],
+  "organization": "quantskills",
+  "resources": [
+    {
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "aa7c4090e9951c597b8dc7c1e6df3addcbc26754",
+      "name": ".github",
+      "topics": []
+    },
+    {
+      "default_branch": "main",
+      "description": "",
+      "head_sha": "3a5aa6d28dd96c7c8d33ae774544dc89a55c1081",
+      "name": "join",
+      "topics": []
+    },
+    {
+      "default_branch": "main",
+      "description": "QuantSkills组织的全景导航 ——Panoramic navigator for the QuantSkills organization",
+      "head_sha": "979aacd11218cf5d7ea002669fa4ac9f3f4956fa",
+      "name": "quantskills",
+      "topics": []
+    },
+    {
+      "default_branch": "main",
+      "description": "Public display registry for QUANTSKILLS skill-* and agent-* assets.",
+      "head_sha": "cde4cc97f84e9ef3f7f3150f73604cc581be7d0f",
+      "name": "registry",
+      "topics": []
+    }
+  ],
+  "schema_version": "1.0.0",
+  "sha256": "sha256:cf04ee524bafeac9b04839f43699e53fc11d15f92330ad5d232dee2a1ec9715c"
+}

@@ -1,0 +1,19 @@
+{
+  "https://api.github.test/orgs/quantskills/repos?type=all&per_page=100&page=1": [
+    {"name":"skill-alpha","default_branch":"main","description":"alpha","topics":["z","a"],"archived":false,"fork":false,"private":false},
+    {"name":"agent-beta","default_branch":"main","description":null,"topics":[],"archived":false,"fork":false,"private":false},
+    {"name":".github","default_branch":"main","description":"github","topics":[],"archived":false,"fork":false,"private":false},
+    {"name":"join","default_branch":"main","description":"join","topics":[],"archived":false,"fork":false,"private":false},
+    {"name":"quantskills","default_branch":"main","description":"org","topics":[],"archived":false,"fork":false,"private":false},
+    {"name":"registry","default_branch":"main","description":"registry","topics":[],"archived":false,"fork":false,"private":false}
+  ],
+  "https://api.github.test/orgs/quantskills/repos?type=all&per_page=100&page=2": [],
+  "https://api.github.test/repos/quantskills/skill-alpha/commits/main": {"sha":"skill-head"},
+  "https://api.github.test/repos/quantskills/agent-beta/commits/main": {"sha":"agent-head"},
+  "https://api.github.test/repos/quantskills/.github/commits/main": {"sha":"github-head"},
+  "https://api.github.test/repos/quantskills/join/commits/main": {"sha":"join-head"},
+  "https://api.github.test/repos/quantskills/quantskills/commits/main": {"sha":"org-head"},
+  "https://api.github.test/repos/quantskills/registry/commits/main": {"sha":"registry-head"},
+  "https://api.github.test/repos/quantskills/skill-alpha/contents/SKILL.md?ref=skill-head": {"type":"file"},
+  "https://api.github.test/repos/quantskills/agent-beta/contents/AGENTS.md?ref=agent-head": {"type":"file"}
+}
