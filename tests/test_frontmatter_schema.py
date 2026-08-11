@@ -2,9 +2,11 @@ import json
 import copy
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import yaml
 from jsonschema import Draft202012Validator
+from scripts.catalog_contract import validate_frontmatter_schema
 
 
 ROOT = Path(__file__).parents[1]
@@ -114,6 +116,31 @@ class FrontmatterSchemaTests(unittest.TestCase):
         declaration["quantSkills"]["project_type"] = "agent"
         declaration["allowed-tools"] = ["Read"]
         self.assertTrue(list(self.validator.iter_errors(declaration)))
+
+    def test_2_0_rejects_every_2_1_only_root_field_through_public_validator(self):
+        values = {
+            "license": "GPL-3.0-only", "allowed-tools": ["Read"], "user-invocable": True,
+            "disable-model-invocation": False, "supported-runtimes": ["codex"],
+            "compatibility": "Python 3.10+", "version": "1.0.0", "author": "PandaAI",
+            "metadata": {"organization": "QuantSkills"},
+        }
+        for field, value in values.items():
+            with self.subTest(field=field):
+                declaration = load_yaml("valid-structured.yml")
+                declaration[field] = value
+                self.assertTrue(validate_frontmatter_schema(declaration, SCHEMA_PATH))
+        self.assertFalse(validate_frontmatter_schema(load_yaml("valid-structured.yml"), SCHEMA_PATH))
+        declaration = load_yaml("valid-structured.yml")
+        declaration["quantSkills"]["schema_version"] = "2.1.0"
+        declaration.update(values)
+        declaration["supported-runtimes"] = declaration["quantSkills"]["platforms"]
+        self.assertFalse(validate_frontmatter_schema(declaration, SCHEMA_PATH))
+
+    def test_version_validation_never_uses_external_schema_resolution(self):
+        declaration = load_yaml("valid-structured.yml")
+        declaration["quantSkills"]["schema_version"] = "2.1.0"
+        with patch("urllib.request.urlopen", side_effect=AssertionError("external schema resolution")):
+            self.assertFalse(validate_frontmatter_schema(declaration, SCHEMA_PATH))
 
 
 if __name__ == "__main__":

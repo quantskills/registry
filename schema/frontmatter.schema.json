@@ -89,6 +89,10 @@
   },
   "allOf": [
     {
+      "if": {"properties": {"quantSkills": {"properties": {"schema_version": {"const": "2.0.0"}}, "required": ["schema_version"]}}, "required": ["quantSkills"]},
+      "then": {"not": {"anyOf": [{"required": ["license"]}, {"required": ["allowed-tools"]}, {"required": ["user-invocable"]}, {"required": ["disable-model-invocation"]}, {"required": ["supported-runtimes"]}, {"required": ["compatibility"]}, {"required": ["version"]}, {"required": ["author"]}, {"required": ["metadata"]}]}}
+    },
+    {
       "if": {"properties": {"quantSkills": {"properties": {"project_type": {"const": "agent"}}, "required": ["project_type"]}}, "required": ["quantSkills"]},
       "then": {"not": {"anyOf": [{"required": ["allowed-tools"]}, {"required": ["user-invocable"]}, {"required": ["disable-model-invocation"]}]}}
     }
