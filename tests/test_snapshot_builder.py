@@ -5,6 +5,8 @@ import sys
 import unittest
 from pathlib import Path
 import copy
+import csv
+import tempfile
 import yaml
 
 ROOT = Path(__file__).parents[1]
@@ -167,6 +169,21 @@ class SnapshotBuilderTests(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertEqual(validate_frontmatter_schema(declaration, schema), [])
                 self.assertEqual(validate_asset_semantics(declaration, name, "AGENTS.md" if name.startswith("agent-") else "SKILL.md", self.taxonomy), [])
+
+    def test_approved_assignments_replace_only_catalog_workflow_and_summaries(self):
+        entries, _ = collect_entries(self.repos, {}, "enforce", inventory={"assets": ["agent-template", "skill-alpha", "skill-template"], "resources": [".github", "join", "quantskills", "registry"]})
+        interfaces = {entry["name"]: entry["interface"] for entry in entries}
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "assignments.csv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=["name", "category", "subcategory", "primary_stage", "workflow_stages", "summary_zh", "summary_en", "review_status"])
+                writer.writeheader()
+                for entry in entries:
+                    writer.writerow({"name": entry["name"], "category": "02", "subcategory": "02.factor-evaluation", "primary_stage": "evaluation", "workflow_stages": "evaluation", "summary_zh": "已批准简介", "summary_en": "Approved summary.", "review_status": "approved"})
+            build_registry.apply_approved_assignments(entries, path)
+        self.assertTrue(all(entry["summary_en"] == "Approved summary." for entry in entries))
+        self.assertTrue(all(entry["catalog"] == {"category": "02", "subcategory": "02.factor-evaluation"} for entry in entries))
+        self.assertEqual({entry["name"]: entry["interface"] for entry in entries}, interfaces)
 
 
 if __name__ == "__main__":

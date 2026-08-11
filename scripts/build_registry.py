@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import os
 import re
 import tempfile
 import datetime as dt
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import requests
@@ -47,17 +49,65 @@ def head_sha(repo: dict) -> str:
     return gh("GET", f"{API}/repos/{ORG}/{repo['name']}/commits/{repo['default_branch']}")["sha"]
 
 
-def shallow_clone(name: str, destination: Path) -> str:
+def shallow_clone(name: str, destination: Path, expected_sha: str = "") -> str:
     import subprocess
     subprocess.run(["git", "clone", "--depth", "1", "--quiet", f"https://github.com/{ORG}/{name}.git", str(destination)], check=True)
-    return subprocess.run(["git", "-C", str(destination), "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
+    clone_sha = subprocess.run(["git", "-C", str(destination), "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
+    if expected_sha and clone_sha != expected_sha:
+        raise ValueError(f"default branch changed during frozen build for {name}")
+    return clone_sha
 
 
 def load_inventory(path: Path = INVENTORY_PATH) -> dict:
     inventory = json.loads(path.read_text(encoding="utf-8"))
-    if inventory.get("schema_version") != "1.0.0" or not isinstance(inventory.get("assets"), list) or sorted(inventory.get("resources", [])) != sorted(RESOURCE_NAMES):
+    if inventory.get("schema_version") != "1.0.0" or not isinstance(inventory.get("assets"), list) or set(_inventory_names(inventory.get("resources", []))) != set(RESOURCE_NAMES):
         raise ValueError("invalid catalog inventory")
     return inventory
+
+
+def _inventory_names(records: list) -> list[str]:
+    return [record["name"] if isinstance(record, dict) else record for record in records]
+
+
+def repositories_from_frozen_inventory(inventory: dict) -> list[dict]:
+    records = inventory.get("assets", []) + inventory.get("resources", [])
+    if not all(isinstance(record, dict) and isinstance(record.get("name"), str) for record in records):
+        raise ValueError("invalid frozen repository inventory")
+    return [{"name": record["name"], "html_url": f"https://github.com/{ORG}/{record['name']}", "head_sha": record.get("head_sha", ""), "declaration_url": (record.get("declaration") or {}).get("url", "")} for record in records]
+
+
+def frozen_frontmatter(repo: dict) -> dict | None:
+    """Read exactly the declaration URL closed by a frozen inventory record."""
+    url = repo.get("declaration_url")
+    if not url:
+        return None
+    raw = url.replace("https://github.com/", "https://raw.githubusercontent.com/").replace("/blob/", "/")
+    response = requests.get(raw, timeout=30)
+    response.raise_for_status()
+    with tempfile.TemporaryDirectory() as temp:
+        path = Path(temp) / ("AGENTS.md" if repo["name"].startswith("agent-") else "SKILL.md")
+        path.write_text(response.text, encoding="utf-8")
+        return parse_frontmatter(path)
+
+
+def apply_approved_assignments(entries: list[dict], assignments_path: Path) -> None:
+    """Apply only reviewed catalog facts; never infer interfaces from migration candidates."""
+    with Path(assignments_path).open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    by_name = {row.get("name"): row for row in rows}
+    names = {entry["name"] for entry in entries}
+    if set(by_name) != names or any(row.get("review_status") != "approved" for row in rows):
+        raise ValueError("approved assignments do not close the frozen asset inventory")
+    for entry in entries:
+        row = by_name[entry["name"]]
+        stages = row.get("workflow_stages", "").split("|")
+        values = (row.get("category"), row.get("subcategory"), row.get("primary_stage"), row.get("summary_zh"), row.get("summary_en"))
+        if not all(isinstance(value, str) and value.strip() for value in values) or not all(stages):
+            raise ValueError(f"invalid approved assignment for {entry['name']}")
+        entry["catalog"] = {"category": row["category"], "subcategory": row["subcategory"]}
+        entry["workflow"] = {"primary_stage": row["primary_stage"], "workflow_stages": stages}
+        entry["category"], entry["subcategory"], entry["stage"] = row["category"], row["subcategory"], row["primary_stage"]
+        entry["summary_zh"], entry["summary_en"] = row["summary_zh"], row["summary_en"]
 
 
 def _entry_from_frontmatter(name: str, frontmatter: dict, commit_sha: str = "", contract_mode: str = "enforce", validation_date: str = "") -> dict:
@@ -134,25 +184,48 @@ def collect_entries(repos: list[dict], previous: dict, contract_mode: str, inven
     if any(not isinstance(name, str) or not name for name in names) or len(names) != len(set(names)):
         raise ValueError("duplicate or empty asset name")
     inventory = inventory or load_inventory()
-    expected = set(inventory["assets"]) | set(inventory["resources"])
+    expected = set(_inventory_names(inventory["assets"])) | set(_inventory_names(inventory["resources"]))
     if set(names) != expected:
         raise ValueError("catalog inventory mismatch")
     resources_by_name = {repo["name"]: {"name": repo["name"], "url": repo.get("html_url") or repo.get("url") or f"https://github.com/{ORG}/{repo['name']}"} for repo in repos if repo["name"] in RESOURCE_NAMES}
     entries = []
+    frozen_assets = [repo for repo in repos if repo["name"] not in RESOURCE_NAMES and repo.get("declaration_url")]
+    if frozen_assets and len(frozen_assets) == len([repo for repo in repos if repo["name"] not in RESOURCE_NAMES]):
+        def frozen_entry(repo: dict) -> dict:
+            name = repo["name"]
+            frontmatter = frozen_frontmatter(repo)
+            if name != "skill-pandadata-warehouse":
+                frontmatter = {"description": (frontmatter or {}).get("description", "")}
+            entry = _entry_from_frontmatter(name, frontmatter or {"description": repo.get("description", "")}, repo["head_sha"], contract_mode, validation_date)
+            entry["health"] = "frozen-declaration-only"
+            return entry
+        with ThreadPoolExecutor(max_workers=16) as executor:
+            entries = list(executor.map(frozen_entry, frozen_assets))
+        return sorted(entries, key=lambda entry: entry["name"]), [resources_by_name[name] for name in RESOURCE_NAMES]
     for repo in (repo for repo in repos if repo["name"] not in RESOURCE_NAMES):
         name = repo["name"]
         if "frontmatter" in repo:
             entries.append(_entry_from_frontmatter(name, repo["frontmatter"], repo.get("commit_sha", ""), contract_mode, validation_date))
             continue
+        if repo.get("declaration_url"):
+            frontmatter = frozen_frontmatter(repo)
+            # The migration matrix is approved for catalog facts, not endpoint publication.
+            # Only the merged Warehouse declaration is an active public contract in this release.
+            if name != "skill-pandadata-warehouse":
+                frontmatter = {"description": (frontmatter or {}).get("description", "")}
+            entry = _entry_from_frontmatter(name, frontmatter or {"description": repo.get("description", "")}, repo["head_sha"], contract_mode, validation_date)
+            entry["health"] = "frozen-declaration-only"
+            entries.append(entry)
+            continue
         with tempfile.TemporaryDirectory() as temp:
             directory = Path(temp) / name
-            clone_sha = shallow_clone(name, directory)
+            clone_sha = shallow_clone(name, directory, repo.get("head_sha", ""))
             kind, declaration = declaration_info(directory)
             frontmatter = parse_frontmatter(directory / declaration) if declaration else None
             report = validate(directory, set(names), contract_mode)
-            if report.health == "quarantined" or not frontmatter:
+            if not frontmatter and contract_mode != "audit":
                 raise ValueError(f"invalid declaration for {name}")
-            entry = _entry_from_frontmatter(name, frontmatter, clone_sha, contract_mode, validation_date)
+            entry = _entry_from_frontmatter(name, frontmatter or {"description": repo.get("description", "")}, clone_sha, contract_mode, validation_date)
             entry["health"] = report.health
             entries.append(entry)
     return sorted(entries, key=lambda entry: entry["name"]), [resources_by_name[name] for name in RESOURCE_NAMES]
@@ -312,10 +385,16 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--contract-mode", choices=("audit", "enforce"), default="audit")
     parser.add_argument("--full", action="store_true", help="Compatibility switch; catalog scans are always full-inventory.")
+    parser.add_argument("--inventory", type=Path, help="Frozen inventory; pins all declaration reads to default-branch HEADs.")
+    parser.add_argument("--assignments", type=Path, help="Reviewed migration assignments CSV.")
     args = parser.parse_args()
     previous_path = ROOT / "registry.json"
     previous = {row["name"]: row for row in json.loads(previous_path.read_text(encoding="utf-8"))} if previous_path.exists() else {}
-    entries, resources = collect_entries(list_asset_repos(), previous, args.contract_mode, validation_date=dt.date.today().isoformat())
+    inventory = load_inventory(args.inventory) if args.inventory else None
+    repos = repositories_from_frozen_inventory(inventory) if inventory else list_asset_repos()
+    entries, resources = collect_entries(repos, previous, args.contract_mode, inventory=inventory, validation_date=dt.date.today().isoformat())
+    if args.assignments:
+        apply_approved_assignments(entries, args.assignments)
     envelope, profiles, adapters, mappings = load_contract_catalogs()
     snapshot = build_snapshot(entries, resources, load_taxonomy(ROOT), profiles, adapters, envelope, mappings, contract_mode=args.contract_mode)
     promote_artifacts(render_artifacts(snapshot))
