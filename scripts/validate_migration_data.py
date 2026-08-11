@@ -219,6 +219,18 @@ def validate(
             fail("invalid workflow stages")
         if row["project_type"] != project_type[row["name"]] or subcategories.get(row["subcategory"]) != row["category"]:
             fail("invalid assignment classification")
+        if project_type[row["name"]] == "agent":
+            if row["name"] == "agent-template":
+                if row["category"] != "10" or row["subcategory"] != "10.agent-template":
+                    fail("invalid agent template classification")
+            elif row["category"] != "09" or not row["subcategory"].startswith("09."):
+                fail("invalid agent classification")
+        elif row["category"] == "09":
+            fail("invalid skill classification")
+        if row["name"] == "skill-template" and (
+            row["category"] != "10" or row["subcategory"] != "10.skill-template"
+        ):
+            fail("invalid skill template classification")
         if row["interface_candidate"] not in MODES:
             fail("invalid interface candidate")
         if row["review_status"] not in STATUSES or (enforce and row["review_status"] != "approved"):

@@ -328,6 +328,17 @@ class MigrationDataTests(unittest.TestCase):
 
     def test_not_applicable_mode_uses_reason_and_non_structured_bases(self):
         template_names = ["skill-template", *[f"skill-{i}" for i in range(1, 13)], "agent-template"]
+
+        def template_mutator(name, reason, explicit, base):
+            candidate = self.candidate_mutator(name, "not-applicable", explicit, base, notes=reason)
+
+            def mutate(rows, audit, waves):
+                rows[0].update(category="10", subcategory="10.skill-template")
+                rows[-1].update(category="10", subcategory="10.agent-template")
+                candidate(rows, audit, waves)
+
+            return mutate
+
         valid_cases = [
             ("skill-template", "natural-language-only", "non-structured-review"),
             ("agent-template", "orchestration-only", "agent-runtime"),
@@ -337,7 +348,7 @@ class MigrationDataTests(unittest.TestCase):
             for name, reason, base in valid_cases:
                 paths = self.write(
                     root,
-                    self.candidate_mutator(name, "not-applicable", False, base, notes=reason),
+                    template_mutator(name, reason, False, base),
                     names=template_names,
                 )
                 with self.subTest(name=name, reason=reason, base=base):
@@ -352,11 +363,59 @@ class MigrationDataTests(unittest.TestCase):
             for name, reason, explicit, base in invalid_cases:
                 paths = self.write(
                     root,
-                    self.candidate_mutator(name, "not-applicable", explicit, base, notes=reason),
+                    template_mutator(name, reason, explicit, base),
                     names=template_names,
                 )
                 with self.subTest(name=name, reason=reason, explicit=explicit, base=base), self.assertRaises(ValueError):
                     validate(*paths, expected_structured=0)
+
+    def test_agent_catalog_boundary_accepts_domain_agents(self):
+        names = [f"skill-{i}" for i in range(10)] + [
+            "agent-research",
+            "agent-monitor",
+            "agent-execution",
+            "agent-orchestration",
+        ]
+        subcategories = [
+            "09.research-agent",
+            "09.monitor-risk-agent",
+            "09.execution-agent",
+            "09.workflow-orchestration-agent",
+        ]
+
+        def mutate(rows, audit, waves):
+            rows[0].update(category="10", subcategory="10.registry-navigation")
+            for row, subcategory in zip(rows[-4:], subcategories):
+                row.update(category="09", subcategory=subcategory)
+
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self.write(Path(directory), mutate, names=names)
+            self.assertEqual(validate(*paths, expected_structured=0)["assets"], 14)
+
+    def test_agent_catalog_boundary_rejects_invalid_assignments(self):
+        template_names = ["skill-template", *[f"skill-{i}" for i in range(1, 13)], "agent-template"]
+        cases = [
+            (None, "agent-a", "03", "03.a-share-equity"),
+            (None, "agent-a", "04", "04.market-regime"),
+            (None, "agent-a", "10", "10.registry-navigation"),
+            (None, "skill-0", "09", "09.research-agent"),
+            (template_names, "agent-template", "10", "10.skill-template"),
+            (template_names, "skill-template", "10", "10.agent-template"),
+        ]
+        for names, target, category, subcategory in cases:
+            def mutate(rows, audit, waves, names=names, target=target, category=category, subcategory=subcategory):
+                if names is template_names:
+                    rows[0].update(category="10", subcategory="10.skill-template")
+                    rows[-1].update(category="10", subcategory="10.agent-template")
+                next(row for row in rows if row["name"] == target).update(
+                    category=category,
+                    subcategory=subcategory,
+                )
+
+            with tempfile.TemporaryDirectory() as directory:
+                paths = self.write(Path(directory), mutate, names=names) if names is not None else self.write(Path(directory), mutate)
+                with self.subTest(target=target, category=category, subcategory=subcategory), self.assertRaises(ValueError):
+                    validate(*paths)
 
     def test_enforce_and_expected_structured(self):
         with tempfile.TemporaryDirectory() as directory:
