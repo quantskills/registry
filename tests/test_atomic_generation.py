@@ -31,7 +31,7 @@ class AtomicGenerationTests(unittest.TestCase):
             item.update(catalog_status="approved", declaration_status="contract-valid", interface_status="published", default_branch="main", commit_sha="a" * 40)
         publication = {"inventory_sha256": "sha256:" + "0" * 64, "assignments_sha256": "sha256:" + "1" * 64, "published_interfaces": [{"name": item["name"], "default_branch": "main", "head_sha": item["commit_sha"], "interface": item["interface"]} for item in baseline["assets"]]}
         publication["manifest_sha256"] = "sha256:" + hashlib.sha256(build_registry.canonical_json(publication)).hexdigest()
-        baseline["publication"] = publication; baseline["core_lineage"] = {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}; self._sealed(baseline)
+        baseline["publication"] = publication; baseline["core_lineage"] = {"version": "1.0.0", "scope": "schema-smoke-only", "artifacts": []}; baseline["compatibility_edges"] = build_registry.build_compatibility_edges(baseline["assets"], adapters["items"]); self._sealed(baseline)
         fake = {"id": "fake-adapter", "source": {"profile": "market-bar", "version": "1.0.0"}, "target": {"profile": "factor-panel", "version": "1.0.0"}, "implementation": {"repository": "registry", "path": "scripts/compatibility.py"}, "lossless": True, "validation_status": "validated", "evidence": {"fixture_sha256": "sha256:" + "0" * 64, "test_command": "fixture", "validated_at": "2026-08-10"}, "envelope_major": 1}
         mutations = (
             lambda value: (value.pop("envelope"), value.pop("provider_mappings")),
@@ -39,7 +39,7 @@ class AtomicGenerationTests(unittest.TestCase):
             lambda value: value["profiles"]["items"][0].update(schema="wrong.schema.json"),
             lambda value: value["provider_mappings"]["items"][0]["evidence"].update(raw_sha256="sha256:" + "0" * 64),
             lambda value: value["adapters"]["items"].append(copy.deepcopy(fake)),
-            lambda value: value["core_lineage"]["artifacts"][0].update(artifact_sha256="sha256:" + "0" * 64),
+            lambda value: value["publication"]["published_interfaces"][0].update(head_sha="0" * 40),
             lambda value: value["assets"].append(copy.deepcopy(value["assets"][0])),
             lambda value: value["resources"].append(copy.deepcopy(value["resources"][0])),
             lambda value: value["resources"][0].update(url="https://evil.example/.github"),
