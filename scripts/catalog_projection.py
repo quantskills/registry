@@ -7,4 +7,4 @@ PUBLIC_FIELDS = ("name", "url", "description", "project_type", "declaration_file
 
 def public_registry_projection(snapshot: dict) -> list[dict]:
     snapshot_id = snapshot["snapshot_id"]
-    return [{**{field: asset.get(field, "" if field not in {"tags", "platforms", "requires"} else []) for field in PUBLIC_FIELDS}, "category": asset["catalog"]["category"], "subcategory": asset["catalog"]["subcategory"], "stage": asset["workflow"]["primary_stage"], "catalog": asset["catalog"], "workflow": asset["workflow"], "interface": asset["interface"], "snapshot_id": snapshot_id} for asset in snapshot["assets"]]
+    return [{**{field: asset.get(field, "" if field not in {"tags", "platforms", "requires"} else []) for field in PUBLIC_FIELDS}, "category": asset["catalog"]["category"], "subcategory": asset["catalog"]["subcategory"], "stage": asset["workflow"]["primary_stage"], "catalog": asset["catalog"], "workflow": asset["workflow"], "interface": asset["interface"], "snapshot_id": snapshot_id} for asset in snapshot["assets"] if asset.get("status") != "deprecated"]

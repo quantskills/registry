@@ -7,6 +7,26 @@
   "plugins": [
     {
       "category": "09",
+      "description": "Multi-factor portfolio health guardian producing a health matrix, crowding alerts, retire/rebuild candidates, IC decay curves, and a research-only effectiveness backtest L4 page.",
+      "name": "alpha-portfolio-guardian",
+      "source": {
+        "repo": "quantskills/agent-alpha-portfolio-guardian",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
+      "description": "Corporate governance scoring agent with 9-dimension risk scoring and evidence chains",
+      "name": "corporate-governance-scanner",
+      "source": {
+        "repo": "quantskills/agent-corporate-governance-scanner",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
       "description": "Uses Pandadata price-series correlation changes to identify style shifts, diversification stress, and structural market moves.",
       "name": "correlation-break-research",
       "source": {
@@ -37,10 +57,50 @@
     },
     {
       "category": "09",
+      "description": "财报季 Surprise/暴雷猎手 Agent。获取财报预告、一致预期、审计意见，计算偏离度并生成分析报告。支持A股/港股/美股。",
+      "name": "earnings-surprise-hunter",
+      "source": {
+        "repo": "quantskills/agent-earnings-surprise-hunter",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
+      "description": "Tracks Weibo user \"峰哥亡命天涯\" (Feng Ge), a well-known A-share reverse indicator. Extracts stock/market opinions from his posts and generates contrarian trading signals.",
+      "name": "feng-reverse",
+      "source": {
+        "repo": "quantskills/agent-feng-reverse",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
       "description": "Multi-agent collaboration framework for Liangshuyuan tasks, organizing quantitative tools, build workflows, and task roles.",
       "name": "for-liangshuyuan-tasks",
       "source": {
         "repo": "quantskills/agent-for-liangshuyuan-tasks",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
+      "description": "Multi-agent futures research, strategy generation, backtesting, and research feedback workflow",
+      "name": "future-trading",
+      "source": {
+        "repo": "quantskills/agent-future-trading",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
+      "description": "Research-only RL lab for intraday timing on minute bars: Gym env, baseline policies, leakage-aware walk-forward train/eval. No live orders.",
+      "name": "intraday-rl-timing",
+      "source": {
+        "repo": "quantskills/agent-intraday-rl-timing",
         "source": "github"
       },
       "type": "agent"
@@ -96,6 +156,16 @@
       "type": "agent"
     },
     {
+      "category": "03",
+      "description": "Analyze A-share cross-sectional market participation, turnover concentration, liquidity distribution, speculative crowding, leader dependence, and structural fragility from daily or intraday stock snapshots. Use when the user asks in Chinese or English to analyze A-share market breadth, participation, turnover concentration, crowding, whether an index rally is broad or narrow, or to generate a reproducible market-structure report. Use only bundled scripts with PandaData as the primary live source, AKShare as fallback, or user-provided local data; never search, browse, or scrape webpages for replacement market data, and fail closed when approved sources are unavailable. Do not use for order routing, fill simulation, slippage/TCA, live trade execution, or stock-level margin/northbound/block-trade capital-flow attribution.",
+      "name": "a-share-market-participation",
+      "source": {
+        "repo": "quantskills/skill-a-share-market-participation",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "04",
       "description": "Scans A-share macro, funding, valuation, trend, sector-rotation, and event evidence into risk levels.",
       "name": "a-share-market-risk-radar",
@@ -126,6 +196,16 @@
       "type": "skill"
     },
     {
+      "category": "03",
+      "description": "A-share tradability-constraint auditor — replays a backtest or signal trade log against date-resolved price limits (10%/20%/30%; main-board ST was 5% until the 2026-07-06 rule change), locked vs intraday-opened limit bars, suspensions, T+1 settlement, the naked-short ban, the new-listing window and turnover participation caps, then splits headline PnL into executable PnL and phantom PnL. Use when the user asks 回测收益是不是真的能成交、涨停买不进、 跌停卖不出、停牌怎么处理、T+1 约束、一字板、可交易性/可成交性审计, or wants to know why a live account underperforms its backtest. Fills the ecosystem gap: the four existing auditors all check whether the DATA is right, none checks whether the EXECUTION ASSUMPTION is possible.",
+      "name": "a-share-tradability-auditor",
+      "source": {
+        "repo": "quantskills/skill-a-share-tradability-auditor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "02",
       "description": "Generates an event-ranking factor from Dragon-Tiger seat history, win rate, payoff, and next-session premium.",
       "name": "a1-lhb-tracking",
@@ -146,11 +226,31 @@
       "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Monitor FX-adjusted A/H premiums, historical extremes, dislocations, and daily cross-market price-discovery proxies.",
+      "name": "ah-share-relative-value-montior",
+      "source": {
+        "repo": "quantskills/skill-ah-share-relative-value-montior",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "02",
       "description": "Computes a hot-money seat cooling and reversal factor from Dragon-Tiger and market data with validation artifacts.",
       "name": "alpha-a06-hotmoney-reversal",
       "source": {
         "repo": "quantskills/skill-alpha-a06-hotmoney-reversal",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "连板龙头接力（A3）Alpha 因子——从全 A 市场每日 ≥3 板候选池中识别 T+1 接力的事件型 top-N 信号，10 个子因子（个股截面 8 + 大盘情绪 2），权重可用 ICIR + shrinkage 重训，含滚动 IC gate 与 score 加权。研究层面的候选发现器，非交易策略。",
+      "name": "alpha-a3-streak-leader-relay",
+      "source": {
+        "repo": "quantskills/skill-alpha-a3-streak-leader-relay",
         "source": "github"
       },
       "type": "skill"
@@ -191,16 +291,6 @@
       "name": "alpha-f8-family-main-divergence",
       "source": {
         "repo": "quantskills/skill-alpha-f8-family-main-divergence",
-        "source": "github"
-      },
-      "type": "skill"
-    },
-    {
-      "category": "02",
-      "description": "Computes a Graham NCAV discount factor for A-share deep-value screening and buy-sell-hold signals.",
-      "name": "alpha-ncav-graham",
-      "source": {
-        "repo": "quantskills/skill-alpha-ncav-graham",
         "source": "github"
       },
       "type": "skill"
@@ -267,6 +357,16 @@
     },
     {
       "category": "07",
+      "description": "Use when an agent needs to independently audit the assumptions and biases behind a backtest / strategy code / research backtest report — execution timing and lookahead, trading costs, price limits and suspensions, survivorship bias, parameter freedom and multiple testing, data alignment and adjustment, turnover and capacity, benchmark and excess returns, and reporting transparency. Outputs a structured defect list (axis x evidence x severity x impact x fix).",
+      "name": "backtest-assumption_check",
+      "source": {
+        "repo": "quantskills/skill-backtest-assumption_check",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "07",
       "description": "Evaluates backtest overfitting and multiple-testing risk with DSR, PBO, purged cross-validation, and Harvey-Liu haircut.",
       "name": "backtest-overfit",
       "source": {
@@ -296,21 +396,21 @@
       "type": "skill"
     },
     {
-      "category": "05",
-      "description": "Runs Brinson-Fachler or BHB attribution with HHI, contributor ranking, and Carino multi-period linking.",
-      "name": "brinson-performance-attribution",
+      "category": "03",
+      "description": "Screens A-share and US companies using moat, valuation, and point-in-time data for research records.",
+      "name": "buffett-moat-screener",
       "source": {
-        "repo": "quantskills/skill-brinson-performance-attribution",
+        "repo": "quantskills/skill-buffett-moat-screener",
         "source": "github"
       },
       "type": "skill"
     },
     {
       "category": "03",
-      "description": "Screens A-share and US companies using moat, valuation, and point-in-time data for research records.",
-      "name": "buffett-moat-screener",
+      "description": "PandaData-only point-in-time Buffett moat hard screener for A-shares.",
+      "name": "buffett-moat-screener--lavineversion",
       "source": {
-        "repo": "quantskills/skill-buffett-moat-screener",
+        "repo": "quantskills/skill-buffett-moat-screener--lavineversion",
         "source": "github"
       },
       "type": "skill"
@@ -351,6 +451,16 @@
       "name": "capital-flow-crowding-monitor",
       "source": {
         "repo": "quantskills/skill-capital-flow-crowding-monitor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Discover causal alpha factors from OHLCV data using causal discovery (PC + LiNGAM + NOTEARS), build Structural Causal Models, construct regime-invariant factor expressions, and validate through backtesting. Produces OHLCV-only alpha factors whose predictive power is grounded in causal mechanisms rather than spurious correlations. Use when an agent needs to discover stable alpha factors that survive regime changes, test whether existing factors are causal or merely correlational, or generate alpha factors with formal invariance guarantees on portable agent platforms such as Claude Code, Codex, or Codex-style skill systems.",
+      "name": "causal-alpha-discovery",
+      "source": {
+        "repo": "quantskills/skill-causal-alpha-discovery",
         "source": "github"
       },
       "type": "skill"
@@ -406,6 +516,16 @@
       "type": "skill"
     },
     {
+      "category": "04",
+      "description": "A-share CSRC approval pipeline tracking: categorization by announcement level, approval flow monitoring, and status report generation.",
+      "name": "csrc-approval-pipeline",
+      "source": {
+        "repo": "quantskills/skill-csrc-approval-pipeline",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "08",
       "description": "Aggregates cross-market prices, sectors, flows, and news into a daily Markdown review.",
       "name": "daily-report",
@@ -426,6 +546,26 @@
       "type": "skill"
     },
     {
+      "category": "04",
+      "description": "Price options and other derivatives and quantify their risk from a contract specification and market inputs, covering Black-Scholes-Merton analytical pricing, the full set of Greeks, binomial-tree and Monte-Carlo numerical pricing with convergence checks, implied-volatility inversion, volatility smile/skew structure, and model-risk validation (put-call parity, no-arbitrage bounds, cross-method consistency). Use when the user asks for 期权定价、希腊字母计算、隐含波动率、波动率微笑/曲面、二叉树或蒙特卡洛定价、Black-Scholes、美式期权定价、看跌看涨平价校验, or a one-stop option pricing and risk dossier.",
+      "name": "derivatives-pricing-stochastic-calculus",
+      "source": {
+        "repo": "quantskills/skill-derivatives-pricing-stochastic-calculus",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "08",
+      "description": "Turn unstructured A-share disclosure text from cninfo (巨潮) and the SSE/SZSE exchanges into a traceable, structured event table (监管问询/诉讼担保/重组/治理/ 停牌控制权变更/增减持/质押/业绩预告). Use when the user asks to scan A-share announcements, find 关注函/问询函/诉讼/停牌/易主 events, build an event table for factor or alert pipelines, or backtest disclosure events. Fills the information-search gap Pandadata does not cover.",
+      "name": "disclosure-event-extractor",
+      "source": {
+        "repo": "quantskills/skill-disclosure-event-extractor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "03",
       "description": "Calculates A-share rolling dividend yield, dividend continuity, and ex-dividend calendars.",
       "name": "dividend-yield-scan",
@@ -437,10 +577,40 @@
     },
     {
       "category": "06",
+      "description": "深度自编码器无监督异常检测 —— 用户问「今天哪些股票走势最异常」「沪深300 异常股」「AE 跑一下」「找不像自己往常样子的股票」类问题时触发。对沪深300成分股用最近60日窗口重训一个MLP自编码器，输出T日重建误差Top-10异常股，按「样式② 结构化播报」呈现。",
+      "name": "dl-autoencoder-anomaly",
+      "source": {
+        "repo": "quantskills/skill-dl-autoencoder-anomaly",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
       "description": "Builds A-share heterogeneous graphs for GNN stock selection and backtesting.",
       "name": "dl-gnn-stock-graph",
       "source": {
         "repo": "quantskills/skill-dl-gnn-stock-graph",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "使用因果扩张 Temporal Convolutional Network 对沪深 A 股分钟线执行未来 1、2、3、5 个交易日的横截面收益排序研究，并以同数据、切分和预算的 LSTM 作为基准，生成可审计的数据、训练、速度和预测效果证据。用于运行或诊断 TCN 短线预测、核验感受野与因果卷积、PIT/walk-forward/purge/embargo、防止未来泄漏、比较 RankIC/Top 区域指标与训练吞吐，或判断研究模型是否达到冻结候选条件；不用于组合换手优化、券商连接、实盘交易或收益承诺。",
+      "name": "dl-tcn-shortterm",
+      "source": {
+        "repo": "quantskills/skill-dl-tcn-shortterm",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "skill dl transformer multiasset",
+      "name": "dl-transformer-multiasset",
+      "source": {
+        "repo": "quantskills/skill-dl-transformer-multiasset",
         "source": "github"
       },
       "type": "skill"
@@ -457,6 +627,16 @@
     },
     {
       "category": "08",
+      "description": "Formal CAR event study around earnings/corporate events — abnormal returns, multi-window CARs, t-tests and sign tests, with sample and model disclosure; research only, no trading advice.",
+      "name": "earnings-event-study",
+      "source": {
+        "repo": "quantskills/skill-earnings-event-study",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "08",
       "description": "Scans earnings guidance, industry distributions, and qualified audit items during earnings seasons.",
       "name": "earnings-season-tracker",
       "source": {
@@ -467,10 +647,30 @@
     },
     {
       "category": "03",
+      "description": "举牌行为监控——侦测 A 股股东持股比例上穿 5%/10%/15%/20%/25%/30% 法定披露梯度的权益变动事件，含举牌梯度、意图倾向（财务 vs 战略）、6 个月锁定期、逼近举牌线观察名单。剔除通道账户与股本稀释造成的假举牌。BUILD 型 skill，可被复盘 agent 或事件驱动 Alpha 调用。",
+      "name": "equity-placard-watchlist",
+      "source": {
+        "repo": "quantskills/skill-equity-placard-watchlist",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
       "description": "Monitors A-share ETF primary/secondary-market premiums and redemption-basket feasibility.",
       "name": "etf-arbitrage-monitor",
       "source": {
         "repo": "quantskills/skill-etf-arbitrage-monitor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "每日盘后 ETF 资金流雷达 —— 用户问「今天/最近 ETF 有什么异动」「ETF 资金流看下」「哪些 ETF 在被大量申购/赎回」「ETF 净申赎异动」类问题时触发。扫描主流权益 ETF，输出三类信号（净申赎异动 / 折溢价背离 / 连续多日大额同向），以「样式② 结构化播报」呈现给用户。",
+      "name": "etf-flow-radar",
+      "source": {
+        "repo": "quantskills/skill-etf-flow-radar",
         "source": "github"
       },
       "type": "skill"
@@ -567,10 +767,30 @@
     },
     {
       "category": "02",
+      "description": "Diagnose factor IC decay, ICIR, significance, rolling stability, and multi-horizon half-life. Evidence-first, no trading signals.",
+      "name": "factor-ic-decay",
+      "source": {
+        "repo": "quantskills/skill-factor-ic-decay",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
       "description": "Generates candidate factor ideas with economic rationale and risk notes from the default data scope.",
       "name": "factor-idea-generation",
       "source": {
         "repo": "quantskills/skill-factor-idea-generation",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Local closed-loop factor research: generate, validate, backtest, diagnose, learn, iterate N rounds. Self-improving alpha discovery and optimization.",
+      "name": "factor-loop-evolve",
+      "source": {
+        "repo": "quantskills/skill-factor-loop-evolve",
         "source": "github"
       },
       "type": "skill"
@@ -687,10 +907,30 @@
     },
     {
       "category": "02",
+      "description": "Generate alpha factor expressions from fundamental data (PandaData). Accepts a document, URL, natural language query, or model invention and returns validated point-in-time factors.",
+      "name": "fundamental-alpha",
+      "source": {
+        "repo": "quantskills/skill-fundamental-alpha",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
       "description": "Computes and validates A-share valuation, quality, and growth factors from quarterly financial reports.",
       "name": "fundamental-factor-analysis",
       "source": {
         "repo": "quantskills/skill-fundamental-factor-analysis",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Commodity-futures CTA factor library — computes a structured date×variety factor panel (time-series & cross-sectional momentum, carry/roll, term structure, positioning/COT, inventory, volatility). Use when the user asks for 商品期货因子、 CTA 信号、动量/carry/期限结构/库存/持仓因子, a factor panel for futures backtesting, or futures factor IC. Fills the ecosystem gap of ZERO futures factor libraries (vs 10 for equities). Emits factor values for the factor toolchain (factor-evaluate / ic-analysis / backtest), NOT human-readable reports.",
+      "name": "futures-cta-alpha",
+      "source": {
+        "repo": "quantskills/skill-futures-cta-alpha",
         "source": "github"
       },
       "type": "skill"
@@ -706,11 +946,41 @@
       "type": "skill"
     },
     {
+      "category": "03",
+      "description": "当需要设计、审查或排错期货对冲、期货仓位 sizing、合约移仓、基差/carry 分析、日历价差、保证金压力测试或 CTA 风格期货配置时，使用此 skill。适用于股指期货、商品期货、利率期货和跨期价差场景，重点处理合约乘数、名义本金、保证金、期限结构、交割规则和压力损失。",
+      "name": "futures-hedgecraft",
+      "source": {
+        "repo": "quantskills/skill-futures-hedgecraft",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Futures research Skill for analyzing, comparing, and screening futures markets with technical indicators, futures structure, and committee-style reports. Use when Codex needs to analyze a futures symbol, compare futures symbols, screen futures candidates, explain signal changes, or generate a structured futures research report without stock analysis, auto-trading, or deterministic buy/sell promises.",
+      "name": "futures-investment-council",
+      "source": {
+        "repo": "quantskills/skill-futures-investment-council",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "01",
       "description": "Audits continuous-contract selection, roll gaps, and adjustment factors and produces a roll ledger.",
       "name": "futures-roll-auditor",
       "source": {
         "repo": "quantskills/skill-futures-roll-auditor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Build an auditable futures factor from contract transitions and crowding shifts",
+      "name": "futures-transition-crowding-factor",
+      "source": {
+        "repo": "quantskills/skill-futures-transition-crowding-factor",
         "source": "github"
       },
       "type": "skill"
@@ -767,6 +1037,36 @@
     },
     {
       "category": "03",
+      "description": "当需要开发、计算、验证 Graham 净净营运资本(NCAV) 因子时，使用此 skill。适用于 A 股全市场深度价值筛选，排除银行/房地产/非银金融，计算 NCAV 折价因子并生成 buy/sell/hold 信号。",
+      "name": "graham-netnet-screener",
+      "source": {
+        "repo": "quantskills/skill-graham-netnet-screener",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Build auditable factor diffusion and residuals on point-in-time equity graphs",
+      "name": "graph-spectral-diffusion-factor",
+      "source": {
+        "repo": "quantskills/skill-graph-spectral-diffusion-factor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "A-share cumulative guarantee risk scanning: guarantee ratio, excess guarantee, and high-debt-ratio guarantee monitoring and alerting.",
+      "name": "guarantee-risk-scan",
+      "source": {
+        "repo": "quantskills/skill-guarantee-risk-scan",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
       "description": "Generates nine-dimension Hong Kong equity due-diligence reports from Pandadata interfaces.",
       "name": "hk-stock-dossier",
       "source": {
@@ -806,11 +1106,31 @@
       "type": "skill"
     },
     {
+      "category": "02",
+      "description": "Build, standardize, compare, and validate multi-factor fundamental panels for Hong Kong and US equities from PandaAI operating, market-financial, industry-median, price-volume, and financial-statement APIs. Use for quality, value, growth, momentum, low-risk, composite-score, percentile-rank, or cross-market stock-screening tasks.",
+      "name": "hk-us-fundamental-factor",
+      "source": {
+        "repo": "quantskills/skill-hk-us-fundamental-factor",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "03",
       "description": "Scans HK and US insider transactions, net direction, trading clusters, and holding changes.",
       "name": "hk-us-insider-radar",
       "source": {
         "repo": "quantskills/skill-hk-us-insider-radar",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "Build, compare, and validate institutional ownership structure panels for Hong Kong and US equities with PandaAI investor concentration, ranking, and shareholder-report APIs. Use for ownership breadth, top-holder dominance, HHI, controlling-holder risk, evidence confidence, or within-market institutional ownership screening.",
+      "name": "hk-us-institutional-concentration",
+      "source": {
+        "repo": "quantskills/skill-hk-us-institutional-concentration",
         "source": "github"
       },
       "type": "skill"
@@ -926,6 +1246,36 @@
       "type": "skill"
     },
     {
+      "category": "06",
+      "description": "用截图或只读 PandaData 行情识别股票/期货K线趋势结构、蜡烛线和候选图表形态，支持日线与1/5/10/15/30/60分钟线，输出证据、确认条件、失效条件和不确定性。",
+      "name": "kline-pattern-vision",
+      "source": {
+        "repo": "quantskills/skill-kline-pattern-vision",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Mine formulaic alpha factors end to end: LLM 主导生成候选公式 → 三层校验（白名单/量纲/前视）→ warm-start 遗传编程精修 → AlphaEval 五维打分 → LLM 经济解释 → 自包含 HTML 报告，返回结构化因子结果。Use when the user wants to mine/discover alpha factors, generate formulaic (expression-tree) trading factors, run LLM+GP factor search, or evaluate factor predictive power (RankIC) on stocks or futures. 只挖因子、不做回测（回测归另一 skill）。",
+      "name": "llm-alpha-generator",
+      "source": {
+        "repo": "quantskills/skill-llm-alpha-generator",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "财报公告 RAG 问答系统——就一家 A 股公司的财报/公告提问，给出带官方引用、可核对、拒绝编造的回答。三路路由（数字精确算 / 底仓文本检索 / 官方全文按需）+ 引用纪律 + 拒答。数据源 PandaData 优先、官方披露网页为次级源。BUILD 型 skill，可被复盘 agent 或投研 agent 调用。",
+      "name": "llm-rag-financial-qa",
+      "source": {
+        "repo": "quantskills/skill-llm-rag-financial-qa",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "05",
       "description": "Computes moving-average crossover signals and reports trend state, latest cross, MA gap, and price bias.",
       "name": "ma-crossover-signal",
@@ -941,6 +1291,16 @@
       "name": "macro-altdata-nowcast",
       "source": {
         "repo": "quantskills/skill-macro-altdata-nowcast",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "基于 PandaData 的宏观事件—期货预期分析：读取宏观经济日历的实际值、市场预期与前值，结合期货价格、成交量、持仓量、基差、期限结构、库存与仓单，对沪金、沪铜、原油及用户指定品种输出基准、偏强、偏弱情景。当用户询问「美国CPI对期货影响」「宏观事件期货预期」「美联储对商品影响」「期货供需与宏观共振」「事件公布前情景」时触发。仅作条件化研究，不承诺涨跌或生成自动交易指令。",
+      "name": "macro-futures-scenario-analysis",
+      "source": {
+        "repo": "quantskills/skill-macro-futures-scenario-analysis",
         "source": "github"
       },
       "type": "skill"
@@ -977,10 +1337,50 @@
     },
     {
       "category": "02",
+      "description": "A-share material contract alpha factor: cross-sectional ranking based on log-sum of contract amounts.",
+      "name": "material-contract-alpha",
+      "source": {
+        "repo": "quantskills/skill-material-contract-alpha",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "Minute-bar VWAP deviation strategy research and auditable SSQuant futures validation. Use for rolling VWAP deviation signals, confirmed mean reversion, trend guards, next-bar execution, execution-cost modeling, frozen-data backtests, and trade-result review.",
+      "name": "microstructure-vwap-deviation",
+      "source": {
+        "repo": "quantskills/skill-microstructure-vwap-deviation",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Generate alpha factor expressions from minute-level market data using PandaData (panda_data). Takes a research document or natural language query as input, fetches intraday OHLCV bars via get_market_min_data, extracts rich minute-level features (VWAP divergence, intraday momentum decay, order flow proxy, volatility curve shape, trade concentration, lead-lag signatures), and produces validated alpha expressions backed by a formula contract. Use when an agent needs to generate alpha ideas from academic papers, market commentary, or research notes that leverage intraday microstructure signals invisible in daily data.",
+      "name": "minuteflow-alpha",
+      "source": {
+        "repo": "quantskills/skill-minuteflow-alpha",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
       "description": "Ensembles machine-learning models into factor meta-signals with leakage-aware rolling validation.",
       "name": "ml-factor-ensemble",
       "source": {
         "repo": "quantskills/skill-ml-factor-ensemble",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "审计任意金融特征、可训练时序模型或候选策略收益，并执行防泄漏的 Purged K-Fold、Embargo、CPCV、Causal Walk-Forward、PBO、DSR、Governed Holdout 与 Temporal Forward Evidence。用于检查未来函数、信息区间重叠、特征可用时间和血缘、Fold-Local 预处理、CPCV Path 稳健性、策略选择过拟合、预测是否在标签成熟前登记，以及在接受金融模型或策略前生成结构化验证证据。",
+      "name": "ml-purged-cv",
+      "source": {
+        "repo": "quantskills/skill-ml-purged-cv",
         "source": "github"
       },
       "type": "skill"
@@ -1041,6 +1441,16 @@
       "name": "oil-brief",
       "source": {
         "repo": "quantskills/skill-oil-brief",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Build auditable factors from point-in-time cross-sectional transport",
+      "name": "optimal-transport-cross-sectional-factor",
+      "source": {
+        "repo": "quantskills/skill-optimal-transport-cross-sectional-factor",
         "source": "github"
       },
       "type": "skill"
@@ -1156,6 +1566,16 @@
       "type": "skill"
     },
     {
+      "category": "06",
+      "description": "Use when an agent needs to attribute the returns of an A-share quant strategy or portfolio — decompose performance into Alpha/Beta/timing, Brinson allocation/selection/interaction effects by industry, and factor-return contributions (style factors, industry, residual Alpha). Outputs a unified AttributionReport (Markdown + JSON) with reconciliation checks.",
+      "name": "performance-attribution",
+      "source": {
+        "repo": "quantskills/skill-performance-attribution",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "05",
       "description": "Attributes active portfolio returns to industry allocation, stock selection, interaction, and factor contributions.",
       "name": "portfolio-attribution",
@@ -1166,11 +1586,31 @@
       "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Black-Litterman 组合优化 —— 用户问「跑一下 BL 组合」「基于视图的组合权重」「相对沪深300 的主动配置」「动量/反转/换手视图对权重的影响」类问题时触发。以沪深300 指数权重为先验，用动量/反转/换手率三条因子视图更新，输出长权重组合，按「样式② 结构化播报」呈现给用户。",
+      "name": "portfolio-blacklitterman",
+      "source": {
+        "repo": "quantskills/skill-portfolio-blacklitterman",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "04",
       "description": "Aggregates concentration, benchmark deviation, valuation, quality, and risk exposures into a portfolio health report.",
       "name": "portfolio-checkup",
       "source": {
         "repo": "quantskills/skill-portfolio-checkup",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "当需要开发、计算、验证 CVaR 尾部风险最小化组合时，使用此 skill。在预期收益约束下最小化组合 95% CVaR，支持极值理论(EVT/GPD)尾部补样、组合权重求解、样本外验证。",
+      "name": "portfolio-cvar-optim",
+      "source": {
+        "repo": "quantskills/skill-portfolio-cvar-optim",
         "source": "github"
       },
       "type": "skill"
@@ -1201,6 +1641,16 @@
       "name": "portfolio-pnl-attribution",
       "source": {
         "repo": "quantskills/skill-portfolio-pnl-attribution",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "当需要开发、计算、验证风险平价（等风险贡献 ERC）组合时使用。手写 Ledoit-Wolf 收缩协方差稳定相关性，scipy SLSQP 求 ERC 权重，支持指数/期货/ETF 三类资产与月度 rebalance。",
+      "name": "portfolio-risk-parity",
+      "source": {
+        "repo": "quantskills/skill-portfolio-risk-parity",
         "source": "github"
       },
       "type": "skill"
@@ -1266,16 +1716,6 @@
       "type": "skill"
     },
     {
-      "category": "02",
-      "description": "Provides an OHLCV factor library for volume and price-volume statistical research.",
-      "name": "quant-factor-volume-stat-alpha",
-      "source": {
-        "repo": "quantskills/skill-quant-factor-volume-stat-alpha",
-        "source": "github"
-      },
-      "type": "skill"
-    },
-    {
       "category": "04",
       "description": "Analyzes portfolio risk exposures, constraints, and stress scenarios.",
       "name": "quant-portfolio-risk",
@@ -1306,11 +1746,11 @@
       "type": "skill"
     },
     {
-      "category": "06",
-      "description": "Guides auditable quantitative-research replication workflows.",
-      "name": "quant-research-replication",
+      "category": "02",
+      "description": "Check recent strategy or factor deterioration using returns, IC, drawdown, turnover, benchmarks, and market regimes.",
+      "name": "quant-strategy-diagnostics",
       "source": {
-        "repo": "quantskills/skill-quant-research-replication",
+        "repo": "quantskills/skill-quant-strategy-diagnostics",
         "source": "github"
       },
       "type": "skill"
@@ -1376,6 +1816,16 @@
       "type": "skill"
     },
     {
+      "category": "05",
+      "description": "skill rl portfolio allocator",
+      "name": "rl-portfolio-allocator",
+      "source": {
+        "repo": "quantskills/skill-rl-portfolio-allocator",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "04",
       "description": "Estimates rolling beta exposure of assets or portfolios relative to a benchmark.",
       "name": "rolling-beta-exposure",
@@ -1387,10 +1837,40 @@
     },
     {
       "category": "06",
+      "description": "当需要分析市场状态、行业轮动、ETF 强弱排序、市场宽度、风格切换或战术配置信号时，使用此 skill。适用于 A 股、港股、美股和 ETF 池的行业轮动分析、risk-on/risk-off 状态识别、相对强弱排名、宽度确认、假突破过滤和轮动失效条件设计。",
+      "name": "rotation-radar",
+      "source": {
+        "repo": "quantskills/skill-rotation-radar",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
       "description": "Reconstructs Serenity-style research logic from public X/Twitter evidence.",
       "name": "serenity-research-model",
       "source": {
         "repo": "quantskills/skill-serenity-research-model",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "Cost-aware A-share five-session cross-sectional return reversal research.",
+      "name": "shortterm-mean-reversal",
+      "source": {
+        "repo": "quantskills/skill-shortterm-mean-reversal",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "Converts one stock signal into benchmark-relative target weights with auditable risk, exposure, turnover, and cost controls.",
+      "name": "signal-portfolio-optimize",
+      "source": {
+        "repo": "quantskills/skill-signal-portfolio-optimize",
         "source": "github"
       },
       "type": "skill"
@@ -1421,6 +1901,16 @@
       "name": "smart-money-profiler",
       "source": {
         "repo": "quantskills/skill-smart-money-profiler",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
+      "description": "索罗斯反身性识别器——用双环模型（快环情绪-资金 / 慢环基本面-资本）判断 A 股\"这波涨跌是不是自我强化的反身性、转到哪一圈、燃料和裂缝在哪\"，做阶段识别与仓位纪律。BUILD 型 skill，可被复盘 agent 或 Alpha 调用。",
+      "name": "soros-reflexivity-detector",
+      "source": {
+        "repo": "quantskills/skill-soros-reflexivity-detector",
         "source": "github"
       },
       "type": "skill"
@@ -1467,10 +1957,40 @@
     },
     {
       "category": "03",
+      "description": "skill stock score",
+      "name": "stock-score",
+      "source": {
+        "repo": "quantskills/skill-stock-score",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "03",
       "description": "Screens A-share stocks from natural-language criteria and Pandadata evidence.",
       "name": "stock-screener",
       "source": {
         "repo": "quantskills/skill-stock-screener",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "Estimate strategy capacity and transaction costs from trades and ADV — participation, square-root/linear impact, capacity curve and breakeven vs alpha. Estimates only, no trade advice.",
+      "name": "strategy-capacity-tca",
+      "source": {
+        "repo": "quantskills/skill-strategy-capacity-tca",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "08",
+      "description": "Use when an agent needs to generate a periodic performance report for a LIVE A-share quant strategy — 日报/周报/月报/半年报/年报 or custom period — covering returns, risk, trade analysis, and position/turnover detail, with embedded visualizations. Outputs a self-contained offline HTML dashboard (interactive ECharts) plus Markdown + JSON.",
+      "name": "strategy-performance-report",
+      "source": {
+        "repo": "quantskills/skill-strategy-performance-report",
         "source": "github"
       },
       "type": "skill"
@@ -1506,11 +2026,41 @@
       "type": "skill"
     },
     {
+      "category": "03",
+      "description": "当需要开发、计算、验证 Templeton 全球价值多因子 V2 时，使用此 skill。适用于 A 股/港股/美股跨市场价值筛选，基于 EP/BP/SP/股息/ROE/杠杆/动量 七子因子截面打分，生成 buy/sell/hold 信号。",
+      "name": "templeton-global-contrarian",
+      "source": {
+        "repo": "quantskills/skill-templeton-global-contrarian",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "06",
       "description": "Diagnoses financial time series and produces analysis reports.",
       "name": "time-series-analysis",
       "source": {
         "repo": "quantskills/skill-time-series-analysis",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "skill tqx research",
+      "name": "tqx-research",
+      "source": {
+        "repo": "quantskills/skill-tqx-research",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "08",
+      "description": "Trade review skill that turns trade records into attribution, pattern detection, per-trade review, and actionable advice.",
+      "name": "trade-review",
+      "source": {
+        "repo": "quantskills/skill-trade-review",
         "source": "github"
       },
       "type": "skill"
@@ -1531,6 +2081,16 @@
       "name": "transaction-cost-calibration",
       "source": {
         "repo": "quantskills/skill-transaction-cost-calibration",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "06",
+      "description": "计算A股日线下跌突破划线压力位反转因子，识别下破下降压力线后反转确认的个股；当用户提供交易日期、要求自动获取当日全市场A股行情、量化选股、因子研究或回测时使用。",
+      "name": "trendline-breakdown-reversal",
+      "source": {
+        "repo": "quantskills/skill-trendline-breakdown-reversal",
         "source": "github"
       },
       "type": "skill"

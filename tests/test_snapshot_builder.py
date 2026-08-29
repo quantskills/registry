@@ -11,7 +11,7 @@ import yaml
 
 ROOT = Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from build_registry import build_snapshot, collect_entries, public_registry_projection, render_artifacts
+from build_registry import apply_listing_policy, build_snapshot, collect_entries, public_registry_projection, render_artifacts
 import build_registry
 
 
@@ -64,6 +64,22 @@ class SnapshotBuilderTests(unittest.TestCase):
         self.assertTrue(all(row["snapshot_id"] == snapshot["snapshot_id"] for row in projection))
         self.assertTrue(all("interface" in row and "catalog" in row and "workflow" in row for row in projection))
 
+    def test_listing_policy_keeps_duplicates_in_snapshot_but_hides_them_from_public_projection(self):
+        entries = [dict(entry) for entry in self.snapshot()["assets"]]
+        policy = ROOT / "catalog-listing.v1.json"
+        original = policy.read_text(encoding="utf-8") if policy.exists() else None
+        try:
+            policy.write_text(json.dumps({"schema_version": "1.0.0", "entries": [{"name": "skill-alpha", "listing_status": "unlisted_duplicate", "superseded_by": "skill-template"}]}), encoding="utf-8")
+            apply_listing_policy(entries, policy)
+            resources = [{"name": name, "url": f"https://github.com/quantskills/{name}"} for name in (".github", "join", "quantskills", "registry")]
+            snapshot = build_snapshot(entries, resources, self.taxonomy)
+            self.assertIn("skill-alpha", {asset["name"] for asset in snapshot["assets"]})
+            self.assertNotIn("skill-alpha", {asset["name"] for asset in public_registry_projection(snapshot)})
+        finally:
+            if original is None:
+                policy.unlink(missing_ok=True)
+            else:
+                policy.write_text(original, encoding="utf-8")
     def test_collection_rejects_duplicate_and_invalid_declarations(self):
         with self.assertRaisesRegex(ValueError, "duplicate"):
             collect_entries(self.repos + [self.repos[0]], {}, "enforce", inventory={"assets": [], "resources": [".github", "join", "quantskills", "registry"]})

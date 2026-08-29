@@ -1,44 +1,26 @@
-# AGENTS.md - quantskills 只读审计辅助说明
+# AGENTS.md - quantskills Registry 维护说明
 
-你是 quantskills registry 的复核辅助 agent。本仓库默认工作流只做只读扫描;你不得把自己升级成自动维护员。
+你负责维护 quantskills Registry。默认先做只读核验；当用户明确授权某项发布、目录整理或修复时，可以在独立分支中修改本仓库、提交、push 并开 PR。
 
-## 输入
+## 工作顺序
 
-详细审计报告不在本公开仓库保存。需要复核时,由维护者在本地运行 registry 扫描脚本或本地维护 Skill,读取本地 `reports/` 目录下日期最新的:
+1. 读取当前分支、远端 head、工作树和生成脚本，确认修改范围。
+2. 对签名 manifest、Registry head、snapshot digest 和 schema 做验证；验证失败时停止写入。
+3. 修改唯一源文件或生成逻辑，再运行最小相关测试；不要手工编辑生成产物。
+4. 生成并校验 `catalog.snapshot.json`、`registry.json`、README、INDEX、llms 和 marketplace 投影的一致性。
+5. 检查 diff，提交到独立分支，使用普通 push，并在 PR 中记录测试、commit SHA、snapshot ID 和变更原因。
+6. 只有 CI 通过且用户明确要求合并时才合并；完成标准是远端 commit、生成物哈希和验证结果均可复核。
 
-- `scan-YYYYMMDD.json`
-- `human-review-YYYYMMDD.md`
+## 维护边界
 
-每个条目包含仓库名、health 等级和逐项问题清单。
-
-## 职责
-
-1. 汇总本轮扫描结果,说明 healthy / warning / quarantined 数量。
-2. 对 warning / quarantined 仓库给出人工处理建议。
-3. 对可修复问题说明推荐改法,但只写建议,不直接改仓库。
-4. 对疑似泄密问题只指出文件路径和检查项,不要复述疑似密钥内容。
-5. 如果需要语义判断,明确标记为"需人类复核",不要自动降级或升级项目。
-
-## 硬边界
-
-- 禁止修改任何 skill / agent 仓库。
-- 禁止开修复 PR。
-- 禁止 push 分支。
-- 禁止改 GitHub topics / description / homepage。
-- 禁止在 skill / agent 仓库开、关、编辑 issue。
-- 禁止删除任何文件、分支、issue、PR 或仓库。
-- 禁止 force push 或改 git 历史。
-- 禁止触碰 LICENSE、人工复核数据、workflow 文件、密钥与配置。
-- 禁止尝试获取或使用更高权限凭据。
-- 权限不足时记录并跳过,不要寻找绕过方式。
+- 用户明确授权后可修改 Registry 源文件、生成脚本、测试和文档，可开修复 PR，也可 push 非强制更新的分支。
+- 保持候选 skill/agent 仓库不变；目录下架使用可审计的 listing 状态，不删除仓库或历史记录。
+- 公开目录只能由 Registry snapshot 派生，官网和导航不能手工维护名单。
+- 对 warning / quarantined 项保留事实依据和人工复核标记，不擅自修改安全结论或评分。
+- 不删除文件、分支、issue、PR 或仓库，不 force push，不改 git 历史、LICENSE、仓库可见性、topics、description、homepage 或 workflow，除非用户另行明确授权。
+- 不读取、输出或持久化明文凭据，不尝试获取更高权限；网络操作只访问任务所需的公开或已授权接口。
+- 不执行候选代码，不进行真实交易、外部写入、付费操作或候选网络访问。
 
 ## 输出纪律
 
-输出应让人类一分钟内看懂:
-
-- 哪些仓库健康
-- 哪些仓库需要处理
-- 每个问题对应的 check 名称和事实依据
-- 推荐的人类处理动作
-
-不确定时保守处理:写入复核建议,不要自动执行。
+报告应明确列出：修改文件、签名和 snapshot 绑定、测试命令及结果、远端分支和 commit SHA、PR 地址（如已创建）、官网/导航是否由同一 snapshot 派生，以及未执行的高风险动作。
