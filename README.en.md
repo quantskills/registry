@@ -7,7 +7,7 @@
 **Creator / Maintainer**: [`abgyjaguo`](https://github.com/abgyjaguo)
 
 <p align="center">
-  <img alt="public assets" src="https://img.shields.io/badge/public_assets-156-blue">
+  <img alt="public assets" src="https://img.shields.io/badge/public_assets-214-blue">
   <img alt="health checks" src="https://img.shields.io/badge/health_checks-8-brightgreen">
   <img alt="validation levels" src="https://img.shields.io/badge/validation-L1%20%7C%20L2%20%7C%20L3-orange">
   <img alt="nightly scan" src="https://img.shields.io/badge/nightly_scan-00%3A30_UTC%2B8-9cf">
@@ -117,7 +117,7 @@ These generated outputs are owned by `build_registry.py` — **do not edit by ha
 ## 📊 Current Snapshot
 
 <!-- registry-snapshot:start -->
-Catalog snapshot: `sha256:117387f24ed230521243f50541e0d1f8c10cd949848b4ba095c55222ba833c00`; public assets: 156.
+Catalog snapshot: `sha256:276e68899f6db4a7570a1b13cd84231f94987469343002522270686e52e87091`; public assets: 214.
 <!-- registry-snapshot:end -->
 
 > This snapshot changes with every nightly scan — [INDEX.md](INDEX.md) / [registry.json](registry.json) are the live sources of truth.

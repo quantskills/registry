@@ -10,6 +10,21 @@
       "name": "skill-quant-factor-volume-stat-alpha",
       "listing_status": "unlisted_duplicate",
       "superseded_by": "skill-quant-factor-directional-alpha"
+    },
+    {
+      "name": "skill-alpha-ncav-graham",
+      "listing_status": "unlisted_duplicate",
+      "superseded_by": "skill-graham-netnet-screener"
+    },
+    {
+      "name": "skill-quant-research-replication",
+      "listing_status": "unlisted_duplicate",
+      "superseded_by": "skill-report-replication"
+    },
+    {
+      "name": "skill-intraday-data-quality-auditor-private-archive",
+      "listing_status": "unlisted_duplicate",
+      "superseded_by": "skill-intraday-data-quality-auditor"
     }
   ]
 }
