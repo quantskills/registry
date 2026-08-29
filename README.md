@@ -7,7 +7,7 @@
 **Creator / Maintainer**: [`abgyjaguo`](https://github.com/abgyjaguo)
 
 <p align="center">
-  <img alt="public assets" src="https://img.shields.io/badge/public_assets-158-blue">
+  <img alt="public assets" src="https://img.shields.io/badge/public_assets-156-blue">
   <img alt="health checks" src="https://img.shields.io/badge/health_checks-8-brightgreen">
   <img alt="validation levels" src="https://img.shields.io/badge/validation-L1%20%7C%20L2%20%7C%20L3-orange">
   <img alt="nightly scan" src="https://img.shields.io/badge/nightly_scan-00%3A30_UTC%2B8-9cf">
@@ -118,7 +118,7 @@ flowchart LR
 ## 📊 当前收录快照
 
 <!-- registry-snapshot:start -->
-Catalog snapshot: `sha256:ecb9a3d03c6df06f3d5ca7961766ad2927ab3d370ee64e80343c0dd6946567a7`; public assets: 158.
+Catalog snapshot: `sha256:117387f24ed230521243f50541e0d1f8c10cd949848b4ba095c55222ba833c00`; public assets: 156.
 <!-- registry-snapshot:end -->
 
 > 此快照会随每夜扫描变化，实时清单以 [INDEX.md](INDEX.md) / [registry.json](registry.json) 为准。

@@ -29,6 +29,7 @@ TOKEN = os.environ.get("GITHUB_TOKEN", "")
 HEADERS = {"Authorization": f"Bearer {TOKEN}", "Accept": "application/vnd.github+json"} if TOKEN else {}
 RESOURCE_NAMES = (".github", "join", "quantskills", "registry")
 INVENTORY_PATH = ROOT / "catalog-inventory.v1.json"
+LISTING_POLICY_PATH = ROOT / "catalog-listing.v1.json"
 
 
 def gh(method: str, url: str, **kwargs):
@@ -112,6 +113,26 @@ def apply_approved_assignments(entries: list[dict], assignments_path: Path) -> N
         entry["workflow"] = {"primary_stage": row["primary_stage"], "workflow_stages": stages}
         entry["category"], entry["subcategory"], entry["stage"] = row["category"], row["subcategory"], row["primary_stage"]
         entry["summary_zh"], entry["summary_en"] = row["summary_zh"], row["summary_en"]
+
+
+def apply_listing_policy(entries: list[dict], policy_path: Path = LISTING_POLICY_PATH) -> None:
+    """Apply explicit, non-destructive listing decisions to the full snapshot."""
+    policy = json.loads(Path(policy_path).read_text(encoding="utf-8"))
+    rows = policy.get("entries") if isinstance(policy, dict) and policy.get("schema_version") == "1.0.0" else None
+    if not isinstance(rows, list):
+        raise ValueError("invalid catalog listing policy")
+    by_name = {entry["name"]: entry for entry in entries}
+    seen = set()
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != {"name", "listing_status", "superseded_by"} or row.get("listing_status") != "unlisted_duplicate":
+            raise ValueError("invalid catalog listing policy")
+        name, replacement = row.get("name"), row.get("superseded_by")
+        if name in seen or name not in by_name or not isinstance(replacement, str) or not replacement or name == replacement:
+            raise ValueError("invalid catalog listing policy")
+        by_name[name]["status"] = "deprecated"
+        seen.add(name)
+    if len(seen) != len(rows):
+        raise ValueError("invalid catalog listing policy")
 
 
 def publication_manifest(entries: list[dict], inventory: dict, assignments_path: Path) -> dict:
@@ -425,6 +446,7 @@ def main() -> None:
         apply_approved_assignments(entries, args.assignments)
         if inventory:
             publication = publication_manifest(entries, inventory, args.assignments)
+    apply_listing_policy(entries)
     envelope, profiles, adapters, mappings = load_contract_catalogs()
     snapshot = build_snapshot(entries, resources, load_taxonomy(ROOT), profiles, adapters, envelope, mappings, contract_mode=args.contract_mode, publication=publication)
     promote_artifacts(render_artifacts(snapshot))

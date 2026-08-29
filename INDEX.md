@@ -29,7 +29,6 @@
 - [skill-backtest-overfit](https://github.com/quantskills/skill-backtest-overfit): Evaluates backtest overfitting and multiple-testing risk with DSR, PBO, purged cross-validation, and Harvey-Liu haircut.
 - [skill-backtesting-bias-avoidance](https://github.com/quantskills/skill-backtesting-bias-avoidance): Builds look-ahead-safe backtests and audits leakage, survivorship, overfitting, costs, and out-of-sample checks.
 - [skill-block-trade-radar](https://github.com/quantskills/skill-block-trade-radar): Builds an A-share block-trade radar from discount or premium, volume, and price evidence.
-- [skill-brinson-performance-attribution](https://github.com/quantskills/skill-brinson-performance-attribution): Runs Brinson-Fachler or BHB attribution with HHI, contributor ranking, and Carino multi-period linking.
 - [skill-buffett-moat-screener](https://github.com/quantskills/skill-buffett-moat-screener): Screens A-share and US companies using moat, valuation, and point-in-time data for research records.
 - [skill-build-b10-factor-evaluation](https://github.com/quantskills/skill-build-b10-factor-evaluation): Evaluates quantitative factors with IC, IR, stratified backtests, monotonicity, turnover, and decay diagnostics.
 - [skill-buyback-monitor](https://github.com/quantskills/skill-buyback-monitor): Monitors A-share buyback lifecycles, purposes, price ranges, and intensity for research.
@@ -126,7 +125,6 @@
 - [skill-quant-factor-directional-alpha](https://github.com/quantskills/skill-quant-factor-directional-alpha): Provides an OHLCV directional-factor library for trend, breakout, and reversal research.
 - [skill-quant-factor-risk-pattern-alpha](https://github.com/quantskills/skill-quant-factor-risk-pattern-alpha): Provides an OHLCV factor library for volatility, chart-pattern, and drawdown-pressure research.
 - [skill-quant-factor-skill-factory](https://github.com/quantskills/skill-quant-factor-skill-factory): Batch-generates, validates, and packages framework-neutral OHLCV factor skills.
-- [skill-quant-factor-volume-stat-alpha](https://github.com/quantskills/skill-quant-factor-volume-stat-alpha): Provides an OHLCV factor library for volume and price-volume statistical research.
 - [skill-quant-portfolio-risk](https://github.com/quantskills/skill-quant-portfolio-risk): Analyzes portfolio risk exposures, constraints, and stress scenarios.
 - [skill-quant-research](https://github.com/quantskills/skill-quant-research): Guides quantitative research, backtest design, and statistical validation workflows.
 - [skill-quant-research-experiment-registry](https://github.com/quantskills/skill-quant-research-experiment-registry): Registers quantitative experiments and audits their reproducibility evidence.

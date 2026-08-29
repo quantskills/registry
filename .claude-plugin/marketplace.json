@@ -296,16 +296,6 @@
       "type": "skill"
     },
     {
-      "category": "05",
-      "description": "Runs Brinson-Fachler or BHB attribution with HHI, contributor ranking, and Carino multi-period linking.",
-      "name": "brinson-performance-attribution",
-      "source": {
-        "repo": "quantskills/skill-brinson-performance-attribution",
-        "source": "github"
-      },
-      "type": "skill"
-    },
-    {
       "category": "03",
       "description": "Screens A-share and US companies using moat, valuation, and point-in-time data for research records.",
       "name": "buffett-moat-screener",
@@ -1261,16 +1251,6 @@
       "name": "quant-factor-skill-factory",
       "source": {
         "repo": "quantskills/skill-quant-factor-skill-factory",
-        "source": "github"
-      },
-      "type": "skill"
-    },
-    {
-      "category": "02",
-      "description": "Provides an OHLCV factor library for volume and price-volume statistical research.",
-      "name": "quant-factor-volume-stat-alpha",
-      "source": {
-        "repo": "quantskills/skill-quant-factor-volume-stat-alpha",
         "source": "github"
       },
       "type": "skill"

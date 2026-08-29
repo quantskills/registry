@@ -1165,7 +1165,7 @@
       "project_type": "skill",
       "requires": [],
       "stage": "evaluation",
-      "status": "active",
+      "status": "deprecated",
       "subcategory": "05.performance-attribution",
       "summary_en": "Runs Brinson-Fachler or BHB attribution with HHI, contributor ranking, and Carino multi-period linking.",
       "summary_zh": "执行 Brinson-Fachler 或 BHB 归因、HHI 与贡献排序，并支持 Carino 多期链接。",
@@ -4979,7 +4979,7 @@
       "project_type": "skill",
       "requires": [],
       "stage": "factor-generation",
-      "status": "active",
+      "status": "deprecated",
       "subcategory": "02.factor-generation",
       "summary_en": "Provides an OHLCV factor library for volume and price-volume statistical research.",
       "summary_zh": "提供用于成交量和量价统计研究的 OHLCV 因子库。",
@@ -6632,7 +6632,7 @@
     }
   ],
   "schema_version": "1.0.0",
-  "snapshot_id": "sha256:ecb9a3d03c6df06f3d5ca7961766ad2927ab3d370ee64e80343c0dd6946567a7",
+  "snapshot_id": "sha256:117387f24ed230521243f50541e0d1f8c10cd949848b4ba095c55222ba833c00",
   "taxonomy": {
     "categories": {
       "01": {

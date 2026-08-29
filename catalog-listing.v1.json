@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "entries": [
+    {
+      "name": "skill-brinson-performance-attribution",
+      "listing_status": "unlisted_duplicate",
+      "superseded_by": "skill-performance-attribution"
+    },
+    {
+      "name": "skill-quant-factor-volume-stat-alpha",
+      "listing_status": "unlisted_duplicate",
+      "superseded_by": "skill-quant-factor-directional-alpha"
+    }
+  ]
+}
