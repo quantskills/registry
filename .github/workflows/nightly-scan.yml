@@ -41,7 +41,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.QS_READ_TOKEN }}
           QS_ORG: quantskills
         run: |
-          python scripts/build_registry.py --contract-mode "$CONTRACT_MODE" --inventory migration/inventory-2026-08-11.json --assignments migration/catalog-assignments-2026-08-11.csv
+          python scripts/build_registry.py --contract-mode "$CONTRACT_MODE" --inventory catalog-inventory.v1.json --assignments migration/catalog-assignments-2026-08-29-reviewed.csv
 
       - name: Build registry (full compatibility)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.full == true }}
@@ -50,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.QS_READ_TOKEN }}
           QS_ORG: quantskills
         run: |
-          python scripts/build_registry.py --contract-mode "$CONTRACT_MODE" --full --inventory migration/inventory-2026-08-11.json --assignments migration/catalog-assignments-2026-08-11.csv
+          python scripts/build_registry.py --contract-mode "$CONTRACT_MODE" --full --inventory catalog-inventory.v1.json --assignments migration/catalog-assignments-2026-08-29-reviewed.csv
 
       - name: Final enforce validation
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.contract_mode == 'enforce' }}

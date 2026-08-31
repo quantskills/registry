@@ -36,3 +36,5 @@ jobs:
           node-version: 20
       - name: Validate registry snapshot
         run: node scripts/validate-registry.mjs
+      - name: Validate public Shadow evaluations
+        run: python scripts/verify_public_evaluations.py

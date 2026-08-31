@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantskills.ai/schemas/public-score-dataset.v2.json",
+  "type": "object",
+  "required": ["schema", "generated_at", "mode", "record_count", "historical_observation_count", "catalog_snapshot_id", "publication_precedence", "records"],
+  "properties": {
+    "schema": {"const": "quantskills.public-score-dataset.v2"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "mode": {"const": "shadow"},
+    "record_count": {"const": 218},
+    "historical_observation_count": {"const": 224},
+    "catalog_snapshot_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "publication_precedence": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string"}},
+    "records": {"type": "array", "minItems": 218, "maxItems": 218, "items": {"$ref": "#/$defs/record"}}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "required": ["schema", "asset_id", "kind", "category", "repo", "commit_sha", "source_publication", "source_request_id", "score_key", "score_formula", "score_comparability", "security", "scores", "featured", "metrics", "usage", "integrity"],
+      "properties": {
+        "schema": {"const": "quantskills.public-score-record.v2"},
+        "asset_id": {"type": "string", "pattern": "^(?:skill|agent)-[a-z0-9][a-z0-9_-]*$"},
+        "kind": {"enum": ["skill", "agent"]},
+        "category": {"type": "string", "pattern": "^[0-9]{2}$"},
+        "repo": {"type": "string", "pattern": "^quantskills/(?:skill|agent)-[a-z0-9][a-z0-9_-]*$"},
+        "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "source_publication": {"enum": ["publication.v12.13", "publication.v12.14", "publication.v12.16", "publication.v12.20", "publication.v12.21", "publication.v12.22", "publication.v12.23"]},
+        "source_request_id": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "score_key": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "score_formula": {"const": "score-formula.v9"},
+        "score_comparability": {"type": "string", "pattern": "^publication\\.v12\\.[0-9]+-only$"},
+        "scores": {
+          "type": "object",
+          "required": ["behavior", "quality", "token", "total"],
+          "properties": {
+            "behavior": {"type": "number", "minimum": 0, "maximum": 100},
+            "quality": {"type": "number", "minimum": 0, "maximum": 100},
+            "token": {"type": "number", "minimum": 0, "maximum": 100},
+            "total": {"type": "number", "minimum": 0, "maximum": 100}
+          },
+          "additionalProperties": false
+        },
+        "security": {
+          "type": "object",
+          "required": ["status", "evidence_digest"],
+          "properties": {
+            "status": {"enum": ["pass", "pass_with_warning"]},
+            "evidence_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          },
+          "additionalProperties": false
+        },
+        "featured": {
+          "type": "object",
+          "required": ["status", "score", "reason", "affects_total", "material_core_regression_count"],
+          "properties": {
+            "status": {"enum": ["eligible", "ineligible", "not_applicable"]},
+            "score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+            "reason": {"type": ["string", "null"]},
+            "affects_total": {"const": false},
+            "material_core_regression_count": {"type": "integer", "minimum": 0, "maximum": 4}
+          },
+          "additionalProperties": false
+        },
+        "metrics": {
+          "type": "object",
+          "required": ["artifact_outcome", "competition_eligible", "evaluation_tier", "reliability", "trigger_f1"],
+          "properties": {
+            "artifact_outcome": {"type": "number", "minimum": 0, "maximum": 100},
+            "competition_eligible": {"type": "boolean"},
+            "evaluation_tier": {"type": "string"},
+            "reliability": {"type": "number", "minimum": 0, "maximum": 100},
+            "trigger_f1": {"type": "number", "minimum": 0, "maximum": 100}
+          },
+          "additionalProperties": false
+        },
+        "usage": {
+          "type": "object",
+          "required": ["model_calls", "core_model_calls", "featured_model_calls", "recovery_model_calls", "total_tokens", "elapsed_ms", "token_accounting"],
+          "properties": {
+            "model_calls": {"type": "integer", "minimum": 0},
+            "core_model_calls": {"type": "integer", "minimum": 0},
+            "featured_model_calls": {"type": "integer", "minimum": 0},
+            "recovery_model_calls": {"type": "integer", "minimum": 0},
+            "total_tokens": {"type": "integer", "minimum": 0},
+            "elapsed_ms": {"type": "integer", "minimum": 0},
+            "token_accounting": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "integrity": {
+          "type": "object",
+          "required": ["measurement_digest", "attestation_key", "attestation_payload_digest", "attestation_key_id", "signed_envelope_sha256", "score_row_sha256"],
+          "properties": {
+            "measurement_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "attestation_key": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "attestation_payload_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "attestation_key_id": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
+            "signed_envelope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "score_row_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
