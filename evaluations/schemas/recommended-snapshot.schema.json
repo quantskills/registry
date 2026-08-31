@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantskills.ai/schemas/recommended-snapshot.v1.json",
+  "type": "object",
+  "required": ["schema", "generated_at", "status", "catalog_snapshot_id", "score_dataset_sha256", "policy_id", "policy_digest", "record_count", "records"],
+  "properties": {
+    "schema": {"const": "quantskills.recommended-snapshot.v1"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "status": {"const": "shadow"},
+    "catalog_snapshot_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "score_dataset_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "policy_id": {"const": "shadow-category-quartile.v1"},
+    "policy_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "record_count": {"type": "integer", "minimum": 1},
+    "records": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": false
+}

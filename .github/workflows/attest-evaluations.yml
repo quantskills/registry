@@ -1,0 +1,33 @@
+name: Attest public evaluations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "evaluations/**"
+      - "scripts/verify_public_evaluations.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install verification dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Verify public projection
+        run: python scripts/verify_public_evaluations.py
+      - name: Package public projection
+        run: tar -czf quantskills-public-evaluations.tgz evaluations
+      - name: Attest package provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: quantskills-public-evaluations.tgz

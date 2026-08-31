@@ -1,0 +1,16 @@
+{
+  "affects_registry": false,
+  "endorsement": false,
+  "exclude_material_core_regression": true,
+  "grouping": [
+    "kind",
+    "category"
+  ],
+  "minimum_reliability": 100,
+  "policy_digest": "c7d2ba0470739c5319ca4011fa2abb8739551fe01beae2113365a3f26ef5f4e2",
+  "policy_id": "shadow-category-quartile.v1",
+  "requires_active_registry_listing": true,
+  "schema": "quantskills.recommendation-policy.v1",
+  "selection": "top_25_percent_by_core",
+  "status": "shadow"
+}
