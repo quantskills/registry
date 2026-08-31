@@ -41,7 +41,8 @@ def read_json(path: Path) -> dict:
 
 def write_json(path: Path, value: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
 
 
 def registry_assets(value: object) -> list[dict]:
@@ -266,9 +267,8 @@ def main() -> None:
             "attestation_rows_root": attestation_root,
             "signed_envelope_files_root": envelope_root,
         })
-        (publication_dir / f"{publication}.jsonl").write_text(
-            "".join(canonical(row).decode("utf-8") + "\n" for row in publication_records), encoding="utf-8"
-        )
+        with (publication_dir / f"{publication}.jsonl").open("w", encoding="utf-8", newline="\n") as handle:
+            handle.write("".join(canonical(row).decode("utf-8") + "\n" for row in publication_records))
 
     records = [current[key] for key in sorted(current)]
     if len(records) != 218:

@@ -315,6 +315,6 @@
     }
   ],
   "schema": "quantskills.recommended-snapshot.v1",
-  "score_dataset_sha256": "ca5845bf351bc87c3000942f5a3484f73f833726ba564d0d00ae65b0f0fbd670",
+  "score_dataset_sha256": "8c30794e1becfca53667761f1dd33a29cd1033c00999a96fc47c0b095af25458",
   "status": "shadow"
 }

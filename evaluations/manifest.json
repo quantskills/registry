@@ -2,18 +2,18 @@
   "catalog_snapshot_id": "sha256:276e68899f6db4a7570a1b13cd84231f94987469343002522270686e52e87091",
   "files": {
     "README.md": "c7d39259df142fe259863eee9f394500878d70322d970158631c5f7cc14a01c2",
-    "current-scores.json": "ca5845bf351bc87c3000942f5a3484f73f833726ba564d0d00ae65b0f0fbd670",
-    "publications/publication.v12.13.jsonl": "7dd8021b78d788393ac3f2fa6c91a8585906e443d035bee4fdb5eed3f9cf39ba",
-    "publications/publication.v12.14.jsonl": "94ab9fdcd307f2289fb147750b21f259662aa3d4c3765d5695ce20e074608293",
-    "publications/publication.v12.16.jsonl": "d14101dcca1ffaa127833b4c5dd19f83f2f82076e6a0f531de04e74a807ec956",
-    "publications/publication.v12.20.jsonl": "33a5827851ab1082402d5434591294ba55c7e5ffb43b89779579c2a3a91ad6a4",
-    "publications/publication.v12.21.jsonl": "682b675910a2a021b7e450ab5e2c94e384517d75e8c15164150c2ce9af74173d",
-    "publications/publication.v12.22.jsonl": "db4f5f39f099e27e3d09990f2cf84a30efcc678d16f394ad7e9cbf390f1ebe70",
-    "publications/publication.v12.23.jsonl": "c8b4a35aaed098d75e5c97f2bb4324e60b55af9c23f5e12e262caf5727359238",
-    "recommended.snapshot.json": "fca0487033270486f6b6bbc9a9b0d7932e323e06b4ebd26a29c86bed56a1847b",
+    "current-scores.json": "8c30794e1becfca53667761f1dd33a29cd1033c00999a96fc47c0b095af25458",
+    "publications/publication.v12.13.jsonl": "bac8cf1ccd260d25f2b59719215d20732f58761a1d6422caad05370e50caf0a2",
+    "publications/publication.v12.14.jsonl": "d10be3df502f0f0e82363a9b8629425fa9ae2a1de68f6f62a935a60b113eb7af",
+    "publications/publication.v12.16.jsonl": "9503f3e25c73148a7f6f8741796d43c6eb37721dd6e531e1f3e6d7e10fc2b998",
+    "publications/publication.v12.20.jsonl": "9c2b057104e23e3b7e78cb97621c5576995a23272a3fe1c0835aff32c17778e5",
+    "publications/publication.v12.21.jsonl": "923c9fdb1dc373f540031c3a0e426fa97c2effbe43cbaf140ab4da0f03f9112f",
+    "publications/publication.v12.22.jsonl": "7d1491642082017544ff800ff2a519163e6a29f1f9c8810153ec5285d52c037f",
+    "publications/publication.v12.23.jsonl": "af0df069285d5ef4f3cd43625625b1a1f6296f85e1ec71f2c7f8698bb2cb4532",
+    "recommended.snapshot.json": "469ca52a356344cd7c3162388fb9fef27cdcf254dae0840816cf5966a93c2ec2",
     "schemas/current-scores.schema.json": "f43b11ab1d11714e932eee44b9a5ce04ac1e6a74e42d0b356f27c5b567591bea",
     "schemas/recommended-snapshot.schema.json": "5b0ea9b82168ab66f7aa16b96c88b5625192b3743a63394ce4d94e8a61626ebe",
-    "selection-policy.v1.json": "7aff8c35cf49c376f8f2df6b70a7898f0e23493880bce825096c16f1dfab041f"
+    "selection-policy.v1.json": "19804e60ac6832da6ec33e5af070ca6677be6fcefafbee07190f8dca326d69ac"
   },
   "generated_at": "2026-08-31T14:05:07+08:00",
   "historical_observation_count": 224,
@@ -78,5 +78,5 @@
   ],
   "record_count": 218,
   "schema": "quantskills.public-evaluation-manifest.v1",
-  "snapshot_digest": "d2fb7396d10764b371b5853da1cf20eab902997b4a52f7a5d9bfec7808ea445b"
+  "snapshot_digest": "53178a1362d5946361a73ad5c2384655106a7c93544e6164369ac735299693c0"
 }

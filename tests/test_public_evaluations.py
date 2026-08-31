@@ -42,6 +42,14 @@ class PublicEvaluationTests(unittest.TestCase):
         self.assertEqual(result["observations"], 224)
         self.assertGreater(result["recommended"], 0)
 
+    def test_public_files_use_portable_lf_bytes(self):
+        paths = list((ROOT / "evaluations").rglob("*.json"))
+        paths.extend((ROOT / "evaluations" / "publications").glob("*.jsonl"))
+        for path in paths:
+            content = path.read_bytes()
+            self.assertNotIn(b"\r\n", content, path)
+            self.assertTrue(content.endswith(b"\n"), path)
+
     def test_v1213_roots_are_pinned_beyond_manifest_self_digest(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
