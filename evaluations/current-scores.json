@@ -1,6 +1,6 @@
 {
-  "catalog_snapshot_id": "sha256:276e68899f6db4a7570a1b13cd84231f94987469343002522270686e52e87091",
-  "generated_at": "2026-08-31T14:05:07+08:00",
+  "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
+  "generated_at": "2026-09-01T22:04:21+08:00",
   "historical_observation_count": 224,
   "mode": "shadow",
   "publication_precedence": [
@@ -11248,7 +11248,7 @@
     },
     {
       "asset_id": "skill-tqx-research",
-      "category": "06",
+      "category": "03",
       "commit_sha": "805795de05329462af50e86b4a46ad4f51d826f3",
       "featured": {
         "affects_total": false,

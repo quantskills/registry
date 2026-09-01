@@ -1,6 +1,6 @@
 {
-  "catalog_snapshot_id": "sha256:276e68899f6db4a7570a1b13cd84231f94987469343002522270686e52e87091",
-  "generated_at": "2026-08-31T14:05:07+08:00",
+  "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
+  "generated_at": "2026-09-01T22:04:21+08:00",
   "policy_digest": "c7d2ba0470739c5319ca4011fa2abb8739551fe01beae2113365a3f26ef5f4e2",
   "policy_id": "shadow-category-quartile.v1",
   "record_count": 28,
@@ -76,7 +76,7 @@
       "category": "03",
       "core": 82.08,
       "group": "skill:03",
-      "group_size": 38,
+      "group_size": 37,
       "kind": "skill",
       "rank": 1,
       "score_record_sha256": "e6986a8c24acc7f50f2da3f424a0bb435f464535f7d1b3099574d1acf0eafaa2",
@@ -87,7 +87,7 @@
       "category": "03",
       "core": 80.73,
       "group": "skill:03",
-      "group_size": 38,
+      "group_size": 37,
       "kind": "skill",
       "rank": 2,
       "score_record_sha256": "3bf3fc0ee6b96bd7d3e2d0a47283776cf6902f888b9f27c87d3806af237f828b",
@@ -98,31 +98,20 @@
       "category": "03",
       "core": 79.7,
       "group": "skill:03",
-      "group_size": 38,
+      "group_size": 37,
       "kind": "skill",
       "rank": 3,
       "score_record_sha256": "a7e3f0d4f4bd954791de532a29a720b1de18dd14187ba17f14413f8bf533da32",
       "source_publication": "publication.v12.13"
     },
     {
-      "asset_id": "skill-buffett-moat-screener--lavineversion",
-      "category": "03",
-      "core": 79.36,
-      "group": "skill:03",
-      "group_size": 38,
-      "kind": "skill",
-      "rank": 4,
-      "score_record_sha256": "4c795da64fb6a08b5b4a409fb2c30ea4a157052a1f2eeaf975dc85faa2a1b9b1",
-      "source_publication": "publication.v12.22"
-    },
-    {
       "asset_id": "skill-post-market-screener",
       "category": "03",
       "core": 79.11,
       "group": "skill:03",
-      "group_size": 38,
+      "group_size": 37,
       "kind": "skill",
-      "rank": 5,
+      "rank": 4,
       "score_record_sha256": "2f016ecb06c5bd6756cc7d0db0137bb8280e17477d70bba4d36d666417098707",
       "source_publication": "publication.v12.13"
     },
@@ -131,9 +120,9 @@
       "category": "03",
       "core": 79.03,
       "group": "skill:03",
-      "group_size": 38,
+      "group_size": 37,
       "kind": "skill",
-      "rank": 6,
+      "rank": 5,
       "score_record_sha256": "e8f5f267042ebef546fa841005ff88eb6bb8f3199efa86b11ec3295f731792eb",
       "source_publication": "publication.v12.13"
     },
@@ -142,9 +131,9 @@
       "category": "03",
       "core": 78.78,
       "group": "skill:03",
-      "group_size": 38,
+      "group_size": 37,
       "kind": "skill",
-      "rank": 7,
+      "rank": 6,
       "score_record_sha256": "4d411d58ef43e578292db96f4d4f5419c2d0f7cc2374b61b66aa1e0672db4057",
       "source_publication": "publication.v12.13"
     },
@@ -153,9 +142,9 @@
       "category": "03",
       "core": 78.72,
       "group": "skill:03",
-      "group_size": 38,
+      "group_size": 37,
       "kind": "skill",
-      "rank": 8,
+      "rank": 7,
       "score_record_sha256": "1f0a7ea41243a23f42d88cf3db16425806363ff547a1cbeab7d0cea88212fff9",
       "source_publication": "publication.v12.13"
     },
@@ -164,9 +153,9 @@
       "category": "03",
       "core": 78.49,
       "group": "skill:03",
-      "group_size": 38,
+      "group_size": 37,
       "kind": "skill",
-      "rank": 9,
+      "rank": 8,
       "score_record_sha256": "3c26d1a9d998cd1a751798ebed7bb02984c88885470f12c26f4acab916982135",
       "source_publication": "publication.v12.13"
     },
@@ -175,10 +164,21 @@
       "category": "03",
       "core": 78.35,
       "group": "skill:03",
-      "group_size": 38,
+      "group_size": 37,
+      "kind": "skill",
+      "rank": 9,
+      "score_record_sha256": "c45f7fcb81bf37fa17aad36b0a9f3de54eab5c36c84f58fb4d323e0b2bac138a",
+      "source_publication": "publication.v12.13"
+    },
+    {
+      "asset_id": "skill-etf-fund-evaluator",
+      "category": "03",
+      "core": 78.3,
+      "group": "skill:03",
+      "group_size": 37,
       "kind": "skill",
       "rank": 10,
-      "score_record_sha256": "c45f7fcb81bf37fa17aad36b0a9f3de54eab5c36c84f58fb4d323e0b2bac138a",
+      "score_record_sha256": "436b54aea5b02e8447522787141497b7444aaacc0dba1052ec0e19bd9fbc45b0",
       "source_publication": "publication.v12.13"
     },
     {
@@ -270,14 +270,14 @@
       "source_publication": "publication.v12.13"
     },
     {
-      "asset_id": "skill-backtest-assumption_check",
+      "asset_id": "skill-backtesting-bias-avoidance",
       "category": "07",
-      "core": 79.74,
+      "core": 74.23,
       "group": "skill:07",
-      "group_size": 4,
+      "group_size": 3,
       "kind": "skill",
       "rank": 1,
-      "score_record_sha256": "8a07c69637bc41abe53352f01a070286e40ffcf595d07d5af9b7cc3a9c93ffb8",
+      "score_record_sha256": "b6336f05a853d72acd6911fec67979c7fd2a2a080920495d24cbf4b7556a614a",
       "source_publication": "publication.v12.13"
     },
     {
@@ -315,6 +315,6 @@
     }
   ],
   "schema": "quantskills.recommended-snapshot.v1",
-  "score_dataset_sha256": "8c30794e1becfca53667761f1dd33a29cd1033c00999a96fc47c0b095af25458",
+  "score_dataset_sha256": "720122e60f6b41d4e2958d28782460baaaae80f9df9470b98943d2ddc0ca477b",
   "status": "shadow"
 }

@@ -1,21 +1,21 @@
 {
-  "catalog_snapshot_id": "sha256:276e68899f6db4a7570a1b13cd84231f94987469343002522270686e52e87091",
+  "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
   "files": {
     "README.md": "c7d39259df142fe259863eee9f394500878d70322d970158631c5f7cc14a01c2",
-    "current-scores.json": "8c30794e1becfca53667761f1dd33a29cd1033c00999a96fc47c0b095af25458",
-    "publications/publication.v12.13.jsonl": "bac8cf1ccd260d25f2b59719215d20732f58761a1d6422caad05370e50caf0a2",
+    "current-scores.json": "720122e60f6b41d4e2958d28782460baaaae80f9df9470b98943d2ddc0ca477b",
+    "publications/publication.v12.13.jsonl": "ffd373d194e4dc4f76c1d68c8219256da7b13a70149bb52558afdc9cec21cef2",
     "publications/publication.v12.14.jsonl": "d10be3df502f0f0e82363a9b8629425fa9ae2a1de68f6f62a935a60b113eb7af",
     "publications/publication.v12.16.jsonl": "9503f3e25c73148a7f6f8741796d43c6eb37721dd6e531e1f3e6d7e10fc2b998",
     "publications/publication.v12.20.jsonl": "9c2b057104e23e3b7e78cb97621c5576995a23272a3fe1c0835aff32c17778e5",
     "publications/publication.v12.21.jsonl": "923c9fdb1dc373f540031c3a0e426fa97c2effbe43cbaf140ab4da0f03f9112f",
     "publications/publication.v12.22.jsonl": "7d1491642082017544ff800ff2a519163e6a29f1f9c8810153ec5285d52c037f",
     "publications/publication.v12.23.jsonl": "af0df069285d5ef4f3cd43625625b1a1f6296f85e1ec71f2c7f8698bb2cb4532",
-    "recommended.snapshot.json": "469ca52a356344cd7c3162388fb9fef27cdcf254dae0840816cf5966a93c2ec2",
+    "recommended.snapshot.json": "b6de7c4350bb30951b2c1387a763d04907a383a4b73bbf9de35a480bdd60a755",
     "schemas/current-scores.schema.json": "f43b11ab1d11714e932eee44b9a5ce04ac1e6a74e42d0b356f27c5b567591bea",
     "schemas/recommended-snapshot.schema.json": "5b0ea9b82168ab66f7aa16b96c88b5625192b3743a63394ce4d94e8a61626ebe",
     "selection-policy.v1.json": "19804e60ac6832da6ec33e5af070ca6677be6fcefafbee07190f8dca326d69ac"
   },
-  "generated_at": "2026-08-31T14:05:07+08:00",
+  "generated_at": "2026-09-01T22:04:21+08:00",
   "historical_observation_count": 224,
   "integrity_model": "signed-source-attestations-plus-sha256-public-projection",
   "publications": [
@@ -78,5 +78,5 @@
   ],
   "record_count": 218,
   "schema": "quantskills.public-evaluation-manifest.v1",
-  "snapshot_digest": "53178a1362d5946361a73ad5c2384655106a7c93544e6164369ac735299693c0"
+  "snapshot_digest": "11555a32bfb812a534918c8a33d72cf22d00cff369bd4ddc6cc7508c03677f97"
 }
