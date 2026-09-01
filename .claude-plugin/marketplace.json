@@ -358,9 +358,9 @@
     {
       "category": "07",
       "description": "Use when an agent needs to independently audit the assumptions and biases behind a backtest / strategy code / research backtest report — execution timing and lookahead, trading costs, price limits and suspensions, survivorship bias, parameter freedom and multiple testing, data alignment and adjustment, turnover and capacity, benchmark and excess returns, and reporting transparency. Outputs a structured defect list (axis x evidence x severity x impact x fix).",
-      "name": "backtest-assumption_check",
+      "name": "backtest-assumption-check",
       "source": {
-        "repo": "quantskills/skill-backtest-assumption_check",
+        "repo": "quantskills/skill-backtest-assumption-check",
         "source": "github"
       },
       "type": "skill"
@@ -408,9 +408,9 @@
     {
       "category": "03",
       "description": "PandaData-only point-in-time Buffett moat hard screener for A-shares.",
-      "name": "buffett-moat-screener--lavineversion",
+      "name": "buffett-moat-screener-lavine-version",
       "source": {
-        "repo": "quantskills/skill-buffett-moat-screener--lavineversion",
+        "repo": "quantskills/skill-buffett-moat-screener-lavine-version",
         "source": "github"
       },
       "type": "skill"
@@ -2048,9 +2048,9 @@
     {
       "category": "06",
       "description": "skill tqx research",
-      "name": "tqx-research",
+      "name": "tqx-data-research",
       "source": {
-        "repo": "quantskills/skill-tqx-research",
+        "repo": "quantskills/skill-tqx-data-research",
         "source": "github"
       },
       "type": "skill"
