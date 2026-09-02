@@ -1,24 +1,24 @@
 # Registry 健康检查
 
-生成时间：2026-09-01T05:24:05Z
+生成时间：2026-09-02T04:50:58Z
 
 ## 汇总
 
 | 总数 | 可达 | 有声明 | 声明合法 |
 | ---: | ---: | ---: | ---: |
-| 214 | 213 | 208 | 208 |
+| 214 | 214 | 214 | 214 |
 
 ## 明细
 
 | 条目 | 仓库可达 | 声明存在 | qsh-form 存在 | 声明合法 | 问题 |
 | --- | :---: | :---: | :---: | :---: | --- |
 | agent-alpha-portfolio-guardian | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
-| agent-corporate-governance-scanner | ✅ | ❌ | ❌ | ❌ | main 和 master 均无声明文件 |
+| agent-corporate-governance-scanner | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-correlation-break-research | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-crowding-risk-monitor | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-derivatives-skew-sentiment-monitor | ✅ | ✅ | ✅ | ✅ | 无 |
-| agent-earnings-surprise-hunter | ✅ | ❌ | ❌ | ❌ | main 和 master 均无声明文件 |
-| agent-feng-reverse | ✅ | ❌ | ❌ | ❌ | main 和 master 均无声明文件 |
+| agent-earnings-surprise-hunter | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| agent-feng-reverse | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-for-liangshuyuan-tasks | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-future-trading | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-intraday-rl-timing | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -47,12 +47,12 @@
 | skill-b6-limitup-pool | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-b7-lhb-monitor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-backtest | ✅ | ✅ | ✅ | ✅ | 无 |
-| skill-backtest-assumption_check | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-backtest-assumption-check | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-backtest-overfit | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-backtesting-bias-avoidance | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-block-trade-radar | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-buffett-moat-screener | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
-| skill-buffett-moat-screener--lavineversion | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-buffett-moat-screener-lavine-version | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-build-b10-factor-evaluation | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-buyback-monitor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-calendar-anomaly-scanner | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -146,7 +146,7 @@
 | skill-market-daily-review | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-market-regime-analysis | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-material-contract-alpha | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
-| skill-microstructure-vwap-deviation | ✅ | ❌ | ❌ | ❌ | main 和 master 均无声明文件 |
+| skill-microstructure-vwap-deviation | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-minuteflow-alpha | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-ml-factor-ensemble | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-ml-purged-cv | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -216,8 +216,8 @@
 | skill-template | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-templeton-global-contrarian | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-time-series-analysis | ✅ | ✅ | ✅ | ✅ | 无 |
-| skill-tqx-research | ❌ | ❌ | ❌ | ❌ | 仓库不可达 |
-| skill-trade-review | ✅ | ❌ | ❌ | ❌ | main 和 master 均无声明文件 |
+| skill-tqx-data-research | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-trade-review | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-transaction-cost-analysis | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-transaction-cost-calibration | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-trendline-breakdown-reversal | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
