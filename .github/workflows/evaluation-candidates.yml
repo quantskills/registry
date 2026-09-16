@@ -1,0 +1,40 @@
+name: Evaluation candidate diff
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - catalog.snapshot.json
+      - registry.json
+      - evaluations/current-scores.json
+      - scripts/detect_evaluation_candidates.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: evaluation-candidates-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Detect new, changed, and offline evaluation candidates
+        run: >-
+          python scripts/detect_evaluation_candidates.py
+          --catalog catalog.snapshot.json
+          --registry registry.json
+          --current-scores evaluations/current-scores.json
+          --output evaluation-candidates.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-candidates-${{ github.run_id }}
+          path: evaluation-candidates.json
+          if-no-files-found: error
+          retention-days: 14
