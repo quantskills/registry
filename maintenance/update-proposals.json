@@ -1,0 +1,107 @@
+{
+  "schema": "quantskills.community-update-proposals.v1",
+  "proposals": [
+    {
+      "asset_id": "agent-cross-market-event-radar",
+      "commit_sha": "b2cf19bec2ee9fa4f70e815b7f9bc75b0c03979d",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "agent-quantspace",
+      "commit_sha": "2e196283e5465b775d99255bcb39dcd9401e4508",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-alpha-a3-streak-leader-relay",
+      "commit_sha": "666e5270367e89f9eea6b4bc4f3ec4f90b282481",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-b6-limitup-pool",
+      "commit_sha": "54568d9aeec73057e9f9ecd6f35870bc5b42d97a",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-b7-lhb-monitor",
+      "commit_sha": "21b47bb866ac4b14cfc2edda6550d1ce2891947c",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-backtest-etf",
+      "commit_sha": "c519cf820baca469682d9312d6cccc39c692a4fc",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-equity-placard-watchlist",
+      "commit_sha": "2ce3f6d2116b683868715610caf8a7e48b849a14",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-factor-alpha191-alpha101",
+      "commit_sha": "c92ee90d8855899cc33c8b6d76e1c209e5ca1c8e",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-factor-calendar-formulas",
+      "commit_sha": "d62bc797ca3397a060f28309b912619979c577ea",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-factor-drift-monitor",
+      "commit_sha": "cf5ab22397c1c3f8621c6bc06089af2620fbe1a8",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-factor-health-monitor",
+      "commit_sha": "7b00ea3315abc2cb1a0f1e40af859164896613fe",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-factor-rl-weighting",
+      "commit_sha": "1e6652ad4705bdeff74012cea16e02f9ea024e34",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-fund-holding-xray",
+      "commit_sha": "93125c464b2e4626e65ea29e05904fa266e3a98d",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-llm-rag-financial-qa",
+      "commit_sha": "a0bc3cd4b58d79bf188538521c74d4b146445da0",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-signal-portfolio-optimize",
+      "commit_sha": "75fbf8a97a4536888c787b45b673561ce9201b43",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-soros-reflexivity-detector",
+      "commit_sha": "e4b48925c360aadd8c6ac56e450145591ec187be",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-trading-behavior-diagnostics",
+      "commit_sha": "e443d34122c127063e5a87ceab0f52dae5765738",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    }
+  ]
+}
