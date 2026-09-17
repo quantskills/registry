@@ -1,7 +1,7 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-17T13:34:28+00:00",
-  "historical_observation_count": 235,
+  "generated_at": "2026-09-17T14:20:04+00:00",
+  "historical_observation_count": 236,
   "mode": "shadow",
   "publication_precedence": [
     "publication.v12.13",
@@ -2502,7 +2502,7 @@
     {
       "asset_id": "skill-causal-alpha-discovery",
       "category": "02",
-      "commit_sha": "c4d186a9bbedd05890472fd3e2c006cdcfa5d6a9",
+      "commit_sha": "777e07a5f6ebec8b55852947e56dcfcd8e090565",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 1,
@@ -2511,46 +2511,46 @@
         "status": "ineligible"
       },
       "integrity": {
-        "attestation_key": "de3da767372859dca7b37e083ed0c615f92ba5af3ad52f253d7f7f7063796672",
+        "attestation_key": "a74e30c04253ce56c9dfd04b0e228f05525df0885abe0c0828570fc66680b755",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "2af6fe39692be4a6df77f2c1faf26bc4eab286c35313425a27410aed92442522",
-        "measurement_digest": "2af6fe39692be4a6df77f2c1faf26bc4eab286c35313425a27410aed92442522",
-        "score_row_sha256": "91938617c1475ffc5db3fc1f5042eb457df018f5bb66a978cb9bc0a272b987ce",
-        "signed_envelope_sha256": "472386d7896ff0a12de21028e8b1e6327b2df0809085e87e9347f712f2bee84d"
+        "attestation_payload_digest": "1ae80a10188378d6f6d7862d6393ef8c592d9df4b3c31e3345553bacf4433dde",
+        "measurement_digest": "1ae80a10188378d6f6d7862d6393ef8c592d9df4b3c31e3345553bacf4433dde",
+        "score_row_sha256": "786e1a6d9dde747ec089c5687553caf9d38d9b273a8f1edadcbf9354b3771207",
+        "signed_envelope_sha256": "796db3e2a6db2f74087353576c6f11de82d2701c82bcbf83b1bf57d06c4855df"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 83.25,
+        "artifact_outcome": 46.41,
         "competition_eligible": false,
         "evaluation_tier": "screening",
-        "reliability": 75.0,
+        "reliability": 50.0,
         "trigger_f1": 100.0
       },
       "repo": "quantskills/skill-causal-alpha-discovery",
       "schema": "quantskills.public-score-record.v2",
       "score_comparability": "publication.v12.13-only",
       "score_formula": "score-formula.v9",
-      "score_key": "f128ee05b35b9c854ab942cf9dd600732aecb843b3456e37a71960f7a66e5879",
+      "score_key": "60e613c2b28bfb27f918f89985a7f9da8f4ac27ddca40b1b32f067a55a540c55",
       "scores": {
-        "behavior": 86.6,
-        "quality": 53.12,
-        "token": 39.3,
-        "total": 66.41
+        "behavior": 57.12,
+        "quality": 41.88,
+        "token": 18.27,
+        "total": 43.6
       },
       "security": {
-        "evidence_digest": "65e33294660a3b279e17644e265e3f432db1601b403444e60c79227a47c8e88e",
+        "evidence_digest": "ecf45e665db4cc5d55ec1a63eabce71413a2219a54b938481ea29ddb2f1a6e8e",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "f7c2538dc456c4a458aec8b42fd28c226445076b21ba8b619789e023cdc34b44",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "006118cea76c4a90a86919d63bacb7bd89ec4fa4e89a0c397bbdc173de0f0ec8",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 303172,
+        "elapsed_ms": 322328,
         "featured_model_calls": 0,
         "model_calls": 16,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 329686
+        "total_tokens": 355748
       }
     },
     {
