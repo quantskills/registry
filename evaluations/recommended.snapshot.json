@@ -1,6 +1,6 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-01T22:04:21+08:00",
+  "generated_at": "2026-09-17T14:20:04+00:00",
   "policy_digest": "c7d2ba0470739c5319ca4011fa2abb8739551fe01beae2113365a3f26ef5f4e2",
   "policy_id": "shadow-category-quartile.v1",
   "record_count": 28,
@@ -8,24 +8,13 @@
     {
       "asset_id": "agent-alpha-portfolio-guardian",
       "category": "09",
-      "core": 79.79,
+      "core": 80.79,
       "group": "agent:09",
       "group_size": 12,
       "kind": "agent",
       "rank": 1,
-      "score_record_sha256": "5884e55ef538778ab108b5ea6f3b312be2b3dc6d261339c34e1734580aa036f5",
-      "source_publication": "publication.v12.13"
-    },
-    {
-      "asset_id": "agent-for-liangshuyuan-tasks",
-      "category": "09",
-      "core": 78.03,
-      "group": "agent:09",
-      "group_size": 12,
-      "kind": "agent",
-      "rank": 2,
-      "score_record_sha256": "eeacbce7eff94d176e913305c7d82942ce5144bed202a5234f65ca1a4255fb39",
-      "source_publication": "publication.v12.13"
+      "score_record_sha256": "4afb3bdb0a2a2eb99d75a72d4bf9c92981613024ed07dc3073d06ebab07c7125",
+      "source_publication": "publication.v12.13.on-demand"
     },
     {
       "asset_id": "agent-correlation-break-research",
@@ -34,9 +23,20 @@
       "group": "agent:09",
       "group_size": 12,
       "kind": "agent",
-      "rank": 3,
+      "rank": 2,
       "score_record_sha256": "902f3aae3011f6679d6ee384e512352679de458e918fae56bd486cc4445f27fd",
       "source_publication": "publication.v12.13"
+    },
+    {
+      "asset_id": "agent-corporate-governance-scanner",
+      "category": "09",
+      "core": 76.32,
+      "group": "agent:09",
+      "group_size": 12,
+      "kind": "agent",
+      "rank": 3,
+      "score_record_sha256": "40621f15d56c0ad680d988b9fdff0c2ef03a5ba92a0fae70ee31312d2e41241d",
+      "source_publication": "publication.v12.13.on-demand"
     },
     {
       "asset_id": "skill-corporate-action-adjustment-auditor",
@@ -76,7 +76,7 @@
       "category": "03",
       "core": 82.08,
       "group": "skill:03",
-      "group_size": 37,
+      "group_size": 38,
       "kind": "skill",
       "rank": 1,
       "score_record_sha256": "e6986a8c24acc7f50f2da3f424a0bb435f464535f7d1b3099574d1acf0eafaa2",
@@ -87,7 +87,7 @@
       "category": "03",
       "core": 80.73,
       "group": "skill:03",
-      "group_size": 37,
+      "group_size": 38,
       "kind": "skill",
       "rank": 2,
       "score_record_sha256": "3bf3fc0ee6b96bd7d3e2d0a47283776cf6902f888b9f27c87d3806af237f828b",
@@ -98,7 +98,7 @@
       "category": "03",
       "core": 79.7,
       "group": "skill:03",
-      "group_size": 37,
+      "group_size": 38,
       "kind": "skill",
       "rank": 3,
       "score_record_sha256": "a7e3f0d4f4bd954791de532a29a720b1de18dd14187ba17f14413f8bf533da32",
@@ -109,7 +109,7 @@
       "category": "03",
       "core": 79.11,
       "group": "skill:03",
-      "group_size": 37,
+      "group_size": 38,
       "kind": "skill",
       "rank": 4,
       "score_record_sha256": "2f016ecb06c5bd6756cc7d0db0137bb8280e17477d70bba4d36d666417098707",
@@ -120,7 +120,7 @@
       "category": "03",
       "core": 79.03,
       "group": "skill:03",
-      "group_size": 37,
+      "group_size": 38,
       "kind": "skill",
       "rank": 5,
       "score_record_sha256": "e8f5f267042ebef546fa841005ff88eb6bb8f3199efa86b11ec3295f731792eb",
@@ -131,20 +131,31 @@
       "category": "03",
       "core": 78.78,
       "group": "skill:03",
-      "group_size": 37,
+      "group_size": 38,
       "kind": "skill",
       "rank": 6,
       "score_record_sha256": "4d411d58ef43e578292db96f4d4f5419c2d0f7cc2374b61b66aa1e0672db4057",
       "source_publication": "publication.v12.13"
     },
     {
+      "asset_id": "skill-buffett-moat-screener-lavine-version",
+      "category": "03",
+      "core": 78.74,
+      "group": "skill:03",
+      "group_size": 38,
+      "kind": "skill",
+      "rank": 7,
+      "score_record_sha256": "6fd5c82f1280bb46fe16a8a9e929ec3e0340de4d17737de362df52ada1dec16f",
+      "source_publication": "publication.v12.13.on-demand"
+    },
+    {
       "asset_id": "skill-hk-us-consensus-revision-radar",
       "category": "03",
       "core": 78.72,
       "group": "skill:03",
-      "group_size": 37,
+      "group_size": 38,
       "kind": "skill",
-      "rank": 7,
+      "rank": 8,
       "score_record_sha256": "1f0a7ea41243a23f42d88cf3db16425806363ff547a1cbeab7d0cea88212fff9",
       "source_publication": "publication.v12.13"
     },
@@ -153,9 +164,9 @@
       "category": "03",
       "core": 78.49,
       "group": "skill:03",
-      "group_size": 37,
+      "group_size": 38,
       "kind": "skill",
-      "rank": 8,
+      "rank": 9,
       "score_record_sha256": "3c26d1a9d998cd1a751798ebed7bb02984c88885470f12c26f4acab916982135",
       "source_publication": "publication.v12.13"
     },
@@ -164,21 +175,10 @@
       "category": "03",
       "core": 78.35,
       "group": "skill:03",
-      "group_size": 37,
-      "kind": "skill",
-      "rank": 9,
-      "score_record_sha256": "c45f7fcb81bf37fa17aad36b0a9f3de54eab5c36c84f58fb4d323e0b2bac138a",
-      "source_publication": "publication.v12.13"
-    },
-    {
-      "asset_id": "skill-etf-fund-evaluator",
-      "category": "03",
-      "core": 78.3,
-      "group": "skill:03",
-      "group_size": 37,
+      "group_size": 38,
       "kind": "skill",
       "rank": 10,
-      "score_record_sha256": "436b54aea5b02e8447522787141497b7444aaacc0dba1052ec0e19bd9fbc45b0",
+      "score_record_sha256": "c45f7fcb81bf37fa17aad36b0a9f3de54eab5c36c84f58fb4d323e0b2bac138a",
       "source_publication": "publication.v12.13"
     },
     {
@@ -315,6 +315,6 @@
     }
   ],
   "schema": "quantskills.recommended-snapshot.v1",
-  "score_dataset_sha256": "720122e60f6b41d4e2958d28782460baaaae80f9df9470b98943d2ddc0ca477b",
+  "score_dataset_sha256": "dd16c3f6e9e416cb99e45c59f7606325571ce6ea6b302f4f2ed71783766290da",
   "status": "shadow"
 }

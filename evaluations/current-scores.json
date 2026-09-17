@@ -1,7 +1,7 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-01T22:04:21+08:00",
-  "historical_observation_count": 224,
+  "generated_at": "2026-09-17T14:20:04+00:00",
+  "historical_observation_count": 236,
   "mode": "shadow",
   "publication_precedence": [
     "publication.v12.13",
@@ -10,32 +10,33 @@
     "publication.v12.20",
     "publication.v12.21",
     "publication.v12.22",
-    "publication.v12.23"
+    "publication.v12.23",
+    "publication.v12.13.on-demand"
   ],
-  "record_count": 218,
+  "record_count": 217,
   "records": [
     {
       "asset_id": "agent-alpha-portfolio-guardian",
       "category": "09",
-      "commit_sha": "4c93fd6d93a5bca6e4cac178c2cf9d6ef7e8d241",
+      "commit_sha": "f3744dfae726fa64a6127e6427ff2e29f9cc7cb5",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 0,
         "reason": null,
-        "score": 91.96,
+        "score": 75.39,
         "status": "eligible"
       },
       "integrity": {
-        "attestation_key": "3d1299ea1fb13599f0df7154e55cf4073d507652e98490b71fa82958437a8509",
+        "attestation_key": "367f61ab1342f9a7dd5d9241f8f0a5963b3b15c16f729fd196fb9e4b2ca8cf7b",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "76e134ac2bf0866947655649b0fcbd07cf4995360fb4217dee51041f46d1a737",
-        "measurement_digest": "76e134ac2bf0866947655649b0fcbd07cf4995360fb4217dee51041f46d1a737",
-        "score_row_sha256": "f6ddd31f534047cdc582556639d4e3fec3cff826205a7bf3ddce730c1de97df6",
-        "signed_envelope_sha256": "ff87cd91237895c06e3b8128114368769c35bb624f1afea8a63f99c1693692c3"
+        "attestation_payload_digest": "a29f972bcd49642a203373f3b9f009a7c254f3ee82c80cb15c6d315ad5eba204",
+        "measurement_digest": "a29f972bcd49642a203373f3b9f009a7c254f3ee82c80cb15c6d315ad5eba204",
+        "score_row_sha256": "e060be688a81037a4365bcbac7802fe81b8e312e743c6aae33b8a9aa6f461e5b",
+        "signed_envelope_sha256": "46a4ded08a58b879c112404680df2b055c9edcdef61e976e3c7d2bf040b6f9b8"
       },
       "kind": "agent",
       "metrics": {
-        "artifact_outcome": 96.83,
+        "artifact_outcome": 95.66,
         "competition_eligible": false,
         "evaluation_tier": "screening",
         "reliability": 100.0,
@@ -47,49 +48,49 @@
       "score_formula": "score-formula.v9",
       "score_key": "d9d5d2cd70231905aa96467b5ba1bae27034afbf276e0ff106dca0bcd8bb7f64",
       "scores": {
-        "behavior": 97.46,
-        "quality": 82.5,
-        "token": 41.74,
-        "total": 79.79
+        "behavior": 96.52,
+        "quality": 88.75,
+        "token": 41.36,
+        "total": 80.79
       },
       "security": {
-        "evidence_digest": "1bc1a580812fcd4fac78ae59da3c93fd40f64d94c538e559b043c6e6a65d581b",
+        "evidence_digest": "53d72c817dfdc86119846738ec7a4b4fd971e5af6e5765c500a2301343cb13fe",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "ef2f1f381e75f3c332a0e33a8f39a40377dcedc6a39aee2cf5cf84ee85e7c0da",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "aec41d95257bf9816caa0a4e00000c45aee9c90028b188464430d905976c04bd",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 316469,
-        "featured_model_calls": 3,
-        "model_calls": 19,
+        "elapsed_ms": 523531,
+        "featured_model_calls": 9,
+        "model_calls": 26,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 390050
+        "total_tokens": 531841
       }
     },
     {
       "asset_id": "agent-corporate-governance-scanner",
       "category": "09",
-      "commit_sha": "dc7c29e3f953e871574150993dfb036c2403d658",
+      "commit_sha": "6a685a7f0e6524808cf7fffeaca9d4e61b00bca1",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 0,
-        "reason": null,
-        "score": 89.12,
-        "status": "eligible"
+        "reason": "no_measurable_headroom",
+        "score": null,
+        "status": "not_applicable"
       },
       "integrity": {
-        "attestation_key": "3ba8f37706d11b2c5587cb3ccafe42ebe8b3cd22e337ad6609ee34712fe77544",
+        "attestation_key": "e0799bc228cd9f82189ae581c569ab6da0bb3069af928e421f9bce5aef2637e0",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "f9700be9287313604846ca674727bffc41b4933e3ab571e94362e12863f03810",
-        "measurement_digest": "f9700be9287313604846ca674727bffc41b4933e3ab571e94362e12863f03810",
-        "score_row_sha256": "e5623c8a87d6c2459a6e23055c3ee172fd81406a58b23c202c1e88e4cb8e4c80",
-        "signed_envelope_sha256": "2681b748d71f92bbbb958c93c84629db0f41d588b603d75b283fff5b4fad92c8"
+        "attestation_payload_digest": "66c53b55f6e57abbb417b5483c6b5c04b3a300be60ecaa94b13d1906575822ce",
+        "measurement_digest": "66c53b55f6e57abbb417b5483c6b5c04b3a300be60ecaa94b13d1906575822ce",
+        "score_row_sha256": "f841d064b857fd87c9079698ee7174d1763b9e1fb7e1b976bdb3e1a31a222d15",
+        "signed_envelope_sha256": "c7d99c57cea6247153f9ad9fa02f283efc07537f8bc537198c7b61b2753791e1"
       },
       "kind": "agent",
       "metrics": {
-        "artifact_outcome": 96.53,
+        "artifact_outcome": 97.48,
         "competition_eligible": false,
         "evaluation_tier": "screening",
         "reliability": 100.0,
@@ -101,25 +102,25 @@
       "score_formula": "score-formula.v9",
       "score_key": "d9d5d2cd70231905aa96467b5ba1bae27034afbf276e0ff106dca0bcd8bb7f64",
       "scores": {
-        "behavior": 97.22,
-        "quality": 42.5,
-        "token": 39.58,
-        "total": 69.13
+        "behavior": 97.99,
+        "quality": 63.12,
+        "token": 46.17,
+        "total": 76.32
       },
       "security": {
-        "evidence_digest": "85823f1d4f1c9c4b61a8d8326e171e887d676684baf234a7fb3a1d438b9d21fc",
+        "evidence_digest": "09315c724a61ac8f2b1b41f7366e8d5c406bfa05b9e6776b813d61187ff1421e",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "58207473041ba53d1220e56ba26919d565fcc993c6cd58a3ddae8ee4e6f331be",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "57f7f3a2b4a276cd37ad7c8e0299ab1940bb5a51b7976e1aacf691eacdb4e28f",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 466047,
-        "featured_model_calls": 6,
-        "model_calls": 22,
+        "elapsed_ms": 392000,
+        "featured_model_calls": 0,
+        "model_calls": 16,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 454841
+        "total_tokens": 306549
       }
     },
     {
@@ -287,25 +288,25 @@
     {
       "asset_id": "agent-earnings-surprise-hunter",
       "category": "09",
-      "commit_sha": "d697366910255a3f1e1174a65f95cc1f5412a879",
+      "commit_sha": "9f0f184106c0ae0436f8af115c2bb61153ac482d",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 0,
-        "reason": "no_measurable_headroom",
-        "score": null,
-        "status": "not_applicable"
+        "reason": null,
+        "score": 79.87,
+        "status": "eligible"
       },
       "integrity": {
-        "attestation_key": "df17b1f7354dfdefb1560252e58b0fbd064edb808d54a9983559fc4e354849a5",
+        "attestation_key": "ecee49135e2c936cb7133f1782c2a9d5721462a76b05fb2265d67df78154f1dd",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "84bf6a803c70e620046943b2bd323c683d75c7f3d37d731a4217d818f3881783",
-        "measurement_digest": "84bf6a803c70e620046943b2bd323c683d75c7f3d37d731a4217d818f3881783",
-        "score_row_sha256": "e500c692dabdfe2c5001e66adbef89db77cfa8d6546b5d11ad3e70a64bfbf0db",
-        "signed_envelope_sha256": "4ec773d9b7df37bb004e9df44e99292d05ba189251b58dd49519e0bbb6a3fd42"
+        "attestation_payload_digest": "658d3844c81700fd5429f78e2c6e4a905ec699b5fe80e5f8dd3aeaa673e536a1",
+        "measurement_digest": "658d3844c81700fd5429f78e2c6e4a905ec699b5fe80e5f8dd3aeaa673e536a1",
+        "score_row_sha256": "0c93f8bbae1904c2bd60a18b438a3922697d9a10fb1a9c4e1023070a90e9c295",
+        "signed_envelope_sha256": "4cc1a9165e2a71aa2a2fa1cc48151e309f9bcdfef7d072f6a145d4c16da44280"
       },
       "kind": "agent",
       "metrics": {
-        "artifact_outcome": 98.22,
+        "artifact_outcome": 98.99,
         "competition_eligible": false,
         "evaluation_tier": "screening",
         "reliability": 100.0,
@@ -317,25 +318,25 @@
       "score_formula": "score-formula.v9",
       "score_key": "d9d5d2cd70231905aa96467b5ba1bae27034afbf276e0ff106dca0bcd8bb7f64",
       "scores": {
-        "behavior": 98.58,
-        "quality": 37.5,
-        "token": 41.95,
-        "total": 69.15
+        "behavior": 99.19,
+        "quality": 35.0,
+        "token": 46.14,
+        "total": 69.88
       },
       "security": {
-        "evidence_digest": "f39338e17b082f3539e83e1015fb0e1470fe76079f2800e6cc57ac20320ab21c",
+        "evidence_digest": "c766d7683fe9e55edf8342f0a29a4bb3f40c4237efd548dc79fccaa2a05a8cbc",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "c0e604ff06d751f7b698b09a859b9445bea787ebe8e874cb6c531b506cdf243e",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "461f286b962d6a4385dd07963761f18f3aca0bec958851fd5bc8580b162b5b84",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 299266,
-        "featured_model_calls": 0,
-        "model_calls": 16,
+        "elapsed_ms": 416406,
+        "featured_model_calls": 6,
+        "model_calls": 22,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 320132
+        "total_tokens": 423689
       }
     },
     {
@@ -395,25 +396,25 @@
     {
       "asset_id": "agent-for-liangshuyuan-tasks",
       "category": "09",
-      "commit_sha": "606d818c32a52732a0a3573c0445e1da2500480f",
+      "commit_sha": "0405bd04862326010e9376cab4b4c15f52bb35a6",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 0,
         "reason": null,
-        "score": 96.39,
+        "score": 23.91,
         "status": "eligible"
       },
       "integrity": {
-        "attestation_key": "5f58b2709f1d5c5f8962a283ce8f269bf1757f04de453b68059e9fb0d4b81b73",
+        "attestation_key": "1a1ecd6dc86b92497292b3e757259e671ff163122cfdd9a21ba80d3b202e32b5",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "b31b66509071079e17ccd741955c6e17dfebaab3982722bb7ad5f389d1d57b52",
-        "measurement_digest": "b31b66509071079e17ccd741955c6e17dfebaab3982722bb7ad5f389d1d57b52",
-        "score_row_sha256": "f4241991108acc8c6ac4dab1d0a4a4fd3cc118f3ccf20e06d01298c79faa3180",
-        "signed_envelope_sha256": "81a9664fc2d6a0c78042f334fc0b27462ed8f33c5abc5c8ea9074f903e43eb0b"
+        "attestation_payload_digest": "2f15bed0bd708f4cbf45215b16633d4098d2221bfe6ca0d07eb718230e058381",
+        "measurement_digest": "2f15bed0bd708f4cbf45215b16633d4098d2221bfe6ca0d07eb718230e058381",
+        "score_row_sha256": "d8dae5127abea36be9b020d3896648373d883c091f9e56bddc79a4956bbca1af",
+        "signed_envelope_sha256": "21aa40d8b2a8fed71cf59acf7a30e09a7de51c6b25b58d5b6c11a68e384c6b3d"
       },
       "kind": "agent",
       "metrics": {
-        "artifact_outcome": 98.45,
+        "artifact_outcome": 94.94,
         "competition_eligible": false,
         "evaluation_tier": "screening",
         "reliability": 100.0,
@@ -425,25 +426,25 @@
       "score_formula": "score-formula.v9",
       "score_key": "d9d5d2cd70231905aa96467b5ba1bae27034afbf276e0ff106dca0bcd8bb7f64",
       "scores": {
-        "behavior": 98.76,
-        "quality": 74.38,
-        "token": 40.21,
-        "total": 78.03
+        "behavior": 95.95,
+        "quality": 52.5,
+        "token": 40.67,
+        "total": 71.27
       },
       "security": {
-        "evidence_digest": "4314e14b3f37793a14da68091383d223b0a1c6bdbe4ca8103f9ddd6314c178dd",
+        "evidence_digest": "62169be6e122dca0f890929d15b7f09bcb35eb356dcfa08fc573f85dcc997188",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "e483ce9a0e942019323134f8985ce0d5c70d24794dd9095ca0c027a79f3f3959",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "d09ba1a3d5b90342c1112a0fbe42dc3b1df9d3ef1994e1289b658407b973d01f",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 311438,
+        "elapsed_ms": 517859,
         "featured_model_calls": 3,
         "model_calls": 19,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 390757
+        "total_tokens": 384817
       }
     },
     {
@@ -930,60 +931,6 @@
         "recovery_model_calls": 0,
         "token_accounting": "complete",
         "total_tokens": 439521
-      }
-    },
-    {
-      "asset_id": "skill-a-share-placement-discount-alpha",
-      "category": "02",
-      "commit_sha": "52363b84775ea8a671397f326607778ee27bb228",
-      "featured": {
-        "affects_total": false,
-        "material_core_regression_count": 0,
-        "reason": "no_measurable_headroom",
-        "score": null,
-        "status": "not_applicable"
-      },
-      "integrity": {
-        "attestation_key": "12733dd4ac73731f7a64bd7793f7401702be681ece7b28cbb220ada03b922eb2",
-        "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "ca7af27e87063269132653b4898f3ffd91fe259a83e26c429a16a8ef9011ff4c",
-        "measurement_digest": "ca7af27e87063269132653b4898f3ffd91fe259a83e26c429a16a8ef9011ff4c",
-        "score_row_sha256": "dbfb0810e49338661d5674573e319a0442223d4dd2888f0f36737a0b70732779",
-        "signed_envelope_sha256": "64a6f4cd427c8415f712a6fa06b002c742bc4e4d95d20b5415228ce94cc04a09"
-      },
-      "kind": "skill",
-      "metrics": {
-        "artifact_outcome": 49.05,
-        "competition_eligible": false,
-        "evaluation_tier": "screening",
-        "reliability": 50.0,
-        "trigger_f1": 100.0
-      },
-      "repo": "quantskills/skill-a-share-placement-discount-alpha",
-      "schema": "quantskills.public-score-record.v2",
-      "score_comparability": "publication.v12.14-only",
-      "score_formula": "score-formula.v9",
-      "score_key": "caf191540a506cfd1ef3f04803803250d6a0a31026912a430ec886b30e54ad46",
-      "scores": {
-        "behavior": 59.24,
-        "quality": 51.25,
-        "token": 19.16,
-        "total": 47.22
-      },
-      "security": {
-        "evidence_digest": "a19c9b5f7333fdb3440d232fb34706360a38c437576dfe34e3002b72571d86e0",
-        "status": "pass"
-      },
-      "source_publication": "publication.v12.14",
-      "source_request_id": "9065d9736ad29d8d0a09d0a1f0293de8bc7a17e8932d7606f6b3f4a1446a37f1",
-      "usage": {
-        "core_model_calls": 16,
-        "elapsed_ms": 259062,
-        "featured_model_calls": 0,
-        "model_calls": 17,
-        "recovery_model_calls": 0,
-        "token_accounting": "complete",
-        "total_tokens": 353201
       }
     },
     {
@@ -1959,57 +1906,57 @@
       }
     },
     {
-      "asset_id": "skill-backtest-assumption_check",
+      "asset_id": "skill-backtest-assumption-check",
       "category": "07",
-      "commit_sha": "0332e475abcb399b5949999cf1d0ffc9559aa00f",
+      "commit_sha": "7430dbc0f36751def82e0e4f102066fba12362b7",
       "featured": {
         "affects_total": false,
-        "material_core_regression_count": 0,
-        "reason": null,
-        "score": 79.53,
-        "status": "eligible"
+        "material_core_regression_count": 1,
+        "reason": "material_core_regression",
+        "score": null,
+        "status": "ineligible"
       },
       "integrity": {
-        "attestation_key": "0353b857d94baec2b8918c7b45c983c153f279aca345bc32ff86a3aff522027f",
+        "attestation_key": "67e71371454ec5f39c91e5bc35051a4efd99532d04a75cb09f5c02c0bfb90a78",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "0fcd9fe426dcda9d945686c67d6b5749e840abb3fb64bbec61df90bdc2eb860e",
-        "measurement_digest": "0fcd9fe426dcda9d945686c67d6b5749e840abb3fb64bbec61df90bdc2eb860e",
-        "score_row_sha256": "5658e127f0bd0e40fca700cca74619a6e39356ae15188cb8acae516dc64750b3",
-        "signed_envelope_sha256": "1416b500bd5a1ee84f06f949520bdb1d2b4102b00ec8c16fffdb4b36a3969fac"
+        "attestation_payload_digest": "895ef6eff7a5866d7f0579860094e06cfc485c4961577d8e717227ac86b099e5",
+        "measurement_digest": "895ef6eff7a5866d7f0579860094e06cfc485c4961577d8e717227ac86b099e5",
+        "score_row_sha256": "b23e0588d47c26c1d2a814dcd9c76da23f27c8b43cbfaa93a6770ab84a6ad394",
+        "signed_envelope_sha256": "91becf8c6fb731761b7b2f20413f8697d935fe9e7bf9552a447c720b81ab90e5"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 96.34,
+        "artifact_outcome": 90.31,
         "competition_eligible": false,
         "evaluation_tier": "screening",
         "reliability": 100.0,
         "trigger_f1": 100.0
       },
-      "repo": "quantskills/skill-backtest-assumption_check",
+      "repo": "quantskills/skill-backtest-assumption-check",
       "schema": "quantskills.public-score-record.v2",
       "score_comparability": "publication.v12.13-only",
       "score_formula": "score-formula.v9",
       "score_key": "80385ab6b444ebf8cc4befde0910a542c578b95f9e224c388bcf0b954d0224ba",
       "scores": {
-        "behavior": 97.07,
-        "quality": 85.62,
-        "token": 39.19,
-        "total": 79.74
+        "behavior": 92.25,
+        "quality": 75.62,
+        "token": 39.88,
+        "total": 75.0
       },
       "security": {
-        "evidence_digest": "23e153ed6ac84f52f45a4253407b6a43f076f87b0b892bab5e6d25d58f91252c",
+        "evidence_digest": "24803f5341f256aa12aa44c47b7c8e312994d076cc69ffbaef4ee6ccbac7d2b6",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "e4aca3b9e965c03c1aefafcb4df2cfb9de861dd8519e63b58115f8ff11ed9d94",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "36ecd344f1ee35c075e201ac4ec76a2cce152b3755b534063c678d2e43dba682",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 276500,
-        "featured_model_calls": 3,
-        "model_calls": 19,
+        "elapsed_ms": 283735,
+        "featured_model_calls": 0,
+        "model_calls": 16,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 393825
+        "total_tokens": 325972
       }
     },
     {
@@ -2283,9 +2230,9 @@
       }
     },
     {
-      "asset_id": "skill-buffett-moat-screener--lavineversion",
+      "asset_id": "skill-buffett-moat-screener-lavine-version",
       "category": "03",
-      "commit_sha": "08b4e44a01d493e70cbd478b95a45e57fb7997d7",
+      "commit_sha": "08b9457b8ee8ff93c45e317da9c40a9fc85b5563",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 0,
@@ -2294,46 +2241,46 @@
         "status": "not_applicable"
       },
       "integrity": {
-        "attestation_key": "827b712f696de2422e135f707ac6eea28dbb9d9014633730314bbd9b6c895326",
+        "attestation_key": "9a5c28860590765ec6e060f6aaf64588171e449f006dc10bde2d83d5fb570f61",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "1ae63d0f259e87ba2ee226183aedb3db2b6d15382bea92f72844462bb532edf2",
-        "measurement_digest": "1ae63d0f259e87ba2ee226183aedb3db2b6d15382bea92f72844462bb532edf2",
-        "score_row_sha256": "8cdc5600951edb210c320b8886b1c91ab16f8a55be8ce61cc88b789a524cb079",
-        "signed_envelope_sha256": "47a1de0d9740a67a667641cee3b020a03f0533e8e3f5d027a3f9d434c6c719f2"
+        "attestation_payload_digest": "a1edefe9e6acff355bf4d915b8c395260a495ad3d82a39fdb6b3271e69eb4d1f",
+        "measurement_digest": "a1edefe9e6acff355bf4d915b8c395260a495ad3d82a39fdb6b3271e69eb4d1f",
+        "score_row_sha256": "f78a1bfc57f3901945c081ffa19b816169ae90e26843f5fb2d84651974d70a62",
+        "signed_envelope_sha256": "17f5c70869fad44596ce71d1917b9161d1d8fd857e5201eab3a4e6abe0952c95"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 99.47,
+        "artifact_outcome": 98.88,
         "competition_eligible": false,
-        "evaluation_tier": "competition",
+        "evaluation_tier": "screening",
         "reliability": 100.0,
         "trigger_f1": 100.0
       },
-      "repo": "quantskills/skill-buffett-moat-screener--lavineversion",
+      "repo": "quantskills/skill-buffett-moat-screener-lavine-version",
       "schema": "quantskills.public-score-record.v2",
-      "score_comparability": "publication.v12.22-only",
+      "score_comparability": "publication.v12.13-only",
       "score_formula": "score-formula.v9",
-      "score_key": "d97b0a131f98e7c20530d8b9ccd027eeffca2425867b7712e71bbf9d0cf68974",
+      "score_key": "ebe39f575d64ecc98531191f415cdc415bb1c9b1782b21b6f82df9efe8d70d1a",
       "scores": {
-        "behavior": 99.58,
-        "quality": 77.5,
-        "token": 40.78,
-        "total": 79.36
+        "behavior": 99.1,
+        "quality": 76.25,
+        "token": 40.49,
+        "total": 78.74
       },
       "security": {
-        "evidence_digest": "6e63dac3acc01e3c1d6da4e312d1b58fe7305419bbaed0c163a9558bf0686f3c",
+        "evidence_digest": "4759e4837ceb222de3baca17238669fcb805ed30c8061f6ba74a65a50b1a351d",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.22",
-      "source_request_id": "c2a91e01ef379de27c2c2ffa3174972f6684114957645a6fd89ef0317f148e3c",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "9954dac8c34b3cc6a8c7605304437e811e3693758cefe6dd355a64a1aa57bc0a",
       "usage": {
-        "core_model_calls": 31,
-        "elapsed_ms": 442547,
+        "core_model_calls": 16,
+        "elapsed_ms": 354016,
         "featured_model_calls": 0,
-        "model_calls": 31,
+        "model_calls": 16,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 638442
+        "total_tokens": 324569
       }
     },
     {
@@ -2555,7 +2502,7 @@
     {
       "asset_id": "skill-causal-alpha-discovery",
       "category": "02",
-      "commit_sha": "c4d186a9bbedd05890472fd3e2c006cdcfa5d6a9",
+      "commit_sha": "777e07a5f6ebec8b55852947e56dcfcd8e090565",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 1,
@@ -2564,46 +2511,46 @@
         "status": "ineligible"
       },
       "integrity": {
-        "attestation_key": "de3da767372859dca7b37e083ed0c615f92ba5af3ad52f253d7f7f7063796672",
+        "attestation_key": "a74e30c04253ce56c9dfd04b0e228f05525df0885abe0c0828570fc66680b755",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "2af6fe39692be4a6df77f2c1faf26bc4eab286c35313425a27410aed92442522",
-        "measurement_digest": "2af6fe39692be4a6df77f2c1faf26bc4eab286c35313425a27410aed92442522",
-        "score_row_sha256": "91938617c1475ffc5db3fc1f5042eb457df018f5bb66a978cb9bc0a272b987ce",
-        "signed_envelope_sha256": "472386d7896ff0a12de21028e8b1e6327b2df0809085e87e9347f712f2bee84d"
+        "attestation_payload_digest": "1ae80a10188378d6f6d7862d6393ef8c592d9df4b3c31e3345553bacf4433dde",
+        "measurement_digest": "1ae80a10188378d6f6d7862d6393ef8c592d9df4b3c31e3345553bacf4433dde",
+        "score_row_sha256": "786e1a6d9dde747ec089c5687553caf9d38d9b273a8f1edadcbf9354b3771207",
+        "signed_envelope_sha256": "796db3e2a6db2f74087353576c6f11de82d2701c82bcbf83b1bf57d06c4855df"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 83.25,
+        "artifact_outcome": 46.41,
         "competition_eligible": false,
         "evaluation_tier": "screening",
-        "reliability": 75.0,
+        "reliability": 50.0,
         "trigger_f1": 100.0
       },
       "repo": "quantskills/skill-causal-alpha-discovery",
       "schema": "quantskills.public-score-record.v2",
       "score_comparability": "publication.v12.13-only",
       "score_formula": "score-formula.v9",
-      "score_key": "f128ee05b35b9c854ab942cf9dd600732aecb843b3456e37a71960f7a66e5879",
+      "score_key": "60e613c2b28bfb27f918f89985a7f9da8f4ac27ddca40b1b32f067a55a540c55",
       "scores": {
-        "behavior": 86.6,
-        "quality": 53.12,
-        "token": 39.3,
-        "total": 66.41
+        "behavior": 57.12,
+        "quality": 41.88,
+        "token": 18.27,
+        "total": 43.6
       },
       "security": {
-        "evidence_digest": "65e33294660a3b279e17644e265e3f432db1601b403444e60c79227a47c8e88e",
+        "evidence_digest": "ecf45e665db4cc5d55ec1a63eabce71413a2219a54b938481ea29ddb2f1a6e8e",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "f7c2538dc456c4a458aec8b42fd28c226445076b21ba8b619789e023cdc34b44",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "006118cea76c4a90a86919d63bacb7bd89ec4fa4e89a0c397bbdc173de0f0ec8",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 303172,
+        "elapsed_ms": 322328,
         "featured_model_calls": 0,
         "model_calls": 16,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 329686
+        "total_tokens": 355748
       }
     },
     {
@@ -11247,57 +11194,57 @@
       }
     },
     {
-      "asset_id": "skill-tqx-research",
-      "category": "03",
-      "commit_sha": "805795de05329462af50e86b4a46ad4f51d826f3",
+      "asset_id": "skill-tqx-data-research",
+      "category": "06",
+      "commit_sha": "0ca32c8d9c8f7a92ce8f27f14ac82ded7a8adad2",
       "featured": {
         "affects_total": false,
-        "material_core_regression_count": 1,
-        "reason": "material_core_regression",
-        "score": null,
-        "status": "ineligible"
+        "material_core_regression_count": 0,
+        "reason": null,
+        "score": 86.12,
+        "status": "eligible"
       },
       "integrity": {
-        "attestation_key": "c6e18bf42a7662e74e5bac1792865b92c5f8b8b325da15a488f0a2dc16ff1b83",
+        "attestation_key": "e3aae10dd12b9591f33b6f9a4489fcebf62f927da46cc5f329e9cb8c2ab934f2",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "bf4334e181c3fd0b0183824de1a3d586a2c9d46a023fd3f0dbb497401a883846",
-        "measurement_digest": "bf4334e181c3fd0b0183824de1a3d586a2c9d46a023fd3f0dbb497401a883846",
-        "score_row_sha256": "666ae854dcf415a91f9de40065d283cb9bdcb597f6ebc7f1e2457b7d003d4122",
-        "signed_envelope_sha256": "1b240be013d31f4bdb9e7b0420531247f5eb5640071a0716ced335948ce098e9"
+        "attestation_payload_digest": "d74fb4ca121aaa6abcf414dfa66b94c4a34401459882f38328f55cac2090b3d4",
+        "measurement_digest": "d74fb4ca121aaa6abcf414dfa66b94c4a34401459882f38328f55cac2090b3d4",
+        "score_row_sha256": "7e8792b65ef547bdf07a16dc213d57a21407ef4d641660bfda3b35d379a6c304",
+        "signed_envelope_sha256": "02ef6c24470be0456107b2ceb6341ce02b05de111b8c0f9c776a414167de1b0d"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 93.69,
+        "artifact_outcome": 77.89,
         "competition_eligible": false,
         "evaluation_tier": "screening",
-        "reliability": 100.0,
+        "reliability": 75.0,
         "trigger_f1": 100.0
       },
-      "repo": "quantskills/skill-tqx-research",
+      "repo": "quantskills/skill-tqx-data-research",
       "schema": "quantskills.public-score-record.v2",
       "score_comparability": "publication.v12.13-only",
       "score_formula": "score-formula.v9",
-      "score_key": "ebe39f575d64ecc98531191f415cdc415bb1c9b1782b21b6f82df9efe8d70d1a",
+      "score_key": "f128ee05b35b9c854ab942cf9dd600732aecb843b3456e37a71960f7a66e5879",
       "scores": {
-        "behavior": 94.95,
-        "quality": 74.38,
-        "token": 39.19,
-        "total": 75.87
+        "behavior": 82.31,
+        "quality": 69.38,
+        "token": 36.5,
+        "total": 67.62
       },
       "security": {
-        "evidence_digest": "3fb8e74f08bb19e5dece61cc7853a1950f586b0734761c3cae99a18a219eeafb",
+        "evidence_digest": "b2b5b7bd1b755ceb5cf3928488aa5fdc78052a2dbb170771aef416fb40f44a17",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "342ce0d40f77db3d560512b399ae4147f74825bcf171a9bebff295f8f2a8cb6d",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "8b2946998eb04d8c641ac34ec13c1a41dc47b8f0d63e8e47505d3dd97a305374",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 342593,
-        "featured_model_calls": 0,
-        "model_calls": 16,
+        "elapsed_ms": 451546,
+        "featured_model_calls": 6,
+        "model_calls": 22,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 333974
+        "total_tokens": 420945
       }
     },
     {
