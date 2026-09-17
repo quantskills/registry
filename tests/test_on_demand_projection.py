@@ -1,14 +1,14 @@
 import json
 import shutil
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from scripts import refresh_on_demand_evaluations as projection
-
-
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'scripts'))
+import refresh_on_demand_evaluations as projection
 
 
 class OnDemandProjectionTests(unittest.TestCase):

@@ -1,7 +1,7 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
   "files": {
-    "README.md": "77c9916496df16e67578d10ca278bd807d547ca634121df298144964d73465dc",
+    "README.md": "15903b29f184a65a370afb6df5264d46ba87f1dac1b9907bc5afce50679e536e",
     "current-scores.json": "ec66983c1c1a35e04856c27fdb6108bf8ae2c94b590ce55baaa5e9a1d5ea103c",
     "publications/publication.v12.13.jsonl": "ffd373d194e4dc4f76c1d68c8219256da7b13a70149bb52558afdc9cec21cef2",
     "publications/publication.v12.13.on-demand.jsonl": "e9a0f091e2dfc07dca3444df92db1245bdd75d0a2f0e9cf428e1dc50715f7626",
@@ -87,5 +87,5 @@
   ],
   "record_count": 217,
   "schema": "quantskills.public-evaluation-manifest.v1",
-  "snapshot_digest": "970b9227e41a2f6bbb365a0abb374a51898c9b35461701e6bcdc18cf5b8b75f3"
+  "snapshot_digest": "ced699dc0e47af7b89958036e50e356bcee93d1afade462e0fd080ed6c8d4ed0"
 }
