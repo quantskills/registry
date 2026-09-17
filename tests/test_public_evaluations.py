@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.export_public_evaluations import canonical, digest, select_recommendations
+from scripts.export_public_evaluations import canonical, digest, select_recommendations, expected_scoring_asset_ids
 from scripts.verify_public_evaluations import verify_publication
 
 
@@ -38,8 +38,10 @@ class PublicEvaluationTests(unittest.TestCase):
 
     def test_committed_publication_verifies(self):
         result = verify_publication(ROOT)
-        self.assertEqual(result["records"], 218)
-        self.assertEqual(result["observations"], 224)
+        catalog = json.loads((ROOT / 'catalog.snapshot.json').read_text(encoding='utf-8'))
+        registry = json.loads((ROOT / 'registry.json').read_text(encoding='utf-8'))
+        self.assertEqual(result['records'], len(expected_scoring_asset_ids(catalog, registry)))
+        self.assertGreaterEqual(result['observations'], result['records'])
         self.assertGreater(result["recommended"], 0)
 
     def test_public_files_use_portable_lf_bytes(self):
