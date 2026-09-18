@@ -1,7 +1,7 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-18T14:23:28+00:00",
-  "historical_observation_count": 237,
+  "generated_at": "2026-09-18T22:18:16+00:00",
+  "historical_observation_count": 238,
   "mode": "shadow",
   "publication_precedence": [
     "publication.v12.13",
@@ -1152,55 +1152,55 @@
     {
       "asset_id": "skill-ah-share-relative-value-montior",
       "category": "06",
-      "commit_sha": "33b26ef77ae97c5a824b1441d124023308cf78bb",
+      "commit_sha": "15aafacb7ecb43436351cbdbbbf2370bd8818ffd",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 0,
-        "reason": null,
-        "score": 79.95,
-        "status": "eligible"
+        "reason": "no_measurable_headroom",
+        "score": null,
+        "status": "not_applicable"
       },
       "integrity": {
-        "attestation_key": "c2b845a9f0fdd2f82a94a6a36ec239488b14c1c8e95b8e51de5974e3c72eaf47",
+        "attestation_key": "30d74d450d22371ac7b06a9794aac7c3d36976c64c80d171e47192aedad7eaa1",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "f93294342a519148a88016e6ba40351610cd0cba7f9623c383a4f9f3133cc955",
-        "measurement_digest": "f93294342a519148a88016e6ba40351610cd0cba7f9623c383a4f9f3133cc955",
-        "score_row_sha256": "c394e8112e9bb60ee7f78b11e7cfa050645a94cc63c10bcb4a42d3217bdd9698",
-        "signed_envelope_sha256": "360b39d19ae78d1bb134908ed72fcfed980e8ec79ea8333f7657e8c6ecc2215e"
+        "attestation_payload_digest": "39d53d953a211aff0822e56ad2827d119dff61b84a35dc447a7fedd055755607",
+        "measurement_digest": "39d53d953a211aff0822e56ad2827d119dff61b84a35dc447a7fedd055755607",
+        "score_row_sha256": "8a8ebbf472b4a50bb1bcd191c9e10fb842b767a8347e97d417a5c6b93f4894b0",
+        "signed_envelope_sha256": "6785f5a4b541b1404efb0afeeeecc2a3cceb9473cf3d2226aae70e93a5a44121"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 99.72,
+        "artifact_outcome": 56.41,
         "competition_eligible": false,
         "evaluation_tier": "screening",
-        "reliability": 100.0,
+        "reliability": 50.0,
         "trigger_f1": 100.0
       },
       "repo": "quantskills/skill-ah-share-relative-value-montior",
       "schema": "quantskills.public-score-record.v2",
       "score_comparability": "publication.v12.13-only",
       "score_formula": "score-formula.v9",
-      "score_key": "ebe39f575d64ecc98531191f415cdc415bb1c9b1782b21b6f82df9efe8d70d1a",
+      "score_key": "f128ee05b35b9c854ab942cf9dd600732aecb843b3456e37a71960f7a66e5879",
       "scores": {
-        "behavior": 99.78,
-        "quality": 83.12,
-        "token": 42.53,
-        "total": 81.3
+        "behavior": 65.13,
+        "quality": 86.88,
+        "token": 22.25,
+        "total": 59.85
       },
       "security": {
-        "evidence_digest": "91ed295f2e9cfe80ae19afe5d7ccb7dc636414a6fbfbdb461f3d162ed5f345fc",
+        "evidence_digest": "3e2e959e29e726510d4cfaf74c3e30d5a3c406bb17800c580e90167b9ec8ae6f",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "098feb55da8d875d3289b61d4aa5314eca9c9c3ddfab9effd6b4e874d43a826b",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "a816979ce681c1022948aaf1ceb0a052e8cbf0fcd4be76c0acc7dcbea739c26d",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 297828,
-        "featured_model_calls": 3,
-        "model_calls": 19,
+        "elapsed_ms": 282937,
+        "featured_model_calls": 0,
+        "model_calls": 16,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 386861
+        "total_tokens": 346549
       }
     },
     {
