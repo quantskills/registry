@@ -1,7 +1,7 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-17T14:20:04+00:00",
-  "historical_observation_count": 236,
+  "generated_at": "2026-09-18T14:23:28+00:00",
+  "historical_observation_count": 237,
   "mode": "shadow",
   "publication_precedence": [
     "publication.v12.13",
@@ -3312,28 +3312,28 @@
     {
       "asset_id": "skill-dl-transformer-multiasset",
       "category": "06",
-      "commit_sha": "7c2e647a9af04c760db7a35efadb751eee7f917d",
+      "commit_sha": "801f905db991b21c05879af144f9c186404687a2",
       "featured": {
         "affects_total": false,
-        "material_core_regression_count": 0,
-        "reason": null,
-        "score": 75.76,
-        "status": "eligible"
+        "material_core_regression_count": 1,
+        "reason": "material_core_regression",
+        "score": null,
+        "status": "ineligible"
       },
       "integrity": {
-        "attestation_key": "2f7a9b95be0c52a318c52f221844dbb2b0d95c44da54b9b4bbb1b8fca51b1825",
+        "attestation_key": "f12f5e9cb6aaa6979a06113689d762005cf373a2646af4d1fab11e187c58f694",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "fa7e42c0ae1f09185cad18d5833806a9be9c034bdb9f6ff7f1caa2f6f31a00fa",
-        "measurement_digest": "fa7e42c0ae1f09185cad18d5833806a9be9c034bdb9f6ff7f1caa2f6f31a00fa",
-        "score_row_sha256": "4d3032ef4b0407aef154ca0b91616e757dba31c21e1d7fa8dcd05c3fb8e083bc",
-        "signed_envelope_sha256": "a95700ed1b5b67c1e90ceaba82b3ea19e62c56e667eda615250d1a5b9840a35b"
+        "attestation_payload_digest": "a4a322f333b07168dea694f61c36ce39c0b28cb1ed4a36132093821bb08b1be7",
+        "measurement_digest": "a4a322f333b07168dea694f61c36ce39c0b28cb1ed4a36132093821bb08b1be7",
+        "score_row_sha256": "2a689e319094c637b0fbbfa05087436da91b0bedd0651a4cdbbf84389d4625f2",
+        "signed_envelope_sha256": "83d0b5697b1e7a090031ec2a5e09756215f5a60184280f5f42057ce4daa782ba"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 97.22,
+        "artifact_outcome": 45.87,
         "competition_eligible": false,
         "evaluation_tier": "screening",
-        "reliability": 100.0,
+        "reliability": 25.0,
         "trigger_f1": 100.0
       },
       "repo": "quantskills/skill-dl-transformer-multiasset",
@@ -3342,25 +3342,25 @@
       "score_formula": "score-formula.v9",
       "score_key": "f128ee05b35b9c854ab942cf9dd600732aecb843b3456e37a71960f7a66e5879",
       "scores": {
-        "behavior": 97.77,
-        "quality": 65.0,
-        "token": 47.74,
-        "total": 77.07
+        "behavior": 56.7,
+        "quality": 50.0,
+        "token": 24.67,
+        "total": 47.02
       },
       "security": {
-        "evidence_digest": "7a0b3f432523d646a5be6a43f6f0db3c878a9805c7edb372fb114fce063d32a2",
+        "evidence_digest": "1483a8e22644a7c890ad4f0041dac1b4bfd61ffb22a889e38ce446dd08614070",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "f8e41750116bc07710f0c31b40a5ea84b16fed753ad4d58b1026e5046ea16ca9",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "11b9ce6f0630e7aea270ad8e3784b02030cd28f46c013a50022a7b429fb825ba",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 464250,
-        "featured_model_calls": 9,
-        "model_calls": 25,
+        "elapsed_ms": 338985,
+        "featured_model_calls": 0,
+        "model_calls": 16,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 480532
+        "total_tokens": 331398
       }
     },
     {

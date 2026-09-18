@@ -1,6 +1,6 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-17T14:20:04+00:00",
+  "generated_at": "2026-09-18T14:23:28+00:00",
   "policy_digest": "c7d2ba0470739c5319ca4011fa2abb8739551fe01beae2113365a3f26ef5f4e2",
   "policy_id": "shadow-category-quartile.v1",
   "record_count": 28,
@@ -252,7 +252,7 @@
       "category": "06",
       "core": 81.3,
       "group": "skill:06",
-      "group_size": 8,
+      "group_size": 7,
       "kind": "skill",
       "rank": 1,
       "score_record_sha256": "364030fe00e4232991b714255776b85409a42572f01ec276bc1c2802d2572be7",
@@ -263,7 +263,7 @@
       "category": "06",
       "core": 79.5,
       "group": "skill:06",
-      "group_size": 8,
+      "group_size": 7,
       "kind": "skill",
       "rank": 2,
       "score_record_sha256": "4e3e4acf6c51738fc95294471cc5e355dd5904d33727fbe97209255b68fc8d47",
@@ -315,6 +315,6 @@
     }
   ],
   "schema": "quantskills.recommended-snapshot.v1",
-  "score_dataset_sha256": "dd16c3f6e9e416cb99e45c59f7606325571ce6ea6b302f4f2ed71783766290da",
+  "score_dataset_sha256": "20640af59cf4a16d4d9b76ba4c174ae516cd15923a18df72b02ae50dff51216d",
   "status": "shadow"
 }
