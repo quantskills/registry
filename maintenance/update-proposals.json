@@ -14,6 +14,12 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-a-share-placement-discount-alpha",
+      "commit_sha": "3938417f37d626ac1b20789bfcd212c37cbcf42a",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-alpha-a3-streak-leader-relay",
       "commit_sha": "666e5270367e89f9eea6b4bc4f3ec4f90b282481",
       "reason": "changed",
@@ -46,6 +52,12 @@
     {
       "asset_id": "skill-factor-alpha191-alpha101",
       "commit_sha": "c92ee90d8855899cc33c8b6d76e1c209e5ca1c8e",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-factor-backtest",
+      "commit_sha": "df379919a02bf42fa95f16ebad6f5a2da0cb6e24",
       "reason": "changed",
       "status": "maintainer_review_required"
     },

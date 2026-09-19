@@ -1,6 +1,6 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-17T14:20:04+00:00",
+  "generated_at": "2026-09-18T22:18:16+00:00",
   "policy_digest": "c7d2ba0470739c5319ca4011fa2abb8739551fe01beae2113365a3f26ef5f4e2",
   "policy_id": "shadow-category-quartile.v1",
   "record_count": 28,
@@ -248,25 +248,25 @@
       "source_publication": "publication.v12.13"
     },
     {
-      "asset_id": "skill-ah-share-relative-value-montior",
-      "category": "06",
-      "core": 81.3,
-      "group": "skill:06",
-      "group_size": 8,
-      "kind": "skill",
-      "rank": 1,
-      "score_record_sha256": "364030fe00e4232991b714255776b85409a42572f01ec276bc1c2802d2572be7",
-      "source_publication": "publication.v12.13"
-    },
-    {
       "asset_id": "skill-x-trader-builder",
       "category": "06",
       "core": 79.5,
       "group": "skill:06",
-      "group_size": 8,
+      "group_size": 6,
+      "kind": "skill",
+      "rank": 1,
+      "score_record_sha256": "4e3e4acf6c51738fc95294471cc5e355dd5904d33727fbe97209255b68fc8d47",
+      "source_publication": "publication.v12.13"
+    },
+    {
+      "asset_id": "skill-serenity-research-model",
+      "category": "06",
+      "core": 79.46,
+      "group": "skill:06",
+      "group_size": 6,
       "kind": "skill",
       "rank": 2,
-      "score_record_sha256": "4e3e4acf6c51738fc95294471cc5e355dd5904d33727fbe97209255b68fc8d47",
+      "score_record_sha256": "bc4a09548e96d8d94794c54090e21acb3da3f8a69a1b286806b8a5920f4c5699",
       "source_publication": "publication.v12.13"
     },
     {
@@ -315,6 +315,6 @@
     }
   ],
   "schema": "quantskills.recommended-snapshot.v1",
-  "score_dataset_sha256": "dd16c3f6e9e416cb99e45c59f7606325571ce6ea6b302f4f2ed71783766290da",
+  "score_dataset_sha256": "dc650486a0f866fcf2d2496e23684ad0f8a8e9b3a1dce459037630d6744f1554",
   "status": "shadow"
 }
