@@ -1,7 +1,7 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-18T22:18:16+00:00",
-  "historical_observation_count": 238,
+  "generated_at": "2026-09-21T15:33:41+00:00",
+  "historical_observation_count": 240,
   "mode": "shadow",
   "publication_precedence": [
     "publication.v12.13",
@@ -2178,7 +2178,7 @@
     {
       "asset_id": "skill-buffett-moat-screener",
       "category": "03",
-      "commit_sha": "ce00fee720fad6eeb8e1f655fe75474b8b257d6d",
+      "commit_sha": "efc80319ee9541da898059aef6e18590243c8c16",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 0,
@@ -2187,46 +2187,46 @@
         "status": "not_applicable"
       },
       "integrity": {
-        "attestation_key": "251fd3e0c7c743ee3496aa9d630c44e990f4736e5c99a42861a76ef8caed2eb4",
+        "attestation_key": "bfdc223ecd92ca639edce8bb4e11e5dde89548c8fc2742c6ec65cf2e64e6f39c",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "faf58edc4718931dd6f1907a4d20c234dcfb7dca6b79aa16117afd49c5ba187b",
-        "measurement_digest": "faf58edc4718931dd6f1907a4d20c234dcfb7dca6b79aa16117afd49c5ba187b",
-        "score_row_sha256": "a10e2e1c8d08c3b0b629bb4db101c42269bb9d131d60b4898edfdb80d2a56b0a",
-        "signed_envelope_sha256": "a0526ee5b8bc51863445fbfabd16e2ceef7a0c7d59322d75e557d83f50dfb0ea"
+        "attestation_payload_digest": "337bf338a110ae54dd8fe39c1a79b29e29dc3a7dbe75254b9164eb4b0c4f4f55",
+        "measurement_digest": "337bf338a110ae54dd8fe39c1a79b29e29dc3a7dbe75254b9164eb4b0c4f4f55",
+        "score_row_sha256": "aab0b19240add92378676c7fb34377a709d91b41fc2a3ee3aa5981a9472cb2e4",
+        "signed_envelope_sha256": "0eb65fbc4cfd4509921d8823ffb83459b04c8ba464e975bbd9a324b4eb741a40"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 98.97,
+        "artifact_outcome": 94.48,
         "competition_eligible": false,
-        "evaluation_tier": "competition",
+        "evaluation_tier": "screening",
         "reliability": 100.0,
         "trigger_f1": 100.0
       },
       "repo": "quantskills/skill-buffett-moat-screener",
       "schema": "quantskills.public-score-record.v2",
-      "score_comparability": "publication.v12.22-only",
+      "score_comparability": "publication.v12.13-only",
       "score_formula": "score-formula.v9",
-      "score_key": "d97b0a131f98e7c20530d8b9ccd027eeffca2425867b7712e71bbf9d0cf68974",
+      "score_key": "ebe39f575d64ecc98531191f415cdc415bb1c9b1782b21b6f82df9efe8d70d1a",
       "scores": {
-        "behavior": 99.18,
-        "quality": 91.88,
-        "token": 38.07,
-        "total": 82.08
+        "behavior": 95.59,
+        "quality": 75.62,
+        "token": 37.45,
+        "total": 76.06
       },
       "security": {
-        "evidence_digest": "65d605373c022b8fa22c734c43e51596e4ad13bf23a2a00b5d5c4f99eefb6a96",
+        "evidence_digest": "68f8c5f89863b0d57890a14f346023022a9d0b106ee756107f236d58909b4113",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.22",
-      "source_request_id": "1b25bd47f38b7dc6970404a99d65036e2cad62c0c7de31a51a862818a38ac2ad",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "64d656e39981cc87d17841c0381428e1d297ed72f1d89afa2cc9b085828ce216",
       "usage": {
-        "core_model_calls": 31,
-        "elapsed_ms": 615610,
+        "core_model_calls": 16,
+        "elapsed_ms": 337938,
         "featured_model_calls": 0,
-        "model_calls": 32,
-        "recovery_model_calls": 1,
+        "model_calls": 16,
+        "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 695674
+        "total_tokens": 354992
       }
     },
     {
@@ -5634,7 +5634,7 @@
     {
       "asset_id": "skill-graham-netnet-screener",
       "category": "03",
-      "commit_sha": "1d6fbea960d7715ab38ae50be2df571f7c6358df",
+      "commit_sha": "9ff13122b89dfe4dd560663222cf3b69cff8394b",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 0,
@@ -5643,16 +5643,16 @@
         "status": "not_applicable"
       },
       "integrity": {
-        "attestation_key": "e46f94bbd28748978c6d3b22f0ff7cdea2e3cff2e3f485909ca86140f161df06",
+        "attestation_key": "a928c6ae3f6442ec20fecf892c122a3144fa348de21bd75e033b7e23502d0bb0",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "ac5f3d137680a32a25bd541a4642bb7df1c81afce9e3477e5ab5244552d25410",
-        "measurement_digest": "ac5f3d137680a32a25bd541a4642bb7df1c81afce9e3477e5ab5244552d25410",
-        "score_row_sha256": "e231c8a762f1bce423289f2816ddf1f3bee84396ad8521314e639fe241b034fb",
-        "signed_envelope_sha256": "276d015abd1af83307fc0573dc86af261e4b44c22f42390eebc863b52cbba58f"
+        "attestation_payload_digest": "bd5036a5592d07a592722d8263944b2a47279726bcecb73208cfc20c1f268fab",
+        "measurement_digest": "bd5036a5592d07a592722d8263944b2a47279726bcecb73208cfc20c1f268fab",
+        "score_row_sha256": "88a9ef8f6376d40d016c630bb4bacaa0da031048981a275cb737f954bf5a8b20",
+        "signed_envelope_sha256": "135afaaa6b688b29ecb109f791b31fa6c89241d43033a0300ac84b502533f2d8"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 97.75,
+        "artifact_outcome": 96.14,
         "competition_eligible": false,
         "evaluation_tier": "screening",
         "reliability": 100.0,
@@ -5664,25 +5664,25 @@
       "score_formula": "score-formula.v9",
       "score_key": "ebe39f575d64ecc98531191f415cdc415bb1c9b1782b21b6f82df9efe8d70d1a",
       "scores": {
-        "behavior": 98.2,
-        "quality": 57.5,
-        "token": 38.84,
-        "total": 73.19
+        "behavior": 96.91,
+        "quality": 78.12,
+        "token": 36.42,
+        "total": 77.09
       },
       "security": {
-        "evidence_digest": "a30064c732787d0395aa5682c69ceb122970738b765ef0750ad3aee0313be0d9",
+        "evidence_digest": "d34d4a09d2e27da10b52e0f1f69022e6339833ec36c5051587ed15f8d4fcc245",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "b996eb8c686827e5047ab28bccda11af662366e0f99a6a8b5c6e0ef063f6df76",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "5a3b056f10b35a9908a81c600587bb1c41fe8fe28e20e5a44b2847eb3aecc4c3",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 315688,
+        "elapsed_ms": 441469,
         "featured_model_calls": 0,
         "model_calls": 16,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 333028
+        "total_tokens": 356810
       }
     },
     {
