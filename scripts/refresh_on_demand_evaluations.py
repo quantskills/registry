@@ -1,6 +1,7 @@
 """Project verified, queue-bound on-demand measurements without exposing evidence."""
 import argparse
 import datetime as dt
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -15,6 +16,11 @@ from export_public_evaluations import (build_record, canonical, digest, file_dig
 from verify_public_evaluations import verify_publication
 
 PUBLICATION = 'publication.v12.13.on-demand'
+
+
+def queue_digest(value):
+    """Match the authority queue protocol, including ASCII Unicode escapes."""
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
 
 
 def read_measurements(config):
@@ -37,7 +43,7 @@ def read_measurements(config):
     for row in rows:
         root = Path(config['runs_root']) / 'Bridge' / 'runs' / row['batch_id']
         result, bindings = read_json(root / 'result.json'), read_json(root / 'bindings.json')
-        if digest(result) != row['result_digest'] or digest(bindings) != row['stage_digest']:
+        if queue_digest(result) != row['result_digest'] or queue_digest(bindings) != row['stage_digest']:
             raise ValueError('on-demand artifact binding mismatch')
         if result.get('request_id') != row['request_id'] or result.get('asset_id') != row['asset_id'] or result.get('ingest', {}).get('accepted') is not True:
             raise ValueError('on-demand result is not accepted')

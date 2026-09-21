@@ -1,4 +1,5 @@
 import json
+import hashlib
 import shutil
 import sys
 import tempfile
@@ -12,6 +13,13 @@ import refresh_on_demand_evaluations as projection
 
 
 class OnDemandProjectionTests(unittest.TestCase):
+    def test_queue_binding_uses_authority_unicode_escaping(self):
+        value = {"label": "中文"}
+        expected = hashlib.sha256(b'{"label":"\\u4e2d\\u6587"}').hexdigest()
+        self.assertEqual(projection.queue_digest(value), expected)
+        self.assertNotEqual(projection.digest(value), expected)
+        self.assertNotEqual(projection.queue_digest({"label": "changed"}), expected)
+
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
