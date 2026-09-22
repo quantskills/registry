@@ -1,7 +1,7 @@
 {
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-21T15:33:41+00:00",
-  "historical_observation_count": 240,
+  "generated_at": "2026-09-22T14:02:09+00:00",
+  "historical_observation_count": 241,
   "mode": "shadow",
   "publication_precedence": [
     "publication.v12.13",
@@ -6984,25 +6984,25 @@
     {
       "asset_id": "skill-ma-crossover-signal",
       "category": "05",
-      "commit_sha": "7b5380e3e0a2ba75decc1d542e8afd8415e02b05",
+      "commit_sha": "5cdde5cbc8d010d04862d7392c1a27e173109147",
       "featured": {
         "affects_total": false,
         "material_core_regression_count": 0,
         "reason": null,
-        "score": 55.8,
+        "score": 88.92,
         "status": "eligible"
       },
       "integrity": {
-        "attestation_key": "71c6705df6b1c3e829861b3a2a09bec57d023c577250deb93f5797c4e6a78898",
+        "attestation_key": "4d61c7b3a90336189e3c82d6677e3ba8cda532158c5885edbe429392b2dc61e6",
         "attestation_key_id": "lan-signer-2026-08",
-        "attestation_payload_digest": "d81210907892a66bb06b19195f4465f27649e034a80af688da1e231f81a24edf",
-        "measurement_digest": "d81210907892a66bb06b19195f4465f27649e034a80af688da1e231f81a24edf",
-        "score_row_sha256": "7f6f57bc2abdc8030384dc51c70bf4100db9788be830fe38f967770e6879df78",
-        "signed_envelope_sha256": "2209faef17ac87fa23b85a33f88a56dbf80b2827f105bb36e29c7acf8bbc7dd1"
+        "attestation_payload_digest": "dde2e63089c0fe38c4887721f03ec6414bb0012f1907c3469ba2f55519762558",
+        "measurement_digest": "dde2e63089c0fe38c4887721f03ec6414bb0012f1907c3469ba2f55519762558",
+        "score_row_sha256": "5e1c8186c72f10e655e1fe0d51840f95360b176a813741fc1e36981818632205",
+        "signed_envelope_sha256": "a48c4e154a8095252d82fb44937da62e1b76b1c3e8188729f0766c63cc224b1c"
       },
       "kind": "skill",
       "metrics": {
-        "artifact_outcome": 87.67,
+        "artifact_outcome": 83.73,
         "competition_eligible": false,
         "evaluation_tier": "screening",
         "reliability": 100.0,
@@ -7014,25 +7014,25 @@
       "score_formula": "score-formula.v9",
       "score_key": "861ace16c1b850a9398ad5ae7c0ac3d54a66cd2cd27d8353e082f1af75579419",
       "scores": {
-        "behavior": 90.14,
-        "quality": 55.62,
-        "token": 40.08,
-        "total": 69.0
+        "behavior": 86.98,
+        "quality": 51.88,
+        "token": 37.59,
+        "total": 65.86
       },
       "security": {
-        "evidence_digest": "17961ebcb4ca606993371b93ec3d1f5caedaf3c365e2cebeb86450db3d6f526c",
+        "evidence_digest": "ea7a9b861472caf9648d1cf598fbd4edb4a8f738a25a44b9a6e384ae10b980d8",
         "status": "pass_with_warning"
       },
-      "source_publication": "publication.v12.13",
-      "source_request_id": "4c596b891699355e61987b682ac0bfe362c1c7b830a40e35020c3c9ff43d6b9b",
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "28788f78940687e12070a79fce81460bacf72987d9cbe5e62ed623cdbf6b65a6",
       "usage": {
         "core_model_calls": 16,
-        "elapsed_ms": 773203,
+        "elapsed_ms": 723813,
         "featured_model_calls": 9,
-        "model_calls": 26,
+        "model_calls": 25,
         "recovery_model_calls": 0,
         "token_accounting": "complete",
-        "total_tokens": 536161
+        "total_tokens": 551487
       }
     },
     {

@@ -2,22 +2,22 @@
   "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
   "files": {
     "README.md": "15903b29f184a65a370afb6df5264d46ba87f1dac1b9907bc5afce50679e536e",
-    "current-scores.json": "357bdf790097be3e1ac650f99e2fdf8c981e72ea68c6a42f6c94ffb675d9c17a",
+    "current-scores.json": "5654991ff0dd2b051e988108c80a0c51421c80f3662760b5e0d3bee5273f5a5c",
     "publications/publication.v12.13.jsonl": "ffd373d194e4dc4f76c1d68c8219256da7b13a70149bb52558afdc9cec21cef2",
-    "publications/publication.v12.13.on-demand.jsonl": "8ddc0df70f8c1f36944df073183ce4ff6c28b0b0fe112848da98d25b5b0228a5",
+    "publications/publication.v12.13.on-demand.jsonl": "2ca5d8ddfd972dcc1fb398418f316460cf81db97478981b713c242779ac914a1",
     "publications/publication.v12.14.jsonl": "d10be3df502f0f0e82363a9b8629425fa9ae2a1de68f6f62a935a60b113eb7af",
     "publications/publication.v12.16.jsonl": "9503f3e25c73148a7f6f8741796d43c6eb37721dd6e531e1f3e6d7e10fc2b998",
     "publications/publication.v12.20.jsonl": "9c2b057104e23e3b7e78cb97621c5576995a23272a3fe1c0835aff32c17778e5",
     "publications/publication.v12.21.jsonl": "923c9fdb1dc373f540031c3a0e426fa97c2effbe43cbaf140ab4da0f03f9112f",
     "publications/publication.v12.22.jsonl": "7d1491642082017544ff800ff2a519163e6a29f1f9c8810153ec5285d52c037f",
     "publications/publication.v12.23.jsonl": "af0df069285d5ef4f3cd43625625b1a1f6296f85e1ec71f2c7f8698bb2cb4532",
-    "recommended.snapshot.json": "61863b90b25a6e94a424bb51dc6496eaead812d3f3d5dcb8749d2c1934b05a60",
+    "recommended.snapshot.json": "b872e423b04eefdcacb7fa04f5eada55e0066ef13a991e25b8225bd9da577c06",
     "schemas/current-scores.schema.json": "5ed7a4a8fe9829892a4d5d7b3b86069ee60921b3bb3c35bfdfa1864664154950",
     "schemas/recommended-snapshot.schema.json": "5b0ea9b82168ab66f7aa16b96c88b5625192b3743a63394ce4d94e8a61626ebe",
     "selection-policy.v1.json": "19804e60ac6832da6ec33e5af070ca6677be6fcefafbee07190f8dca326d69ac"
   },
-  "generated_at": "2026-09-21T15:33:41+00:00",
-  "historical_observation_count": 240,
+  "generated_at": "2026-09-22T14:02:09+00:00",
+  "historical_observation_count": 241,
   "integrity_model": "signed-source-attestations-plus-sha256-public-projection",
   "publications": [
     {
@@ -77,15 +77,15 @@
       "signed_envelope_files_root": "b590aad380491627ff76c058b27950942056d0a6db5ce397c18758616b5d6a3b"
     },
     {
-      "attestation_rows_root": "f46cc45b4ed30f1dc6953532568abe2b77d624bf0065affa6062be9b8b2698a0",
-      "control_artifact_sha256": "1f1cbaf4fc84ca58a98eff4b5363ee344ed123265ff58b5c1b757573a442c941",
-      "observation_count": 16,
+      "attestation_rows_root": "e9da993355a3c82756c0f6f8af29dba0a98a644d3463f7daccecd31eca45ca2b",
+      "control_artifact_sha256": "c3b14870734b9a4479bcecb0796fbd7b3974a82ebed97eb9a2d2d5830d036fdf",
+      "observation_count": 17,
       "publication": "publication.v12.13.on-demand",
-      "score_rows_root": "a330cafbe5c332c745eccde0732110da16854781627342db8dcfaed39256c7ad",
-      "signed_envelope_files_root": "824ef9003e666764d1a58ef78e5dab9e5cf5b644e36d37624032377656b6b69f"
+      "score_rows_root": "0aa3fcf2812f7882d20f247ee61239bf5f187a18600988ec6c187e7f8d8f8afd",
+      "signed_envelope_files_root": "0c9f3e2e7f39e0a70f56d393429e893593822b81b21196cef360a71dc75ae4a6"
     }
   ],
   "record_count": 217,
   "schema": "quantskills.public-evaluation-manifest.v1",
-  "snapshot_digest": "fd7fba32739bed30d925adb6c2f8c190567ae30eab7b012595f2b78a9c058b42"
+  "snapshot_digest": "3531b8b4e02a45867b54005f90f9dae9e02e26aeca0fbdf828b1427b6ca77d92"
 }
