@@ -3,7 +3,7 @@
   "files": {
     "README.md": "4b865424c180db181cc8a38fea1e1b12c630074fae511107f8effbfde7d9d585",
     "current-scores.json": "5654991ff0dd2b051e988108c80a0c51421c80f3662760b5e0d3bee5273f5a5c",
-    "model-cohorts/gpt-6-sol-medium.json": "033e3d32bf5f92ee77474cd59c4295cc1592eee10c9bde75d8bd9356cccc1e80",
+    "model-cohorts/gpt-6-sol-medium.json": "2cd27b1edd9d605318a2e908319f927dabc72c56dae8c0bbd7bc8c94872e5cf5",
     "publications/publication.v12.13.jsonl": "ffd373d194e4dc4f76c1d68c8219256da7b13a70149bb52558afdc9cec21cef2",
     "publications/publication.v12.13.on-demand.jsonl": "2ca5d8ddfd972dcc1fb398418f316460cf81db97478981b713c242779ac914a1",
     "publications/publication.v12.14.jsonl": "d10be3df502f0f0e82363a9b8629425fa9ae2a1de68f6f62a935a60b113eb7af",
@@ -79,7 +79,7 @@
     },
     {
       "attestation_rows_root": "e9da993355a3c82756c0f6f8af29dba0a98a644d3463f7daccecd31eca45ca2b",
-      "control_artifact_sha256": "44ee8b761ac9aef5274d32f9fac2e8eafd7db879a2d2808859cdd596f4f1b86e",
+      "control_artifact_sha256": "bcd2d3bd0f7215670ef0d6696c18f2c31b98d6c70901895491f4bbdc2b6a67f7",
       "observation_count": 17,
       "publication": "publication.v12.13.on-demand",
       "score_rows_root": "0aa3fcf2812f7882d20f247ee61239bf5f187a18600988ec6c187e7f8d8f8afd",
@@ -88,5 +88,5 @@
   ],
   "record_count": 217,
   "schema": "quantskills.public-evaluation-manifest.v1",
-  "snapshot_digest": "8c1a1e1dd6eab6670dff0d29986706c1c4550bf3b498a36b330ef9ad57f094ed"
+  "snapshot_digest": "020a9bf10614c09016179a7e755afdc8e18595354d42819fb6dd386640b8105b"
 }
