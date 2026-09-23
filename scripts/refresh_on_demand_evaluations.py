@@ -16,11 +16,22 @@ from export_public_evaluations import (build_record, canonical, digest, file_dig
 from verify_public_evaluations import verify_publication
 
 PUBLICATION = 'publication.v12.13.on-demand'
+MODEL_PROFILE = 'gpt-6-sol-medium'
 
 
 def queue_digest(value):
     """Match the authority queue protocol, including ASCII Unicode escapes."""
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
+def model_profile(private, payload, active_suite):
+    config = private['reference_config']
+    if config['suite'] != payload['suite']:
+        raise ValueError('signed model suite binding mismatch')
+    expected = 'gpt-6-sol' if payload['suite'] == active_suite else 'gpt-5.6-terra'
+    if config['model'] != expected or config['reasoning_effort'] != 'medium':
+        raise ValueError('unsupported evaluation model profile')
+    return MODEL_PROFILE if expected == 'gpt-6-sol' else None
 
 
 def read_measurements(config):
@@ -54,6 +65,12 @@ def read_measurements(config):
         if payload['asset_id'] != asset['asset_id'] or payload['commit'] != asset['commit_sha'] or payload['outcome'] != 'complete':
             raise ValueError('signed asset binding mismatch')
         runtime = Path(config['executor_roots'][asset['category'][:2]]) / 'runs' / row['batch_id']
+        private = read_json(runtime / 'private/reference-bundle.json')
+        profile = model_profile(private, payload, rules['suites'][asset['category'][:2]]['digest'])
+        if profile:
+            from quantskills_eval.scoring_v12_13_production import suite_digest
+            if suite_digest(private) != payload['suite']:
+                raise ValueError('signed model suite binding mismatch')
         database = runtime / 'state' / 'evaluation.sqlite3'
         with sqlite3.connect(database.resolve().as_uri() + '?mode=ro', uri=True) as db:
             db.row_factory = sqlite3.Row
@@ -65,6 +82,9 @@ def read_measurements(config):
                 raise ValueError('score is not the projection of the signed measurement')
             security = security_for_request(db, payload['request_id'], runtime, asset['asset_id'])
             record = build_record(PUBLICATION, score, attestation, security, digest(result['envelope']), asset['category'][:2])
+        if profile:
+            record['evaluation_profile'] = profile
+            record['evaluation_suite'] = payload['suite']
         observations.append(record)
         evidence[row['request_id']] = {'result_digest': row['result_digest'], 'bindings_digest': row['stage_digest']}
     return observations, evidence
@@ -76,6 +96,10 @@ def refresh(root, config):
     expected = expected_scoring_asset_ids(catalog, registry)
     dataset, manifest = read_json(evaluation / 'current-scores.json'), read_json(evaluation / 'manifest.json')
     observations, evidence = read_measurements(config)
+    model_review = [r for r in observations if r.get('evaluation_profile') == MODEL_PROFILE]
+    if any(r.get('evaluation_profile') not in (None, MODEL_PROFILE) for r in observations):
+        raise ValueError('unsupported evaluation model profile')
+    observations = [r for r in observations if not r.get('evaluation_profile')]
     current = {}
     for publication in dataset['publication_precedence']:
         if publication == PUBLICATION:
@@ -113,6 +137,16 @@ def refresh(root, config):
         write_json(stage / 'schemas/current-scores.schema.json', schema)
         dataset.update(generated_at=generated, records=records, record_count=len(records), historical_observation_count=history_count, publication_precedence=precedence, catalog_snapshot_id=catalog['snapshot_id'])
         write_json(stage / 'current-scores.json', dataset)
+        # A changed model is a separate cohort. Signed results remain visible for
+        # maintainer review without silently replacing the established ranking.
+        if model_review:
+            review_dir = stage / 'model-cohorts'
+            review_dir.mkdir(exist_ok=True)
+            write_json(review_dir / (MODEL_PROFILE + '.json'), {
+                'schema': 'quantskills.evaluation-model-review.v1',
+                'profile': MODEL_PROFILE, 'model': 'gpt-6-sol', 'reasoning_effort': 'medium',
+                'status': 'review_required', 'included_in_current_ranking': False,
+                'record_count': len(model_review), 'records': model_review})
         if observations:
             (stage / 'publications' / (PUBLICATION + '.jsonl')).write_bytes(b''.join(canonical(r) + b'\n' for r in observations))
         recommended = read_json(stage / 'recommended.snapshot.json')
@@ -124,13 +158,16 @@ def refresh(root, config):
             publications.append({'publication': PUBLICATION, 'observation_count': len(observations), 'control_artifact_sha256': digest(evidence), 'score_rows_root': digest([r['integrity']['score_row_sha256'] for r in observations]), 'attestation_rows_root': digest([r['integrity']['attestation_payload_digest'] for r in observations]), 'signed_envelope_files_root': digest([r['integrity']['signed_envelope_sha256'] for r in observations])})
         readme = stage / 'README.md'
         readme.write_text('# Public Shadow evaluations\n\nMaintainer: abgyjaguo. GPL-3.0-only.\n\nThe generated current score projection contains ' + str(len(records)) + ' assets. Immutable historical observations and verified on-demand screening results remain distinguishable by source publication. Recommendations use the existing category-relative top-quartile policy; this is research material, not endorsement or investment advice. Pending or rejected requests never produce scores.\n\nVerify with `python scripts/verify_public_evaluations.py`. Regenerate on the trusted controller with `python scripts/refresh_on_demand_evaluations.py --config <authority-config>`. No private payloads, candidate code or credentials are published.\n', encoding='utf-8', newline='\n')
+        if model_review:
+            with readme.open('a', encoding='utf-8', newline='\n') as stream:
+                stream.write('\nGPT-6 Sol / medium results are retained in `model-cohorts/gpt-6-sol-medium.json` for maintainer review. They are a separate model cohort and are excluded from current rankings and recommendations.\n')
         files = {p.relative_to(stage).as_posix(): file_digest(p) for p in sorted(stage.rglob('*')) if p.is_file() and p.name != 'manifest.json'}
         manifest.update(generated_at=generated, record_count=len(records), historical_observation_count=history_count, catalog_snapshot_id=catalog['snapshot_id'], publications=publications, files=files)
         manifest['snapshot_digest'] = digest({k: v for k, v in manifest.items() if k != 'snapshot_digest'})
         write_json(stage / 'manifest.json', manifest)
         result = verify_publication(stage_root)
         promote_evaluation_artifacts(stage, evaluation, [*files, 'manifest.json'])
-    return dict(result, on_demand_observations=len(observations))
+    return dict(result, on_demand_observations=len(observations), model_review_observations=len(model_review))
 
 
 if __name__ == '__main__':
