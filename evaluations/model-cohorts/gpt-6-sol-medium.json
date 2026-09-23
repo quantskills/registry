@@ -1,0 +1,67 @@
+{
+  "included_in_current_ranking": false,
+  "model": "gpt-6-sol",
+  "profile": "gpt-6-sol-medium",
+  "reasoning_effort": "medium",
+  "record_count": 1,
+  "records": [
+    {
+      "asset_id": "skill-cb-analyzer",
+      "category": "03",
+      "commit_sha": "b76db32a22cdc3b72c7dc3a6d523642c8582138f",
+      "evaluation_profile": "gpt-6-sol-medium",
+      "evaluation_suite": "df6d27cae9b2dc231d91aed739ab05601dd777c230a125b15ca785f9c7d41518",
+      "featured": {
+        "affects_total": false,
+        "material_core_regression_count": 0,
+        "reason": "no_measurable_headroom",
+        "score": null,
+        "status": "not_applicable"
+      },
+      "integrity": {
+        "attestation_key": "a9c55dc1c2f6d6e4ecb84a9c31c86c21aadbe920fe63f04ac6c000a08fb91044",
+        "attestation_key_id": "lan-signer-2026-08",
+        "attestation_payload_digest": "2f1c173592e712d87d01f032617dc8a417e35539c98e1c28c385ad755d67f4e2",
+        "measurement_digest": "2f1c173592e712d87d01f032617dc8a417e35539c98e1c28c385ad755d67f4e2",
+        "score_row_sha256": "242a4bb3b77a02743dbeb058618bb6570e7d088fc0daaf939e64d3d1878dd8b0",
+        "signed_envelope_sha256": "c93b48c008169b0e5a1db62fbffe6b2bf88a0d50e203e65f66c94245ed0b4617"
+      },
+      "kind": "skill",
+      "metrics": {
+        "artifact_outcome": 98.9,
+        "competition_eligible": false,
+        "evaluation_tier": "screening",
+        "reliability": 100.0,
+        "trigger_f1": 100.0
+      },
+      "repo": "quantskills/skill-cb-analyzer",
+      "schema": "quantskills.public-score-record.v2",
+      "score_comparability": "publication.v12.13-only",
+      "score_formula": "score-formula.v9",
+      "score_key": "a65386e1ae55a350216f9f554f49d11cbc06ed69ff1dbe9df8576db6a16f2529",
+      "scores": {
+        "behavior": 99.12,
+        "quality": 65.62,
+        "token": 34.26,
+        "total": 74.53
+      },
+      "security": {
+        "evidence_digest": "657421d72aad876ff58dd53af081ec0591764c745035f13983d400eb6d488018",
+        "status": "pass_with_warning"
+      },
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "c12511fae3c86b05cd95f53710f6266dfa1a203cac8e499408567474c76e0ccd",
+      "usage": {
+        "core_model_calls": 16,
+        "elapsed_ms": 347140,
+        "featured_model_calls": 0,
+        "model_calls": 16,
+        "recovery_model_calls": 0,
+        "token_accounting": "complete",
+        "total_tokens": 394094
+      }
+    }
+  ],
+  "schema": "quantskills.evaluation-model-review.v1",
+  "status": "review_required"
+}
