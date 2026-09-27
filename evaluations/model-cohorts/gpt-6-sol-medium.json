@@ -3,7 +3,7 @@
   "model": "gpt-6-sol",
   "profile": "gpt-6-sol-medium",
   "reasoning_effort": "medium",
-  "record_count": 12,
+  "record_count": 15,
   "records": [
     {
       "asset_id": "skill-cb-analyzer",
@@ -675,6 +675,174 @@
         "recovery_model_calls": 0,
         "token_accounting": "complete",
         "total_tokens": 460812
+      }
+    },
+    {
+      "asset_id": "skill-x-trader-builder",
+      "category": "06",
+      "commit_sha": "571af4ab1d0504196a2406e9140a62a30d5e85e6",
+      "evaluation_profile": "gpt-6-sol-medium",
+      "evaluation_suite": "f467818cde878ea216eb57aad786825cd40ba32a33586382b81590b9b9cda547",
+      "featured": {
+        "affects_total": false,
+        "material_core_regression_count": 0,
+        "reason": null,
+        "score": 76.97,
+        "status": "eligible"
+      },
+      "integrity": {
+        "attestation_key": "b709961fc319bee73c1798d029cc83244c614b59f03cb058fa2bf0aa245b0fc9",
+        "attestation_key_id": "lan-signer-2026-08",
+        "attestation_payload_digest": "9c01bf991523e59b7e3f86641000bcf766e17ba421a05144f25969497c4577ee",
+        "measurement_digest": "9c01bf991523e59b7e3f86641000bcf766e17ba421a05144f25969497c4577ee",
+        "score_row_sha256": "2d0a8df241cdd15f8bf5668bb11135a3d56032c440f1dd89089b422be24a1571",
+        "signed_envelope_sha256": "256b4fcb54b399d021d50ccc41d32bbc344df54910bf2fce8c9465c4c4ab8cf4"
+      },
+      "kind": "skill",
+      "metrics": {
+        "artifact_outcome": 97.35,
+        "competition_eligible": false,
+        "evaluation_tier": "screening",
+        "reliability": 100.0,
+        "trigger_f1": 100.0
+      },
+      "repo": "quantskills/skill-x-trader-builder",
+      "schema": "quantskills.public-score-record.v2",
+      "score_comparability": "publication.v12.13-only",
+      "score_formula": "score-formula.v9",
+      "score_key": "ad7fbb07ba1dc9f0dd37d7788ae3648fd60749477ef7527262a09c99ffff5937",
+      "scores": {
+        "behavior": 97.88,
+        "quality": 65.0,
+        "token": 36.23,
+        "total": 74.25
+      },
+      "security": {
+        "evidence_digest": "8227d6d5d06fdb88d22fc91fdc4f57814dc50cdaa0594438e8ce7876e159c1f0",
+        "status": "pass_with_warning"
+      },
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "d3ff8f6af19766a57e0648c6d8331950c7cb550195fea4400edaa8a048965101",
+      "usage": {
+        "core_model_calls": 16,
+        "elapsed_ms": 427359,
+        "featured_model_calls": 6,
+        "model_calls": 22,
+        "recovery_model_calls": 0,
+        "token_accounting": "complete",
+        "total_tokens": 497914
+      }
+    },
+    {
+      "asset_id": "skill-factor-alpha191-alpha101",
+      "category": "02",
+      "commit_sha": "c92ee90d8855899cc33c8b6d76e1c209e5ca1c8e",
+      "evaluation_profile": "gpt-6-sol-medium",
+      "evaluation_suite": "d7b6ed3debd1761227ae9f8873378ac7593ed226c3eb138ad5b218cad503dd47",
+      "featured": {
+        "affects_total": false,
+        "material_core_regression_count": 0,
+        "reason": null,
+        "score": 48.84,
+        "status": "eligible"
+      },
+      "integrity": {
+        "attestation_key": "f6007955b9bb99975560ec88d85824a11138fe65316b1bd21e3b7669a5407cfa",
+        "attestation_key_id": "lan-signer-2026-08",
+        "attestation_payload_digest": "e186f02ce7097b25c3bc54728e1dbac36c6285fbce96d4aa2a677417b7d6c1a0",
+        "measurement_digest": "e186f02ce7097b25c3bc54728e1dbac36c6285fbce96d4aa2a677417b7d6c1a0",
+        "score_row_sha256": "ec0fb8eca09565a12ef409b3d5591efe52cb0f3023ee3321a395cf20f7f05323",
+        "signed_envelope_sha256": "5fd5bae065849aea6b43fb50aac45ef4b98056f5152ecf3e80a1a432ddc7c3aa"
+      },
+      "kind": "skill",
+      "metrics": {
+        "artifact_outcome": 11.69,
+        "competition_eligible": false,
+        "evaluation_tier": "screening",
+        "reliability": 0.0,
+        "trigger_f1": 100.0
+      },
+      "repo": "quantskills/skill-factor-alpha191-alpha101",
+      "schema": "quantskills.public-score-record.v2",
+      "score_comparability": "publication.v12.13-only",
+      "score_formula": "score-formula.v9",
+      "score_key": "3d820119ec9513883654f1cca3f236d2cec34b70496ff24514ca5c77065c6f72",
+      "scores": {
+        "behavior": 29.35,
+        "quality": 61.25,
+        "token": 10.5,
+        "total": 32.61
+      },
+      "security": {
+        "evidence_digest": "ebe4ad2e3d8803ff771cd9ace4c5eaceee83f24f325ed297773c4ee60f883c94",
+        "status": "pass_with_warning"
+      },
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "bb58ffa0da0cbd936a198af2644710cbd066fa06e5fb18c91270f0432d856524",
+      "usage": {
+        "core_model_calls": 16,
+        "elapsed_ms": 368390,
+        "featured_model_calls": 3,
+        "model_calls": 19,
+        "recovery_model_calls": 0,
+        "token_accounting": "complete",
+        "total_tokens": 442933
+      }
+    },
+    {
+      "asset_id": "skill-hk-us-consensus-revision-radar",
+      "category": "03",
+      "commit_sha": "4c6566e0119e98dcb3541b8dd4d1ee15d35a835a",
+      "evaluation_profile": "gpt-6-sol-medium",
+      "evaluation_suite": "df6d27cae9b2dc231d91aed739ab05601dd777c230a125b15ca785f9c7d41518",
+      "featured": {
+        "affects_total": false,
+        "material_core_regression_count": 0,
+        "reason": "no_measurable_headroom",
+        "score": null,
+        "status": "not_applicable"
+      },
+      "integrity": {
+        "attestation_key": "f86e007d6c5bc673d6da44f8f73d1e4f2a0cbb172c706e792c34dddbc347dfd7",
+        "attestation_key_id": "lan-signer-2026-08",
+        "attestation_payload_digest": "d25d62dfdc726f9fe54b86488ea864b7fa1822f4392665ac59eb905e447e32b8",
+        "measurement_digest": "d25d62dfdc726f9fe54b86488ea864b7fa1822f4392665ac59eb905e447e32b8",
+        "score_row_sha256": "73112af8fa9640bbf13b17d83e8366cdd583447fab8de581eb587ca803d21b0a",
+        "signed_envelope_sha256": "6383c475f5a654468ad1c1b75107efac355bd61867bc214d895c721a565d0b70"
+      },
+      "kind": "skill",
+      "metrics": {
+        "artifact_outcome": 99.26,
+        "competition_eligible": false,
+        "evaluation_tier": "screening",
+        "reliability": 100.0,
+        "trigger_f1": 100.0
+      },
+      "repo": "quantskills/skill-hk-us-consensus-revision-radar",
+      "schema": "quantskills.public-score-record.v2",
+      "score_comparability": "publication.v12.13-only",
+      "score_formula": "score-formula.v9",
+      "score_key": "a65386e1ae55a350216f9f554f49d11cbc06ed69ff1dbe9df8576db6a16f2529",
+      "scores": {
+        "behavior": 99.41,
+        "quality": 78.12,
+        "token": 34.88,
+        "total": 77.95
+      },
+      "security": {
+        "evidence_digest": "ebe77219497e62ee489eac8458551d4e7e324f8e723a871ab67b7cdeae89f140",
+        "status": "pass_with_warning"
+      },
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "e7cc6224a24bf85b8afd80c3265901436ef3defe0331e910259ef9eeffda8f4c",
+      "usage": {
+        "core_model_calls": 16,
+        "elapsed_ms": 335844,
+        "featured_model_calls": 0,
+        "model_calls": 16,
+        "recovery_model_calls": 0,
+        "token_accounting": "complete",
+        "total_tokens": 381582
       }
     }
   ],
