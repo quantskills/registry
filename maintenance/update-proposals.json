@@ -9,7 +9,7 @@
     },
     {
       "asset_id": "agent-quantspace",
-      "commit_sha": "2e196283e5465b775d99255bcb39dcd9401e4508",
+      "commit_sha": "090a9b2085e8a57fcf9be48c3ee7a23136099bb5",
       "reason": "changed",
       "status": "maintainer_review_required"
     },
@@ -99,7 +99,7 @@
     },
     {
       "asset_id": "skill-signal-portfolio-optimize",
-      "commit_sha": "75fbf8a97a4536888c787b45b673561ce9201b43",
+      "commit_sha": "5eff57002b7ca7106ec8eef440ec987db1281562",
       "reason": "changed",
       "status": "maintainer_review_required"
     },
