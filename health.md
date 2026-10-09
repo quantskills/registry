@@ -1,12 +1,12 @@
 # Registry 健康检查
 
-生成时间：2026-10-08T06:24:43Z
+生成时间：2026-10-09T06:25:53Z
 
 ## 汇总
 
 | 总数 | 可达 | 有声明 | 声明合法 |
 | ---: | ---: | ---: | ---: |
-| 214 | 214 | 214 | 214 |
+| 218 | 218 | 218 | 218 |
 
 ## 明细
 
@@ -15,6 +15,7 @@
 | agent-alpha-portfolio-guardian | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-corporate-governance-scanner | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-correlation-break-research | ✅ | ✅ | ✅ | ✅ | 无 |
+| agent-cross-market-event-radar | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-crowding-risk-monitor | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-derivatives-skew-sentiment-monitor | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-earnings-surprise-hunter | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -48,6 +49,7 @@
 | skill-b7-lhb-monitor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-backtest | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-backtest-assumption-check | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-backtest-etf | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-backtest-overfit | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-backtesting-bias-avoidance | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-block-trade-radar | ✅ | ✅ | ✅ | ✅ | 无 |
@@ -86,6 +88,7 @@
 | skill-factor-blend | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-debug | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-decay | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-factor-drift-monitor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-factor-evaluate | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-grouped-wrapper | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-factor-ic-decay | ✅ | ✅ | ✅ | ✅ | 无 |
@@ -102,6 +105,7 @@
 | skill-factormad-debate-factor-mining | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-fin-news | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-forecast-calibration-audit | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-fund-holding-xray | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-fundamental-alpha | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-fundamental-factor-analysis | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-futures-cta-alpha | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
