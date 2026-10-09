@@ -100,14 +100,16 @@ def _evaluation_eligible(asset: dict) -> bool:
     return markers[0] if markers else True
 
 
-def expected_scoring_asset_ids(catalog: object, registry: object) -> set[str]:
+def expected_scoring_asset_ids(catalog: object, registry: object, *, include_unranked: bool = False) -> set[str]:
     """Derive the closed set of assets that the current score projection must cover.
 
     ``catalog.snapshot.json`` is the complete asset directory and
     ``registry.json`` is its backward-compatible public projection.  The
     latter may omit deprecated entries, but it must not introduce an asset
     absent from the catalog.  The catalog's explicit eligibility marker is
-    the only opt-out; absent a marker an asset is expected to be scored.
+    the only scoring opt-out; absent a marker an asset is expected to be scored.
+    A reviewed listing may separately opt out of the established ranking while
+    awaiting evaluation in a new model cohort. Candidate detection includes it.
     """
     catalog_by_name = _unique_assets(catalog, "catalog")
     registry_by_name = _unique_assets(registry, "registry")
@@ -125,9 +127,13 @@ def expected_scoring_asset_ids(catalog: object, registry: object) -> set[str]:
     unexpected = sorted(set(registry_by_name) - set(catalog_by_name))
     if unexpected:
         raise ValueError(f"registry contains assets absent from catalog: {', '.join(unexpected)}")
+    for asset in catalog_by_name.values():
+        if not isinstance(asset.get("current_ranking_eligible", True), bool):
+            raise ValueError("invalid current ranking eligibility marker")
     return {
         name for name, asset in catalog_by_name.items()
         if name not in NON_SCOREABLE_ASSETS and _evaluation_eligible(asset)
+        and (include_unranked or asset.get("current_ranking_eligible", True))
     }
 
 

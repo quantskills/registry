@@ -1,0 +1,305 @@
+{
+  "authorization": "Owner requested the next step after the 19 pending listing/update proposals were explained.",
+  "deferred": 6,
+  "maintainer": "abgyjaguo",
+  "new_listings": 4,
+  "previous_public_assets": 214,
+  "public_assets": 218,
+  "reviewed_at": "2026-10-09",
+  "reviews": [
+    {
+      "asset_id": "agent-cross-market-event-radar",
+      "candidate_code_executed": false,
+      "decision": "approved_listing",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "new",
+      "reasons": [],
+      "reviewed_commit_sha": "b2cf19bec2ee9fa4f70e815b7f9bc75b0c03979d",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/agent-cross-market-event-radar/tree/b2cf19bec2ee9fa4f70e815b7f9bc75b0c03979d"
+    },
+    {
+      "asset_id": "agent-quantspace",
+      "candidate_code_executed": false,
+      "decision": "deferred",
+      "reason": "changed",
+      "reasons": [
+        "New declaration self-labels maintainer_type official without approval; GPL-3.0 metadata needs an exact license declaration; no explicit portable Hermes loader was found. Existing listing stays at its previously reviewed commit."
+      ],
+      "reviewed_commit_sha": "090a9b2085e8a57fcf9be48c3ee7a23136099bb5",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "DESTRUCTIVE_FILESYSTEM_CAPABILITY",
+        "SECRET_LIKE_MATERIAL",
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/agent-quantspace/tree/090a9b2085e8a57fcf9be48c3ee7a23136099bb5"
+    },
+    {
+      "asset_id": "skill-a-share-placement-discount-alpha",
+      "candidate_code_executed": false,
+      "decision": "deferred",
+      "reason": "new",
+      "reasons": [
+        "Missing root SKILL.md, GPLv3 LICENSE, English README and five-runtime loaders."
+      ],
+      "reviewed_commit_sha": "3938417f37d626ac1b20789bfcd212c37cbcf42a",
+      "security_status": "pass",
+      "security_warning_codes": [],
+      "source_url": "https://github.com/quantskills/skill-a-share-placement-discount-alpha/tree/3938417f37d626ac1b20789bfcd212c37cbcf42a"
+    },
+    {
+      "asset_id": "skill-alpha-a3-streak-leader-relay",
+      "candidate_code_executed": false,
+      "decision": "approved_update",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "changed",
+      "reasons": [],
+      "reviewed_commit_sha": "666e5270367e89f9eea6b4bc4f3ec4f90b282481",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-alpha-a3-streak-leader-relay/tree/666e5270367e89f9eea6b4bc4f3ec4f90b282481"
+    },
+    {
+      "asset_id": "skill-b6-limitup-pool",
+      "candidate_code_executed": false,
+      "decision": "approved_update",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "changed",
+      "reasons": [],
+      "reviewed_commit_sha": "54568d9aeec73057e9f9ecd6f35870bc5b42d97a",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-b6-limitup-pool/tree/54568d9aeec73057e9f9ecd6f35870bc5b42d97a"
+    },
+    {
+      "asset_id": "skill-b7-lhb-monitor",
+      "candidate_code_executed": false,
+      "decision": "approved_update",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "changed",
+      "reasons": [],
+      "reviewed_commit_sha": "21b47bb866ac4b14cfc2edda6550d1ce2891947c",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "DYNAMIC_EXECUTION_CAPABILITY",
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-b7-lhb-monitor/tree/21b47bb866ac4b14cfc2edda6550d1ce2891947c"
+    },
+    {
+      "asset_id": "skill-backtest-etf",
+      "candidate_code_executed": false,
+      "decision": "approved_listing",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "new",
+      "reasons": [],
+      "reviewed_commit_sha": "c519cf820baca469682d9312d6cccc39c692a4fc",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-backtest-etf/tree/c519cf820baca469682d9312d6cccc39c692a4fc"
+    },
+    {
+      "asset_id": "skill-equity-placard-watchlist",
+      "candidate_code_executed": false,
+      "decision": "approved_update",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "changed",
+      "reasons": [],
+      "reviewed_commit_sha": "2ce3f6d2116b683868715610caf8a7e48b849a14",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-equity-placard-watchlist/tree/2ce3f6d2116b683868715610caf8a7e48b849a14"
+    },
+    {
+      "asset_id": "skill-factor-alpha191-alpha101",
+      "candidate_code_executed": false,
+      "decision": "approved_update",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "changed",
+      "reasons": [],
+      "reviewed_commit_sha": "c92ee90d8855899cc33c8b6d76e1c209e5ca1c8e",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-factor-alpha191-alpha101/tree/c92ee90d8855899cc33c8b6d76e1c209e5ca1c8e"
+    },
+    {
+      "asset_id": "skill-factor-backtest",
+      "candidate_code_executed": false,
+      "decision": "approved_update",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "changed",
+      "reasons": [],
+      "reviewed_commit_sha": "df379919a02bf42fa95f16ebad6f5a2da0cb6e24",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-factor-backtest/tree/df379919a02bf42fa95f16ebad6f5a2da0cb6e24"
+    },
+    {
+      "asset_id": "skill-factor-calendar-formulas",
+      "candidate_code_executed": false,
+      "decision": "deferred",
+      "reason": "new",
+      "reasons": [
+        "Cursor loader directs users to absent .cursor/skills/factor-calendar-formulas/SKILL.md; upstream organization_url and maintainer attribution need clarification; self-declared verified status is not adopted."
+      ],
+      "reviewed_commit_sha": "d62bc797ca3397a060f28309b912619979c577ea",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-factor-calendar-formulas/tree/d62bc797ca3397a060f28309b912619979c577ea"
+    },
+    {
+      "asset_id": "skill-factor-drift-monitor",
+      "candidate_code_executed": false,
+      "decision": "approved_listing",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "new",
+      "reasons": [],
+      "reviewed_commit_sha": "cf5ab22397c1c3f8621c6bc06089af2620fbe1a8",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-factor-drift-monitor/tree/cf5ab22397c1c3f8621c6bc06089af2620fbe1a8"
+    },
+    {
+      "asset_id": "skill-factor-health-monitor",
+      "candidate_code_executed": false,
+      "decision": "deferred",
+      "reason": "new",
+      "reasons": [
+        "Missing English README, Cursor and portable Hermes loaders, and full GPLv3 license text."
+      ],
+      "reviewed_commit_sha": "7b00ea3315abc2cb1a0f1e40af859164896613fe",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-factor-health-monitor/tree/7b00ea3315abc2cb1a0f1e40af859164896613fe"
+    },
+    {
+      "asset_id": "skill-factor-rl-weighting",
+      "candidate_code_executed": false,
+      "decision": "deferred",
+      "reason": "new",
+      "reasons": [
+        "Missing English README, Cursor and portable Hermes loaders, and full GPLv3 license text."
+      ],
+      "reviewed_commit_sha": "1e6652ad4705bdeff74012cea16e02f9ea024e34",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-factor-rl-weighting/tree/1e6652ad4705bdeff74012cea16e02f9ea024e34"
+    },
+    {
+      "asset_id": "skill-fund-holding-xray",
+      "candidate_code_executed": false,
+      "decision": "approved_listing",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "new",
+      "reasons": [],
+      "reviewed_commit_sha": "93125c464b2e4626e65ea29e05904fa266e3a98d",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-fund-holding-xray/tree/93125c464b2e4626e65ea29e05904fa266e3a98d"
+    },
+    {
+      "asset_id": "skill-llm-rag-financial-qa",
+      "candidate_code_executed": false,
+      "decision": "approved_update",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "changed",
+      "reasons": [],
+      "reviewed_commit_sha": "a0bc3cd4b58d79bf188538521c74d4b146445da0",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-llm-rag-financial-qa/tree/a0bc3cd4b58d79bf188538521c74d4b146445da0"
+    },
+    {
+      "asset_id": "skill-signal-portfolio-optimize",
+      "candidate_code_executed": false,
+      "decision": "approved_update",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "changed",
+      "reasons": [],
+      "reviewed_commit_sha": "d674a5392337655089214062b2567d78fd34ce4c",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "DESTRUCTIVE_FILESYSTEM_CAPABILITY",
+        "LIVE_FINANCIAL_ACTION",
+        "TECHNICAL_CAPABILITY_PRESENT",
+        "UNGUARDED_LIVE_FINANCIAL_ACTION",
+        "UNPINNED_GITHUB_ACTION"
+      ],
+      "source_url": "https://github.com/quantskills/skill-signal-portfolio-optimize/tree/d674a5392337655089214062b2567d78fd34ce4c"
+    },
+    {
+      "asset_id": "skill-soros-reflexivity-detector",
+      "candidate_code_executed": false,
+      "decision": "approved_update",
+      "license_review": "Full GPLv3 text present; exact GPL-3.0-only listing retained.",
+      "reason": "changed",
+      "reasons": [],
+      "reviewed_commit_sha": "e4b48925c360aadd8c6ac56e450145591ec187be",
+      "runtime_package_review": "Codex/Claude canonical declaration; Cursor loader; portable Hermes/OpenClaw loader and OpenAI metadata inspected. Supporting assets present. Runtime execution not claimed.",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-soros-reflexivity-detector/tree/e4b48925c360aadd8c6ac56e450145591ec187be"
+    },
+    {
+      "asset_id": "skill-trading-behavior-diagnostics",
+      "candidate_code_executed": false,
+      "decision": "deferred",
+      "reason": "new",
+      "reasons": [
+        "Missing English README, Cursor and portable Hermes loaders, and full GPLv3 license text."
+      ],
+      "reviewed_commit_sha": "e443d34122c127063e5a87ceab0f52dae5765738",
+      "security_status": "pass_with_warning",
+      "security_warning_codes": [
+        "TECHNICAL_CAPABILITY_PRESENT"
+      ],
+      "source_url": "https://github.com/quantskills/skill-trading-behavior-diagnostics/tree/e443d34122c127063e5a87ceab0f52dae5765738"
+    }
+  ],
+  "schema": "quantskills.catalog-maintainer-review.v1",
+  "scope": "Catalog listing and version facts only; no recommendation, interface publication, candidate changes, model calls or retry/budget changes.",
+  "snapshot_id": "sha256:5ee87e0287642c2c1ed75f34bc8a9a925e1bbc0c2ea668cce2ca89abe54481d7",
+  "updated_versions": 9
+}
