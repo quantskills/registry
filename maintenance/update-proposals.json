@@ -1,4 +1,5 @@
 {
+  "schema": "quantskills.community-update-proposals.v1",
   "proposals": [
     {
       "asset_id": "agent-quantspace",
@@ -36,6 +37,5 @@
       "reason": "new",
       "status": "maintainer_review_required"
     }
-  ],
-  "schema": "quantskills.community-update-proposals.v1"
+  ]
 }
