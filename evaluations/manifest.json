@@ -1,8 +1,8 @@
 {
-  "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
+  "catalog_snapshot_id": "sha256:5ee87e0287642c2c1ed75f34bc8a9a925e1bbc0c2ea668cce2ca89abe54481d7",
   "files": {
     "README.md": "4b865424c180db181cc8a38fea1e1b12c630074fae511107f8effbfde7d9d585",
-    "current-scores.json": "5654991ff0dd2b051e988108c80a0c51421c80f3662760b5e0d3bee5273f5a5c",
+    "current-scores.json": "a6e4af1f42de82f5c8aee61b5e13dbd41c633d391eea6863bd2e15140da283e9",
     "model-cohorts/gpt-6-sol-medium.json": "e40e571a459760a55efe92d5fb99de718132d203ccb8d6249500198b809a7736",
     "publications/publication.v12.13.jsonl": "ffd373d194e4dc4f76c1d68c8219256da7b13a70149bb52558afdc9cec21cef2",
     "publications/publication.v12.13.on-demand.jsonl": "2ca5d8ddfd972dcc1fb398418f316460cf81db97478981b713c242779ac914a1",
@@ -12,12 +12,12 @@
     "publications/publication.v12.21.jsonl": "923c9fdb1dc373f540031c3a0e426fa97c2effbe43cbaf140ab4da0f03f9112f",
     "publications/publication.v12.22.jsonl": "7d1491642082017544ff800ff2a519163e6a29f1f9c8810153ec5285d52c037f",
     "publications/publication.v12.23.jsonl": "af0df069285d5ef4f3cd43625625b1a1f6296f85e1ec71f2c7f8698bb2cb4532",
-    "recommended.snapshot.json": "b872e423b04eefdcacb7fa04f5eada55e0066ef13a991e25b8225bd9da577c06",
+    "recommended.snapshot.json": "d60b748618434dbb05d69d305370ee4d824bb2cc3e0a538858d41aee757e438e",
     "schemas/current-scores.schema.json": "5ed7a4a8fe9829892a4d5d7b3b86069ee60921b3bb3c35bfdfa1864664154950",
     "schemas/recommended-snapshot.schema.json": "5b0ea9b82168ab66f7aa16b96c88b5625192b3743a63394ce4d94e8a61626ebe",
     "selection-policy.v1.json": "19804e60ac6832da6ec33e5af070ca6677be6fcefafbee07190f8dca326d69ac"
   },
-  "generated_at": "2026-09-22T14:02:09+00:00",
+  "generated_at": "2026-10-09T01:47:27+00:00",
   "historical_observation_count": 241,
   "integrity_model": "signed-source-attestations-plus-sha256-public-projection",
   "publications": [
@@ -88,5 +88,5 @@
   ],
   "record_count": 217,
   "schema": "quantskills.public-evaluation-manifest.v1",
-  "snapshot_digest": "f2ea96f42d5e6a0a0bf3d5468be37a3e1b4c8bd7192bd9b5f15df1fd492ae15b"
+  "snapshot_digest": "a8130d7c6bd5b5fd87249c48dd8eda64a526cfe70d98e9d7b6ec524595e56d3f"
 }

@@ -143,6 +143,10 @@ def publication_manifest(entries: list[dict], inventory: dict, assignments_path:
     for entry in entries:
         record = records[entry["name"]]
         entry["default_branch"] = record["default_branch"]
+        if "current_ranking_eligible" in record:
+            if not isinstance(record["current_ranking_eligible"], bool):
+                raise ValueError("invalid current ranking eligibility marker")
+            entry["current_ranking_eligible"] = record["current_ranking_eligible"]
         entry["catalog_status"] = "approved"
         if entry["name"] == "skill-pandadata-warehouse":
             if not isinstance(entry.get("interface"), dict) or entry["interface"].get("mode") not in {"structured", "hybrid"}:

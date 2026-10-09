@@ -265,6 +265,10 @@
         "health": {
           "type": "string"
         },
+        "current_ranking_eligible": {
+          "type": "boolean",
+          "description": "Eligibility for the established model ranking; false does not disable evaluation in a separate model cohort."
+        },
         "workflow_groups": {
           "type": "array",
           "items": {

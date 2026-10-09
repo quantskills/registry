@@ -1,6 +1,6 @@
 {
-  "catalog_snapshot_id": "sha256:829968af695eff8d2317cac23dec3962046c0acd0ea5c57e332bf46e29725a11",
-  "generated_at": "2026-09-22T14:02:09+00:00",
+  "catalog_snapshot_id": "sha256:5ee87e0287642c2c1ed75f34bc8a9a925e1bbc0c2ea668cce2ca89abe54481d7",
+  "generated_at": "2026-10-09T01:47:27+00:00",
   "historical_observation_count": 241,
   "mode": "shadow",
   "publication_precedence": [

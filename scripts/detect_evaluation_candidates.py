@@ -76,7 +76,7 @@ def detect_evaluation_candidates(catalog: object, registry: object, current_scor
         raise ValueError("invalid current score projection")
     catalog_by_name = _unique_assets(catalog, "catalog")
     registry_by_name = _unique_assets(registry, "registry")
-    expected = expected_scoring_asset_ids(catalog, registry)
+    expected = expected_scoring_asset_ids(catalog, registry, include_unranked=True)
     catalog_snapshot_id = _snapshot_id(catalog)
 
     records = current_scores["records"]

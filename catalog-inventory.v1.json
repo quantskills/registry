@@ -34,6 +34,18 @@
       "topics": []
     },
     {
+      "current_ranking_eligible": false,
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-cross-market-event-radar/blob/b2cf19bec2ee9fa4f70e815b7f9bc75b0c03979d/AGENTS.md"
+      },
+      "default_branch": "main",
+      "description": "Cross-market corporate event radar using PandaData for research monitoring; no order execution.",
+      "head_sha": "b2cf19bec2ee9fa4f70e815b7f9bc75b0c03979d",
+      "name": "agent-cross-market-event-radar",
+      "topics": []
+    },
+    {
       "declaration": {
         "file": "AGENTS.md",
         "url": "https://github.com/quantskills/agent-crowding-risk-monitor/blob/ce24e9db80865995b8ac1fab6dda41558e539194/AGENTS.md"
@@ -267,11 +279,11 @@
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-alpha-a3-streak-leader-relay/blob/c1de583f6f42c559020b2d3d2b6fdab654ed8c82/SKILL.md"
+        "url": "https://github.com/quantskills/skill-alpha-a3-streak-leader-relay/blob/666e5270367e89f9eea6b4bc4f3ec4f90b282481/SKILL.md"
       },
       "default_branch": "main",
       "description": "A 股「连板龙头接力」Alpha 因子（A3）。每日从 ≥3 板候选中识别 top-N 接力标的，T+1 open 进 / T+2 vwap 出。事件型设计，绝对评分，含因子检验 + 策略层回测 + HTML 可视化。",
-      "head_sha": "c1de583f6f42c559020b2d3d2b6fdab654ed8c82",
+      "head_sha": "666e5270367e89f9eea6b4bc4f3ec4f90b282481",
       "name": "skill-alpha-a3-streak-leader-relay",
       "topics": []
     },
@@ -366,22 +378,22 @@
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-b6-limitup-pool/blob/921275db95804ac42a046b1249d51d3d56a04e06/SKILL.md"
+        "url": "https://github.com/quantskills/skill-b6-limitup-pool/blob/54568d9aeec73057e9f9ecd6f35870bc5b42d97a/SKILL.md"
       },
       "default_branch": "main",
-      "description": "",
-      "head_sha": "921275db95804ac42a046b1249d51d3d56a04e06",
+      "description": "涨停池动态管理 — panda-data BUILD 技能(B6)。每日维护涨停池，标记首板/连板数/炸板次数/回封时间，含题材分组/特殊形态/情绪面量化(分层晋级率·赚钱效应)，输出多维表格+HTML看板。",
+      "head_sha": "54568d9aeec73057e9f9ecd6f35870bc5b42d97a",
       "name": "skill-b6-limitup-pool",
       "topics": []
     },
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-b7-lhb-monitor/blob/10860cba707a6f2b761ba6fad3e11c9c90faca7b/SKILL.md"
+        "url": "https://github.com/quantskills/skill-b7-lhb-monitor/blob/21b47bb866ac4b14cfc2edda6550d1ce2891947c/SKILL.md"
       },
       "default_branch": "main",
-      "description": "",
-      "head_sha": "10860cba707a6f2b761ba6fad3e11c9c90faca7b",
+      "description": "龙虎榜监控+席位标签库 — panda-data BUILD 技能(B7)。收盘后抓取龙虎榜，席位标签匹配(北向/机构/游资/量化)，生成次日关注清单；个股详情页按上榜原因拆买卖营业部，支持区间统计与交互式HTML看板(搜索/筛选/排序/展开详情)。",
+      "head_sha": "21b47bb866ac4b14cfc2edda6550d1ce2891947c",
       "name": "skill-b7-lhb-monitor",
       "topics": []
     },
@@ -405,6 +417,18 @@
       "description": "",
       "head_sha": "7430dbc0f36751def82e0e4f102066fba12362b7",
       "name": "skill-backtest-assumption-check",
+      "topics": []
+    },
+    {
+      "current_ranking_eligible": false,
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-backtest-etf/blob/c519cf820baca469682d9312d6cccc39c692a4fc/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Research-only listed ETF strategy backtesting with an authorized panda_data SDK and local Parquet.",
+      "head_sha": "c519cf820baca469682d9312d6cccc39c692a4fc",
+      "name": "skill-backtest-etf",
       "topics": []
     },
     {
@@ -729,11 +753,11 @@
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-equity-placard-watchlist/blob/499db18924760203e88285a56fde6214be7177d5/SKILL.md"
+        "url": "https://github.com/quantskills/skill-equity-placard-watchlist/blob/2ce3f6d2116b683868715610caf8a7e48b849a14/SKILL.md"
       },
       "default_branch": "main",
       "description": "举牌行为监控（#17）— PandaData BUILD 技能。从十大股东快照重建持股比例上穿 5%/10%/15%/20%/25%/30% 法定披露梯度的权益变动事件，含举牌梯度、意图倾向、6个月锁定期与逼近观察名单；剔除通道账户与股本稀释造成的假举牌。报告期快照口径非实时播报。Community Project，仅研究与教育示例，非投资建议。",
-      "head_sha": "499db18924760203e88285a56fde6214be7177d5",
+      "head_sha": "2ce3f6d2116b683868715610caf8a7e48b849a14",
       "name": "skill-equity-placard-watchlist",
       "topics": []
     },
@@ -784,22 +808,22 @@
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-factor-alpha191-alpha101/blob/8512f6cdb391d13cd28fa4d207f8d9f3c6de9d2c/SKILL.md"
+        "url": "https://github.com/quantskills/skill-factor-alpha191-alpha101/blob/c92ee90d8855899cc33c8b6d76e1c209e5ca1c8e/SKILL.md"
       },
       "default_branch": "main",
-      "description": "Compute Alpha101 and Alpha191 factor-library values based on JoinQuant formulas from long-form OHLCV CSV market data. Use when an agent needs to calculate selected or full Alpha101/Alpha191 factor columns, export wide factor CSVs, and list skipped factors without running LLMs or factor evaluation.",
-      "head_sha": "8512f6cdb391d13cd28fa4d207f8d9f3c6de9d2c",
+      "description": "Alpha101/Alpha191 经典公式因子库 Skill，参考 JoinQuant 公式与 API 数据复现，支持批量或指定计算每日因子值。",
+      "head_sha": "c92ee90d8855899cc33c8b6d76e1c209e5ca1c8e",
       "name": "skill-factor-alpha191-alpha101",
       "topics": []
     },
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-factor-backtest/blob/0deaf6f576a92637ba3511aa44f857cdd90b6af7/SKILL.md"
+        "url": "https://github.com/quantskills/skill-factor-backtest/blob/df379919a02bf42fa95f16ebad6f5a2da0cb6e24/SKILL.md"
       },
       "default_branch": "main",
-      "description": "Run and explain cross-sectional trading-factor backtests on schema-compatible factor signals and market data. Use when Codex needs to validate backtest inputs; calculate returns, NAV, drawdown, holdings, turnover, benchmark or hedged performance; generate a PDF diagnostic report; or explicitly verify the checked-in test fixture. Also use for Chinese requests such as 因子回测、收益验证、净值、回撤、持仓、换手、对冲收益或回测报告.",
-      "head_sha": "0deaf6f576a92637ba3511aa44f857cdd90b6af7",
+      "description": "",
+      "head_sha": "df379919a02bf42fa95f16ebad6f5a2da0cb6e24",
       "name": "skill-factor-backtest",
       "topics": []
     },
@@ -834,6 +858,18 @@
       "description": "Use when an agent needs to analyze how a factor signal's predictive power decays over holding horizons — compute IC decay curves, half-life, turnover decay, and group-return decay to determine optimal rebalancing frequency and signal shelf life.",
       "head_sha": "e049c2bdfca2e630fd5f22c03d596732ef9d884a",
       "name": "skill-factor-decay",
+      "topics": []
+    },
+    {
+      "current_ranking_eligible": false,
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-drift-monitor/blob/cf5ab22397c1c3f8621c6bc06089af2620fbe1a8/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Diagnose missingness, anomalies, coverage changes, and distribution drift in factor panel data.",
+      "head_sha": "cf5ab22397c1c3f8621c6bc06089af2620fbe1a8",
+      "name": "skill-factor-drift-monitor",
       "topics": []
     },
     {
@@ -1010,6 +1046,18 @@
       "description": "Audit binary probability forecasts with reliability bins, Brier score, log loss, calibration intercept and slope, threshold metrics, and time-sliced diagnostics. Use when an agent needs to evaluate whether model probabilities are trustworthy for research or decision thresholds.",
       "head_sha": "9fd588982c060ff2b0356616405034b6a7ac2837",
       "name": "skill-forecast-calibration-audit",
+      "topics": []
+    },
+    {
+      "current_ranking_eligible": false,
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-fund-holding-xray/blob/93125c464b2e4626e65ea29e05904fa266e3a98d/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Research-only ETF and fund holding concentration and implied-style analysis using PandaAI data.",
+      "head_sha": "93125c464b2e4626e65ea29e05904fa266e3a98d",
+      "name": "skill-fund-holding-xray",
       "topics": []
     },
     {
@@ -1429,11 +1477,11 @@
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-llm-rag-financial-qa/blob/5deec2cc446f44bbc916c851f0d43e8a67317288/SKILL.md"
+        "url": "https://github.com/quantskills/skill-llm-rag-financial-qa/blob/a0bc3cd4b58d79bf188538521c74d4b146445da0/SKILL.md"
       },
       "default_branch": "main",
       "description": "财报公告 RAG 问答系统（#42）— PandaData BUILD 技能。三路路由：数字精确算(PIT)/底仓文本BM25检索/官方披露全文按需，每条结论附官方出处四元组，证据不足即拒答。Community Project，仅研究与教育示例，非投资建议。",
-      "head_sha": "5deec2cc446f44bbc916c851f0d43e8a67317288",
+      "head_sha": "a0bc3cd4b58d79bf188538521c74d4b146445da0",
       "name": "skill-llm-rag-financial-qa",
       "topics": []
     },
@@ -2111,11 +2159,11 @@
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-signal-portfolio-optimize/blob/78d290f41df496b4d66918735468e23986ebe9eb/SKILL.md"
+        "url": "https://github.com/quantskills/skill-signal-portfolio-optimize/blob/d674a5392337655089214062b2567d78fd34ce4c/SKILL.md"
       },
       "default_branch": "main",
       "description": "将单因子或模型生成的股票信号，转换为兼顾收益、风险、换手与交易约束的组合权重，并完成统一回测和风险归因。",
-      "head_sha": "78d290f41df496b4d66918735468e23986ebe9eb",
+      "head_sha": "d674a5392337655089214062b2567d78fd34ce4c",
       "name": "skill-signal-portfolio-optimize",
       "topics": []
     },
@@ -2155,11 +2203,11 @@
     {
       "declaration": {
         "file": "SKILL.md",
-        "url": "https://github.com/quantskills/skill-soros-reflexivity-detector/blob/23141a47ba0c11761f0b333b70a0f73b13d749da/SKILL.md"
+        "url": "https://github.com/quantskills/skill-soros-reflexivity-detector/blob/e4b48925c360aadd8c6ac56e450145591ec187be/SKILL.md"
       },
       "default_branch": "main",
       "description": "索罗斯反身性识别器（#48）— PandaData BUILD 技能。双环模型(快环情绪-资金/慢环基本面-资本)识别自我强化行情，输出八阶段+仓位纪律+脆弱预警(质押/解禁/大宗)。Community Project，不预测顶底，仅研究与教育示例，非投资建议。",
-      "head_sha": "23141a47ba0c11761f0b333b70a0f73b13d749da",
+      "head_sha": "e4b48925c360aadd8c6ac56e450145591ec187be",
       "name": "skill-soros-reflexivity-detector",
       "topics": []
     },
@@ -2449,5 +2497,5 @@
     }
   ],
   "schema_version": "1.0.0",
-  "sha256": "sha256:9594af95202529ccefcd61829bcb4ae37a487454d010a4a99a782657791789f3"
+  "sha256": "sha256:0294469f747b167dab73a8fb3e24d3cda9815f1b5084e85a467ccf46ad018aab"
 }
