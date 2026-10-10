@@ -26,6 +26,18 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-factor-model-factorvae",
+      "commit_sha": "44f4a703aba8e68f97ab3338f9aa3a25dd1971b8",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-factor-model-tra",
+      "commit_sha": "122749ee6b3ff1506fa496f3fb799b0b8be53ad1",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-factor-rl-weighting",
       "commit_sha": "1e6652ad4705bdeff74012cea16e02f9ea024e34",
       "reason": "new",
