@@ -3,7 +3,7 @@
   "model": "gpt-6-sol",
   "profile": "gpt-6-sol-medium",
   "reasoning_effort": "medium",
-  "record_count": 29,
+  "record_count": 30,
   "records": [
     {
       "asset_id": "skill-cb-analyzer",
@@ -1627,6 +1627,62 @@
         "recovery_model_calls": 0,
         "token_accounting": "complete",
         "total_tokens": 456048
+      }
+    },
+    {
+      "asset_id": "skill-fund-holding-xray",
+      "category": "03",
+      "commit_sha": "93125c464b2e4626e65ea29e05904fa266e3a98d",
+      "evaluation_profile": "gpt-6-sol-medium",
+      "evaluation_suite": "df6d27cae9b2dc231d91aed739ab05601dd777c230a125b15ca785f9c7d41518",
+      "featured": {
+        "affects_total": false,
+        "material_core_regression_count": 0,
+        "reason": "no_measurable_headroom",
+        "score": null,
+        "status": "not_applicable"
+      },
+      "integrity": {
+        "attestation_key": "49f7a3f8832563e1563b43dd0192b10f23f22e000077685af411ac47c4f37928",
+        "attestation_key_id": "lan-signer-2026-08",
+        "attestation_payload_digest": "4ca0f3c29c2620005b12acc88e40010951b81fe8438fd222d36c1a808ebddd92",
+        "measurement_digest": "4ca0f3c29c2620005b12acc88e40010951b81fe8438fd222d36c1a808ebddd92",
+        "score_row_sha256": "330ae2dc06e84d7d98e355a8e9d5f934db31db6b4b4c290184f4e27e68663898",
+        "signed_envelope_sha256": "8cc54cd1fa7d9de0fa22b757ea2bdd734b18b53eead0e16d056528f03427bbb0"
+      },
+      "kind": "skill",
+      "metrics": {
+        "artifact_outcome": 98.62,
+        "competition_eligible": false,
+        "evaluation_tier": "screening",
+        "reliability": 100.0,
+        "trigger_f1": 100.0
+      },
+      "repo": "quantskills/skill-fund-holding-xray",
+      "schema": "quantskills.public-score-record.v2",
+      "score_comparability": "publication.v12.13-only",
+      "score_formula": "score-formula.v9",
+      "score_key": "a65386e1ae55a350216f9f554f49d11cbc06ed69ff1dbe9df8576db6a16f2529",
+      "scores": {
+        "behavior": 98.9,
+        "quality": 81.25,
+        "token": 31.26,
+        "total": 77.58
+      },
+      "security": {
+        "evidence_digest": "095daf67868b830597987911449832a500ef930f4f181fd19da465596ef14c66",
+        "status": "pass_with_warning"
+      },
+      "source_publication": "publication.v12.13.on-demand",
+      "source_request_id": "ef6ff1d34cb3617022f61d8243d4425f10438061a47d08daaea46d9383b558ed",
+      "usage": {
+        "core_model_calls": 16,
+        "elapsed_ms": 236407,
+        "featured_model_calls": 0,
+        "model_calls": 16,
+        "recovery_model_calls": 0,
+        "token_accounting": "complete",
+        "total_tokens": 397196
       }
     }
   ],
