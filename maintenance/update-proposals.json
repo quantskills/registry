@@ -27,13 +27,13 @@
     },
     {
       "asset_id": "skill-factor-model-factorvae",
-      "commit_sha": "44f4a703aba8e68f97ab3338f9aa3a25dd1971b8",
+      "commit_sha": "e4fbc31a7c83de7d2cc76bf9016a87638d0b1b00",
       "reason": "new",
       "status": "maintainer_review_required"
     },
     {
       "asset_id": "skill-factor-model-tra",
-      "commit_sha": "122749ee6b3ff1506fa496f3fb799b0b8be53ad1",
+      "commit_sha": "47ee2bc9921d83000ed0b7edafa16a7e6247c1df",
       "reason": "new",
       "status": "maintainer_review_required"
     },
