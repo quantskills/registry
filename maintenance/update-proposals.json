@@ -44,6 +44,12 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-signal-portfolio-optimize",
+      "commit_sha": "2aeee8f64b31ee898731d83af4d195d629bd98ab",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-trading-behavior-diagnostics",
       "commit_sha": "e443d34122c127063e5a87ceab0f52dae5765738",
       "reason": "new",
