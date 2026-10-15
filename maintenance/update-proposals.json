@@ -45,7 +45,7 @@
     },
     {
       "asset_id": "skill-signal-portfolio-optimize",
-      "commit_sha": "2aeee8f64b31ee898731d83af4d195d629bd98ab",
+      "commit_sha": "1266261f4e3542201f84e389fbc821bc10a43331",
       "reason": "changed",
       "status": "maintainer_review_required"
     },
