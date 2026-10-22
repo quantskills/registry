@@ -44,6 +44,12 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-model-label-blo",
+      "commit_sha": "9b958578c164dfe67745dd5ef5a75accf29a80a3",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-signal-portfolio-optimize",
       "commit_sha": "1266261f4e3542201f84e389fbc821bc10a43331",
       "reason": "changed",
