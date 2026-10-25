@@ -3,7 +3,7 @@
   "proposals": [
     {
       "asset_id": "agent-quantspace",
-      "commit_sha": "d2ddace2ef673e42368bc7c3ed8d6391d5a83383",
+      "commit_sha": "fdf454edde939bb68e0941f13bebd9567c5739d0",
       "reason": "changed",
       "status": "maintainer_review_required"
     },
