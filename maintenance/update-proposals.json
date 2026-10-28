@@ -14,6 +14,12 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-factor-backtest",
+      "commit_sha": "e615265bdaa8ca6094b3982b816f1fb4adb987f7",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-factor-calendar-formulas",
       "commit_sha": "d62bc797ca3397a060f28309b912619979c577ea",
       "reason": "new",
