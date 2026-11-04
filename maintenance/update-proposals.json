@@ -14,6 +14,12 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-cta-parameter-generalization",
+      "commit_sha": "9580511b03de0be24f6cdbd2c42fa42e10dc7b65",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-factor-backtest",
       "commit_sha": "e615265bdaa8ca6094b3982b816f1fb4adb987f7",
       "reason": "changed",
@@ -52,6 +58,12 @@
     {
       "asset_id": "skill-model-label-blo",
       "commit_sha": "9b958578c164dfe67745dd5ef5a75accf29a80a3",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-prompt-workflow-regression",
+      "commit_sha": "1c634ab9d7bc106d6c7f4bf84c1b1d409e56ed0a",
       "reason": "new",
       "status": "maintainer_review_required"
     },
