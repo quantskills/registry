@@ -14,8 +14,14 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-cross-market-executable-signal",
+      "commit_sha": "c673ef1ab6972145d033c2236d7355696da4d84d",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-cta-parameter-generalization",
-      "commit_sha": "9580511b03de0be24f6cdbd2c42fa42e10dc7b65",
+      "commit_sha": "ee26c578f16493b896b494f272252106741bbe0a",
       "reason": "new",
       "status": "maintainer_review_required"
     },
@@ -63,7 +69,7 @@
     },
     {
       "asset_id": "skill-prompt-workflow-regression",
-      "commit_sha": "1c634ab9d7bc106d6c7f4bf84c1b1d409e56ed0a",
+      "commit_sha": "5bcea023f3b2eaeb1a74a6785886d22df839bb1e",
       "reason": "new",
       "status": "maintainer_review_required"
     },
