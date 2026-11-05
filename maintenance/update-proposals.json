@@ -68,8 +68,14 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-pandadata-api",
+      "commit_sha": "7148df76e02e5c9416421fc6855bbb1d29b630ee",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-prompt-workflow-regression",
-      "commit_sha": "5bcea023f3b2eaeb1a74a6785886d22df839bb1e",
+      "commit_sha": "f57af096150c9c2cf2b2529f7207365afb503f31",
       "reason": "new",
       "status": "maintainer_review_required"
     },
