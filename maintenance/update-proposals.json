@@ -26,6 +26,12 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-dl-gnn-stock-graph",
+      "commit_sha": "466a942f2db3254429e936f2be081095441a2d9e",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-factor-backtest",
       "commit_sha": "e615265bdaa8ca6094b3982b816f1fb4adb987f7",
       "reason": "changed",
