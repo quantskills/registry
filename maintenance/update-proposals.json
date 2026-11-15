@@ -2,6 +2,12 @@
   "schema": "quantskills.community-update-proposals.v1",
   "proposals": [
     {
+      "asset_id": "agent-investor-roundtable",
+      "commit_sha": "a23b630f81981429c76e2c925cac5e74d850c662",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "agent-quantspace",
       "commit_sha": "6019ded4bc8d539f835594c270b2fecaacbd66d9",
       "reason": "changed",
@@ -29,6 +35,12 @@
       "asset_id": "skill-dl-gnn-stock-graph",
       "commit_sha": "466a942f2db3254429e936f2be081095441a2d9e",
       "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-dragon-head-hunter",
+      "commit_sha": "c18a11ab3785b9a4287ff3cf55e922e4f04fb8f9",
+      "reason": "new",
       "status": "maintainer_review_required"
     },
     {
@@ -101,6 +113,12 @@
       "asset_id": "skill-signal-portfolio-optimize",
       "commit_sha": "1266261f4e3542201f84e389fbc821bc10a43331",
       "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-student-index",
+      "commit_sha": "46e6cf0a8394b9e5011cde789f3e1d76ba931921",
+      "reason": "new",
       "status": "maintainer_review_required"
     },
     {
