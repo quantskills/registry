@@ -110,6 +110,24 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "skill-q2-roll-cta",
+      "commit_sha": "fb967c6d3351e700afce83bc994a1fe8b10ace17",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-q4-seat-alpha",
+      "commit_sha": "fb4e01ccc483259e03befa56f771970824eca78b",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-q6-risk-budget",
+      "commit_sha": "b630712f6b313d6c63113b5b66b372f22ed65334",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-signal-portfolio-optimize",
       "commit_sha": "1266261f4e3542201f84e389fbc821bc10a43331",
       "reason": "changed",
