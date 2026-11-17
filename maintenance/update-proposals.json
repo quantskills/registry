@@ -14,6 +14,12 @@
       "status": "maintainer_review_required"
     },
     {
+      "asset_id": "agent-strategy-red-team",
+      "commit_sha": "bc9a824611ff40d99bde4d35205caeb87e1f021b",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "skill-a-share-placement-discount-alpha",
       "commit_sha": "3938417f37d626ac1b20789bfcd212c37cbcf42a",
       "reason": "new",
@@ -76,6 +82,12 @@
     {
       "asset_id": "skill-factor-rl-weighting",
       "commit_sha": "1e6652ad4705bdeff74012cea16e02f9ea024e34",
+      "reason": "new",
+      "status": "maintainer_review_required"
+    },
+    {
+      "asset_id": "skill-futures-capacity-boundary",
+      "commit_sha": "172dc3113bea6fd82e5932d3197b484259f90886",
       "reason": "new",
       "status": "maintainer_review_required"
     },
