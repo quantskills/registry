@@ -2,6 +2,12 @@
   "schema": "quantskills.community-update-proposals.v1",
   "proposals": [
     {
+      "asset_id": "agent-for-liangshuyuan-tasks",
+      "commit_sha": "7132166b1a133c6edcb842e30fc2ce68d854bdcf",
+      "reason": "changed",
+      "status": "maintainer_review_required"
+    },
+    {
       "asset_id": "agent-investor-roundtable",
       "commit_sha": "a23b630f81981429c76e2c925cac5e74d850c662",
       "reason": "new",
