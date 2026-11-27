@@ -137,6 +137,16 @@
     },
     {
       "category": "09",
+      "description": "Coordinates small-cap, global ETF, and low-volatility strategies by market regime, with research backtests and attribution.",
+      "name": "market-style-adaptive",
+      "source": {
+        "repo": "quantskills/agent-market-style-adaptive",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
       "description": "AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.",
       "name": "quantspace",
       "source": {
@@ -516,6 +526,16 @@
       "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Evaluates trading safeguards in offline replay with duplicate input, prompt perturbation, missing quotes, and timeout retries.",
+      "name": "constraint-stress-test",
+      "source": {
+        "repo": "quantskills/skill-constraint-stress-test",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "01",
       "description": "Audits split and cash-dividend consistency between raw and adjusted equity prices before research.",
       "name": "corporate-action-adjustment-auditor",
@@ -761,6 +781,16 @@
       "name": "factor-decay",
       "source": {
         "repo": "quantskills/skill-factor-decay",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Evaluates out-of-sample net value after factor-drift alerts and response actions.",
+      "name": "factor-drift-closure",
+      "source": {
+        "repo": "quantskills/skill-factor-drift-closure",
         "source": "github"
       },
       "type": "skill"

@@ -145,6 +145,18 @@
       "topics": []
     },
     {
+      "current_ranking_eligible": false,
+      "declaration": {
+        "file": "AGENTS.md",
+        "url": "https://github.com/quantskills/agent-market-style-adaptive/blob/79339d0285b7372179dab38b0f09bf69201c0390/AGENTS.md"
+      },
+      "default_branch": "master",
+      "description": "Coordinate point-in-time A-share small-cap selection, domestic-listed global ETF rotation, low-volatility blue-chip selection, market-regime allocation, portfolio risk controls, reproducible backtests, and attribution. Use for research workflows that need deterministic style adaptation from Pandadata evidence; never use it to place live orders.",
+      "head_sha": "79339d0285b7372179dab38b0f09bf69201c0390",
+      "name": "agent-market-style-adaptive",
+      "topics": []
+    },
+    {
       "declaration": {
         "file": "AGENTS.md",
         "url": "https://github.com/quantskills/agent-quantspace/blob/f61d98fcb78b852643de98f363efc717dce4dc44/AGENTS.md"
@@ -586,6 +598,18 @@
       "topics": []
     },
     {
+      "current_ranking_eligible": false,
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-constraint-stress-test/blob/dd67f08e397df9d222ffae5f91e62234423b684d/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "当需要评测 AI 交易员在异常数据和重复请求下是否守住交易约束时，使用此 skill。支持四类故障注入（同输入重复、提示扰动、缺失行情、超时/重试），市场无关的约束判定器，有/无校验层前后对照，输出约束违反率、重复动作率与拒绝执行表现。",
+      "head_sha": "dd67f08e397df9d222ffae5f91e62234423b684d",
+      "name": "skill-constraint-stress-test",
+      "topics": []
+    },
+    {
       "declaration": {
         "file": "SKILL.md",
         "url": "https://github.com/quantskills/skill-corporate-action-adjustment-auditor/blob/c4a8a124b1deb79cc579e8a791795a3bc48b7b25/SKILL.md"
@@ -858,6 +882,18 @@
       "description": "Use when an agent needs to analyze how a factor signal's predictive power decays over holding horizons — compute IC decay curves, half-life, turnover decay, and group-return decay to determine optimal rebalancing frequency and signal shelf life.",
       "head_sha": "e049c2bdfca2e630fd5f22c03d596732ef9d884a",
       "name": "skill-factor-decay",
+      "topics": []
+    },
+    {
+      "current_ranking_eligible": false,
+      "declaration": {
+        "file": "SKILL.md",
+        "url": "https://github.com/quantskills/skill-factor-drift-closure/blob/d94bbcb2adaf59079a1a9e75fb02db94f8b493bf/SKILL.md"
+      },
+      "default_branch": "main",
+      "description": "Evaluate whether a factor-drift alert creates net value after the response action. Use for out-of-sample comparisons of no action, fixed de-risking, alert-triggered downweighting, retraining or signal switching, including false-alarm cost and recovery latency.",
+      "head_sha": "d94bbcb2adaf59079a1a9e75fb02db94f8b493bf",
+      "name": "skill-factor-drift-closure",
       "topics": []
     },
     {
@@ -2497,5 +2533,5 @@
     }
   ],
   "schema_version": "1.0.0",
-  "sha256": "sha256:0294469f747b167dab73a8fb3e24d3cda9815f1b5084e85a467ccf46ad018aab"
+  "sha256": "sha256:1b5ff6d6adbed600ce9794595a5d52fbab0ab1f711b2e48b5c1ad31c721c1695"
 }

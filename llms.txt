@@ -13,6 +13,7 @@
 - [agent-intraday-rl-timing](https://github.com/quantskills/agent-intraday-rl-timing): Research-only RL lab for intraday timing on minute bars: Gym env, baseline policies, leakage-aware walk-forward train/eval. No live orders.
 - [agent-macro-driven-rotation](https://github.com/quantskills/agent-macro-driven-rotation): Generates macro-driven industry-rotation research materials from clock phases, nowcasts, and valuation filters.
 - [agent-market-regime-monitor](https://github.com/quantskills/agent-market-regime-monitor): Monitors market regimes from Pandadata index breadth, volatility, and funding evidence.
+- [agent-market-style-adaptive](https://github.com/quantskills/agent-market-style-adaptive): Coordinates small-cap, global ETF, and low-volatility strategies by market regime, with research backtests and attribution.
 - [agent-quantspace](https://github.com/quantskills/agent-quantspace): AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.
 - [agent-ssquant](https://github.com/quantskills/agent-ssquant): SSQuant Agent workflow for futures strategies, data services, CTP gates, and Chinese backtest reports.
 - [agent-template](https://github.com/quantskills/agent-template): Canonical template for portable QuantSkills agent projects.
@@ -51,6 +52,7 @@
 - [skill-cb-analyzer](https://github.com/quantskills/skill-cb-analyzer): Analyzes A-share convertible bonds with double-low screening, terms, equity linkage, Greeks, and volatility.
 - [skill-commodity-carry-cta](https://github.com/quantskills/skill-commodity-carry-cta): Builds commodity-futures carry, time-series momentum, cross-sectional momentum, basis, and inventory factors for rotation backtests.
 - [skill-concept-rotation-monitor](https://github.com/quantskills/skill-concept-rotation-monitor): Monitors A-share concept and theme momentum, breadth, and rotation for research reports.
+- [skill-constraint-stress-test](https://github.com/quantskills/skill-constraint-stress-test): Evaluates trading safeguards in offline replay with duplicate input, prompt perturbation, missing quotes, and timeout retries.
 - [skill-corporate-action-adjustment-auditor](https://github.com/quantskills/skill-corporate-action-adjustment-auditor): Audits split and cash-dividend consistency between raw and adjusted equity prices before research.
 - [skill-cross-listing-parity](https://github.com/quantskills/skill-cross-listing-parity): Monitors A/H and China ADR cross-listing parity using prices, FX, and share ratios.
 - [skill-csrc-approval-pipeline](https://github.com/quantskills/skill-csrc-approval-pipeline): A-share CSRC approval pipeline tracking: categorization by announcement level, approval flow monitoring, and status report generation.
@@ -76,6 +78,7 @@
 - [skill-factor-blend](https://github.com/quantskills/skill-factor-blend): De-redundantly weights and combines multiple factor signals into a composite signal.
 - [skill-factor-debug](https://github.com/quantskills/skill-factor-debug): Provides a symptom, cause, and verification playbook for factor failures.
 - [skill-factor-decay](https://github.com/quantskills/skill-factor-decay): Analyzes decay in Rank IC, turnover, and bucket returns and estimates half-life.
+- [skill-factor-drift-closure](https://github.com/quantskills/skill-factor-drift-closure): Evaluates out-of-sample net value after factor-drift alerts and response actions.
 - [skill-factor-drift-monitor](https://github.com/quantskills/skill-factor-drift-monitor): Checks factor panels for drift, coverage, missing values, duplicates and distribution changes, with optional predictive degradation analysis; research only.
 - [skill-factor-evaluate](https://github.com/quantskills/skill-factor-evaluate): Scores a cross-sectional factor using IC, Sharpe, drawdown, monotonicity, and turnover.
 - [skill-factor-grouped-wrapper](https://github.com/quantskills/skill-factor-grouped-wrapper): Wraps grouped factor-processing workflows and their pipeline diagrams.
