@@ -1,6 +1,7 @@
 # quantskills Asset Directory
 
 - [agent-alpha-portfolio-guardian](https://github.com/quantskills/agent-alpha-portfolio-guardian): Multi-factor portfolio health guardian producing a health matrix, crowding alerts, retire/rebuild candidates, IC decay curves, and a research-only effectiveness backtest L4 page.
+- [agent-cfe-ctd-irr](https://github.com/quantskills/agent-cfe-ctd-irr): Reproduces CGB futures cheapest-to-deliver, implied repo, and net basis and examines financing and delivery-switch scenarios.
 - [agent-corporate-governance-scanner](https://github.com/quantskills/agent-corporate-governance-scanner): Corporate governance scoring agent with 9-dimension risk scoring and evidence chains
 - [agent-correlation-break-research](https://github.com/quantskills/agent-correlation-break-research): Uses Pandadata price-series correlation changes to identify style shifts, diversification stress, and structural market moves.
 - [agent-cross-market-event-radar](https://github.com/quantskills/agent-cross-market-event-radar): Cross-market corporate event radar: aggregates A-share placement/unlock and earnings events with HK/US dividend, earnings, meeting, and IR events into a standardized daily dashboard.
@@ -14,6 +15,7 @@
 - [agent-macro-driven-rotation](https://github.com/quantskills/agent-macro-driven-rotation): Generates macro-driven industry-rotation research materials from clock phases, nowcasts, and valuation filters.
 - [agent-market-regime-monitor](https://github.com/quantskills/agent-market-regime-monitor): Monitors market regimes from Pandadata index breadth, volatility, and funding evidence.
 - [agent-market-style-adaptive](https://github.com/quantskills/agent-market-style-adaptive): Coordinates small-cap, global ETF, and low-volatility strategies by market regime, with research backtests and attribution.
+- [agent-quant-failure-triage](https://github.com/quantskills/agent-quant-failure-triage): Triages A-share strategy or factor deterioration with layered counterfactuals, retraining criteria, and review evidence.
 - [agent-quantspace](https://github.com/quantskills/agent-quantspace): AI-native quantitative research framework for reusable skills, strategy workflows, backtests, and reports.
 - [agent-ssquant](https://github.com/quantskills/agent-ssquant): SSQuant Agent workflow for futures strategies, data services, CTP gates, and Chinese backtest reports.
 - [agent-template](https://github.com/quantskills/agent-template): Canonical template for portable QuantSkills agent projects.
@@ -58,6 +60,7 @@
 - [skill-csrc-approval-pipeline](https://github.com/quantskills/skill-csrc-approval-pipeline): A-share CSRC approval pipeline tracking: categorization by announcement level, approval flow monitoring, and status report generation.
 - [skill-daily-report](https://github.com/quantskills/skill-daily-report): Aggregates cross-market prices, sectors, flows, and news into a daily Markdown review.
 - [skill-dalio-all-weather](https://github.com/quantskills/skill-dalio-all-weather): Provides an all-weather allocation and backtest workflow for A-share assets, bonds, gold, and commodities.
+- [skill-delivery-regime-risk](https://github.com/quantskills/skill-delivery-regime-risk): Builds futures delivery, position-limit, and margin event calendars and compares historical risk for early reduction and unchanged positions.
 - [skill-derivatives-pricing-stochastic-calculus](https://github.com/quantskills/skill-derivatives-pricing-stochastic-calculus): Price options and other derivatives and quantify their risk from a contract specification and market inputs, covering Black-Scholes-Merton analytical pricing, the full set of Greeks, binomial-tree and Monte-Carlo numerical pricing with convergence checks, implied-volatility inversion, volatility smile/skew structure, and model-risk validation (put-call parity, no-arbitrage bounds, cross-method consistency). Use when the user asks for 期权定价、希腊字母计算、隐含波动率、波动率微笑/曲面、二叉树或蒙特卡洛定价、Black-Scholes、美式期权定价、看跌看涨平价校验, or a one-stop option pricing and risk dossier.
 - [skill-disclosure-event-extractor](https://github.com/quantskills/skill-disclosure-event-extractor): Turn unstructured A-share disclosure text from cninfo (巨潮) and the SSE/SZSE exchanges into a traceable, structured event table (监管问询/诉讼担保/重组/治理/ 停牌控制权变更/增减持/质押/业绩预告). Use when the user asks to scan A-share announcements, find 关注函/问询函/诉讼/停牌/易主 events, build an event table for factor or alert pipelines, or backtest disclosure events. Fills the information-search gap Pandadata does not cover.
 - [skill-dividend-yield-scan](https://github.com/quantskills/skill-dividend-yield-scan): Calculates A-share rolling dividend yield, dividend continuity, and ex-dividend calendars.
@@ -128,6 +131,7 @@
 - [skill-institutional-research-tracker](https://github.com/quantskills/skill-institutional-research-tracker): Monitors A-share institutional research activity, attention, and changes over time.
 - [skill-intraday-data-quality-auditor](https://github.com/quantskills/skill-intraday-data-quality-auditor): Audits normalized intraday OHLCV data for timestamp, gap, price, volume, and trading-date defects.
 - [skill-investment-decision](https://github.com/quantskills/skill-investment-decision): Combines research evidence, valuation, and risk information into an auditable investment decision report.
+- [skill-jev-history-replay](https://github.com/quantskills/skill-jev-history-replay): Compares JEV watch conditions with historical replay offline and records differences in decisions, timing, entries, and exits.
 - [skill-jq-to-panda-converter](https://github.com/quantskills/skill-jq-to-panda-converter): Converts JoinQuant strategy code into PandaAI JSON configurations runnable in backtests.
 - [skill-keynes-contrarian-investment](https://github.com/quantskills/skill-keynes-contrarian-investment): Uses long-term expectations and contrarian analysis to identify optimism, pessimism, and value traps.
 - [skill-klarman-special-situations](https://github.com/quantskills/skill-klarman-special-situations): Researches private placements, restructurings, spin-offs, and distressed turnarounds as special situations.
@@ -151,6 +155,7 @@
 - [skill-northbound-margin-monitor](https://github.com/quantskills/skill-northbound-margin-monitor): Monitors northbound flows, margin trading, and futures conditions with multiple risk signals.
 - [skill-numerical-leak-check](https://github.com/quantskills/skill-numerical-leak-check): Detects lookahead and data leakage in quantitative research workflows through numerical checks.
 - [skill-oil-brief](https://github.com/quantskills/skill-oil-brief): Combines futures, EIA, OPEC, and market data into Chinese crude-oil briefs.
+- [skill-opinion-to-ruler](https://github.com/quantskills/skill-opinion-to-ruler): Converts trading opinions into testable rule fields and evaluates extraction accuracy and historical results after costs.
 - [skill-optimal-transport-cross-sectional-factor](https://github.com/quantskills/skill-optimal-transport-cross-sectional-factor): Build auditable factors from point-in-time cross-sectional transport
 - [skill-option-strategy-builder](https://github.com/quantskills/skill-option-strategy-builder): Builds option strategies with legs, payoff charts, breakevens, Greeks, and margin analysis.
 - [skill-options-vol-analyst](https://github.com/quantskills/skill-options-vol-analyst): Analyzes option chains, implied and historical volatility, term structure, skew, and volatility premium.
@@ -205,6 +210,7 @@
 - [skill-stock-score](https://github.com/quantskills/skill-stock-score): skill stock score
 - [skill-stock-screener](https://github.com/quantskills/skill-stock-screener): Screens A-share stocks from natural-language criteria and Pandadata evidence.
 - [skill-strategy-capacity-tca](https://github.com/quantskills/skill-strategy-capacity-tca): Estimate strategy capacity and transaction costs from trades and ADV — participation, square-root/linear impact, capacity curve and breakeven vs alpha. Estimates only, no trade advice.
+- [skill-strategy-lifecycle](https://github.com/quantskills/skill-strategy-lifecycle): Replays point-in-time strategy states and compares exposure reductions, cooldown, retirement, and reactivation with costs.
 - [skill-strategy-performance-report](https://github.com/quantskills/skill-strategy-performance-report): Use when an agent needs to generate a periodic performance report for a LIVE A-share quant strategy — 日报/周报/月报/半年报/年报 or custom period — covering returns, risk, trade analysis, and position/turnover detail, with embedded visualizations. Outputs a self-contained offline HTML dashboard (interactive ECharts) plus Markdown + JSON.
 - [skill-strategy-tearsheet-report](https://github.com/quantskills/skill-strategy-tearsheet-report): Generates strategy-performance tearsheets with risk-adjusted metrics.
 - [skill-survivorship-universe-auditor](https://github.com/quantskills/skill-survivorship-universe-auditor): Audits point-in-time universe membership, identities, and delisting returns before backtests.
@@ -218,6 +224,7 @@
 - [skill-trendline-breakdown-reversal](https://github.com/quantskills/skill-trendline-breakdown-reversal): 计算A股日线下跌突破划线压力位反转因子，识别下破下降压力线后反转确认的个股；当用户提供交易日期、要求自动获取当日全市场A股行情、量化选股、因子研究或回测时使用。
 - [skill-us-sec-edgar-harvester](https://github.com/quantskills/skill-us-sec-edgar-harvester): Harvests and structures public US SEC EDGAR filings.
 - [skill-us-sector-rotation](https://github.com/quantskills/skill-us-sector-rotation): Generates factual reports on US sector performance, valuation, and rotation.
+- [skill-video-2-text](https://github.com/quantskills/skill-video-2-text): Transcribes local audio and video to timestamped text with faster-whisper for review and subtitles.
 - [skill-walk-forward-validator](https://github.com/quantskills/skill-walk-forward-validator): Validates cross-sectional signals out of sample with purged and embargoed rolling windows.
 - [skill-x-trader-builder](https://github.com/quantskills/skill-x-trader-builder): Builds trader-specific research-model skills from public X/Twitter post data.
 - [skill-xingtai-catcher](https://github.com/quantskills/skill-xingtai-catcher): Retrieves similar A-share and futures K-line patterns from text or image descriptions.

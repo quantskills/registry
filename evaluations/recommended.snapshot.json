@@ -1,5 +1,5 @@
 {
-  "catalog_snapshot_id": "sha256:397dabd3d9cd98acf765755dabfca103754904106d45921064d6496fce579c29",
+  "catalog_snapshot_id": "sha256:3b62a921f5f66d554bbf958001432ad5bdf56ce558ba88bec45b3e3f07cb1e18",
   "generated_at": "2026-10-09T01:47:27+00:00",
   "policy_digest": "c7d2ba0470739c5319ca4011fa2abb8739551fe01beae2113365a3f26ef5f4e2",
   "policy_id": "shadow-category-quartile.v1",
@@ -315,6 +315,6 @@
     }
   ],
   "schema": "quantskills.recommended-snapshot.v1",
-  "score_dataset_sha256": "81f56aface7124a7e602e48074eb5cc00bee216da29a79671990363bbd2f4409",
+  "score_dataset_sha256": "7c4eb8cb0d3faedeec6e079569eb03c3446f59b29a7d8905856de5819381eaf8",
   "status": "shadow"
 }

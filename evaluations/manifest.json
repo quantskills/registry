@@ -1,8 +1,8 @@
 {
-  "catalog_snapshot_id": "sha256:397dabd3d9cd98acf765755dabfca103754904106d45921064d6496fce579c29",
+  "catalog_snapshot_id": "sha256:3b62a921f5f66d554bbf958001432ad5bdf56ce558ba88bec45b3e3f07cb1e18",
   "files": {
     "README.md": "4b865424c180db181cc8a38fea1e1b12c630074fae511107f8effbfde7d9d585",
-    "current-scores.json": "81f56aface7124a7e602e48074eb5cc00bee216da29a79671990363bbd2f4409",
+    "current-scores.json": "7c4eb8cb0d3faedeec6e079569eb03c3446f59b29a7d8905856de5819381eaf8",
     "model-cohorts/gpt-6-sol-medium.json": "db095ef05ac6fee090e3fa9f960ac49ee8ed37efedd038043537d308a23df9b8",
     "publications/publication.v12.13.jsonl": "ffd373d194e4dc4f76c1d68c8219256da7b13a70149bb52558afdc9cec21cef2",
     "publications/publication.v12.13.on-demand.jsonl": "2ca5d8ddfd972dcc1fb398418f316460cf81db97478981b713c242779ac914a1",
@@ -12,7 +12,7 @@
     "publications/publication.v12.21.jsonl": "923c9fdb1dc373f540031c3a0e426fa97c2effbe43cbaf140ab4da0f03f9112f",
     "publications/publication.v12.22.jsonl": "7d1491642082017544ff800ff2a519163e6a29f1f9c8810153ec5285d52c037f",
     "publications/publication.v12.23.jsonl": "af0df069285d5ef4f3cd43625625b1a1f6296f85e1ec71f2c7f8698bb2cb4532",
-    "recommended.snapshot.json": "be0c836f46566604fe9441f8dbd611d80964ab3e0df14ba856be564b96cc4d36",
+    "recommended.snapshot.json": "b90e6d3db2fb37c9b9d6a01bcb033dfc0f2cba622e21c2e26b6271b118a67c4c",
     "schemas/current-scores.schema.json": "5ed7a4a8fe9829892a4d5d7b3b86069ee60921b3bb3c35bfdfa1864664154950",
     "schemas/recommended-snapshot.schema.json": "5b0ea9b82168ab66f7aa16b96c88b5625192b3743a63394ce4d94e8a61626ebe",
     "selection-policy.v1.json": "19804e60ac6832da6ec33e5af070ca6677be6fcefafbee07190f8dca326d69ac"
@@ -88,5 +88,5 @@
   ],
   "record_count": 217,
   "schema": "quantskills.public-evaluation-manifest.v1",
-  "snapshot_digest": "bf1f2342f7b875392b2e77f3e1926577dba4c2dcc551a2d984f67a9026996d82"
+  "snapshot_digest": "a2aba57d139b7316490523a0b8f0ebe24dcb1bd29bd1986b6dc2d9bf3b34838d"
 }
