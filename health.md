@@ -1,18 +1,19 @@
 # Registry 健康检查
 
-生成时间：2026-11-26T08:41:56Z
+生成时间：2026-11-27T08:53:25Z
 
 ## 汇总
 
 | 总数 | 可达 | 有声明 | 声明合法 |
 | ---: | ---: | ---: | ---: |
-| 218 | 218 | 218 | 218 |
+| 228 | 228 | 228 | 228 |
 
 ## 明细
 
 | 条目 | 仓库可达 | 声明存在 | qsh-form 存在 | 声明合法 | 问题 |
 | --- | :---: | :---: | :---: | :---: | --- |
 | agent-alpha-portfolio-guardian | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| agent-cfe-ctd-irr | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-corporate-governance-scanner | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-correlation-break-research | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-cross-market-event-radar | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -25,6 +26,8 @@
 | agent-intraday-rl-timing | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-macro-driven-rotation | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-market-regime-monitor | ✅ | ✅ | ✅ | ✅ | 无 |
+| agent-market-style-adaptive | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| agent-quant-failure-triage | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | agent-quantspace | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-ssquant | ✅ | ✅ | ✅ | ✅ | 无 |
 | agent-template | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -63,11 +66,13 @@
 | skill-cb-analyzer | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-commodity-carry-cta | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-concept-rotation-monitor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-constraint-stress-test | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-corporate-action-adjustment-auditor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-cross-listing-parity | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-csrc-approval-pipeline | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-daily-report | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-dalio-all-weather | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-delivery-regime-risk | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-derivatives-pricing-stochastic-calculus | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-disclosure-event-extractor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-dividend-yield-scan | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -88,6 +93,7 @@
 | skill-factor-blend | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-debug | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-decay | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-factor-drift-closure | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-factor-drift-monitor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-factor-evaluate | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-factor-grouped-wrapper | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -137,6 +143,7 @@
 | skill-institutional-research-tracker | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-intraday-data-quality-auditor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-investment-decision | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-jev-history-replay | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-jq-to-panda-converter | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-keynes-contrarian-investment | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-klarman-special-situations | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -160,6 +167,7 @@
 | skill-northbound-margin-monitor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-numerical-leak-check | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-oil-brief | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-opinion-to-ruler | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-optimal-transport-cross-sectional-factor | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-option-strategy-builder | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-options-vol-analyst | ✅ | ✅ | ✅ | ✅ | 无 |
@@ -214,6 +222,7 @@
 | skill-stock-score | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-stock-screener | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-strategy-capacity-tca | ✅ | ✅ | ✅ | ✅ | 无 |
+| skill-strategy-lifecycle | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-strategy-performance-report | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-strategy-tearsheet-report | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-survivorship-universe-auditor | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
@@ -227,6 +236,7 @@
 | skill-trendline-breakdown-reversal | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-us-sec-edgar-harvester | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-us-sector-rotation | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
+| skill-video-2-text | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-walk-forward-validator | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
 | skill-x-trader-builder | ✅ | ✅ | ✅ | ✅ | 无 |
 | skill-xingtai-catcher | ✅ | ✅ | ❌ | ✅ | 未声明 qsh-form（可选增强） |
