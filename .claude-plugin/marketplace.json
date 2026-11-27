@@ -17,6 +17,16 @@
     },
     {
       "category": "09",
+      "description": "Reproduces CGB futures cheapest-to-deliver, implied repo, and net basis and examines financing and delivery-switch scenarios.",
+      "name": "cfe-ctd-irr",
+      "source": {
+        "repo": "quantskills/agent-cfe-ctd-irr",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
       "description": "Corporate governance scoring agent with 9-dimension risk scoring and evidence chains",
       "name": "corporate-governance-scanner",
       "source": {
@@ -131,6 +141,26 @@
       "name": "market-regime-monitor",
       "source": {
         "repo": "quantskills/agent-market-regime-monitor",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
+      "description": "Coordinates small-cap, global ETF, and low-volatility strategies by market regime, with research backtests and attribution.",
+      "name": "market-style-adaptive",
+      "source": {
+        "repo": "quantskills/agent-market-style-adaptive",
+        "source": "github"
+      },
+      "type": "agent"
+    },
+    {
+      "category": "09",
+      "description": "Triages A-share strategy or factor deterioration with layered counterfactuals, retraining criteria, and review evidence.",
+      "name": "quant-failure-triage",
+      "source": {
+        "repo": "quantskills/agent-quant-failure-triage",
         "source": "github"
       },
       "type": "agent"
@@ -516,6 +546,16 @@
       "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Evaluates trading safeguards in offline replay with duplicate input, prompt perturbation, missing quotes, and timeout retries.",
+      "name": "constraint-stress-test",
+      "source": {
+        "repo": "quantskills/skill-constraint-stress-test",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "01",
       "description": "Audits split and cash-dividend consistency between raw and adjusted equity prices before research.",
       "name": "corporate-action-adjustment-auditor",
@@ -561,6 +601,16 @@
       "name": "dalio-all-weather",
       "source": {
         "repo": "quantskills/skill-dalio-all-weather",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "04",
+      "description": "Builds futures delivery, position-limit, and margin event calendars and compares historical risk for early reduction and unchanged positions.",
+      "name": "delivery-regime-risk",
+      "source": {
+        "repo": "quantskills/skill-delivery-regime-risk",
         "source": "github"
       },
       "type": "skill"
@@ -761,6 +811,16 @@
       "name": "factor-decay",
       "source": {
         "repo": "quantskills/skill-factor-decay",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "02",
+      "description": "Evaluates out-of-sample net value after factor-drift alerts and response actions.",
+      "name": "factor-drift-closure",
+      "source": {
+        "repo": "quantskills/skill-factor-drift-closure",
         "source": "github"
       },
       "type": "skill"
@@ -1256,6 +1316,16 @@
       "type": "skill"
     },
     {
+      "category": "07",
+      "description": "Compares JEV watch conditions with historical replay offline and records differences in decisions, timing, entries, and exits.",
+      "name": "jev-history-replay",
+      "source": {
+        "repo": "quantskills/skill-jev-history-replay",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "10",
       "description": "Converts JoinQuant strategy code into PandaAI JSON configurations runnable in backtests.",
       "name": "jq-to-panda-converter",
@@ -1481,6 +1551,16 @@
       "name": "oil-brief",
       "source": {
         "repo": "quantskills/skill-oil-brief",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "05",
+      "description": "Converts trading opinions into testable rule fields and evaluates extraction accuracy and historical results after costs.",
+      "name": "opinion-to-ruler",
+      "source": {
+        "repo": "quantskills/skill-opinion-to-ruler",
         "source": "github"
       },
       "type": "skill"
@@ -2026,6 +2106,16 @@
       "type": "skill"
     },
     {
+      "category": "05",
+      "description": "Replays point-in-time strategy states and compares exposure reductions, cooldown, retirement, and reactivation with costs.",
+      "name": "strategy-lifecycle",
+      "source": {
+        "repo": "quantskills/skill-strategy-lifecycle",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
       "category": "08",
       "description": "Use when an agent needs to generate a periodic performance report for a LIVE A-share quant strategy — 日报/周报/月报/半年报/年报 or custom period — covering returns, risk, trade analysis, and position/turnover detail, with embedded visualizations. Outputs a self-contained offline HTML dashboard (interactive ECharts) plus Markdown + JSON.",
       "name": "strategy-performance-report",
@@ -2151,6 +2241,16 @@
       "name": "us-sector-rotation",
       "source": {
         "repo": "quantskills/skill-us-sector-rotation",
+        "source": "github"
+      },
+      "type": "skill"
+    },
+    {
+      "category": "08",
+      "description": "Transcribes local audio and video to timestamped text with faster-whisper for review and subtitles.",
+      "name": "video-2-text",
+      "source": {
+        "repo": "quantskills/skill-video-2-text",
         "source": "github"
       },
       "type": "skill"
